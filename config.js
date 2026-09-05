@@ -7,7 +7,7 @@ window.PRIME_CONFIG = {
 
   SUPABASE_ANON_KEY:
     window.ENV?.SUPABASE_ANON_KEY ||
-    "PUT_YOUR_PUBLISHABLE_KEY_HERE",
+    "sb_publishable_Ws1bfQcuKimvf5fyHqRbRw_OnxpIPv9",
 
   STORAGE_BUCKETS: {
     MATERIALS: "materials",
