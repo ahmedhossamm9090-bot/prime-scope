@@ -4,25 +4,23 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Prime Scope | Admin Dashboard</title>
+  <title>Prime Scope - Admin Dashboard</title>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="config.js"></script>
 
   <style>
     :root {
-      --black: #0b0b0b;
-      --black-2: #151515;
-      --black-3: #202020;
+      --bg: #0b0b0b;
+      --card: #151515;
+      --card2: #1c1c1c;
       --gold: #d4af37;
-      --gold-light: #f0d477;
-      --white: #ffffff;
-      --text: #eeeeee;
+      --gold-light: #e6c85c;
+      --text: #ffffff;
       --muted: #999999;
-      --border: rgba(212,175,55,.25);
+      --border: #303030;
       --danger: #d9534f;
-      --success: #36b37e;
-      --card: #171717;
+      --success: #39a96b;
     }
 
     * {
@@ -31,11 +29,9 @@
 
     body {
       margin: 0;
-      background:
-        radial-gradient(circle at top right, rgba(212,175,55,.08), transparent 30%),
-        var(--black);
+      background: var(--bg);
       color: var(--text);
-      font-family: Arial, Helvetica, sans-serif;
+      font-family: Arial, Tahoma, sans-serif;
     }
 
     button,
@@ -53,174 +49,46 @@
       display: none !important;
     }
 
-    /* ================= HEADER ================= */
+    /* =========================
+       LOGIN
+    ========================= */
 
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      background: rgba(11,11,11,.95);
-      backdrop-filter: blur(15px);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .header-inner {
-      max-width: 1400px;
-      margin: auto;
-      padding: 18px 25px;
-
+    #loginPage {
+      min-height: 100vh;
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      gap: 20px;
+      justify-content: center;
+      padding: 20px;
     }
 
-    .brand {
+    .login-box {
+      width: 100%;
+      max-width: 430px;
+      background: var(--card);
+      border: 1px solid #6e5b24;
+      border-radius: 18px;
+      padding: 35px;
+      box-shadow: 0 20px 70px rgba(0,0,0,.5);
+    }
+
+    .logo {
+      text-align: center;
       color: var(--gold);
-      font-size: 22px;
+      font-size: 30px;
       font-weight: 900;
       letter-spacing: 1px;
     }
 
-    .brand small {
-      display: block;
+    .login-subtitle {
+      text-align: center;
       color: var(--muted);
-      font-size: 11px;
-      font-weight: normal;
-      margin-top: 4px;
-      letter-spacing: 0;
-    }
-
-    .header-actions {
-      display: flex;
-      gap: 10px;
-      align-items: center;
-    }
-
-    /* ================= BUTTONS ================= */
-
-    .btn {
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 11px 17px;
-      font-size: 14px;
-      transition: .2s;
-    }
-
-    .btn-gold {
-      background: var(--gold);
-      color: #111;
-      border-color: var(--gold);
-      font-weight: bold;
-    }
-
-    .btn-gold:hover {
-      background: var(--gold-light);
-    }
-
-    .btn-dark {
-      background: var(--black-3);
-      color: var(--white);
-    }
-
-    .btn-dark:hover {
-      border-color: var(--gold);
-    }
-
-    .btn-danger {
-      background: transparent;
-      color: #ff7777;
-      border-color: rgba(217,83,79,.5);
-    }
-
-    .btn-danger:hover {
-      background: rgba(217,83,79,.12);
-    }
-
-    .btn-small {
-      padding: 7px 10px;
-      font-size: 12px;
-    }
-
-    /* ================= LAYOUT ================= */
-
-    main {
-      max-width: 1400px;
-      margin: auto;
-      padding: 30px 20px 70px;
-    }
-
-    .page-title {
-      margin-bottom: 25px;
-    }
-
-    .page-title h1 {
-      margin: 0;
-      color: var(--gold);
-      font-size: 30px;
-    }
-
-    .page-title p {
-      color: var(--muted);
-      margin: 8px 0 0;
-    }
-
-    .message {
-      padding: 13px 16px;
-      border-radius: 9px;
-      margin-bottom: 20px;
-      border: 1px solid var(--border);
-      background: rgba(212,175,55,.06);
-      color: var(--gold-light);
-    }
-
-    .message.success {
-      border-color: rgba(54,179,126,.4);
-      color: #69dda9;
-      background: rgba(54,179,126,.08);
-    }
-
-    .message.error {
-      border-color: rgba(217,83,79,.45);
-      color: #ff8b87;
-      background: rgba(217,83,79,.08);
-    }
-
-    .grid-2 {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-    }
-
-    .card {
-      background: linear-gradient(145deg, #191919, #111111);
-      border: 1px solid var(--border);
-      border-radius: 15px;
-      padding: 23px;
-      margin-bottom: 20px;
-      box-shadow: 0 15px 40px rgba(0,0,0,.25);
-    }
-
-    .card-title {
-      color: var(--gold);
-      margin: 0 0 20px;
-      font-size: 20px;
-    }/* ================= FORM ================= */
-
-    .form-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 15px;
-    }
-
-    .full {
-      grid-column: 1 / -1;
+      margin: 8px 0 30px;
     }
 
     label {
       display: block;
       color: #ddd;
-      font-size: 13px;
+      font-size: 14px;
       margin-bottom: 7px;
     }
 
@@ -228,11 +96,11 @@
     textarea,
     select {
       width: 100%;
-      background: #0d0d0d;
-      color: #fff;
-      border: 1px solid #333;
-      border-radius: 8px;
       padding: 12px;
+      background: #0d0d0d;
+      color: white;
+      border: 1px solid var(--border);
+      border-radius: 8px;
       outline: none;
     }
 
@@ -240,255 +108,227 @@
     textarea:focus,
     select:focus {
       border-color: var(--gold);
-      box-shadow: 0 0 0 2px rgba(212,175,55,.08);
     }
 
     textarea {
-      min-height: 100px;
+      min-height: 110px;
       resize: vertical;
     }
 
-    select option {
-      background: #151515;
-      color: #fff;
+    .field {
+      margin-bottom: 16px;
     }
 
-    .checkbox-row {
+    .btn {
+      border: 0;
+      border-radius: 8px;
+      padding: 11px 17px;
+      color: white;
+      background: #292929;
+    }
+
+    .btn:hover {
+      opacity: .9;
+    }
+
+    .btn-gold {
+      background: var(--gold);
+      color: #111;
+      font-weight: bold;
+    }
+
+    .btn-danger {
+      background: var(--danger);
+    }
+
+    .btn-success {
+      background: var(--success);
+    }
+
+    .btn-full {
+      width: 100%;
+    }
+
+    .message {
+      padding: 12px;
+      border-radius: 8px;
+      margin-bottom: 15px;
+      background: #222;
+      border: 1px solid var(--border);
+    }
+
+    .error {
+      color: #ff7777;
+    }
+
+    .success {
+      color: #67d695;
+    }
+
+    /* =========================
+       DASHBOARD
+    ========================= */
+
+    #dashboard {
+      min-height: 100vh;
+    }
+
+    .sidebar {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 250px;
+      height: 100vh;
+      background: #101010;
+      border-left: 1px solid var(--border);
+      padding: 25px 15px;
+    }
+
+    .sidebar-logo {
+      color: var(--gold);
+      font-size: 23px;
+      font-weight: 900;
+      padding: 5px 12px 30px;
+    }
+
+    .menu-btn {
+      width: 100%;
+      background: transparent;
+      color: #ccc;
+      border: 0;
+      padding: 14px;
+      text-align: right;
+      border-radius: 8px;
+      margin-bottom: 5px;
+      font-size: 15px;
+    }
+
+    .menu-btn:hover,
+    .menu-btn.active {
+      background: #282317;
+      color: var(--gold);
+    }
+
+    .main {
+      margin-right: 250px;
+      padding: 25px;
+    }
+
+    .topbar {
       display: flex;
-      gap: 25px;
       align-items: center;
-      margin-top: 10px;
+      justify-content: space-between;
+      gap: 15px;
+      margin-bottom: 25px;
     }
 
-    .checkbox {
-      display: flex;
-      gap: 8px;
-      align-items: center;
-      cursor: pointer;
-      color: #ddd;
+    .topbar h1 {
+      margin: 0 0 5px;
     }
 
-    .checkbox input {
-      width: auto;
-      accent-color: var(--gold);
-    }
-
-    .form-actions {
-      display: flex;
-      gap: 10px;
-      margin-top: 20px;
-    }
-
-    .form-actions .btn {
-      min-width: 150px;
-    }
-
-    /* ================= IMAGES ================= */
-
-    .upload-box {
-      border: 1px dashed rgba(212,175,55,.45);
-      border-radius: 12px;
-      padding: 18px;
-      background: rgba(212,175,55,.025);
-    }
-
-    .upload-note {
+    .user-email {
       color: var(--muted);
-      font-size: 12px;
+      font-size: 13px;
+    }.card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 13px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+    }
+
+    .stat {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 13px;
+      padding: 20px;
+    }
+
+    .stat-title {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .stat-number {
+      color: var(--gold);
+      font-size: 30px;
+      font-weight: bold;
       margin-top: 8px;
     }
 
-    .images-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-      gap: 12px;
-      margin-top: 15px;
-    }
-
-    .image-item {
-      position: relative;
-      aspect-ratio: 1 / .8;
-      overflow: hidden;
-      border-radius: 9px;
-      border: 1px solid #333;
-      background: #080808;
-    }
-
-    .image-item img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .image-remove {
-      position: absolute;
-      top: 5px;
-      left: 5px;
-      border: 0;
-      border-radius: 50%;
-      width: 27px;
-      height: 27px;
-      background: rgba(0,0,0,.8);
-      color: #ff7777;
-      font-size: 18px;
-    }
-
-    /* ================= FILTERS ================= */
-
-    .filters {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 12px;
-    }
-
-    /* ================= MATERIAL CARDS ================= */
-
-    .materials-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 18px;
-    }
-
-    .material-card {
-      background: #101010;
-      border: 1px solid #292929;
-      border-radius: 13px;
-      overflow: hidden;
-      transition: .2s;
-    }
-
-    .material-card:hover {
-      border-color: rgba(212,175,55,.55);
-      transform: translateY(-2px);
-    }
-
-    .material-image {
-      height: 190px;
-      background: #080808;
-    }
-
-    .material-image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .no-image {
-      height: 100%;
+    .toolbar {
       display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #666;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+
+    .toolbar input,
+    .toolbar select {
+      max-width: 320px;
+    }
+
+    /* =========================
+       TABLE
+    ========================= */
+
+    .table-container {
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 850px;
+    }
+
+    th,
+    td {
+      padding: 13px 10px;
+      border-bottom: 1px solid var(--border);
+      text-align: right;
+    }
+
+    th {
+      color: var(--gold);
       font-size: 13px;
     }
 
-    .material-body {
-      padding: 15px;
+    td {
+      color: #ddd;
+      font-size: 14px;
     }
 
-    .material-name {
-      font-size: 17px;
-      font-weight: bold;
-      color: var(--gold);
-    }
-
-    .material-en {
-      color: #aaa;
-      font-size: 12px;
-      margin-top: 4px;
-    }
-
-    .material-meta {
-      margin-top: 12px;
-      color: #bbb;
-      font-size: 12px;
-      line-height: 1.8;
-    }
-
-    .material-actions {
+    .actions {
       display: flex;
-      gap: 7px;
-      margin-top: 14px;
+      gap: 6px;
+      flex-wrap: wrap;
     }
 
-    .material-actions button {
-      flex: 1;
+    .thumbnail {
+      width: 65px;
+      height: 50px;
+      object-fit: cover;
+      border-radius: 7px;
+      background: #222;
+      border: 1px solid #444;
     }
 
-    .badge {
-      display: inline-block;
-      padding: 4px 8px;
-      border-radius: 20px;
-      font-size: 10px;
-      margin-bottom: 8px;
-    }
-
-    .badge-active {
-      background: rgba(54,179,126,.12);
-      color: #69dda9;
-    }
-
-    .badge-inactive {
-      background: rgba(255,255,255,.06);
-      color: #888;
-    }.badge-featured {
-      background: rgba(212,175,55,.12);
-      color: var(--gold);
-      margin-right: 5px;
-    }
-
-    /* ================= CATEGORIES ================= */
-
-    .category-list {
-      display: grid;
-      gap: 10px;
-    }
-
-    .category-row {
-      display: grid;
-      grid-template-columns: 55px 1fr 1fr 80px 120px;
-      align-items: center;
-      gap: 12px;
-      padding: 12px;
-      background: #101010;
-      border: 1px solid #292929;
-      border-radius: 9px;
-    }
-
-    .category-icon {
-      width: 45px;
-      height: 45px;
-      border-radius: 8px;
-      background: #202020;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--gold);
-      font-size: 20px;
-    }
-
-    .category-name {
-      color: #fff;
-      font-weight: bold;
-    }
-
-    .category-name-en {
-      color: #888;
-      font-size: 12px;
-    }
-
-    .category-actions {
-      display: flex;
-      gap: 5px;
-    }
-
-    /* ================= MODAL ================= */
+    /* =========================
+       MODAL
+    ========================= */
 
     .modal {
       position: fixed;
       inset: 0;
+      background: rgba(0,0,0,.8);
       z-index: 100;
-      background: rgba(0,0,0,.75);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -496,11 +336,12 @@
     }
 
     .modal-content {
-      width: min(650px, 100%);
-      max-height: 90vh;
+      width: 100%;
+      max-width: 1050px;
+      max-height: 92vh;
       overflow-y: auto;
-      background: #171717;
-      border: 1px solid var(--border);
+      background: var(--card);
+      border: 1px solid #4b4b4b;
       border-radius: 15px;
       padding: 25px;
     }
@@ -513,80 +354,109 @@
     }
 
     .modal-header h2 {
-      color: var(--gold);
       margin: 0;
-    }
-
-    .close {
-      background: transparent;
-      color: #aaa;
-      font-size: 25px;
-      border: 0;
-    }
-
-    /* ================= LOADING ================= */
-
-    .loading {
-      text-align: center;
-      padding: 35px;
       color: var(--gold);
+    }
+
+    .close-btn {
+      background: transparent;
+      border: 0;
+      color: white;
+      font-size: 28px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+    }
+
+    .full {
+      grid-column: 1 / -1;
+    }
+
+    /* =========================
+       IMAGES
+    ========================= */
+
+    .image-preview {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .image-item {
+      position: relative;
+    }
+
+    .image-item img {
+      width: 130px;
+      height: 95px;
+      object-fit: cover;
+      border-radius: 8px;
+      border: 1px solid #444;
+    }
+
+    .remove-image {
+      position: absolute;
+      top: 4px;
+      right: 4px;
+      width: 25px;
+      height: 25px;
+      border: 0;
+      border-radius: 50%;
+      background: #000;
+      color: white;
     }
 
     .empty {
       text-align: center;
-      padding: 35px;
-      color: #777;
-      border: 1px dashed #333;
-      border-radius: 10px;
+      color: var(--muted);
+      padding: 30px;
     }
 
-    /* ================= RESPONSIVE ================= */
+    @media(max-width:900px) {
+      .sidebar {
+        width: 200px;
+      }
 
-    @media (max-width: 1100px) {
-      .materials-grid {
-        grid-template-columns: repeat(3, 1fr);
+      .main {
+        margin-right: 200px;
+      }
+
+      .stats {
+        grid-template-columns: repeat(2, 1fr);
       }
     }
 
-    @media (max-width: 850px) {
-      .grid-2,
-      .filters,
+    @media(max-width:650px) {
+      .sidebar {
+        position: static;
+        width: 100%;
+        height: auto;
+      }
+
+      .main {
+        margin-right: 0;
+        padding: 15px;
+      }
+
+      .stats {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
       .form-grid {
         grid-template-columns: 1fr;
       }
 
-      .materials-grid {
-        grid-template-columns: repeat(2, 1fr);
+      .full {
+        grid-column: auto;
       }
 
-      .category-row {
-        grid-template-columns: 45px 1fr;
-      }
-
-      .category-actions {
-        grid-column: 1 / -1;
-      }
-    }
-
-    @media (max-width: 550px) {
-      .materials-grid {
-        grid-template-columns: 1fr;
-      }
-
-      main {
-        padding: 20px 12px;
-      }
-
-      .header-inner {
-        padding: 15px;
-      }
-
-      .header-actions {
+      .topbar {
         flex-direction: column;
-      }
-
-      .form-actions {
-        flex-direction: column;
+        align-items: stretch;
       }
     }
   </style>
@@ -594,1657 +464,376 @@
 
 <body>
 
-<header>
-  <div class="header-inner">
+<!-- =========================
+     LOGIN
+========================= -->
 
-    <div>
-      <div class="brand">PRIME SCOPE</div>
-      <small id="userEmail"></small>
+<div id="loginPage">
+
+  <div class="login-box"><div class="logo">
+      PRIME SCOPE
     </div>
 
-    <div class="header-actions">
-
-      <button
-        class="btn btn-dark"
-        onclick="window.open('/', '_blank')">
-        فتح الموقع
-      </button>
-
-      <button
-        class="btn btn-gold"
-        id="logoutBtn">
-        تسجيل الخروج
-      </button>
-
+    <div class="login-subtitle">
+      لوحة تحكم الإدارة
     </div>
 
-  </div>
-</header>
+    <div id="loginMessage"></div>
 
+    <form id="loginForm">
 
-<main>
-
-  <div class="page-title">
-    <h1>لوحة تحكم Prime Scope</h1>
-    <p>إدارة التصنيفات والخامات والصور</p>
-  </div>
-
-  <div id="message" class="hidden"></div>
-
-
-  <!-- =====================================================
-       CATEGORIES
-  ====================================================== -->
-
-  <div class="card">
-
-    <div style="display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap">
-
-      <h2 class="card-title">
-        التصنيفات الرئيسية
-      </h2>
-
-      <button
-        class="btn btn-gold"
-        onclick="openCategoryModal()">
-        + إضافة تصنيف
-      </button>
-
-    </div>
-
-    <div
-      id="categoriesList"
-      class="category-list"><div class="loading">
-        جاري تحميل التصنيفات...
-      </div>
-
-    </div>
-
-  </div>
-
-
-  <!-- =====================================================
-       MATERIAL FORM
-  ====================================================== -->
-
-  <div class="card">
-
-    <h2
-      id="materialFormTitle"
-      class="card-title">
-      إضافة خامة جديدة
-    </h2>
-
-    <form id="materialForm">
-
-      <div class="form-grid">
-
-        <div>
-          <label>Material ID *</label>
-          <input id="id" required>
-        </div>
-
-        <div>
-          <label>Category</label>
-          <select id="category_id">
-            <option value="">-- اختر التصنيف --</option>
-          </select>
-        </div>
-
-        <div>
-          <label>اسم الخامة بالعربي *</label>
-          <input id="name_ar" required>
-        </div>
-
-        <div>
-          <label>اسم الخامة بالإنجليزي *</label>
-          <input id="name_en" required>
-        </div>
-
-        <div>
-          <label>بلد المنشأ</label>
-          <input
-            id="origin"
-            placeholder="Italy / Spain / Egypt...">
-        </div>
-
-        <div>
-          <label>Stone Type</label>
-          <input id="stone_type">
-        </div>
-
-        <div>
-          <label>وصف اللون</label>
-          <input id="color_desc">
-        </div>
-
-        <div>
-          <label>Color Group</label>
-          <input id="color_group">
-        </div>
-
-        <div>
-          <label>Type Arabic</label>
-          <input id="type_ar">
-        </div>
-
-        <div>
-          <label>Type English</label>
-          <input id="type_en">
-        </div>
-
-        <div>
-          <label>Finish</label>
-          <input id="finish">
-        </div>
-
-        <div>
-          <label>Price Tier</label>
-          <input id="price_tier">
-        </div>
-
-        <div>
-          <label>Color HEX</label>
-          <input
-            id="color_hex"
-            placeholder="#FFFFFF">
-        </div>
-
-        <div>
-          <label>Density</label>
-          <input
-            id="density"
-            type="number"
-            step="any">
-        </div>
-
-        <div>
-          <label>Water Absorption</label>
-          <input
-            id="water_absorption"
-            type="number"
-            step="any">
-        </div>
-
-        <div>
-          <label>Compressive Strength</label>
-          <input
-            id="compressive_strength"
-            type="number"
-            step="any">
-        </div>
-
-        <div>
-          <label>Durability Score</label>
-          <input
-            id="durability_score"
-            type="number"
-            step="any">
-        </div>
-
-        <div>
-          <label>Maintenance Tier</label>
-          <input id="maintenance_tier">
-        </div>
-
-        <div>
-          <label>Texture Grade</label>
-          <input id="texture_grade">
-        </div>
-
-        <div class="full">
-          <label>Usage Arabic</label>
-          <textarea id="usage_ar"></textarea>
-        </div>
-
-        <div class="full">
-          <label>Usage English</label>
-          <textarea id="usage_en"></textarea>
-        </div>
-
-        <!-- IMAGES -->
-
-        <div class="full">
-
-          <label>
-            صور الخامة
-          </label>
-
-          <div class="upload-box">
-
-            <input
-              id="imageFiles"
-              type="file"
-              accept="image/*"
-              multiple>
-
-            <div class="upload-note">
-              يمكنك اختيار أكثر من صورة.
-              الصور الجديدة ستضاف إلى الصور الموجودة عند التعديل.
-            </div>
-
-            <div
-              id="imagePreview"
-              class="images-grid">
-            </div>
-
-          </div>
-
-        </div>
-
-      </div>
-
-
-      <div class="checkbox-row">
-
-        <label class="checkbox">
-          <input
-            id="is_featured"
-            type="checkbox">
-          Featured
-        </label>
-
-        <label class="checkbox">
-          <input
-            id="is_active"
-            type="checkbox"
-            checked>
-          Active
-        </label>
-
-      </div>
-
-
-      <div class="form-actions"><button
-          type="submit"
-          class="btn btn-gold"
-          id="saveMaterialBtn">
-          حفظ الخامة
-        </button>
-
-        <button
-          type="button"
-          class="btn btn-dark hidden"
-          id="cancelEditBtn">
-          إلغاء التعديل
-        </button>
-
-      </div>
-
-    </form>
-
-  </div>
-
-
-  <!-- =====================================================
-       FILTERS
-  ====================================================== -->
-
-  <div class="card">
-
-    <h2 class="card-title">
-      الخامات
-    </h2>
-
-    <div class="filters">
-
-      <div>
-
-        <label>التصنيف</label>
-
-        <select id="filterCategory">
-          <option value="">كل التصنيفات</option>
-        </select>
-
-      </div>
-
-      <div>
-
-        <label>بلد المنشأ</label>
-
-        <select id="filterOrigin">
-          <option value="">كل البلاد</option>
-        </select>
-
-      </div>
-
-      <div>
-
-        <label>بحث</label>
-
+      <div class="field">
+        <label>البريد الإلكتروني</label>
         <input
-          id="searchInput"
-          placeholder="اسم الخامة...">
+          id="loginEmail"
+          type="email"
+          required/* =========================
+   START
+========================= *//* =========================================================
+   CATEGORY MODAL
+========================================================= */
 
-      </div>
+function openCategoryModal(id = null) {
 
-    </div>
+  editingCategoryId = id;
 
-  </div>
+  const category = id
+    ? categories.find(
+        item => String(item.id) === String(id)
+      )
+    : null;
 
+  document.getElementById("modalTitle").textContent =
+    category
+      ? "تعديل التصنيف"
+      : "إضافة تصنيف جديد";
 
-  <!-- =====================================================
-       MATERIALS
-  ====================================================== -->
-
-  <div class="card">
-
-    <div
-      id="materialsGrid"
-      class="materials-grid">
-
-      <div class="loading">
-        جاري تحميل الخامات...
-      </div>
-
-    </div>
-
-  </div>
-
-</main>
-
-
-<!-- =======================================================
-     CATEGORY MODAL
-======================================================== -->
-
-<div
-  id="categoryModal"
-  class="modal hidden">
-
-  <div class="modal-content">
-
-    <div class="modal-header">
-
-      <h2 id="categoryModalTitle">
-        إضافة تصنيف
-      </h2>
-
-      <button
-        class="close"
-        onclick="closeCategoryModal()">
-        ×
-      </button>
-
-    </div>
-
+  document.getElementById("modalBody").innerHTML = 
 
     <form id="categoryForm">
 
-      <input
-        type="hidden"
-        id="categoryEditId">
-
-
       <div class="form-grid">
 
-        <div>
-          <label>Category ID *</label>
+        <div class="field">
+          <label>ID التصنيف</label>
+
           <input
-            id="categoryId"
-            required>
+            id="catId"
+            value="${escapeHtml(category?.id || "")}"
+            ${category ? "readonly" : ""}
+            required
+            placeholder="مثال: italian"
+          >
         </div>
 
-        <div>
-          <label>Sort Order</label>
-          <input
-            id="categorySort"
-            type="number"
-            value="0">
-        </div>
 
-        <div>
-          <label>الاسم بالعربي *</label>
-          <input
-            id="categoryNameAr"
-            required>
-        </div>
-
-        <div>
-          <label>الاسم بالإنجليزي *</label>
-          <input
-            id="categoryNameEn"
-            required>
-        </div>
-
-        <div>
+        <div class="field">
           <label>Icon</label>
+
           <input
-            id="categoryIcon"
-            placeholder="marble">
+            id="catIcon"
+            value="${escapeHtml(category?.icon || "")}"
+            placeholder="مثال: 🇮🇹"
+          >
         </div>
 
-        <div>
-          <label>Badge</label>
+
+        <div class="field">
+          <label>اسم التصنيف بالعربي</label>
+
           <input
-            id="categoryBadge">
+            id="catNameAr"
+            value="${escapeHtml(category?.name_ar || "")}"
+            required
+            placeholder="مثال: الرخام الإيطالي"
+          >
+        </div>
+
+
+        <div class="field">
+          <label>اسم التصنيف بالإنجليزي</label>
+
+          <input
+            id="catNameEn"
+            value="${escapeHtml(category?.name_en || "")}"
+            required
+            placeholder="Example: Italian Marble"
+          >
+        </div>
+
+
+        <div class="field">
+          <label>Badge Text</label>
+
+          <input
+            id="catBadge"
+            value="${escapeHtml(category?.badge || "")}"
+            placeholder="مثال: Premium"
+          >
+        </div>
+
+
+        <div class="field">
+          <label>Sort Order</label>
+
+          <input
+            id="catSort"
+            type="number"
+            value="${category?.sort_order ?? 0}"
+          >
+        </div>
+
+
+        <div class="field full">
+
+          <label>
+            حالة التصنيف
+          </label>
+
+          <label style="display:flex;gap:8px;align-items:center">
+
+            <input
+              id="catActive"
+              type="checkbox"
+              ${category?.is_active !== false ? "checked" : ""}
+              style="width:auto"
+            >
+
+            التصنيف ظاهر في الموقع
+
+          </label>
+
         </div>
 
       </div>
 
 
-      <label class="checkbox" style="margin-top:15px">
-
-        <input
-          id="categoryActive"
-          type="checkbox"
-          checked>
-
-        Active
-
-      </label>
-
-
-      <div class="form-actions">
+      <div style="
+        display:flex;
+        gap:10px;
+        margin-top:20px;
+      ">
 
         <button
           type="submit"
-          class="btn btn-gold">
-          حفظ التصنيف
+          class="btn btn-gold"
+        >
+          ${category ? "حفظ التعديلات" : "إضافة التصنيف"}
         </button>
+
 
         <button
           type="button"
-          class="btn btn-dark"
-          onclick="closeCategoryModal()">
+          class="btn"
+          onclick="closeModal()"
+        >
           إلغاء
         </button>
 
       </div>
 
     </form>
-
-  </div>
-
-</div>
-
-
-<script>
-
-  /* ======================================================
-     SUPABASE
-  ====================================================== */
-
-  const supabaseClient =
-    window.supabase.createClient(
-      window.PRIME_CONFIG.SUPABASE_URL,
-      window.PRIME_CONFIG.SUPABASE_ANON_KEY
-    );
-
-
-  let currentUser = null;
-
-  let materials = [];
-
-  let categories = [];
-
-  let editingMaterialId = null;
-
-  let selectedFiles = [];
-
-  let existingImages = [];
-
-
-  /* ======================================================
-     HELPERS
-  ====================================================== */
-
-  function val(id) {
-
-    return document
-      .getElementById(id)
-      .value
-      .trim();
-
-  }
-
-
-  function nullable(id) {
-
-    const value = val(id);return value === ""
-      ? null
-      : value;
-
-  }
-
-
-  function numberOrNull(id) {
-
-    const value = val(id);
-
-    if (value === "") {
-      return null;
-    }
-
-    const number = Number(value);
-
-    if (!Number.isFinite(number)) {
-      throw new Error(
-        "القيمة الرقمية غير صحيحة: " + id
-      );
-    }
-
-    return number;
-
-  }
-
-
-  function escapeHtml(value) {
-
-    return String(value ?? "")
-      .replace(/&/g, "&amp;")
-      .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;")
-      .replace(/"/g, "&quot;")
-      .replace(/'/g, "&#039;");
-
-  }
-
-
-  function showMessage(text, type = "") {
-
-    const box =
-      document.getElementById("message");
-
-    box.textContent = text;
-
-    box.className =
-      "message " + type;
-
-    box.classList.remove("hidden");
-
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth"
-    });
-
-  }
-
-
-  /* ======================================================
-     AUTH
-  ====================================================== */
-
-  async function checkAuth() {
-
-    const {
-      data,
-      error
-    } =
-      await supabaseClient.auth.getSession();
-
-
-    if (error || !data.session) {
-
-      window.location.href =
-        "admin.html";
-
-      return false;
-
-    }
-
-
-    currentUser =
-      data.session.user;
-
-
-    document.getElementById("userEmail")
-      .textContent =
-      currentUser.email;
-
-
-    return true;
-
-  }
+  ;
 
 
   document
-    .getElementById("logoutBtn")
-    .addEventListener("click", async () => {
-
-      await supabaseClient.auth.signOut();
-
-      window.location.href =
-        "admin.html";
-
-    });
-
-
-  /* ======================================================
-     CATEGORIES
-  ====================================================== */
-
-  async function loadCategories() {
-
-    const {
-      data,
-      error
-    } =
-      await supabaseClient
-        .from("categories")
-        .select("*")
-        .order("sort_order", {
-          ascending: true
-        });
-
-
-    if (error) {
-
-      console.error(error);
-
-      showMessage(
-        "فشل جلب التصنيفات: " +
-        error.message,
-        "error"
-      );
-
-      return;
-
-    }
-
-
-    categories = data || [];
-
-
-    renderCategories();
-
-    populateCategorySelects();
-
-  }
-
-
-  function renderCategories() {
-
-    const container =
-      document.getElementById(
-        "categoriesList"
-      );
-
-
-    if (!categories.length) {
-
-      container.innerHTML =
-        <div class="empty">
-          لا توجد تصنيفات.
-        </div>;
-
-      return;
-
-    }
-
-
-    container.innerHTML =
-      categories.map(category => {
-
-        return 
-
-          <div class="category-row">
-
-            <div class="category-icon">
-
-              ${escapeHtml(
-                category.icon || "◆"
-              )}
-
-            </div>
-
-
-            <div>
-
-              <div class="category-name">
-
-                ${escapeHtml(
-                  category.name_ar
-                )}
-
-              </div>
-
-              <div class="category-name-en">
-
-                ${escapeHtml(
-                  category.name_en
-                )}
-
-              </div>
-
-            </div>
-
-
-            <div>
-
-              <div style="color:#aaa;font-size:12px">
-                ID:
-                ${escapeHtml(category.id)}
-              </div>
-
-              ${
-                category.badge
-                ?
-                <div style="color:#d4af37;font-size:12px">
-                  ${escapeHtml(category.badge)}
-                </div>
-                :
-                ""
-              }
-
-            </div>
-
-
-            <div>
-
-              ${
-                category.is_active
-                ?
-                <span class="badge badge-active">
-                  Active
-                </span>
-                :
-                <span class="badge badge-inactive">
-                  Inactive
-                </span>`
-              }
-
-            </div>
-
-
-            <div class="category-actions"><button
-                class="btn btn-dark btn-small"
-                onclick="editCategory('${escapeAttribute(category.id)}')">
-                تعديل
-              </button>
-
-              <button
-                class="btn btn-danger btn-small"
-                onclick="deleteCategory('${escapeAttribute(category.id)}')">
-                حذف
-              </button>
-
-            </div>
-
-          </div>
-
-        ;
-
-      }).join("");
-
-  }
-
-
-  function populateCategorySelects() {
-
-    const filter =
-      document.getElementById(
-        "filterCategory"
-      );
-
-    const materialCategory =
-      document.getElementById(
-        "category_id"
-      );
-
-
-    filter.innerHTML =
-      <option value="">
-        كل التصنيفات
-      </option>;
-
-
-    materialCategory.innerHTML =
-      <option value="">
-        -- اختر التصنيف --
-      </option>;
-
-
-    categories.forEach(category => {
-
-      const label =
-        category.name_en ||
-        category.name_ar ||
-        category.id;
-
-
-      filter.innerHTML +=
-        <option value="${escapeHtml(category.id)}">
-          ${escapeHtml(label)}
-        </option>;
-
-
-      materialCategory.innerHTML +=
-        <option value="${escapeHtml(category.id)}">
-          ${escapeHtml(label)}
-        </option>`;
-
-    });
-
-  }
-
-
-  window.openCategoryModal =
-    function() {
-
-      document
-        .getElementById("categoryModal")
-        .classList.remove("hidden");
-
-
-      document
-        .getElementById("categoryModalTitle")
-        .textContent =
-        "إضافة تصنيف";
-
-
-      document
-        .getElementById("categoryForm")
-        .reset();
-
-
-      document
-        .getElementById("categoryEditId")
-        .value = "";
-
-
-      document
-        .getElementById("categoryActive")
-        .checked = true;
-
-    };
-
-
-  window.closeCategoryModal =
-    function() {
-
-      document
-        .getElementById("categoryModal")
-        .classList.add("hidden");
-
-    };
-
-
-  window.editCategory =
-    function(id) {
-
-      const category =
-        categories.find(
-          item => String(item.id) === String(id)
-        );
-
-
-      if (!category) {
-        return;
-      }
-
-
-      document
-        .getElementById("categoryModal")
-        .classList.remove("hidden");
-
-
-      document
-        .getElementById("categoryModalTitle")
-        .textContent =
-        "تعديل التصنيف";
-
-
-      document
-        .getElementById("categoryEditId")
-        .value =
-        category.id;
-
-
-      document
-        .getElementById("categoryId")
-        .value =
-        category.id;
-
-
-      document
-        .getElementById("categoryId")
-        .disabled = true;
-
-
-      document
-        .getElementById("categoryNameAr")
-        .value =
-        category.name_ar || "";
-
-
-      document
-        .getElementById("categoryNameEn")
-        .value =
-        category.name_en || "";
-
-
-      document
-        .getElementById("categoryIcon")
-        .value =
-        category.icon || "";
-
-
-      document
-        .getElementById("categoryBadge")
-        .value =
-        category.badge || "";
-
-
-      document
-        .getElementById("categorySort")
-        .value =
-        category.sort_order ?? 0;
-
-
-      document
-        .getElementById("categoryActive")
-        .checked =
-        !!category.is_active;
-
-    };
+    .getElementById("modal")
+    .classList
+    .remove("hidden");
 
 
   document
     .getElementById("categoryForm")
     .addEventListener(
       "submit",
-      async function(event) {
-
-        event.preventDefault();
-
-
-        try {
-
-          const editId =
-            document
-              .getElementById(
-                "categoryEditId"
-              )
-              .value;
+      saveCategory
+    );
+}
 
 
-          const payload = {
+/* =========================================================
+   SAVE CATEGORY
+========================================================= */
 
-            name_ar:
-              val("categoryNameAr"),
+async function saveCategory(event) {
 
-            name_en:
-              val("categoryNameEn"),
+  event.preventDefault();
 
-            icon:
-              nullable("categoryIcon"),
-
-            badge:
-              nullable("categoryBadge"),
-
-            sort_order:
-              Number(
-                document
-                  .getElementById(
-                    "categorySort"
-                  )
-                  .value || 0
-              ),is_active:
-              document
-                .getElementById(
-                  "categoryActive"
-                )
-                .checked
-
-          };
-
-
-          let result;
-
-
-          if (editId) {
-
-            result =
-              await supabaseClient
-                .from("categories")
-                .update(payload)
-                .eq("id", editId);
-
-          } else {
-
-            payload.id =
-              val("categoryId");
-
-
-            result =
-              await supabaseClient
-                .from("categories")
-                .insert(payload);
-
-          }
-
-
-          if (result.error) {
-
-            throw result.error;
-
-          }
-
-
-          closeCategoryModal();
-
-          showMessage(
-            editId
-              ? "تم تعديل التصنيف بنجاح ✅"
-              : "تم إضافة التصنيف بنجاح ✅",
-            "success"
-          );
-
-
-          await loadCategories();
-
-
-        } catch (error) {
-
-          console.error(error);
-
-          showMessage(
-            "فشل حفظ التصنيف: " +
-            error.message,
-            "error"
-          );
-
-        }
-
-      }
+  const button =
+    event.target.querySelector(
+      'button[type="submit"]'
     );
 
+  button.disabled = true;
 
-  window.deleteCategory =
-    async function(id) {
-
-      const category =
-        categories.find(
-          item => String(item.id) === String(id)
-        );
+  button.textContent =
+    "جاري الحفظ...";
 
 
-      if (!category) {
-        return;
-      }
+  try {
+
+    const data = {
+
+      id:
+        document
+          .getElementById("catId")
+          .value
+          .trim(),
+
+      name_ar:
+        document
+          .getElementById("catNameAr")
+          .value
+          .trim(),
+
+      name_en:
+        document
+          .getElementById("catNameEn")
+          .value
+          .trim(),
+
+      icon:
+        document
+          .getElementById("catIcon")
+          .value
+          .trim(),
+
+      badge:
+        document
+          .getElementById("catBadge")
+          .value
+          .trim(),sort_order:
+        Number(
+          document
+            .getElementById("catSort")
+            .value || 0
+        ),
+
+      is_active:
+        document
+          .getElementById("catActive")
+          .checked
+    };
 
 
-      const confirmDelete =
-        confirm(
-          هل تريد حذف التصنيف "${category.name_en || category.name_ar}"؟\n\nإذا كان التصنيف مستخدمًا في خامات، قد يمنع Supabase عملية الحذف.
-        );
+    if (!data.id) {
+      throw new Error(
+        "يجب إدخال ID التصنيف."
+      );
+    }
 
 
-      if (!confirmDelete) {
-        return;
-      }
+    if (editingCategoryId) {
 
-
-      const {
-        error
-      } =
+      const { error } =
         await supabaseClient
           .from("categories")
-          .delete()
-          .eq("id", id);
-
+          .update(data)
+          .eq(
+            "id",
+            editingCategoryId
+          );
 
       if (error) {
-
-        showMessage(
-          "لم يتم حذف التصنيف: " +
-          error.message,
-          "error"
-        );
-
-        return;
-
+        throw error;
       }
 
-
       showMessage(
-        "تم حذف التصنيف بنجاح.",
+        "تم تعديل التصنيف بنجاح.",
         "success"
       );
 
+    } else {
 
-      await loadCategories();
+      const { error } =
+        await supabaseClient
+          .from("categories")
+          .insert(data);
 
-      await loadMaterials();
+      if (error) {
+        throw error;
+      }
 
-    };
-
-
-  /* ======================================================
-     MATERIALS
-  ====================================================== */
-
-  async function loadMaterials() {
-
-    const grid =
-      document.getElementById(
-        "materialsGrid"
+      showMessage(
+        "تم إضافة التصنيف بنجاح.",
+        "success"
       );
+    }
 
 
-    grid.innerHTML =
-      <div class="loading">
-        جاري تحميل الخامات...
-      </div>;
+    closeModal();
+
+    editingCategoryId = null;
+
+    await loadData();
 
 
-    const {
-      data,
+  } catch (error) {
+
+    console.error(
+      "CATEGORY SAVE ERROR:",
       error
-    } =
+    );
+
+    showMessage(
+      "فشل حفظ التصنيف: " +
+      error.message,
+      "error"
+    );
+
+    button.disabled = false;
+
+    button.textContent =
+      editingCategoryId
+        ? "حفظ التعديلات"
+        : "إضافة التصنيف";
+  }
+}
+
+
+/* =========================================================
+   DELETE CATEGORY
+========================================================= */
+
+async function deleteCategory(id) {
+
+  const category =
+    categories.find(
+      item =>
+        String(item.id) ===
+        String(id)
+    );
+
+
+  if (!category) {
+    return;
+  }
+
+
+  const confirmed =
+    confirm(
+      هل أنت متأكد من حذف التصنيف:
+
+${category.name_ar || category.name_en || id}
+
+ملاحظة: لو توجد منتجات مرتبطة بهذا التصنيف، قد يمنع Supabase الحذف.
+    );
+
+
+  if (!confirmed) {
+    return;
+  }
+
+
+  try {
+
+    const { error } =
       await supabaseClient
-        .from("materials")
-        .select("*")
-        .order("created_at", {
-          ascending: false
-        });
-
-
-    if (error) {
-
-      console.error(error);
-
-      grid.innerHTML =
-        <div class="empty">
-          فشل في جلب البيانات:<br>
-          ${escapeHtml(error.message)}
-        </div>;
-
-      return;
-
-    }
-
-
-    materials = data || [];
-
-    updateOriginFilter();
-
-    renderMaterials();
-
-  }
-
-
-  function updateOriginFilter() {
-
-    const select =
-      document.getElementById(
-        "filterOrigin"
-      );
-
-
-    const current =
-      select.value;
-
-
-    const origins =
-      [
-        ...new Set(
-          materials
-            .map(item => item.origin)
-            .filter(Boolean)
-            .map(item => String(item).trim())
-        )
-      ]
-      .sort();
-
-
-    select.innerHTML =
-      <option value="">
-        كل البلاد
-      </option>;
-
-
-    origins.forEach(origin => {
-
-      select.innerHTML +=
-        <option value="${escapeHtml(origin)}">
-          ${escapeHtml(origin)}
-        </option>;
-
-    });
-
-
-    if (
-      origins.includes(current)
-    ) {
-
-      select.value = current;
-
-    }
-
-  }
-
-
-  function renderMaterials() {
-
-    const grid =
-      document.getElementById(
-        "materialsGrid"
-      );
-
-
-    const category =
-      document.getElementById(
-        "filterCategory"
-      ).value;
-
-
-    const origin =
-      document.getElementById(
-        "filterOrigin"
-      ).value;
-
-
-    const search =
-      document.getElementById(
-        "searchInput"
-      ).value
-      .trim()
-      .toLowerCase();
-
-
-    const filtered =
-      materials.filter(material => {if (
-          category &&
-          String(material.category_id) !==
-          String(category)
-        ) {
-          return false;
-        }
-
-
-        if (
-          origin &&
-          String(material.origin || "") !==
-          String(origin)
-        ) {
-          return false;
-        }
-
-
-        if (search) {
-
-          const text =
-            [
-              material.name_ar,
-              material.name_en,
-              material.origin,
-              material.stone_type,
-              material.type_ar,
-              material.type_en
-            ]
-            .filter(Boolean)
-            .join(" ")
-            .toLowerCase();
-
-
-          if (!text.includes(search)) {
-
-            return false;
-
-          }
-
-        }
-
-
-        return true;
-
-      });
-
-
-    if (!filtered.length) {
-
-      grid.innerHTML =
-        <div class="empty">
-          لا توجد خامات مطابقة للبحث.
-        </div>;
-
-      return;
-
-    }
-
-
-    grid.innerHTML =
-      filtered
-        .map(material => {
-
-          const images =
-            normalizeImages(
-              material.images
-            );
-
-
-          const firstImage =
-            images[0] || "";
-
-
-          return 
-
-            <div class="material-card">
-
-              <div class="material-image">
-
-                ${
-                  firstImage
-                  ?
-                  <img
-                    src="${escapeAttribute(firstImage)}"
-                    alt="${escapeHtml(material.name_en  material.name_ar  "")}"
-                    loading="lazy">
-                  :
-                  <div class="no-image">
-                    لا توجد صورة
-                  </div>
-                }
-
-              </div>
-
-
-              <div class="material-body">
-
-                <div>
-
-                  ${
-                    material.is_active
-                    ?
-                    <span class="badge badge-active">
-                      Active
-                    </span>
-                    :
-                    <span class="badge badge-inactive">
-                      Inactive
-                    </span>
-                  }
-
-
-                  ${
-                    material.is_featured
-                    ?
-                    <span class="badge badge-featured">
-                      ★ Featured
-                    </span>
-                    :
-                    ""
-                  }
-
-                </div>
-
-
-                <div class="material-name">
-                  ${escapeHtml(
-                    material.name_ar || ""
-                  )}
-                </div>
-
-
-                <div class="material-en">
-                  ${escapeHtml(
-                    material.name_en || ""
-                  )}
-                </div>
-
-
-                <div class="material-meta">
-
-                  <div>
-                    <strong>Origin:</strong>
-                    ${escapeHtml(
-                      material.origin || "—"
-                    )}
-                  </div>
-
-                  <div>
-                    <strong>Stone:</strong>
-                    ${escapeHtml(
-                      material.stone_type || "—"
-                    )}
-                  </div>
-
-                  <div>
-                    <strong>Images:</strong>
-                    ${images.length}
-                  </div>
-
-                </div>
-
-
-                <div class="material-actions">
-
-                  <button
-                    class="btn btn-dark btn-small"
-                    onclick="editMaterial('${escapeAttribute(material.id)}')">
-                    تعديل
-                  </button>
-
-                  <button
-                    class="btn btn-danger btn-small"
-                    onclick="deleteMaterial('${escapeAttribute(material.id)}')">
-                    حذف
-                  </button>
-
-                </div>
-
-              </div>
-
-            </div>
-
-          ;
-
-        })
-        .join("");
-
-  }
-
-
-  /* ======================================================
-     IMAGE HANDLING
-  ====================================================== */function normalizeImages(images) {
-
-    if (Array.isArray(images)) {
-      return images.filter(Boolean);
-    }
-
-
-    if (typeof images === "string") {
-
-      try {
-
-        const parsed =
-          JSON.parse(images);
-
-        if (Array.isArray(parsed)) {
-          return parsed.filter(Boolean);
-        }
-
-      } catch (_) {
-
-        if (images.trim()) {
-          return [images.trim()];
-        }
-
-      }
-
-    }
-
-
-    return [];
-
-  }
-
-
-  document
-    .getElementById("imageFiles")
-    .addEventListener(
-      "change",
-      function() {
-
-        selectedFiles =
-          [
-            ...selectedFiles,
-            ...Array.from(this.files)
-          ];
-
-        this.value = "";
-
-        renderImagePreview();
-
-      }
-    );
-
-
-  function renderImagePreview() {
-
-    const preview =
-      document.getElementById(
-        "imagePreview"
-      );
-
-
-    preview.innerHTML = "";
-
-
-    existingImages.forEach(
-      (url, index) => {
-
-        const box =
-          document.createElement(
-            "div"
-          );
-
-        box.className =
-          "image-item";
-
-
-        box.innerHTML = 
-
-          <img
-            src="${escapeAttribute(url)}"
-            alt="Existing image">
-
-          <button
-            type="button"
-            class="image-remove"
-            onclick="removeExistingImage(${index})">
-            ×
-          </button>
-
-        ;
-
-
-        preview.appendChild(box);
-
-      }
-    );
-
-
-    selectedFiles.forEach(
-      (file, index) => {
-
-        const box =
-          document.createElement(
-            "div"
-          );
-
-        box.className =
-          "image-item";
-
-
-        const image =
-          document.createElement("img");
-
-
-        image.src =
-          URL.createObjectURL(file);
-
-
-        const button =
-          document.createElement(
-            "button"
-          );
-
-
-        button.type = "button";
-
-        button.className =
-          "image-remove";
-
-        button.textContent = "×";
-
-
-        button.onclick = function() {
-
-          selectedFiles.splice(
-            index,
-            1
-          );
-
-          renderImagePreview();
-
-        };
-
-
-        box.appendChild(image);
-
-        box.appendChild(button);
-
-        preview.appendChild(box);
-
-      }
-    );
-
-  }
-
-
-  window.removeExistingImage =
-    function(index) {
-
-      existingImages.splice(
-        index,
-        1
-      );
-
-      renderImagePreview();
-
-    };
-
-
-  async function uploadImage(
-    file,
-    materialId
-  ) {
-
-    const extension =
-      file.name
-        .split(".")
-        .pop()
-        .toLowerCase();
-
-
-    const fileName =
-      materialId +
-      "/" +
-      crypto.randomUUID() +
-      "." +
-      extension;
-
-
-    const {
-      error
-    } =
-      await supabaseClient.storage
-        .from(
-          window.PRIME_CONFIG
-            .STORAGE_BUCKETS
-            .MATERIALS
-        )
-        .upload(
-          fileName,
-          file,
-          {
-            cacheControl: "3600",
-            upsert: false
-          }
+        .from("categories")
+        .delete()
+        .eq(
+          "id",
+          id
         );
 
 
@@ -2253,675 +842,1098 @@
     }
 
 
-    const {
-      data
-    } =
-      supabaseClient.storage
-        .from(
-          window.PRIME_CONFIG
-            .STORAGE_BUCKETS
-            .MATERIALS
-        )
-        .getPublicUrl(
-          fileName
-        );
+    showMessage(
+      "تم حذف التصنيف.",
+      "success"
+    );
 
 
-    return data.publicUrl;
+    await loadData();
 
+
+  } catch (error) {
+
+    console.error(
+      "CATEGORY DELETE ERROR:",
+      error
+    );
+
+    showMessage(
+      "فشل حذف التصنيف: " +
+      error.message,
+      "error"
+    );
   }
+}
 
 
-  /* ======================================================
-     SAVE MATERIAL
-  ====================================================== */
+/* =========================================================
+   MATERIAL MODAL
+========================================================= */
+
+function openMaterialModal(id = null) {
+
+  editingMaterialId = id;
+
+  const material = id
+    ? materials.find(
+        item =>
+          String(item.id) ===
+          String(id)
+      )
+    : null;
+
+
+  materialImages =
+    Array.isArray(
+      material?.images
+    )
+      ? [...material.images]
+      : [];
+
+
+  document.getElementById("modalTitle").textContent =
+    material
+      ? "تعديل المنتج"
+      : "إضافة منتج جديد";
+
+
+  document.getElementById("modalBody").innerHTML = 
+
+    <form id="materialEditForm">
+
+      <div class="form-grid">
+
+        <div class="field">
+
+          <label>ID المنتج</label>
+
+          <input
+            id="matId"
+            value="${escapeHtml(material?.id || "")}"
+            ${material ? "readonly" : ""}
+            required
+            placeholder="مثال: carrara-001"
+          >
+
+        </div>
+
+
+        <div class="field">
+
+          <label>التصنيف</label>
+
+          <select id="matCategory">
+
+            <option value="">
+              اختر التصنيف
+            </option>
+
+            ${categories.map(category => 
+
+              <option
+                value="${escapeHtml(category.id)}"
+                ${
+                  String(
+                    material?.category_id || ""
+                  ) ===
+                  String(category.id)
+                    ? "selected"
+                    : ""
+                }
+              >
+
+                ${escapeHtml(
+                  category.name_en ||
+                  category.name_ar ||
+                  category.id
+                )}${
+                  category.name_ar
+                    ? " — " +
+                      escapeHtml(
+                        category.name_ar
+                      )
+                    : ""
+                }
+
+              </option>
+
+            `).join("")}
+
+          </select>
+
+        </div>
+
+
+        <div class="field">
+
+          <label>Name Arabic</label>
+
+          <input
+            id="matNameAr"
+            value="${escapeHtml(material?.name_ar || "")}"
+            required
+          >
+
+        </div>
+
+
+        <div class="field">
+
+          <label>Name English</label>
+
+          <input
+            id="matNameEn"
+            value="${escapeHtml(material?.name_en || "")}"
+            required
+          >
+
+        </div>
+
+
+        <div class="field">
+
+          <label>بلد الصنع / Origin</label>
+
+          <input
+            id="matOrigin"
+            value="${escapeHtml(material?.origin || "")}"
+            placeholder="Italy / Spain / Turkey..."
+          >
+
+        </div>
+
+
+        <div class="field">
+
+          <label>Color Description</label>
+
+          <input
+            id="matColor"
+            value="${escapeHtml(material?.color  material?.color_desc  "")}"
+          >
+
+        </div>
+
+
+        <div class="field">
+
+          <label>Type Arabic</label>
+
+          <input
+            id="matTypeAr"
+            value="${escapeHtml(material?.type_ar || "")}"
+          >
+
+        </div>
+
+
+        <div class="field">
+
+          <label>Type English</label>
+
+          <input
+            id="matTypeEn"
+            value="${escapeHtml(material?.type_en || "")}"
+          >
+
+        </div>
+
+
+        <div class="field">
+
+          <label>Finish</label>
+
+          <input
+            id="matFinish"
+            value="${escapeHtml(material?.finish || "")}"
+            placeholder="Polished / Honed / Matte..."
+          >
+
+        </div>
+
+
+        <div class="field">
+
+          <label>Price Tier</label>
+
+          <input
+            id="matPriceTier"
+            value="${escapeHtml(material?.price_tier || "")}"
+          >
+
+        </div>
+
+
+        <div class="field">
+
+          <label>Color Hex</label>
+
+          <input
+            id="matColorHex"
+            value="${escapeHtml(material?.color_hex || "")}"
+            placeholder="#FFFFFF"
+          >
+
+        </div>
+
+
+        <div class="field">
+
+          <label>Stone Type</label>
+
+          <input
+            id="matStoneType"
+            value="${escapeHtml(material?.stone_type || "")}"
+            placeholder="Marble / Granite / Basalt..."
+          >
+
+        </div>
+
+
+        <div class="field">
+
+          <label>Color Group</label>
+
+          <input
+            id="matColorGroup"
+            value="${escapeHtml(material?.color_group || "")}"
+          >
+
+        </div>
+
+
+        <div class="field">
+
+          <label>Density</label>
+
+          <input
+            id="matDensity"
+            type="number"
+            step="any"
+            value="${material?.density ?? ""}"
+          >
+
+        </div>
+
+
+        <div class="field">
+
+          <label>Water Absorption</label>
+
+          <input
+            id="matWater"
+            type="number"
+            step="any"
+            value="${material?.water_absorption ?? ""}"
+          >
+
+        </div>
+
+
+        <div class="field">
+
+          <label>Compressive Strength</label>
+
+          <input
+            id="matCompressive"
+            type="number"
+            step="any"
+            value="${material?.compressive_strength ?? ""}"
+          >
+
+        </div>
+
+
+        <div class="field">
+
+          <label>Durability Score</label>
+
+          <input
+            id="matDurability"
+            type="number"
+            step="any"
+            value="${material?.durability_score ?? ""}"
+          >
+
+        </div>
+
+
+        <div class="field">
+
+          <label>Maintenance Tier</label>
+
+          <input
+            id="matMaintenance"
+            value="${escapeHtml(material?.maintenance_tier || "")}"
+          >
+
+        </div>
+
+
+        <div class="field">
+
+          <label>Texture Grade</label><input
+            id="matTexture"
+            value="${escapeHtml(material?.texture_grade || "")}"
+          >
+
+        </div>
+
+
+        <div class="field full">
+
+          <label>
+            Usage Arabic
+          </label>
+
+          <textarea id="matUsageAr">${escapeHtml(
+            material?.usage_ar || ""
+          )}</textarea>
+
+        </div>
+
+
+        <div class="field full">
+
+          <label>
+            Usage English
+          </label>
+
+          <textarea id="matUsageEn">${escapeHtml(
+            material?.usage_en || ""
+          )}</textarea>
+
+        </div>
+
+
+        <div class="field full">
+
+          <label>
+            صور المنتج
+          </label>
+
+          <input
+            id="matImages"
+            type="file"
+            accept="image/*"
+            multiple
+          >
+
+          <div
+            id="materialImagePreview"
+            class="image-preview"
+          ></div>
+
+        </div>
+
+
+        <div class="field full">
+
+          <label style="
+            display:flex;
+            align-items:center;
+            gap:8px;
+          ">
+
+            <input
+              id="matFeatured"
+              type="checkbox"
+              style="width:auto"
+              ${
+                material?.is_featured
+                  ? "checked"
+                  : ""
+              }
+            >
+
+            منتج مميز
+
+          </label>
+
+
+          <label style="
+            display:flex;
+            align-items:center;
+            gap:8px;
+          ">
+
+            <input
+              id="matActive"
+              type="checkbox"
+              style="width:auto"
+              ${
+                material?.is_active !== false
+                  ? "checked"
+                  : ""
+              }
+            >
+
+            المنتج ظاهر على الموقع
+
+          </label>
+
+        </div>
+
+      </div>
+
+
+      <div style="
+        display:flex;
+        gap:10px;
+        margin-top:20px;
+      ">
+
+        <button
+          type="submit"
+          class="btn btn-gold"
+        >
+          ${
+            material
+              ? "حفظ تعديلات المنتج"
+              : "إضافة المنتج"
+          }
+        </button>
+
+
+        <button
+          type="button"
+          class="btn"
+          onclick="closeModal()"
+        >
+          إلغاء
+        </button>
+
+      </div>
+
+    </form>
+  ;
+
 
   document
-    .getElementById("materialForm")
+    .getElementById("modal")
+    .classList
+    .remove("hidden");
+
+
+  renderMaterialImages();
+
+
+  document
+    .getElementById("matImages")
+    .addEventListener(
+      "change",
+      handleMaterialImages
+    );
+
+
+  document
+    .getElementById("materialEditForm")
     .addEventListener(
       "submit",
-      async function(event) {
+      saveMaterial
+    );
+}
 
-        event.preventDefault();
 
+/* =========================================================
+   SHOW EXISTING IMAGES
+========================================================= */
 
-        const saveButton =
-          document.getElementById(
-            "saveMaterialBtn"
-          );
+function renderMaterialImages() {
 
-
-        saveButton.disabled = true;
-
-
-        try {
-
-          const materialId =
-            val("id");
-
-
-          if (!materialId) {
-
-            throw new Error(
-              "Material ID مطلوب."
-            );
-
-          }
-
-
-          showMessage(
-            "جاري تجهيز الخامة..."
-          );
-
-
-          let newImageUrls = [];for (
-            const file
-            of selectedFiles
-          ) {
-
-            showMessage(
-              "جاري رفع الصورة: " +
-              file.name
-            );
-
-
-            const url =
-              await uploadImage(
-                file,
-                materialId
-              );
-
-
-            newImageUrls.push(url);
-
-          }
-
-
-          const allImages =
-            [
-              ...existingImages,
-              ...newImageUrls
-            ];
-
-
-          const payload = {
-
-            id: materialId,
-
-            name_ar:
-              val("name_ar"),
-
-            name_en:
-              val("name_en"),
-
-            category_id:
-              nullable("category_id"),
-
-            color_desc:
-              nullable("color_desc"),
-
-            origin:
-              nullable("origin"),
-
-            type_ar:
-              nullable("type_ar"),
-
-            type_en:
-              nullable("type_en"),
-
-            finish:
-              nullable("finish"),
-
-            usage_ar:
-              nullable("usage_ar"),
-
-            usage_en:
-              nullable("usage_en"),
-
-            price_tier:
-              nullable("price_tier"),
-
-            color_hex:
-              nullable("color_hex"),
-
-            stone_type:
-              nullable("stone_type"),
-
-            color_group:
-              nullable("color_group"),
-
-            density:
-              numberOrNull("density"),
-
-            water_absorption:
-              numberOrNull(
-                "water_absorption"
-              ),
-
-            compressive_strength:
-              numberOrNull(
-                "compressive_strength"
-              ),
-
-            durability_score:
-              numberOrNull(
-                "durability_score"
-              ),
-
-            maintenance_tier:
-              nullable("maintenance_tier"),
-
-            texture_grade:
-              nullable("texture_grade"),
-
-            images:
-              allImages,
-
-            is_featured:
-              document
-                .getElementById(
-                  "is_featured"
-                )
-                .checked,
-
-            is_active:
-              document
-                .getElementById(
-                  "is_active"
-                )
-                .checked
-
-          };
-
-
-          let result;
-
-
-          if (editingMaterialId) {
-
-            result =
-              await supabaseClient
-                .from("materials")
-                .update(payload)
-                .eq(
-                  "id",
-                  editingMaterialId
-                );
-
-          } else {
-
-            result =
-              await supabaseClient
-                .from("materials")
-                .insert(payload);
-
-          }
-
-
-          if (result.error) {
-
-            throw result.error;
-
-          }
-
-
-          showMessage(
-            editingMaterialId
-              ? "تم تعديل الخامة بنجاح ✅"
-              : "تم إضافة الخامة بنجاح ✅",
-            "success"
-          );
-
-
-          resetMaterialForm();
-
-          await loadMaterials();
-
-
-        } catch (error) {
-
-          console.error(error);
-
-          showMessage(
-            "فشل حفظ الخامة: " +
-            error.message,
-            "error"
-          );
-
-        } finally {
-
-          saveButton.disabled = false;
-
-        }
-
-      }
+  const preview =
+    document.getElementById(
+      "materialImagePreview"
     );
 
 
-  /* ======================================================
-     EDIT MATERIAL
-  ====================================================== */
-
-  window.editMaterial =
-    async function(id) {
-
-      const {
-        data,
-        error
-      } =
-        await supabaseClient
-          .from("materials")
-          .select("*")
-          .eq("id", id)
-          .single();
-
-
-      if (error) {
-
-        showMessage(
-          "فشل تحميل الخامة: " +
-          error.message,
-          "error"
-        );
-
-        return;
-
-      }
-
-
-      editingMaterialId =
-        data.id;
-
-
-      document
-        .getElementById(
-          "materialFormTitle"
-        )
-        .textContent =
-        "تعديل الخامة";document
-        .getElementById(
-          "cancelEditBtn"
-        )
-        .classList.remove(
-          "hidden"
-        );
-
-
-      document
-        .getElementById("saveMaterialBtn")
-        .textContent =
-        "حفظ التعديل";
-
-
-      setValue("id", data.id);
-
-      document
-        .getElementById("id")
-        .disabled = true;
-
-
-      setValue(
-        "name_ar",
-        data.name_ar
-      );
-
-      setValue(
-        "name_en",
-        data.name_en
-      );
-
-      setValue(
-        "category_id",
-        data.category_id
-      );
-
-      setValue(
-        "color_desc",
-        data.color_desc
-      );
-
-      setValue(
-        "origin",
-        data.origin
-      );
-
-      setValue(
-        "type_ar",
-        data.type_ar
-      );
-
-      setValue(
-        "type_en",
-        data.type_en
-      );
-
-      setValue(
-        "finish",
-        data.finish
-      );
-
-      setValue(
-        "usage_ar",
-        data.usage_ar
-      );
-
-      setValue(
-        "usage_en",
-        data.usage_en
-      );
-
-      setValue(
-        "price_tier",
-        data.price_tier
-      );
-
-      setValue(
-        "color_hex",
-        data.color_hex
-      );
-
-      setValue(
-        "stone_type",
-        data.stone_type
-      );
-
-      setValue(
-        "color_group",
-        data.color_group
-      );
-
-      setValue(
-        "density",
-        data.density
-      );
-
-      setValue(
-        "water_absorption",
-        data.water_absorption
-      );
-
-      setValue(
-        "compressive_strength",
-        data.compressive_strength
-      );
-
-      setValue(
-        "durability_score",
-        data.durability_score
-      );
-
-      setValue(
-        "maintenance_tier",
-        data.maintenance_tier
-      );
-
-      setValue(
-        "texture_grade",
-        data.texture_grade
-      );
-
-
-      document
-        .getElementById(
-          "is_featured"
-        )
-        .checked =
-        !!data.is_featured;
-
-
-      document
-        .getElementById(
-          "is_active"
-        )
-        .checked =
-        !!data.is_active;
-
-
-      existingImages =
-        normalizeImages(
-          data.images
-        );
-
-
-      selectedFiles = [];
-
-
-      renderImagePreview();
-
-
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-      });
-
-    };
-
-
-  /* ======================================================
-     DELETE MATERIAL
-  ====================================================== */
-
-  window.deleteMaterial =
-    async function(id) {
-
-      const material =
-        materials.find(
-          item =>
-            String(item.id) ===
-            String(id)
-        );
-
-
-      if (!material) {
-        return;
-      }
-
-
-      const confirmed =
-        confirm(
-          هل أنت متأكد من حذف الخامة:\n${material.name_ar || material.name_en || material.id}\n\nسيتم حذف سجل الخامة من قاعدة البيانات.
-        );
-
-
-      if (!confirmed) {
-        return;
-      }
-
-
-      const {
-        error
-      } =
-        await supabaseClient
-          .from("materials")
-          .delete()
-          .eq("id", id);
-
-
-      if (error) {
-
-        showMessage(
-          "فشل حذف الخامة: " +
-          error.message,
-          "error"
-        );
-
-        return;
-
-      }
-
-
-      showMessage(
-        "تم حذف الخامة بنجاح.",
-        "success"
-      );
-
-
-      if (
-        editingMaterialId === id
-      ) {
-
-        resetMaterialForm();
-
-      }
-
-
-      await loadMaterials();
-
-    };
-
-
-  /* ======================================================
-     RESET MATERIAL
-  ====================================================== */
-
-  function resetMaterialForm() {
-
-    editingMaterialId = null;
-
-    existingImages = [];
-
-    selectedFiles = [];
-
-
-    document
-      .getElementById(
-        "materialForm"
-      )
-      .reset();
-
-
-    document
-      .getElementById(
-        "is_active"
-      )
-      .checked = true;
-
-
-    document
-      .getElementById("id")
-      .disabled = false;
-
-
-    document
-      .getElementById(
-        "materialFormTitle"
-      )
-      .textContent =
-      "إضافة خامة جديدة";document
-      .getElementById(
-        "saveMaterialBtn"
-      )
-      .textContent =
-      "حفظ الخامة";
-
-
-    document
-      .getElementById(
-        "cancelEditBtn"
-      )
-      .classList.add(
-        "hidden"
-      );
-
-
-    document
-      .getElementById(
-        "imagePreview"
-      )
-      .innerHTML = "";
-
+  if (!preview) {
+    return;
   }
 
 
-  document
-    .getElementById(
-      "cancelEditBtn"
-    )
-    .addEventListener(
-      "click",
-      resetMaterialForm
-    );
+  if (!materialImages.length) {
 
+    preview.innerHTML = 
+      <div style="color:#888">
+        لا توجد صور مضافة.
+      </div>
+    ;
 
-  /* ======================================================
-     FILTER EVENTS
-  ====================================================== */
-
-  document
-    .getElementById(
-      "filterCategory"
-    )
-    .addEventListener(
-      "change",
-      renderMaterials
-    );
-
-
-  document
-    .getElementById(
-      "filterOrigin"
-    )
-    .addEventListener(
-      "change",
-      renderMaterials
-    );
-
-
-  document
-    .getElementById(
-      "searchInput"
-    )
-    .addEventListener(
-      "input",
-      renderMaterials
-    );
-
-
-  /* ======================================================
-     ATTRIBUTE HELPERS
-  ====================================================== */
-
-  function setValue(id, value) {
-
-    document
-      .getElementById(id)
-      .value =
-      value ?? "";
-
+    return;
   }
 
 
-  function escapeAttribute(value) {
+  preview.innerHTML =
+    materialImages
+      .map(
+        (url, index) => 
 
-    return String(value ?? "")
-      .replace(/\\/g, "\\\\")
-      .replace(/'/g, "\\'");
+          <div class="image-item">
 
+            <img
+              src="${escapeHtml(url)}"
+              onerror="this.style.opacity='.3'"
+            >
+
+            <button
+              type="button"
+              class="remove-image"
+              onclick="removeMaterialImage(${index})"
+            >
+              ×
+            </button>
+
+          </div>
+
+        `
+      )
+      .join("");
+}
+
+
+/* =========================================================
+   REMOVE IMAGE
+========================================================= */
+
+function removeMaterialImage(index) {
+
+  materialImages.splice(
+    index,
+    1
+  );
+
+  renderMaterialImages();
+}
+
+
+/* =========================================================
+   SELECT NEW IMAGES
+========================================================= */
+
+async function handleMaterialImages(event) {const files =
+    Array.from(
+      event.target.files || []
+    );
+
+
+  if (!files.length) {
+    return;
   }
 
 
-  /* ======================================================
-     START
-  ====================================================== */
+  try {
 
-  (async function() {
+    const materialId =
+      document
+        .getElementById("matId")
+        .value
+        .trim();
 
-    const authenticated =
-      await checkAuth();
 
+    if (!materialId) {
 
-    if (!authenticated) {
+      alert(
+        "اكتب ID المنتج أولاً ثم اختر الصور."
+      );
+
+      event.target.value = "";
+
       return;
     }
 
 
-    await loadCategories();
+    showMessage(
+      "جاري رفع الصور..."
+    );
 
-    await loadMaterials();
 
-  })();
+    for (
+      const file of files
+    ) {
 
-</script>
+      const url =
+        await uploadMaterialImage(
+          file,
+          materialId
+        );
 
-</body>
-</html>
+      materialImages.push(
+        url
+      );
+    }
+
+
+    renderMaterialImages();
+
+    showMessage(
+      "تم رفع الصور.",
+      "success"
+    );
+
+
+  } catch (error) {
+
+    console.error(
+      "IMAGE UPLOAD ERROR:",
+      error
+    );
+
+    showMessage(
+      "فشل رفع الصورة: " +
+      error.message,
+      "error"
+    );
+  }
+
+
+  event.target.value = "";
+}
+
+
+/* =========================================================
+   UPLOAD MATERIAL IMAGE
+========================================================= */
+
+async function uploadMaterialImage(
+  file,
+  materialId
+) {
+
+  const bucket =
+    window
+      .PRIME_CONFIG
+      .STORAGE_BUCKETS
+      .MATERIALS;
+
+
+  const extension =
+    file.name
+      .split(".")
+      .pop()
+      .toLowerCase();
+
+
+  const fileName =
+    ${materialId}/${crypto.randomUUID()}.${extension};
+
+
+  const {
+    error
+  } =
+    await supabaseClient
+      .storage
+      .from(bucket)
+      .upload(
+        fileName,
+        file,
+        {
+          cacheControl: "3600",
+          upsert: false
+        }
+      );
+
+
+  if (error) {
+    throw error;
+  }
+
+
+  const {
+    data
+  } =
+    supabaseClient
+      .storage
+      .from(bucket)
+      .getPublicUrl(
+        fileName
+      );
+
+
+  return data.publicUrl;
+}
+
+
+/* =========================================================
+   SAVE MATERIAL
+========================================================= */
+
+async function saveMaterial(event) {
+
+  event.preventDefault();
+
+
+  const button =
+    event.target.querySelector(
+      'button[type="submit"]'
+    );
+
+
+  button.disabled = true;
+
+  button.textContent =
+    "جاري الحفظ...";
+
+
+  try {
+
+    const data = {
+
+      id:
+        document
+          .getElementById("matId")
+          .value
+          .trim(),
+
+      category_id:
+        document
+          .getElementById("matCategory")
+          .value ||
+        null,
+
+      name_ar:
+        document
+          .getElementById("matNameAr")
+          .value
+          .trim(),
+
+      name_en:
+        document
+          .getElementById("matNameEn")
+          .value
+          .trim(),
+
+      origin:
+        document
+          .getElementById("matOrigin")
+          .value
+          .trim(),
+
+      color:
+        document
+          .getElementById("matColor")
+          .value
+          .trim(),
+
+      type_ar:
+        document
+          .getElementById("matTypeAr")
+          .value
+          .trim(),
+
+      type_en:
+        document
+          .getElementById("matTypeEn")
+          .value
+          .trim(),
+
+      finish:
+        document
+          .getElementById("matFinish")
+          .value
+          .trim(),
+
+      usage_ar:
+        document
+          .getElementById("matUsageAr")
+          .value
+          .trim(),
+
+      usage_en:
+        document
+          .getElementById("matUsageEn")
+          .value
+          .trim(),
+
+      price_tier:
+        document
+          .getElementById("matPriceTier")
+          .value
+          .trim(),
+
+      color_hex:
+        document
+          .getElementById("matColorHex")
+          .value
+          .trim(),
+
+      stone_type:
+        document
+          .getElementById("matStoneType")
+          .value
+          .trim(),
+
+      color_group:
+        document
+          .getElementById("matColorGroup")
+          .value
+          .trim(),
+
+      density:
+        numberOrNull(
+          document
+            .getElementById("matDensity")
+            .value
+        ),water_absorption:
+        numberOrNull(
+          document
+            .getElementById("matWater")
+            .value
+        ),
+
+      compressive_strength:
+        numberOrNull(
+          document
+            .getElementById("matCompressive")
+            .value
+        ),
+
+      durability_score:
+        numberOrNull(
+          document
+            .getElementById("matDurability")
+            .value
+        ),
+
+      maintenance_tier:
+        document
+          .getElementById("matMaintenance")
+          .value
+          .trim(),
+
+      texture_grade:
+        document
+          .getElementById("matTexture")
+          .value
+          .trim(),
+
+      images:
+        materialImages,
+
+      is_featured:
+        document
+          .getElementById("matFeatured")
+          .checked,
+
+      is_active:
+        document
+          .getElementById("matActive")
+          .checked
+    };
+
+
+    if (!data.id) {
+
+      throw new Error(
+        "ID المنتج مطلوب."
+      );
+    }
+
+
+    if (!data.name_ar) {
+
+      throw new Error(
+        "اسم المنتج بالعربي مطلوب."
+      );
+    }
+
+
+    if (!data.name_en) {
+
+      throw new Error(
+        "اسم المنتج بالإنجليزي مطلوب."
+      );
+    }
+
+
+    if (editingMaterialId) {
+
+      const {
+        error
+      } =
+        await supabaseClient
+          .from("materials")
+          .update(data)
+          .eq(
+            "id",
+            editingMaterialId
+          );
+
+
+      if (error) {
+        throw error;
+      }
+
+
+      showMessage(
+        "تم تعديل المنتج بنجاح.",
+        "success"
+      );
+
+    } else {
+
+      const {
+        error
+      } =
+        await supabaseClient
+          .from("materials")
+          .insert(data);
+
+
+      if (error) {
+        throw error;
+      }
+
+
+      showMessage(
+        "تم إضافة المنتج بنجاح.",
+        "success"
+      );
+    }
+
+
+    closeModal();
+
+    editingMaterialId = null;
+
+    materialImages = [];
+
+    await loadData();
+
+
+  } catch (error) {
+
+    console.error(
+      "MATERIAL SAVE ERROR:",
+      error
+    );
+
+
+    showMessage(
+      "فشل حفظ المنتج: " +
+      error.message,
+      "error"
+    );
+
+
+    button.disabled = false;
+
+    button.textContent =
+      editingMaterialId
+        ? "حفظ تعديلات المنتج"
+        : "إضافة المنتج";
+  }
+}
+
+
+/* =========================================================
+   NUMBER HELPER
+========================================================= */
+
+function numberOrNull(value) {
+
+  if (
+    value ===
+    null ||
+    value ===
+    undefined ||
+    String(value).trim() === ""
+  ) {
+    return null;
+  }
+
+
+  const number =
+    Number(value);
+
+
+  return Number.isFinite(number)
+    ? number
+    : null;
+}
+
+
+/* =========================================================
+   DELETE MATERIAL
+========================================================= */
+
+async function deleteMaterial(id) {
+
+  const material =
+    materials.find(
+      item =>
+        String(item.id) ===
+        String(id)
+    );
+
+
+  if (!material) {
+    return;
+  }
+
+
+  const name =
+    material.name_en ||
+    material.name_ar ||
+    id;
+
+
+  const confirmed =
+    confirm(
+      هل أنت متأكد من حذف المنتج:
+
+${name}
+
+سيتم حذف سجل المنتج من قاعدة البيانات.
+    );
+
+
+  if (!confirmed) {
+    return;
+  }
+
+
+  try {
+
+    const {
+      error
+    } =
+      await supabaseClient
+        .from("materials")
+        .delete()
+        .eq(
+          "id",
+          id
+        );
+
+
+    if (error) {
+      throw error;
+    }
+
+
+    showMessage(
+      "تم حذف المنتج بنجاح.",
+      "success"
+    );
+
+
+    await loadData();
+
+
+  } catch (error) {
+
+    console.error(
+      "MATERIAL DELETE ERROR:",
+      error
+    );
+
+
+    showMessage(
+      "فشل حذف المنتج: " +
+      error.message,
+      "error"
+    );
+  }
+}
