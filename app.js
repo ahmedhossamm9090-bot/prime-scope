@@ -222,15 +222,7 @@ function renderProducts() {
 
     return `
       <div class="product-card">
-<div
-  class="card-sample"
-  style="${
-    Array.isArray(product.images) && product.images.length > 0
-      ? background-image: url('${product.images[0]}'); background-size: cover; background-position: center;
-      : background: ${product.textureGrad || 'linear-gradient(135deg,#222,#555)'};
-  }"
-  onclick="openStoneDetail('${product.id}')"
->
+        <div class="card-sample" style="background: ${product.textureGrad};" onclick="openStoneDetail('${product.id}')">
           <span class="sample-badge">${product.priceCategory || 'مميز'}</span>
           <button class="btn-compare-card ${isCompared ? 'active' : ''}" onclick="event.stopPropagation(); toggleCompareStone('${product.id}')">
             ${isCompared ? t.btnCompareAdded : '+ ' + t.btnCompareAdd}
@@ -281,9 +273,9 @@ function renderProducts() {
     if (visibleCount < filtered.length) {
       loadMoreWrap.style.display = 'block';
       const remaining = filtered.length - visibleCount;
-     const btnText = currentLang === 'ar'
-  ? عرض المزيد من الخامات (${remaining} خامة متبقية) ⬇️
-  : Load More Materials (${remaining} remaining) ⬇️;
+      const btnText = currentLang === 'ar' 
+        ? `عرض المزيد من الخامات (${remaining} خامة متبقية) ⬇️`
+        : `Load More Materials (${remaining} remaining) ⬇️`;
       loadMoreWrap.innerHTML = `
         <button class="btn-load-more" onclick="loadMoreProducts()">
           ${btnText}
