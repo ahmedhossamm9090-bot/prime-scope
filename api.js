@@ -34,7 +34,7 @@
     },
 
     // 2. Fetch Materials (Stone Catalog)
-   getMaterials: async function() {
+getMaterials: async function() {
   const client = window.PrimeSupabase?.getClient();
 
   if (window.PrimeSupabase?.isReady()) {
@@ -44,74 +44,42 @@
         .select('*')
         .eq('is_active', true);
 
-      if (error) {
-        console.error('[API] Materials error:', error);
-        throw error;
-      }
-
-      if (Array.isArray(data)) {
+      if (!error && data && data.length > 0) {
         return data.map(m => ({
           id: m.id,
-
-          nameAr: m.name_ar || '',
-          nameEn: m.name_en || '',
-
-          category: m.category_id || 'all',
-
-          color: m.color_desc  m.color  '',
-          origin: m.origin || '',
-
-          typeAr: m.type_ar || '',
-          typeEn: m.type_en || '',
-
-          finish: m.finish || '',
-
-          usage: m.usage_ar || '',
-          usageEn: m.usage_en || '',
-
-          priceCategory: m.price_tier || '',
-
+          nameAr: m.name_ar,
+          nameEn: m.name_en,
+          category: m.category_id,
+          color: m.color_desc,
+          origin: m.origin,
+          typeAr: m.type_ar,
+          typeEn: m.type_en,
+          finish: m.finish,
+          usage: m.usage_ar,
+          usageEn: m.usage_en,
+          priceCategory: m.price_tier,
           colorCode: m.color_hex || '#ffffff',
-
-          stoneType: m.stone_type || '',
-          colorGroup: m.color_group || '',
-
-          density: m.density ?? null,
-          waterAbsorption: m.water_absorption ?? null,
-          compressiveStrength: m.compressive_strength ?? null,
-
-          durabilityScore:
-            m.durability_score != null
-              ? Number(m.durability_score)
-              : 4.5,
-
-          maintenanceTier: m.maintenance_tier || '',
-
-          textureGrad: m.texture_grade || '',
-
-          images: Array.isArray(m.images)
-            ? m.images
-            : [],
-
-          isFeatured: m.is_featured === true,
-          isActive: m.is_active !== false,
-
-          createdAt: m.created_at,
-          updatedAt: m.updated_at
+          stoneType: m.stone_type,
+          colorGroup: m.color_group,
+          density: m.density,
+          waterAbsorption: m.water_absorption,
+          compressiveStrength: m.compressive_strength,
+          durabilityScore: parseFloat(m.durability_score) || 4.5,
+          maintenanceTier: m.maintenance_tier,
+          textureGrad: m.texture_grad || getStoneGrad(m.category_id, m.color_hex),
+          images: m.images || []
         }));
       }
 
     } catch (err) {
-      console.error(
-        '⚠️ [API] Failed to fetch materials:',
+      console.warn(
+        "⚠️ [API] Failed to fetch materials from Supabase, using fallback data:",
         err
       );
     }
   }
 
-  return typeof PRODUCTS !== 'undefined'
-    ? PRODUCTS
-    : [];
+  return typeof PRODUCTS !== 'undefined' ? PRODUCTS : [];
 },
 
     // 3. Fetch Showcase Projects
