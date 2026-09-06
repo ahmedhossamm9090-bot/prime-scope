@@ -1,0 +1,1299 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Prime Scope - Admin Dashboard</title>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="config.js"></script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f5f7;
+      color: #222;
+    }
+
+    header {
+      background: #111;
+      color: white;
+      padding: 18px 25px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 22px;
+    }
+
+    button {
+      border: 0;
+      border-radius: 8px;
+      padding: 11px 18px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .logout {
+      background: #eee;
+      color: #111;
+    }
+
+    main {
+      max-width: 1250px;
+      margin: auto;
+      padding: 25px 15px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 14px;
+      padding: 25px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 18px rgba(0,0,0,.06);
+    }
+
+    h2 {
+      margin-top: 0;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+    }
+
+    .full {
+      grid-column: 1 / -1;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 6px;
+    }
+
+    input,
+    textarea,
+    select {
+      width: 100%;
+      padding: 11px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 14px;
+      background: white;
+    }
+
+    textarea {
+      min-height: 90px;
+      resize: vertical;
+    }
+
+    .save {
+      width: 100%;
+      background: #111;
+      color: white;
+      font-size: 16px;
+      margin-top: 20px;
+    }
+
+    .save:disabled {
+      opacity: .6;
+      cursor: not-allowed;
+    }
+
+    .message {
+      padding: 12px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      background: #f0f0f0;
+    }
+
+    .success {
+      background: #e6f7ec;
+      color: #16753a;
+    }
+
+    .error {
+      background: #fde8e8;
+      color: #a11;
+    }
+
+    .images-preview {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 15px;
+    }
+
+    .image-box {
+      position: relative;
+    }
+
+    .image-box img {
+      width: 130px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+    }
+
+    .image-box button {
+      position: absolute;
+      top: 5px;
+      left: 5px;
+      padding: 4px 8px;
+      background: #c00;
+      color: white;
+    }
+
+    .actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 15px;
+    }
+
+    .secondary {
+      background: #eee;
+    }
+
+    .danger {
+      background: #c62828;
+      color: white;
+    }
+
+    .materials-list {
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 900px;
+    }
+
+    th,
+    td {
+      border-bottom: 1px solid #eee;
+      padding: 12px;
+      text-align: right;
+    }
+
+    th {
+      background: #fafafa;
+    }
+
+    .thumb {
+      width: 60px;
+      height: 45px;
+      object-fit: cover;
+      border-radius: 5px;
+    }
+
+    .status {
+      padding: 5px 9px;
+      border-radius: 20px;
+      font-size: 12px;
+    }
+
+    .active {
+      background: #e5f7eb;
+      color: #17733b;
+    }
+
+    .inactive {
+      background: #eee;
+      color: #777;
+    }
+
+    @media (max-width: 700px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .full {
+        grid-column: auto;
+      }
+
+      header {
+        flex-direction: column;
+        align-items: stretch;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div>
+    <h1>Prime Scope Admin</h1>
+    <small id="userEmail"></small>
+  </div>
+
+  <button class="logout" id="logoutBtn">
+    تسجيل الخروج
+  </button>
+</header>
+
+
+<main>
+
+  <div id="message"></div>
+
+
+  <!-- ================= ADD MATERIAL ================= -->
+
+  <div class="card"><h2 id="formTitle">إضافة خامة جديدة</h2>
+
+    <form id="materialForm">
+
+      <div class="grid">
+
+        <div>
+          <label>Material ID *</label>
+          <input id="id" required>
+        </div>
+
+        <div>
+          <label>Category ID</label>
+          <input id="category_id">
+        </div>
+
+        <div>
+          <label>اسم الخامة بالعربي *</label>
+          <input id="name_ar" required>
+        </div>
+
+        <div>
+          <label>اسم الخامة بالإنجليزي *</label>
+          <input id="name_en" required>
+        </div>
+
+        <div>
+          <label>وصف اللون</label>
+          <input id="color_desc">
+        </div>
+
+        <div>
+          <label>بلد المنشأ</label>
+          <input id="origin" placeholder="Egypt / Italy / Turkey...">
+        </div>
+
+        <div>
+          <label>النوع بالعربي</label>
+          <input id="type_ar">
+        </div>
+
+        <div>
+          <label>النوع بالإنجليزي</label>
+          <input id="type_en">
+        </div>
+
+        <div>
+          <label>Finish / التشطيب</label>
+          <input id="finish">
+        </div>
+
+        <div>
+          <label>Price Tier</label>
+          <input id="price_tier">
+        </div>
+
+        <div>
+          <label>Color HEX</label>
+          <input id="color_hex" placeholder="#FFFFFF">
+        </div>
+
+        <div>
+          <label>Stone Type</label>
+          <input id="stone_type">
+        </div>
+
+        <div>
+          <label>Color Group</label>
+          <input id="color_group">
+        </div>
+
+        <div>
+          <label>Density</label>
+          <input id="density" type="number" step="any">
+        </div>
+
+        <div>
+          <label>Water Absorption</label>
+          <input id="water_absorption" type="number" step="any">
+        </div>
+
+        <div>
+          <label>Compressive Strength</label>
+          <input id="compressive_strength" type="number" step="any">
+        </div>
+
+        <div>
+          <label>Durability Score</label>
+          <input id="durability_score" type="number" step="any">
+        </div>
+
+        <div>
+          <label>Maintenance Tier</label>
+          <input id="maintenance_tier">
+        </div>
+
+        <div>
+          <label>Texture Grade</label>
+          <input id="texture_grade">
+        </div>
+
+        <div class="full">
+          <label>الاستخدام بالعربي</label>
+          <textarea id="usage_ar"></textarea>
+        </div>
+
+        <div class="full">
+          <label>Usage English</label>
+          <textarea id="usage_en"></textarea>
+        </div>
+
+        <div class="full">
+          <label>صور الخامة</label>
+
+          <input
+            id="images"
+            type="file"
+            accept="image/*"
+            multiple
+          >
+
+          <div id="imagePreview" class="images-preview"></div>
+        </div>
+
+        <div>
+          <label>
+            <input id="is_featured" type="checkbox">
+            Featured
+          </label>
+        </div>
+
+        <div>
+          <label>
+            <input id="is_active" type="checkbox" checked>
+            Active
+          </label>
+        </div>
+
+      </div>
+
+      <div class="actions">
+
+        <button
+          type="submit"
+          class="save"
+          id="saveBtn">
+          حفظ الخامة
+        </button>
+
+        <button
+          type="button"
+          class="secondary"
+          id="cancelBtn"
+          style="display:none">
+          إلغاء التعديل
+        </button>
+
+      </div>
+
+    </form>
+
+  </div>
+
+
+  <!-- ================= MATERIALS ================= -->
+
+  <div class="card">
+
+    <h2>الخامات الموجودة</h2>
+
+    <button
+      type="button"
+      class="secondary"
+      id="refreshBtn">
+      تحديث القائمة
+    </button>
+
+    <br><br>
+
+    <div class="materials-list">
+
+      <table>
+
+        <thead>
+
+          <tr>
+            <th>الصورة</th>
+            <th>ID</th>
+            <th>الاسم</th>
+            <th>Origin</th>
+            <th>Stone Type</th>
+            <th>Featured</th>
+            <th>Active</th>
+            <th>إجراءات</th>
+          </tr>
+
+        </thead>
+
+        <tbody id="materialsTable"></tbody>
+
+      </table></div>
+
+  </div>
+
+</main>
+
+
+<script>
+
+const supabaseClient = window.supabase.createClient(
+  window.PRIME_CONFIG.SUPABASE_URL,
+  window.PRIME_CONFIG.SUPABASE_ANON_KEY
+);
+
+
+let currentUser = null;
+let editingId = null;
+let selectedFiles = [];
+
+
+/* ================= MESSAGE ================= */
+
+function showMessage(text, type = "") {
+
+  const box = document.getElementById("message");
+
+  box.className = "message " + type;
+
+  box.textContent = text;
+
+}
+
+
+/* ================= AUTH ================= */
+
+async function checkAuth() {
+
+  const {
+    data: { session },
+    error
+  } = await supabaseClient.auth.getSession();
+
+  if (error || !session) {
+
+    window.location.href = "admin.html";
+
+    return;
+  }
+
+  currentUser = session.user;
+
+  document.getElementById("userEmail").textContent =
+    currentUser.email;
+
+}
+
+
+document
+  .getElementById("logoutBtn")
+  .addEventListener("click", async () => {
+
+    await supabaseClient.auth.signOut();
+
+    window.location.href = "admin.html";
+
+  });
+
+
+/* ================= IMAGE SELECT ================= */
+
+document
+  .getElementById("images")
+  .addEventListener("change", function() {
+
+    selectedFiles = [...this.files];
+
+    renderImagePreview();
+
+  });
+
+
+function renderImagePreview() {
+
+  const preview =
+    document.getElementById("imagePreview");
+
+  preview.innerHTML = "";
+
+  selectedFiles.forEach((file, index) => {
+
+    const box = document.createElement("div");
+
+    box.className = "image-box";
+
+    const img = document.createElement("img");
+
+    img.src = URL.createObjectURL(file);
+
+    const remove = document.createElement("button");
+
+    remove.type = "button";
+
+    remove.textContent = "×";
+
+    remove.onclick = () => {
+
+      selectedFiles.splice(index, 1);
+
+      renderImagePreview();
+
+    };
+
+    box.appendChild(img);
+
+    box.appendChild(remove);
+
+    preview.appendChild(box);
+
+  });
+
+}
+
+
+/* ================= UPLOAD ================= */
+
+async function uploadImage(file, materialId) {
+
+  const extension =
+    file.name.split(".").pop().toLowerCase();
+
+  const fileName =
+    materialId +
+    "/" +
+    crypto.randomUUID() +
+    "." +
+    extension;
+
+
+  const {
+    error
+  } = await supabaseClient.storage
+    .from(
+      window.PRIME_CONFIG.STORAGE_BUCKETS.MATERIALS
+    )
+    .upload(fileName, file, {
+
+      cacheControl: "3600",
+
+      upsert: false
+
+    });
+
+
+  if (error) {
+
+    throw error;
+
+  }
+
+
+  const {
+    data
+  } = supabaseClient.storage
+    .from(
+      window.PRIME_CONFIG.STORAGE_BUCKETS.MATERIALS
+    )
+    .getPublicUrl(fileName);
+
+
+  return data.publicUrl;
+
+}
+
+
+/* ================= GET MATERIALS ================= */
+
+async function loadMaterials() {
+
+  const table =
+    document.getElementById("materialsTable");
+
+  table.innerHTML =
+    <tr><td colspan="8">جاري تحميل البيانات...</td></tr>;
+
+
+  const {
+    data,
+    error
+  } = await supabaseClient
+    .from("materials")
+    .select("*")
+    .order("created_at", {
+      ascending: false
+    });
+
+
+  if (error) {
+
+    console.error(error);
+
+    table.innerHTML =
+      <tr><td colspan="8">
+        فشل في جلب البيانات: ${error.message}
+      </td></tr>;
+
+    return;
+
+  }
+
+
+  if (!data || data.length === 0) {
+
+    table.innerHTML =
+      <tr><td colspan="8">
+        لا توجد خامات حتى الآن.
+      </td></tr>;
+
+    return;
+
+  }
+
+
+  table.innerHTML = "";
+
+
+  data.forEach(material => {
+
+    const tr =
+      document.createElement("tr");
+
+
+    let firstImage = "";
+
+    if (
+      Array.isArray(material.images) &&
+      material.images.length
+    ) {
+
+      firstImage = material.images[0];
+
+    }
+
+
+    tr.innerHTML = 
+
+      <td>
+        ${
+          firstImage
+          ?
+          <img class="thumb" src="${firstImage}">`
+          :
+          "—"
+        }
+      </td>
+
+      <td>${escapeHtml(material.id || "")}</td>
+
+      <td>
+        ${escapeHtml(material.name_ar || "")}
+        <br>
+        <small>
+          ${escapeHtml(material.name_en || "")}
+        </small>
+      </td>
+
+      <td>${escapeHtml(material.origin || "")}</td>
+
+      <td>${escapeHtml(material.stone_type || "")}</td><td>
+        ${
+          material.is_featured
+          ? "⭐"
+          : "—"
+        }
+      </td>
+
+      <td>
+
+        <span class="status ${
+          material.is_active
+          ? "active"
+          : "inactive"
+        }">
+
+          ${
+            material.is_active
+            ? "Active"
+            : "Inactive"
+          }
+
+        </span>
+
+      </td>
+
+      <td>
+
+        <button
+          class="secondary"
+          onclick="editMaterial('${escapeAttribute(material.id)}')">
+
+          تعديل
+
+        </button>
+
+        <button
+          class="danger"
+          onclick="deleteMaterial('${escapeAttribute(material.id)}')">
+
+          حذف
+
+        </button>
+
+      </td>
+
+    `;
+
+
+    table.appendChild(tr);
+
+  });
+
+}
+
+
+/* ================= SAVE ================= */
+
+document
+  .getElementById("materialForm")
+  .addEventListener("submit", async function(event) {
+
+    event.preventDefault();
+
+
+    const saveBtn =
+      document.getElementById("saveBtn");
+
+    saveBtn.disabled = true;
+
+    showMessage("جاري حفظ الخامة...");
+
+
+    try {
+
+      const materialId =
+        document.getElementById("id")
+          .value.trim();
+
+
+      if (!materialId) {
+
+        throw new Error(
+          "Material ID مطلوب."
+        );
+
+      }
+
+
+      /* Upload images */
+
+      const imageUrls = [];
+
+
+      for (const file of selectedFiles) {
+
+        showMessage(
+          "جاري رفع الصورة: " + file.name
+        );
+
+
+        const url =
+          await uploadImage(
+            file,
+            materialId
+          );
+
+
+        imageUrls.push(url);
+
+      }
+
+
+      const material = {
+
+        id: materialId,
+
+        name_ar:
+          value("name_ar"),
+
+        name_en:
+          value("name_en"),
+
+        category_id:
+          nullable("category_id"),
+
+        color_desc:
+          nullable("color_desc"),
+
+        origin:
+          nullable("origin"),
+
+        type_ar:
+          nullable("type_ar"),
+
+        type_en:
+          nullable("type_en"),
+
+        finish:
+          nullable("finish"),
+
+        usage_ar:
+          nullable("usage_ar"),
+
+        usage_en:
+          nullable("usage_en"),
+
+        price_tier:
+          nullable("price_tier"),
+
+        color_hex:
+          nullable("color_hex"),
+
+        stone_type:
+          nullable("stone_type"),
+
+        color_group:
+          nullable("color_group"),
+
+        density:
+          numberOrNull("density"),
+
+        water_absorption:
+          numberOrNull("water_absorption"),
+
+        compressive_strength:
+          numberOrNull("compressive_strength"),
+
+        durability_score:
+          numberOrNull("durability_score"),
+
+        maintenance_tier:
+          nullable("maintenance_tier"),
+
+        texture_grade:
+          nullable("texture_grade"),
+
+        images:
+          imageUrls,
+
+        is_featured:
+          document.getElementById("is_featured").checked,
+
+        is_active:
+          document.getElementById("is_active").checked
+
+      };
+
+
+      let result;
+
+
+      if (editingId) {
+
+        result =
+          await supabaseClient
+            .from("materials")
+            .update(material)
+            .eq("id", editingId);
+
+      } else {
+
+        result =
+          await supabaseClient
+            .from("materials")
+            .insert(material);
+
+      }
+
+
+      if (result.error) {
+
+        throw result.error;
+
+      }
+
+
+      showMessage(
+        editingId
+        ? "تم تعديل الخامة بنجاح ✅"
+        : "تم إضافة الخامة بنجاح ✅",
+        "success"
+      );
+
+
+      resetForm();
+
+      await loadMaterials();
+
+
+    } catch (error) {
+
+      console.error(error);
+
+      showMessage(
+        "حدث خطأ: " + error.message,
+        "error"
+      );
+
+    } finally {
+
+      saveBtn.disabled = false;
+
+    }
+
+  });
+
+
+/* ================= EDIT ================= */
+
+window.editMaterial = async function(id) {
+
+  showMessage("جاري تحميل الخامة...");
+
+
+  const {
+    data,
+    error
+  } = await supabaseClient
+    .from("materials")
+    .select("*")
+    .eq("id", id)
+    .single();
+
+
+  if (error) {showMessage(
+      "فشل تحميل الخامة: " + error.message,
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  editingId = id;
+
+
+  document.getElementById("formTitle")
+    .textContent =
+    "تعديل الخامة";
+
+
+  document.getElementById("saveBtn")
+    .textContent =
+    "حفظ التعديل";
+
+
+  document.getElementById("cancelBtn")
+    .style.display =
+    "block";
+
+
+  setValue("id", data.id);
+
+  document.getElementById("id").disabled = true;
+
+  setValue("name_ar", data.name_ar);
+
+  setValue("name_en", data.name_en);
+
+  setValue("category_id", data.category_id);
+
+  setValue("color_desc", data.color_desc);
+
+  setValue("origin", data.origin);
+
+  setValue("type_ar", data.type_ar);
+
+  setValue("type_en", data.type_en);
+
+  setValue("finish", data.finish);
+
+  setValue("usage_ar", data.usage_ar);
+
+  setValue("usage_en", data.usage_en);
+
+  setValue("price_tier", data.price_tier);
+
+  setValue("color_hex", data.color_hex);
+
+  setValue("stone_type", data.stone_type);
+
+  setValue("color_group", data.color_group);
+
+  setValue("density", data.density);
+
+  setValue(
+    "water_absorption",
+    data.water_absorption
+  );
+
+  setValue(
+    "compressive_strength",
+    data.compressive_strength
+  );
+
+  setValue(
+    "durability_score",
+    data.durability_score
+  );
+
+  setValue(
+    "maintenance_tier",
+    data.maintenance_tier
+  );
+
+  setValue(
+    "texture_grade",
+    data.texture_grade
+  );
+
+
+  document.getElementById("is_featured").checked =
+    !!data.is_featured;
+
+
+  document.getElementById("is_active").checked =
+    !!data.is_active;
+
+
+  selectedFiles = [];
+
+  document.getElementById("imagePreview")
+    .innerHTML = "";
+
+
+  if (
+    Array.isArray(data.images)
+  ) {
+
+    data.images.forEach(url => {
+
+      const img =
+        document.createElement("img");
+
+      img.src = url;
+
+      img.style.width = "130px";
+
+      img.style.height = "100px";
+
+      img.style.objectFit = "cover";
+
+      img.style.borderRadius = "8px";
+
+      document
+        .getElementById("imagePreview")
+        .appendChild(img);
+
+    });
+
+  }
+
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+
+};
+
+
+/* ================= DELETE ================= */
+
+window.deleteMaterial = async function(id) {
+
+  if (
+    !confirm(
+      "هل أنت متأكد من حذف هذه الخامة؟"
+    )
+  ) {
+
+    return;
+
+  }
+
+
+  const {
+    error
+  } = await supabaseClient
+    .from("materials")
+    .delete()
+    .eq("id", id);
+
+
+  if (error) {
+
+    showMessage(
+      "فشل الحذف: " + error.message,
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  showMessage(
+    "تم حذف الخامة بنجاح.",
+    "success"
+  );
+
+
+  await loadMaterials();
+
+};
+
+
+/* ================= CANCEL ================= */
+
+document
+  .getElementById("cancelBtn")
+  .addEventListener("click", resetForm);
+
+
+function resetForm() {
+
+  editingId = null;
+
+  document.getElementById("materialForm")
+    .reset();
+
+  document.getElementById("id")
+    .disabled = false;
+
+  document.getElementById("is_active")
+    .checked = true;
+
+  document.getElementById("formTitle")
+    .textContent =
+    "إضافة خامة جديدة";
+
+  document.getElementById("saveBtn")
+    .textContent =
+    "حفظ الخامة";
+
+  document.getElementById("cancelBtn")
+    .style.display =
+    "none";
+
+  selectedFiles = [];
+
+  document.getElementById("imagePreview")
+    .innerHTML = "";
+
+}
+
+
+/* ================= HELPERS ================= */
+
+function value(id) {
+
+  return document
+    .getElementById(id)
+    .value
+    .trim();
+
+}
+
+
+function nullable(id) {
+
+  const v = value(id);
+
+  return v === "" ? null : v;
+
+}
+
+
+function numberOrNull(id) {
+
+  const v = value(id);
+
+  if (v === "") {
+
+    return null;
+
+  }
+
+  const n = Number(v);
+
+  if (!Number.isFinite(n)) {
+
+    throw new Error(
+      "القيمة الرقمية غير صحيحة في: " + id
+    );
+
+  }
+
+  return n;
+
+}
+
+
+function setValue(id, value) {
+
+  document.getElementById(id).value =
+    value ?? "";
+
+}
+
+
+function escapeHtml(value) {
+
+  return String(value)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+
+}
+
+
+function escapeAttribute(value) {return String(value)
+    .replace(/\\/g, "\\\\")
+    .replace(/'/g, "\\'");
+
+}
+
+
+/* ================= START ================= */
+
+(async function() {
+
+  await checkAuth();
+
+  await loadMaterials();
+
+})();
+
+</script>
+
+</body>
+</html>
