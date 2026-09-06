@@ -222,13 +222,13 @@ function renderProducts() {
 
     return `
       <div class="product-card">
-      <div
+<div
   class="card-sample"
-  style="background: ${
-    product.images && product.images.length
-      ? url('${product.images[0]}') center/cover no-repeat
-      : product.textureGrad || 'linear-gradient(135deg,#222,#555)'
-  };"
+  style="${
+    Array.isArray(product.images) && product.images.length > 0
+      ? background-image: url('${product.images[0]}'); background-size: cover; background-position: center;
+      : background: ${product.textureGrad || 'linear-gradient(135deg,#222,#555)'};
+  }"
   onclick="openStoneDetail('${product.id}')"
 >
           <span class="sample-badge">${product.priceCategory || 'مميز'}</span>
