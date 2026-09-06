@@ -273,9 +273,9 @@ function renderProducts() {
     if (visibleCount < filtered.length) {
       loadMoreWrap.style.display = 'block';
       const remaining = filtered.length - visibleCount;
-      const btnText = currentLang === 'ar' 
-        ? `عرض المزيد من الخامات (${remaining} خامة متبقية) ⬇️`
-        : `Load More Materials (${remaining} remaining) ⬇️`;
+     const btnText = currentLang === 'ar'
+  ? عرض المزيد من الخامات (${remaining} خامة متبقية) ⬇️
+  : Load More Materials (${remaining} remaining) ⬇️;
       loadMoreWrap.innerHTML = `
         <button class="btn-load-more" onclick="loadMoreProducts()">
           ${btnText}
