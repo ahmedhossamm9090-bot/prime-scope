@@ -1,59 +1,40 @@
-// ============================================================
-// PRIME SCOPE - API SERVICE
+// Prime Scope - API Service
 // Supabase Data Access Layer
-// ============================================================
 
 (function (window) {
   "use strict";
 
   const ApiService = {
 
-    // ==========================================================
-    // CATEGORIES
-    // ==========================================================
-
+    // =========================
+    // Categories
+    // =========================
     async getCategories() {
-
       const client = window.PrimeSupabase?.getClient();
 
       if (!client || !window.PrimeSupabase?.isReady()) {
-        return typeof CATEGORIES !== "undefined"
-          ? CATEGORIES
-          : [];
+        return typeof CATEGORIES !== "undefined" ? CATEGORIES : [];
       }
 
       try {
-
         const { data, error } = await client
           .from("categories")
           .select("*")
           .eq("is_active", true)
-          .order("sort_order", {
-            ascending: true
-          });
+          .order("sort_order", { ascending: true });
 
-        if (error) {
-          throw error;
-        }
+        if (error) throw error;
 
-        return (data || []).map(function (c) {
-
-          return {
-            id: c.id,
-            nameAr: c.name_ar || "",
-            nameEn: c.name_en || "",
-            icon: c.icon || "💎",
-            badge: c.badge || ""
-          };
-
-        });
+        return (data || []).map(c => ({
+          id: c.id,
+          nameAr: c.name_ar || "",
+          nameEn: c.name_en || "",
+          icon: c.icon || "💎",
+          badge: c.badge || ""
+        }));
 
       } catch (error) {
-
-        console.error(
-          "CATEGORIES ERROR:",
-          error
-        );
+        console.error("Categories error:", error);
 
         return typeof CATEGORIES !== "undefined"
           ? CATEGORIES
@@ -62,16 +43,13 @@
     },
 
 
-    // ==========================================================
-    // MATERIALS
-    // ==========================================================
-
+    // =========================
+    // Materials
+    // =========================
     async getMaterials() {
-
       const client = window.PrimeSupabase?.getClient();
 
       if (!client || !window.PrimeSupabase?.isReady()) {
-
         return typeof PRODUCTS !== "undefined"
           ? PRODUCTS
           : [];
@@ -84,139 +62,84 @@
           .select("*")
           .eq("is_active", true);
 
-        if (error) {
-          throw error;
-        }
+        if (error) throw error;
 
-        console.log(
-          "SUPABASE MATERIALS:",
-          data
-        );
+        console.log("SUPABASE MATERIALS:", data);
+        console.log("SUPABASE MATERIALS COUNT:", data?.length || 0);
 
-        return (data || []).map(function (m) {
+        return (data || []).map(m => {
+
+          // images ممكن تكون Array أو JSON String
+          let images = [];
+
+          if (Array.isArray(m.images)) {
+            images = m.images;
+          } else if (typeof m.images === "string") {
+            try {
+              const parsed = JSON.parse(m.images);
+              images = Array.isArray(parsed) ? parsed : [];
+            } catch (e) {
+              console.warn("Invalid images JSON:", m.images);
+              images = [];
+            }
+          }
 
           return {
-
-            // Basic
             id: m.id,
 
             nameAr: m.name_ar || "",
-
             nameEn: m.name_en || "",
 
-
-            // Category
             category: m.category_id || "",
 
-
-            // Color
+            // FIXED
             color: m.color || m.color_desc || "",
 
-            colorCode:
-              m.color_hex || "#ffffff",
-
-            colorGroup:
-              m.color_group || "",
-
-
-            // Origin
             origin: m.origin || "",
 
-
-            // Type
             typeAr: m.type_ar || "",
-
             typeEn: m.type_en || "",
 
-            stoneType:
-              m.stone_type || "",
+            finish: m.finish || "",
 
+            usage: m.usage_ar || "",
+            usageEn: m.usage_en || "",
 
-            // Finish
-            finish:
-              m.finish || "",
+            priceCategory: m.price_tier || "",
 
+            colorCode: m.color_hex || "#ffffff",
 
-            // Usage
-            usageAr:
-              m.usage_ar || "",
+            stoneType: m.stone_type || "",
+            colorGroup: m.color_group || "",
 
-            usage:
-              m.usage_ar || "",
-
-            usageEn:
-              m.usage_en || "",
-
-
-            // Price
-            priceCategory:
-              m.price_tier || "",
-
-
-            // Technical data
-            density:
-              m.density,
-
-            waterAbsorption:
-              m.water_absorption,
-
-            compressiveStrength:
-              m.compressive_strength,
+            density: m.density,
+            waterAbsorption: m.water_absorption,
+            compressiveStrength: m.compressive_strength,
 
             durabilityScore:
               m.durability_score != null
-                ? parseFloat(
-                    m.durability_score
-                  )
+                ? parseFloat(m.durability_score)
                 : 4.5,
 
-            maintenanceTier:
-              m.maintenance_tier || "",
+            maintenanceTier: m.maintenance_tier || "",
 
             textureGrad:
               m.texture_grad ||
               (
                 typeof getStoneGrad === "function"
-                  ? getStoneGrad(
-                      m.category_id,
-                      m.color_hex
-                    )
+                  ? getStoneGrad(m.category_id, m.color_hex)
                   : "linear-gradient(135deg,#333,#777)"
               ),
 
-
-            // ==================================================
-            // IMAGES
-            // ==================================================
-
-            // مهم جدًا:
-            // images في Supabase لازم تفضل Array
-
-            images:
-              Array.isArray(m.images)
-                ? m.images
-                : [],
-
-
-            // Status
-            isFeatured:
-              m.is_featured === true,
-
-            isActive:
-              m.is_active !== false
-
+            // IMPORTANT
+            images: images
           };
-
         });
 
       } catch (error) {
 
-        console.error(
-          "MATERIALS ERROR:",
-          error
-        );
+        console.error("MATERIALS ERROR:", error);
 
-        // Fallback
         return typeof PRODUCTS !== "undefined"
           ? PRODUCTS
           : [];
@@ -224,33 +147,23 @@
     },
 
 
-    // ==========================================================
-    // PROJECTS
-    // ==========================================================
-
+    // =========================
+    // Projects
+    // =========================
     async getProjects(category = "all") {
 
-      const client =
-        window.PrimeSupabase?.getClient();
+      const client = window.PrimeSupabase?.getClient();
 
-      if (
-        !client ||
-        !window.PrimeSupabase?.isReady()
-      ) {
+      if (!client || !window.PrimeSupabase?.isReady()) {
 
-        if (
-          typeof PRIME_PROJECTS ===
-          "undefined"
-        ) {
+        if (typeof PRIME_PROJECTS === "undefined") {
           return [];
         }
 
         return category === "all"
           ? PRIME_PROJECTS
           : PRIME_PROJECTS.filter(
-              function (p) {
-                return p.category === category;
-              }
+              p => p.category === category
             );
       }
 
@@ -262,115 +175,62 @@
           .eq("is_active", true);
 
         if (category !== "all") {
-
-          query = query.eq(
-            "category",
-            category
-          );
+          query = query.eq("category", category);
         }
 
-        const {
-          data,
-          error
-        } = await query;
+        const { data, error } = await query;
 
-        if (error) {
-          throw error;
-        }
+        if (error) throw error;
 
-        return (data || []).map(
-          function (p) {
+        return (data || []).map(p => ({
+          id: p.id,
 
-            return {
+          titleAr: p.title_ar || "",
+          titleEn: p.title_en || "",
 
-              id: p.id,
+          category: p.category || "",
 
-              titleAr:
-                p.title_ar || "",
+          categoryAr: p.category_ar || "",
+          categoryEn: p.category_en || "",
 
-              titleEn:
-                p.title_en || "",
+          locationAr: p.location_ar || "",
+          locationEn: p.location_en || "",
 
-              category:
-                p.category || "",
+          area: p.area || "",
 
-              categoryAr:
-                p.category_ar || "",
+          scopeAr: p.scope_ar || "",
+          scopeEn: p.scope_en || "",
 
-              categoryEn:
-                p.category_en || "",
+          stonesUsed: p.stones_used || [],
 
-              locationAr:
-                p.location_ar || "",
+          heroGrad: p.hero_grad || "",
 
-              locationEn:
-                p.location_en || "",
-
-              area:
-                p.area || "",
-
-              scopeAr:
-                p.scope_ar || "",
-
-              scopeEn:
-                p.scope_en || "",
-
-              stonesUsed:
-                Array.isArray(
-                  p.stones_used
-                )
-                  ? p.stones_used
-                  : [],
-
-              heroGrad:
-                p.hero_grad || "",
-
-              tags:
-                Array.isArray(p.tags)
-                  ? p.tags
-                  : []
-
-            };
-
-          }
-        );
+          tags: p.tags || []
+        }));
 
       } catch (error) {
 
-        console.error(
-          "PROJECTS ERROR:",
-          error
-        );
+        console.error("PROJECTS ERROR:", error);
 
-        if (
-          typeof PRIME_PROJECTS ===
-          "undefined"
-        ) {
+        if (typeof PRIME_PROJECTS === "undefined") {
           return [];
         }
 
         return category === "all"
           ? PRIME_PROJECTS
           : PRIME_PROJECTS.filter(
-              function (p) {
-                return p.category === category;
-              }
+              p => p.category === category
             );
       }
     },
 
 
-    // ==========================================================
+    // =========================
     // RFQ
-    // ==========================================================
+    // =========================
+    async submitRFQ(rfqData, fileBlob = null) {
 
-    async submitRFQ(
-      rfqData,
-      fileBlob = null
-    ) {
-
-      const client =
-        window.PrimeSupabase?.getClient();
+      const client = window.PrimeSupabase?.getClient();
 
       const rfqRef =
         rfqData.rfqRef ||
@@ -381,255 +241,108 @@
       let savedToDb = false;
       let fileUploaded = false;
 
-      if (
-        client &&
-        window.PrimeSupabase?.isReady()
-      ) {
+      if (client && window.PrimeSupabase?.isReady()) {
 
         try {
 
-          const {
-            data: rfqRow,
-            error: rfqErr
-          } = await client
-            .from("rfqs")
-            .insert([
-              {
-
+          const { data: rfqRow, error: rfqErr } =
+            await client
+              .from("rfqs")
+              .insert([{
                 rfq_ref: rfqRef,
 
-                customer_name:
-                  rfqData.customerName,
+                customer_name: rfqData.customerName,
+                customer_phone: rfqData.customerPhone,
 
-                customer_phone:
-                  rfqData.customerPhone,
+                project_city: rfqData.projectCity,
 
-                project_city:
-                  rfqData.projectCity,
+                quantity: rfqData.quantity,
 
-                quantity:
-                  rfqData.quantity,
+                application: rfqData.application,
 
-                application:
-                  rfqData.application,
+                thickness: rfqData.thickness,
 
-                thickness:
-                  rfqData.thickness,
+                waterjet: rfqData.waterjet,
 
-                waterjet:
-                  rfqData.waterjet,
-
-                notes:
-                  rfqData.notes,
+                notes: rfqData.notes,
 
                 selected_material_id:
-                  rfqData.selectedMaterialId ||
-                  null,
+                  rfqData.selectedMaterialId || null,
 
                 selected_material_name:
-                  rfqData.selectedMaterialName ||
-                  null,
+                  rfqData.selectedMaterialName || null,
 
-                status:
-                  "received"
+                status: "received"
+              }])
+              .select()
+              .single();
 
-              }
-            ])
-            .select()
-            .single();
-
-          if (rfqErr) {
-            throw rfqErr;
-          }
+          if (rfqErr) throw rfqErr;
 
           if (rfqRow) {
             savedToDb = true;
           }
 
-
-          // ====================================================
-          // OPTIONAL FILE UPLOAD
-          // ====================================================
-
-          if (
-            fileBlob &&
-            fileBlob.name
-          ) {
-
-            const fileExt =
-              fileBlob.name
-                .split(".")
-                .pop();
-
-            const sanitizedName =
-              fileBlob.name.replace(
-                /[^a-zA-Z0-9._-]/g,
-                "_"
-              );
-
-            const storagePath =
-              `rfqs/${rfqRef}/${Date.now()}_${sanitizedName}`;
-
-            const {
-              data: uploadData,
-              error: uploadErr
-            } = await client.storage
-              .from("rfq-files")
-              .upload(
-                storagePath,
-                fileBlob,
-                {
-                  cacheControl: "3600",
-                  upsert: false
-                }
-              );
-
-            if (
-              !uploadErr &&
-              uploadData
-            ) {
-
-              fileUploaded = true;
-
-              await client
-                .from("rfq_files")
-                .insert([
-                  {
-
-                    rfq_id:
-                      rfqRow.id,
-
-                    file_name:
-                      fileBlob.name,
-
-                    file_size:
-                      fileBlob.size,
-
-                    file_type:
-                      fileBlob.type ||
-                      fileExt,
-
-                    storage_path:
-                      storagePath
-
-                  }
-                ]);
-            }
-          }
-
         } catch (error) {
-
-          console.error(
-            "RFQ ERROR:",
-            error
-          );
+          console.error("RFQ ERROR:", error);
         }
       }
 
       return {
-
         success: true,
-
-        rfqRef:
-
-          rfqRef,
-
-        savedToDb:
-
-          savedToDb,
-
-        fileUploaded:
-
-          fileUploaded
-
+        rfqRef,
+        savedToDb,
+        fileUploaded
       };
     },
 
 
-    // ==========================================================
-    // TRACK RFQ
-    // ==========================================================
+    // =========================
+    // Track RFQ
+    // =========================
+    async trackRFQ(rfqRef) {
 
-    async trackRFQ(
-      rfqRef
-    ) {
+      const client = window.PrimeSupabase?.getClient();
 
-      const client =
-        window.PrimeSupabase?.getClient();
-
-      if (
-        client &&
-        window.PrimeSupabase?.isReady()
-      ) {
+      if (client && window.PrimeSupabase?.isReady()) {
 
         try {
 
-          const {
-            data,
-            error
-          } = await client
-
+          const { data, error } = await client
             .from("rfqs")
-
             .select(
               "rfq_ref,status,created_at,customer_name,project_city,selected_material_name"
             )
-
-            .eq(
-              "rfq_ref",
-              rfqRef.trim()
-            )
-
+            .eq("rfq_ref", rfqRef.trim())
             .single();
 
-          if (
-            !error &&
-            data
-          ) {
-
+          if (!error && data) {
             return {
-
               found: true,
-
-              data: data
-
+              data
             };
           }
 
         } catch (error) {
-
-          console.error(
-            "TRACK RFQ ERROR:",
-            error
-          );
+          console.error("TRACK RFQ ERROR:", error);
         }
       }
 
       return {
-
         found: false,
-
         data: null
-
       };
     },
 
 
-    // ==========================================================
-    // AI REQUEST LOG
-    // ==========================================================
+    // =========================
+    // AI Logs
+    // =========================
+    async logAIRequest(logData) {
 
-    async logAIRequest(
-      logData
-    ) {
+      const client = window.PrimeSupabase?.getClient();
 
-      const client =
-        window.PrimeSupabase?.getClient();
-
-      if (
-        !client ||
-        !window.PrimeSupabase?.isReady()
-      ) {
+      if (!client || !window.PrimeSupabase?.isReady()) {
         return;
       }
 
@@ -637,47 +350,22 @@
 
         await client
           .from("ai_requests")
-          .insert([
-            {
-
-              query:
-                logData.query,
-
-              response:
-                logData.response,
-
-              project_type:
-                logData.projectType,
-
-              surface_area:
-                logData.surfaceArea,
-
-              budget_tier:
-                logData.budgetTier,
-
-              style_pref:
-                logData.stylePref
-
-            }
-          ]);
+          .insert([{
+            query: logData.query,
+            response: logData.response,
+            project_type: logData.projectType,
+            surface_area: logData.surfaceArea,
+            budget_tier: logData.budgetTier,
+            style_pref: logData.stylePref
+          }]);
 
       } catch (error) {
-
-        console.warn(
-          "AI LOG ERROR:",
-          error
-        );
+        console.warn("AI LOG ERROR:", error);
       }
     }
 
   };
 
-
-  // ============================================================
-  // EXPORT
-  // ============================================================
-
-  window.PrimeAPI =
-    ApiService;
+  window.PrimeAPI = ApiService;
 
 })(window);
