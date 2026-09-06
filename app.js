@@ -222,7 +222,15 @@ function renderProducts() {
 
     return `
       <div class="product-card">
-        <div class="card-sample" style="background: ${product.textureGrad};" onclick="openStoneDetail('${product.id}')">
+      <div
+  class="card-sample"
+  style="background: ${
+    product.images && product.images.length
+      ? url('${product.images[0]}') center/cover no-repeat
+      : product.textureGrad || 'linear-gradient(135deg,#222,#555)'
+  };"
+  onclick="openStoneDetail('${product.id}')"
+>
           <span class="sample-badge">${product.priceCategory || 'مميز'}</span>
           <button class="btn-compare-card ${isCompared ? 'active' : ''}" onclick="event.stopPropagation(); toggleCompareStone('${product.id}')">
             ${isCompared ? t.btnCompareAdded : '+ ' + t.btnCompareAdd}
