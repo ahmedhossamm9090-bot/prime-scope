@@ -1,1456 +1,2493 @@
-[9/6/2026 2:45 AM] Abood: /* =========================
-   START
-========================= */
-[9/6/2026 2:45 AM] Abood: /* =========================================================
-   CATEGORY MODAL
-========================================================= */
-
-function openCategoryModal(id = null) {
-
-  editingCategoryId = id;
-
-  const category = id
-    ? categories.find(
-        item => String(item.id) === String(id)
-      )
-    : null;
-
-  document.getElementById("modalTitle").textContent =
-    category
-      ? "تعديل التصنيف"
-      : "إضافة تصنيف جديد";
-
-  document.getElementById("modalBody").innerHTML = 
-
-    <form id="categoryForm">
-
-      <div class="form-grid">
-
-        <div class="field">
-          <label>ID التصنيف</label>
-
-          <input
-            id="catId"
-            value="${escapeHtml(category?.id || "")}"
-            ${category ? "readonly" : ""}
-            required
-            placeholder="مثال: italian"
-          >
-        </div>
-
-
-        <div class="field">
-          <label>Icon</label>
-
-          <input
-            id="catIcon"
-            value="${escapeHtml(category?.icon || "")}"
-            placeholder="مثال: 🇮🇹"
-          >
-        </div>
-
-
-        <div class="field">
-          <label>اسم التصنيف بالعربي</label>
-
-          <input
-            id="catNameAr"
-            value="${escapeHtml(category?.name_ar || "")}"
-            required
-            placeholder="مثال: الرخام الإيطالي"
-          >
-        </div>
-
-
-        <div class="field">
-          <label>اسم التصنيف بالإنجليزي</label>
-
-          <input
-            id="catNameEn"
-            value="${escapeHtml(category?.name_en || "")}"
-            required
-            placeholder="Example: Italian Marble"
-          >
-        </div>
-
-
-        <div class="field">
-          <label>Badge Text</label>
-
-          <input
-            id="catBadge"
-            value="${escapeHtml(category?.badge || "")}"
-            placeholder="مثال: Premium"
-          >
-        </div>
-
-
-        <div class="field">
-          <label>Sort Order</label>
-
-          <input
-            id="catSort"
-            type="number"
-            value="${category?.sort_order ?? 0}"
-          >
-        </div>
-
-
-        <div class="field full">
-
-          <label>
-            حالة التصنيف
-          </label>
-
-          <label style="display:flex;gap:8px;align-items:center">
-
-            <input
-              id="catActive"
-              type="checkbox"
-              ${category?.is_active !== false ? "checked" : ""}
-              style="width:auto"
-            >
-
-            التصنيف ظاهر في الموقع
-
-          </label>
-
-        </div>
-
-      </div>
-
-
-      <div style="
-        display:flex;
-        gap:10px;
-        margin-top:20px;
-      ">
-
-        <button
-          type="submit"
-          class="btn btn-gold"
-        >
-          ${category ? "حفظ التعديلات" : "إضافة التصنيف"}
-        </button>
-
-
-        <button
-          type="button"
-          class="btn"
-          onclick="closeModal()"
-        >
-          إلغاء
-        </button>
-
-      </div>
-
-    </form>
-  ;
-
-
-  document
-    .getElementById("modal")
-    .classList
-    .remove("hidden");
-
-
-  document
-    .getElementById("categoryForm")
-    .addEventListener(
-      "submit",
-      saveCategory
-    );
-}
-
-
-/* =========================================================
-   SAVE CATEGORY
-========================================================= */
-
-async function saveCategory(event) {
-
-  event.preventDefault();
-
-  const button =
-    event.target.querySelector(
-      'button[type="submit"]'
-    );
-
-  button.disabled = true;
-
-  button.textContent =
-    "جاري الحفظ...";
-
-
-  try {
-
-    const data = {
-
-      id:
-        document
-          .getElementById("catId")
-          .value
-          .trim(),
-
-      name_ar:
-        document
-          .getElementById("catNameAr")
-          .value
-          .trim(),
-
-      name_en:
-        document
-          .getElementById("catNameEn")
-          .value
-          .trim(),
-
-      icon:
-        document
-          .getElementById("catIcon")
-          .value
-          .trim(),
-
-      badge:
-        document
-          .getElementById("catBadge")
-          .value
-          .trim(),
-[9/6/2026 2:45 AM] Abood: sort_order:
-        Number(
-          document
-            .getElementById("catSort")
-            .value || 0
-        ),
-
-      is_active:
-        document
-          .getElementById("catActive")
-          .checked
-    };
-
-
-    if (!data.id) {
-      throw new Error(
-        "يجب إدخال ID التصنيف."
-      );
-    }
-
-
-    if (editingCategoryId) {
-
-      const { error } =
-        await supabaseClient
-          .from("categories")
-          .update(data)
-          .eq(
-            "id",
-            editingCategoryId
-          );
-
-      if (error) {
-        throw error;
-      }
-
-      showMessage(
-        "تم تعديل التصنيف بنجاح.",
-        "success"
-      );
-
-    } else {
-
-      const { error } =
-        await supabaseClient
-          .from("categories")
-          .insert(data);
-
-      if (error) {
-        throw error;
-      }
-
-      showMessage(
-        "تم إضافة التصنيف بنجاح.",
-        "success"
-      );
-    }
-
-
-    closeModal();
-
-    editingCategoryId = null;
-
-    await loadData();
-
-
-  } catch (error) {
-
-    console.error(
-      "CATEGORY SAVE ERROR:",
-      error
-    );
-
-    showMessage(
-      "فشل حفظ التصنيف: " +
-      error.message,
-      "error"
-    );
-
-    button.disabled = false;
-
-    button.textContent =
-      editingCategoryId
-        ? "حفظ التعديلات"
-        : "إضافة التصنيف";
-  }
-}
-
-
-/* =========================================================
-   DELETE CATEGORY
-========================================================= */
-
-async function deleteCategory(id) {
-
-  const category =
-    categories.find(
-      item =>
-        String(item.id) ===
-        String(id)
-    );
-
-
-  if (!category) {
-    return;
-  }
-
-
-  const confirmed =
-    confirm(
-      هل أنت متأكد من حذف التصنيف:
-
-${category.name_ar || category.name_en || id}
-
-ملاحظة: لو توجد منتجات مرتبطة بهذا التصنيف، قد يمنع Supabase الحذف.
-    );
-
-
-  if (!confirmed) {
-    return;
-  }
-
-
-  try {
-
-    const { error } =
-      await supabaseClient
-        .from("categories")
-        .delete()
-        .eq(
-          "id",
-          id
-        );
-
-
-    if (error) {
-      throw error;
-    }
-
-
-    showMessage(
-      "تم حذف التصنيف.",
-      "success"
-    );
-
-
-    await loadData();
-
-
-  } catch (error) {
-
-    console.error(
-      "CATEGORY DELETE ERROR:",
-      error
-    );
-
-    showMessage(
-      "فشل حذف التصنيف: " +
-      error.message,
-      "error"
-    );
-  }
-}
-
-
-/* =========================================================
-   MATERIAL MODAL
-========================================================= */
-
-function openMaterialModal(id = null) {
-
-  editingMaterialId = id;
-
-  const material = id
-    ? materials.find(
-        item =>
-          String(item.id) ===
-          String(id)
-      )
-    : null;
-
-
-  materialImages =
-    Array.isArray(
-      material?.images
-    )
-      ? [...material.images]
-      : [];
-
-
-  document.getElementById("modalTitle").textContent =
-    material
-      ? "تعديل المنتج"
-      : "إضافة منتج جديد";
-
-
-  document.getElementById("modalBody").innerHTML = 
-
-    <form id="materialEditForm">
-
-      <div class="form-grid">
-
-        <div class="field">
-
-          <label>ID المنتج</label>
-
-          <input
-            id="matId"
-            value="${escapeHtml(material?.id || "")}"
-            ${material ? "readonly" : ""}
-            required
-            placeholder="مثال: carrara-001"
-          >
-
-        </div>
-
-
-        <div class="field">
-
-          <label>التصنيف</label>
-
-          <select id="matCategory">
-
-            <option value="">
-              اختر التصنيف
-            </option>
-
-            ${categories.map(category => 
-
-              <option
-                value="${escapeHtml(category.id)}"
-                ${
-                  String(
-                    material?.category_id || ""
-                  ) ===
-                  String(category.id)
-                    ? "selected"
-                    : ""
-                }
-              >
-
-                ${escapeHtml(
-                  category.name_en ||
-                  category.name_ar ||
-                  category.id
-                )}
-[9/6/2026 2:45 AM] Abood: ${
-                  category.name_ar
-                    ? " — " +
-                      escapeHtml(
-                        category.name_ar
-                      )
-                    : ""
-                }
-
-              </option>
-
-            `).join("")}
-
-          </select>
-
-        </div>
-
-
-        <div class="field">
-
-          <label>Name Arabic</label>
-
-          <input
-            id="matNameAr"
-            value="${escapeHtml(material?.name_ar || "")}"
-            required
-          >
-
-        </div>
-
-
-        <div class="field">
-
-          <label>Name English</label>
-
-          <input
-            id="matNameEn"
-            value="${escapeHtml(material?.name_en || "")}"
-            required
-          >
-
-        </div>
-
-
-        <div class="field">
-
-          <label>بلد الصنع / Origin</label>
-
-          <input
-            id="matOrigin"
-            value="${escapeHtml(material?.origin || "")}"
-            placeholder="Italy / Spain / Turkey..."
-          >
-
-        </div>
-
-
-        <div class="field">
-
-          <label>Color Description</label>
-
-          <input
-            id="matColor"
-            value="${escapeHtml(material?.color  material?.color_desc  "")}"
-          >
-
-        </div>
-
-
-        <div class="field">
-
-          <label>Type Arabic</label>
-
-          <input
-            id="matTypeAr"
-            value="${escapeHtml(material?.type_ar || "")}"
-          >
-
-        </div>
-
-
-        <div class="field">
-
-          <label>Type English</label>
-
-          <input
-            id="matTypeEn"
-            value="${escapeHtml(material?.type_en || "")}"
-          >
-
-        </div>
-
-
-        <div class="field">
-
-          <label>Finish</label>
-
-          <input
-            id="matFinish"
-            value="${escapeHtml(material?.finish || "")}"
-            placeholder="Polished / Honed / Matte..."
-          >
-
-        </div>
-
-
-        <div class="field">
-
-          <label>Price Tier</label>
-
-          <input
-            id="matPriceTier"
-            value="${escapeHtml(material?.price_tier || "")}"
-          >
-
-        </div>
-
-
-        <div class="field">
-
-          <label>Color Hex</label>
-
-          <input
-            id="matColorHex"
-            value="${escapeHtml(material?.color_hex || "")}"
-            placeholder="#FFFFFF"
-          >
-
-        </div>
-
-
-        <div class="field">
-
-          <label>Stone Type</label>
-
-          <input
-            id="matStoneType"
-            value="${escapeHtml(material?.stone_type || "")}"
-            placeholder="Marble / Granite / Basalt..."
-          >
-
-        </div>
-
-
-        <div class="field">
-
-          <label>Color Group</label>
-
-          <input
-            id="matColorGroup"
-            value="${escapeHtml(material?.color_group || "")}"
-          >
-
-        </div>
-
-
-        <div class="field">
-
-          <label>Density</label>
-
-          <input
-            id="matDensity"
-            type="number"
-            step="any"
-            value="${material?.density ?? ""}"
-          >
-
-        </div>
-
-
-        <div class="field">
-
-          <label>Water Absorption</label>
-
-          <input
-            id="matWater"
-            type="number"
-            step="any"
-            value="${material?.water_absorption ?? ""}"
-          >
-
-        </div>
-
-
-        <div class="field">
-
-          <label>Compressive Strength</label>
-
-          <input
-            id="matCompressive"
-            type="number"
-            step="any"
-            value="${material?.compressive_strength ?? ""}"
-          >
-
-        </div>
-
-
-        <div class="field">
-
-          <label>Durability Score</label>
-
-          <input
-            id="matDurability"
-            type="number"
-            step="any"
-            value="${material?.durability_score ?? ""}"
-          >
-
-        </div>
-
-
-        <div class="field">
-
-          <label>Maintenance Tier</label>
-
-          <input
-            id="matMaintenance"
-            value="${escapeHtml(material?.maintenance_tier || "")}"
-          >
-
-        </div>
-
-
-        <div class="field">
-
-          <label>Texture Grade</label>
-[9/6/2026 2:45 AM] Abood: <input
-            id="matTexture"
-            value="${escapeHtml(material?.texture_grade || "")}"
-          >
-
-        </div>
-
-
-        <div class="field full">
-
-          <label>
-            Usage Arabic
-          </label>
-
-          <textarea id="matUsageAr">${escapeHtml(
-            material?.usage_ar || ""
-          )}</textarea>
-
-        </div>
-
-
-        <div class="field full">
-
-          <label>
-            Usage English
-          </label>
-
-          <textarea id="matUsageEn">${escapeHtml(
-            material?.usage_en || ""
-          )}</textarea>
-
-        </div>
-
-
-        <div class="field full">
-
-          <label>
-            صور المنتج
-          </label>
-
-          <input
-            id="matImages"
-            type="file"
-            accept="image/*"
-            multiple
-          >
-
-          <div
-            id="materialImagePreview"
-            class="image-preview"
-          ></div>
-
-        </div>
-
-
-        <div class="field full">
-
-          <label style="
-            display:flex;
-            align-items:center;
-            gap:8px;
-          ">
-
-            <input
-              id="matFeatured"
-              type="checkbox"
-              style="width:auto"
-              ${
-                material?.is_featured
-                  ? "checked"
-                  : ""
-              }
-            >
-
-            منتج مميز
-
-          </label>
-
-
-          <label style="
-            display:flex;
-            align-items:center;
-            gap:8px;
-          ">
-
-            <input
-              id="matActive"
-              type="checkbox"
-              style="width:auto"
-              ${
-                material?.is_active !== false
-                  ? "checked"
-                  : ""
-              }
-            >
-
-            المنتج ظاهر على الموقع
-
-          </label>
-
-        </div>
-
-      </div>
-
-
-      <div style="
-        display:flex;
-        gap:10px;
-        margin-top:20px;
-      ">
-
-        <button
-          type="submit"
-          class="btn btn-gold"
-        >
-          ${
-            material
-              ? "حفظ تعديلات المنتج"
-              : "إضافة المنتج"
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>لوحة التحكم الإدارية | Prime Scope CMS</title>
+  <meta name="description" content="لوحة إدارة المحتوى والمنتجات والتصنيفات لمنصة Prime Scope للرخام والأحجار الطبيعية">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23d4af37'><polygon points='12 2 2 7 12 12 22 7 12 2'/><polyline points='2 17 12 22 22 17'/><polyline points='2 12 12 17 22 12'/></svg>">
+
+  <!-- Google Fonts: Tajawal & Playfair Display -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Tajawal:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              gold: '#d4af37',
+              goldLight: '#fde047',
+              goldDark: '#997b19',
+              dark: '#080c14',
+              surface: '#0f172a',
+              card: '#131d31',
+              border: '#1e2d4a',
+              input: '#0c1322'
+            }
+          },
+          fontFamily: {
+            tajawal: ['Tajawal', 'sans-serif'],
+            serif: ['Playfair Display', 'serif']
           }
-        </button>
+        }
+      }
+    }
+  </script>
 
+  <!-- Custom Luxury Theme Styles -->
+  <style>
+    * {
+      font-family: 'Tajawal', sans-serif;
+      box-sizing: border-box;
+    }
+    
+    body {
+      background-color: #070a10;
+      color: #f1f5f9;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
 
-        <button
-          type="button"
-          class="btn"
-          onclick="closeModal()"
-        >
-          إلغاء
-        </button>
+    /* Custom Scrollbars */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0b111e;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #1e2d4a;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #d4af37;
+    }
 
+    .gold-gradient-text {
+      background: linear-gradient(135deg, #fef08a 0%, #d4af37 50%, #997b19 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .gold-gradient-bg {
+      background: linear-gradient(135deg, #d4af37 0%, #b8860b 100%);
+    }
+
+    .gold-border-glow {
+      border: 1px solid rgba(212, 175, 55, 0.25);
+      box-shadow: 0 0 15px rgba(212, 175, 55, 0.05);
+    }
+
+    .gold-border-glow:focus-within, .gold-border-glow:hover {
+      border-color: rgba(212, 175, 55, 0.55);
+      box-shadow: 0 0 20px rgba(212, 175, 55, 0.15);
+    }
+
+    .luxury-card {
+      background: rgba(15, 23, 42, 0.75);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(212, 175, 55, 0.15);
+      border-radius: 1rem;
+    }
+
+    .table-container {
+      border: 1px solid #1e2d4a;
+      border-radius: 0.75rem;
+      overflow: hidden;
+      background: #0f172a;
+    }
+
+    /* Modals & Backdrop Blur */
+    .modal-backdrop {
+      background: rgba(4, 7, 13, 0.85);
+      backdrop-filter: blur(8px);
+    }
+
+    /* Custom Checkbox/Switch */
+    .custom-switch {
+      position: relative;
+      display: inline-block;
+      width: 44px;
+      height: 24px;
+    }
+    .custom-switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-color: #1e293b;
+      transition: .3s;
+      border-radius: 24px;
+      border: 1px solid #334155;
+    }
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 16px;
+      width: 16px;
+      left: 4px;
+      bottom: 3px;
+      background-color: #94a3b8;
+      transition: .3s;
+      border-radius: 50%;
+    }
+    input:checked + .slider {
+      background-color: #d4af37;
+      border-color: #fef08a;
+    }
+    input:checked + .slider:before {
+      transform: translateX(20px);
+      background-color: #070a10;
+    }
+
+    /* Toast Container */
+    #toast-container {
+      position: fixed;
+      top: 1.5rem;
+      left: 1.5rem;
+      z-index: 99999;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      max-width: 420px;
+      width: calc(100% - 3rem);
+    }
+
+    .toast-item {
+      animation: slideInLeft 0.3s ease forwards;
+    }
+
+    @keyframes slideInLeft {
+      from {
+        opacity: 0;
+        transform: translateX(-50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+  </style>
+</head>
+<body class="bg-brand-dark text-slate-100 flex flex-col min-h-screen">
+
+  <!-- Toast Notification System -->
+  <div id="toast-container"></div>
+
+  <!-- ========================================================================= -->
+  <!-- 1. AUTH / LOGIN VIEW (Rendered when user is unauthenticated or not admin) -->
+  <!-- ========================================================================= -->
+  <div id="login-view" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-brand-dark bg-opacity-95 backdrop-blur-md">
+    <div class="luxury-card w-full max-w-md p-8 relative overflow-hidden shadow-2xl">
+      <!-- Glow Decor -->
+      <div class="absolute -top-24 -right-24 w-48 h-48 bg-brand-gold opacity-10 rounded-full blur-3xl"></div>
+      <div class="absolute -bottom-24 -left-24 w-48 h-48 bg-amber-500 opacity-10 rounded-full blur-3xl"></div>
+
+      <div class="text-center mb-8 relative z-10">
+        <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-tr from-brand-goldDark to-brand-gold flex items-center justify-center shadow-lg shadow-amber-500/20">
+          <i class="fa-solid fa-gem text-2xl text-slate-950"></i>
+        </div>
+        <h1 class="text-2xl font-bold font-serif gold-gradient-text tracking-wider">PRIME SCOPE</h1>
+        <p class="text-xs uppercase tracking-widest text-slate-400 mt-1">لوحة الإدارة والتحكم CMS</p>
+        <p class="text-sm text-slate-400 mt-3">سجّل الدخول بحساب المشرف للوصول إلى قاعدة البيانات</p>
       </div>
 
-    </form>
-  ;
-
-
-  document
-    .getElementById("modal")
-    .classList
-    .remove("hidden");
-
-
-  renderMaterialImages();
-
-
-  document
-    .getElementById("matImages")
-    .addEventListener(
-      "change",
-      handleMaterialImages
-    );
-
-
-  document
-    .getElementById("materialEditForm")
-    .addEventListener(
-      "submit",
-      saveMaterial
-    );
-}
-
-
-/* =========================================================
-   SHOW EXISTING IMAGES
-========================================================= */
-
-function renderMaterialImages() {
-
-  const preview =
-    document.getElementById(
-      "materialImagePreview"
-    );
-
-
-  if (!preview) {
-    return;
-  }
-
-
-  if (!materialImages.length) {
-
-    preview.innerHTML = 
-      <div style="color:#888">
-        لا توجد صور مضافة.
+      <div id="login-error-box" class="hidden mb-6 p-4 rounded-xl bg-red-950/60 border border-red-500/30 text-red-300 text-sm flex items-start gap-3">
+        <i class="fa-solid fa-triangle-exclamation text-red-400 mt-0.5"></i>
+        <div id="login-error-msg" class="flex-1"></div>
       </div>
-    ;
 
-    return;
-  }
+      <form id="login-form" class="space-y-5 relative z-10" onsubmit="handleLogin(event)">
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 mb-2">البريد الإلكتروني</label>
+          <div class="relative">
+            <input type="email" id="login-email" required placeholder="admin@primescope.com" 
+              class="w-full bg-brand-input border border-slate-700 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-brand-gold transition duration-200 pl-10">
+            <i class="fa-regular fa-envelope absolute left-3 top-3.5 text-slate-500"></i>
+          </div>
+        </div>
 
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 mb-2">كلمة المرور</label>
+          <div class="relative">
+            <input type="password" id="login-password" required placeholder="••••••••" 
+              class="w-full bg-brand-input border border-slate-700 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-brand-gold transition duration-200 pl-10">
+            <i class="fa-solid fa-lock absolute left-3 top-3.5 text-slate-500"></i>
+          </div>
+        </div>
 
-  preview.innerHTML =
-    materialImages
-      .map(
-        (url, index) => 
+        <button type="submit" id="login-submit-btn" 
+          class="w-full py-3.5 px-4 rounded-xl gold-gradient-bg text-slate-950 font-bold text-sm hover:opacity-95 active:scale-[0.99] transition shadow-lg shadow-amber-500/20 flex items-center justify-center gap-2">
+          <span>تسجيل الدخول</span>
+          <i class="fa-solid fa-arrow-left"></i>
+        </button>
+      </form>
 
-          <div class="image-item">
+      <div class="mt-8 text-center text-xs text-slate-500">
+        منظومة آمنة مشفرة متصلة بقاعدة بيانات Supabase
+      </div>
+    </div>
+  </div>
 
-            <img
-              src="${escapeHtml(url)}"
-              onerror="this.style.opacity='.3'"
-            >
+  <!-- ========================================================================= -->
+  <!-- 2. MAIN APPLICATION VIEW (Admin Workspace)                                -->
+  <!-- ========================================================================= -->
+  <div id="app-view" class="hidden flex-1 flex flex-col md:flex-row min-h-screen">
 
-            <button
-              type="button"
-              class="remove-image"
-              onclick="removeMaterialImage(${index})"
-            >
-              ×
-            </button>
+    <!-- Mobile Sidebar Backdrop Overlay -->
+    <div id="sidebar-overlay" onclick="toggleSidebar(false)" class="hidden fixed inset-0 z-40 bg-black/70 backdrop-blur-sm md:hidden"></div>
+
+    <!-- Right Sidebar (RTL) -->
+    <aside id="main-sidebar" class="fixed top-0 right-0 z-50 h-full w-72 bg-brand-surface border-l border-brand-border flex flex-col transition-transform duration-300 translate-x-full md:translate-x-0 md:static">
+      
+      <!-- Brand Logo Header -->
+      <div class="p-6 border-b border-brand-border flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-goldDark to-brand-gold flex items-center justify-center text-slate-950 shadow-md">
+            <i class="fa-solid fa-gem text-lg"></i>
+          </div>
+          <div>
+            <h2 class="font-serif font-bold text-lg gold-gradient-text tracking-wide">PRIME SCOPE</h2>
+            <span class="text-[10px] text-brand-gold font-bold px-1.5 py-0.5 rounded bg-brand-gold/10 border border-brand-gold/20">لوحة الإدارة</span>
+          </div>
+        </div>
+        <button onclick="toggleSidebar(false)" class="md:hidden text-slate-400 hover:text-white p-1">
+          <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+      </div>
+
+      <!-- Navigation Links -->
+      <nav class="flex-1 p-4 space-y-1.5 overflow-y-auto">
+        <div class="text-[11px] font-bold text-slate-400 px-3 py-2 uppercase tracking-wider">الأقسام الرئيسية</div>
+        
+        <button onclick="switchTab('dashboard')" id="nav-dashboard" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-slate-200 hover:bg-slate-800 hover:text-brand-gold transition duration-200">
+          <i class="fa-solid fa-chart-pie w-5 text-center text-brand-gold"></i>
+          <span>لوحة الإحصائيات</span>
+        </button>
+
+        <button onclick="switchTab('materials')" id="nav-materials" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-slate-200 hover:bg-slate-800 hover:text-brand-gold transition duration-200">
+          <i class="fa-solid fa-cubes w-5 text-center text-brand-gold"></i>
+          <span>إدارة المنتجات والخامات</span>
+        </button>
+
+        <button onclick="switchTab('categories')" id="nav-categories" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-slate-200 hover:bg-slate-800 hover:text-brand-gold transition duration-200">
+          <i class="fa-solid fa-layer-group w-5 text-center text-brand-gold"></i>
+          <span>إدارة التصنيفات</span>
+        </button>
+
+        <button onclick="switchTab('rfqs')" id="nav-rfqs" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-slate-200 hover:bg-slate-800 hover:text-brand-gold transition duration-200">
+          <i class="fa-solid fa-file-invoice-dollar w-5 text-center text-brand-gold"></i>
+          <span>طلبات عروض الأسعار (RFQ)</span>
+        </button>
+
+        <div class="pt-4 border-t border-brand-border mt-4">
+          <div class="text-[11px] font-bold text-slate-400 px-3 py-2 uppercase tracking-wider">روابط سريعة</div>
+          <a href="index.html" target="_blank" class="w-full flex items-center justify-between px-4 py-3 rounded-xl text-sm font-medium text-slate-400 hover:bg-slate-800/50 hover:text-slate-200 transition">
+            <span class="flex items-center gap-3">
+              <i class="fa-solid fa-globe w-5 text-center text-slate-400"></i>
+              <span>عرض الموقع العام</span>
+            </span>
+            <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+          </a>
+        </div>
+      </nav>
+
+      <!-- User Profile & Logout -->
+      <div class="p-4 border-t border-brand-border bg-slate-950/40">
+        <div class="flex items-center gap-3 mb-3">
+          <div class="w-9 h-9 rounded-full bg-brand-gold/20 border border-brand-gold/40 flex items-center justify-center text-brand-gold font-bold text-sm">
+            <i class="fa-solid fa-user-shield"></i>
+          </div>
+          <div class="overflow-hidden flex-1">
+            <div id="admin-user-name" class="text-sm font-semibold text-slate-200 truncate">المشرف العام</div>
+            <div id="admin-user-email" class="text-[11px] text-slate-400 truncate">admin@primescope.com</div>
+          </div>
+        </div>
+        <button onclick="handleLogout()" class="w-full py-2 px-3 rounded-lg border border-red-500/30 text-red-400 hover:bg-red-950/50 text-xs font-semibold flex items-center justify-center gap-2 transition">
+          <i class="fa-solid fa-right-from-bracket"></i>
+          <span>تسجيل الخروج</span>
+        </button>
+      </div>
+
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="flex-1 flex flex-col min-w-0 overflow-y-auto">
+      
+      <!-- Top Header Bar -->
+      <header class="h-16 bg-brand-surface/90 backdrop-blur-md border-b border-brand-border px-4 md:px-8 flex items-center justify-between sticky top-0 z-30">
+        <div class="flex items-center gap-4">
+          <button onclick="toggleSidebar(true)" class="md:hidden p-2 rounded-lg bg-slate-800 text-slate-300 hover:text-white">
+            <i class="fa-solid fa-bars"></i>
+          </button>
+          <div>
+            <h2 id="page-title" class="text-base md:text-lg font-bold text-white">لوحة الإحصائيات</h2>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <button onclick="openMaterialModal()" class="hidden sm:flex items-center gap-2 px-3.5 py-1.5 rounded-lg gold-gradient-bg text-slate-950 font-bold text-xs hover:opacity-90 shadow transition">
+            <i class="fa-solid fa-plus"></i>
+            <span>إضافة منتج سريع</span>
+          </button>
+          <button onclick="refreshCurrentTab()" title="تحديث البيانات" class="p-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-brand-gold transition text-xs flex items-center gap-1.5">
+            <i class="fa-solid fa-rotate"></i>
+            <span class="hidden md:inline">تحديث</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- Dynamic Content Body -->
+      <div class="p-4 md:p-8 flex-1">
+
+        <!-- ================================================================= -->
+        <!-- TAB 1: DASHBOARD STATS OVERVIEW                                   -->
+        <!-- ================================================================= -->
+        <section id="tab-dashboard" class="tab-content space-y-8">
+          
+          <!-- Welcome Banner -->
+          <div class="luxury-card p-6 md:p-8 relative overflow-hidden flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+            <div class="space-y-2 relative z-10">
+              <span class="text-xs font-bold text-brand-gold uppercase tracking-wider">منصة Prime Scope الفاخرة</span>
+              <h2 class="text-2xl md:text-3xl font-bold font-serif text-white">مرحباً بك في لوحة الإدارة</h2>
+              <p class="text-slate-400 text-sm max-w-xl leading-relaxed">
+                تحكّم بشكل كامل في كتالوج المنتجات والخامات الحجرية، التصنيفات الإقليمية، ومتابعة عروض الأسعار مباشرة مع قاعدة بيانات Supabase.
+              </p>
+            </div>
+            <div class="flex flex-wrap gap-3 relative z-10">
+              <button onclick="switchTab('materials'); openMaterialModal();" class="px-5 py-2.5 rounded-xl gold-gradient-bg text-slate-950 font-bold text-sm flex items-center gap-2 hover:opacity-95 shadow-lg shadow-amber-500/20 transition">
+                <i class="fa-solid fa-plus"></i>
+                <span>إضافة خامة جديدة</span>
+              </button>
+              <button onclick="switchTab('categories'); openCategoryModal();" class="px-5 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-semibold text-sm flex items-center gap-2 border border-slate-700 transition">
+                <i class="fa-solid fa-folder-plus"></i>
+                <span>إضافة تصنيف</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- KPI Cards Grid -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            
+            <!-- Card 1: Total Materials -->
+            <div class="luxury-card p-6 border-r-4 border-r-brand-gold">
+              <div class="flex items-center justify-between mb-4">
+                <span class="text-xs font-semibold text-slate-400">إجمالي المنتجات والخامات</span>
+                <div class="w-10 h-10 rounded-xl bg-brand-gold/10 text-brand-gold flex items-center justify-center">
+                  <i class="fa-solid fa-cubes text-lg"></i>
+                </div>
+              </div>
+              <div id="stat-total-materials" class="text-3xl font-bold font-serif text-white">--</div>
+              <p class="text-xs text-slate-400 mt-2 flex items-center gap-1.5">
+                <span class="text-emerald-400 font-semibold"><i class="fa-solid fa-database"></i> كتالوج متكامل</span>
+              </p>
+            </div>
+
+            <!-- Card 2: Active Materials -->
+            <div class="luxury-card p-6 border-r-4 border-r-emerald-500">
+              <div class="flex items-center justify-between mb-4">
+                <span class="text-xs font-semibold text-slate-400">المنتجات النشطة (الظاهرة)</span>
+                <div class="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center">
+                  <i class="fa-solid fa-circle-check text-lg"></i>
+                </div>
+              </div>
+              <div id="stat-active-materials" class="text-3xl font-bold font-serif text-white">--</div>
+              <p class="text-xs text-slate-400 mt-2">ظاهرة للعملاء في واجهة المتجر</p>
+            </div>
+
+            <!-- Card 3: Featured Materials -->
+            <div class="luxury-card p-6 border-r-4 border-r-amber-500">
+              <div class="flex items-center justify-between mb-4">
+                <span class="text-xs font-semibold text-slate-400">المنتجات المميزة (Featured)</span>
+                <div class="w-10 h-10 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center">
+                  <i class="fa-solid fa-star text-lg"></i>
+                </div>
+              </div>
+              <div id="stat-featured-materials" class="text-3xl font-bold font-serif text-white">--</div>
+              <p class="text-xs text-slate-400 mt-2">معروضة في مقدمة الأقسام</p>
+            </div>
+
+            <!-- Card 4: Total Categories -->
+            <div class="luxury-card p-6 border-r-4 border-r-indigo-500">
+              <div class="flex items-center justify-between mb-4">
+                <span class="text-xs font-semibold text-slate-400">إجمالي التصنيفات</span>
+                <div class="w-10 h-10 rounded-xl bg-indigo-500/10 text-indigo-400 flex items-center justify-center">
+                  <i class="fa-solid fa-layer-group text-lg"></i>
+                </div>
+              </div>
+              <div id="stat-total-categories" class="text-3xl font-bold font-serif text-white">--</div>
+              <p class="text-xs text-slate-400 mt-2">المجموعات الإقليمية ومصادر الأحجار</p>
+            </div>
 
           </div>
 
-        `
-      )
-      .join("");
-}
-
-
-/* =========================================================
-   REMOVE IMAGE
-========================================================= */
-
-function removeMaterialImage(index) {
-
-  materialImages.splice(
-    index,
-    1
-  );
-
-  renderMaterialImages();
-}
-
-
-/* =========================================================
-   SELECT NEW IMAGES
-========================================================= */
-
-async function handleMaterialImages(event) {
-[9/6/2026 2:45 AM] Abood: const files =
-    Array.from(
-      event.target.files || []
-    );
-
-
-  if (!files.length) {
-    return;
-  }
-
-
-  try {
-
-    const materialId =
-      document
-        .getElementById("matId")
-        .value
-        .trim();
-
-
-    if (!materialId) {
-
-      alert(
-        "اكتب ID المنتج أولاً ثم اختر الصور."
-      );
-
-      event.target.value = "";
-
-      return;
-    }
-
-
-    showMessage(
-      "جاري رفع الصور..."
-    );
-
-
-    for (
-      const file of files
-    ) {
-
-      const url =
-        await uploadMaterialImage(
-          file,
-          materialId
-        );
-
-      materialImages.push(
-        url
-      );
-    }
-
-
-    renderMaterialImages();
-
-    showMessage(
-      "تم رفع الصور.",
-      "success"
-    );
-
-
-  } catch (error) {
-
-    console.error(
-      "IMAGE UPLOAD ERROR:",
-      error
-    );
-
-    showMessage(
-      "فشل رفع الصورة: " +
-      error.message,
-      "error"
-    );
-  }
-
-
-  event.target.value = "";
-}
-
-
-/* =========================================================
-   UPLOAD MATERIAL IMAGE
-========================================================= */
-
-async function uploadMaterialImage(
-  file,
-  materialId
-) {
-
-  const bucket =
-    window
-      .PRIME_CONFIG
-      .STORAGE_BUCKETS
-      .MATERIALS;
-
-
-  const extension =
-    file.name
-      .split(".")
-      .pop()
-      .toLowerCase();
-
-
-  const fileName =
-    ${materialId}/${crypto.randomUUID()}.${extension};
-
-
-  const {
-    error
-  } =
-    await supabaseClient
-      .storage
-      .from(bucket)
-      .upload(
-        fileName,
-        file,
-        {
-          cacheControl: "3600",
-          upsert: false
-        }
-      );
-
-
-  if (error) {
-    throw error;
-  }
-
-
-  const {
-    data
-  } =
-    supabaseClient
-      .storage
-      .from(bucket)
-      .getPublicUrl(
-        fileName
-      );
-
-
-  return data.publicUrl;
-}
-
-
-/* =========================================================
-   SAVE MATERIAL
-========================================================= */
-
-async function saveMaterial(event) {
-
-  event.preventDefault();
-
-
-  const button =
-    event.target.querySelector(
-      'button[type="submit"]'
-    );
-
-
-  button.disabled = true;
-
-  button.textContent =
-    "جاري الحفظ...";
-
-
-  try {
-
-    const data = {
-
-      id:
-        document
-          .getElementById("matId")
-          .value
-          .trim(),
-
-      category_id:
-        document
-          .getElementById("matCategory")
-          .value ||
-        null,
-
-      name_ar:
-        document
-          .getElementById("matNameAr")
-          .value
-          .trim(),
-
-      name_en:
-        document
-          .getElementById("matNameEn")
-          .value
-          .trim(),
-
-      origin:
-        document
-          .getElementById("matOrigin")
-          .value
-          .trim(),
-
-      color:
-        document
-          .getElementById("matColor")
-          .value
-          .trim(),
-
-      type_ar:
-        document
-          .getElementById("matTypeAr")
-          .value
-          .trim(),
-
-      type_en:
-        document
-          .getElementById("matTypeEn")
-          .value
-          .trim(),
-
-      finish:
-        document
-          .getElementById("matFinish")
-          .value
-          .trim(),
-
-      usage_ar:
-        document
-          .getElementById("matUsageAr")
-          .value
-          .trim(),
-
-      usage_en:
-        document
-          .getElementById("matUsageEn")
-          .value
-          .trim(),
-
-      price_tier:
-        document
-          .getElementById("matPriceTier")
-          .value
-          .trim(),
-
-      color_hex:
-        document
-          .getElementById("matColorHex")
-          .value
-          .trim(),
-
-      stone_type:
-        document
-          .getElementById("matStoneType")
-          .value
-          .trim(),
-
-      color_group:
-        document
-          .getElementById("matColorGroup")
-          .value
-          .trim(),
-
-      density:
-        numberOrNull(
-          document
-            .getElementById("matDensity")
-            .value
-        ),
-[9/6/2026 2:45 AM] Abood: water_absorption:
-        numberOrNull(
-          document
-            .getElementById("matWater")
-            .value
-        ),
-
-      compressive_strength:
-        numberOrNull(
-          document
-            .getElementById("matCompressive")
-            .value
-        ),
-
-      durability_score:
-        numberOrNull(
-          document
-            .getElementById("matDurability")
-            .value
-        ),
-
-      maintenance_tier:
-        document
-          .getElementById("matMaintenance")
-          .value
-          .trim(),
-
-      texture_grade:
-        document
-          .getElementById("matTexture")
-          .value
-          .trim(),
-
-      images:
-        materialImages,
-
-      is_featured:
-        document
-          .getElementById("matFeatured")
-          .checked,
-
-      is_active:
-        document
-          .getElementById("matActive")
-          .checked
+          <!-- Quick Overview Tables -->
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <!-- Recent Materials Quick List -->
+            <div class="luxury-card p-6 flex flex-col">
+              <div class="flex items-center justify-between mb-5">
+                <h3 class="font-bold text-base text-white flex items-center gap-2">
+                  <i class="fa-solid fa-gem text-brand-gold"></i>
+                  <span>أحدث الخامات المضافة</span>
+                </h3>
+                <button onclick="switchTab('materials')" class="text-xs text-brand-gold hover:underline font-semibold">عرض الكل &larr;</button>
+              </div>
+              <div id="dashboard-recent-materials" class="space-y-3 flex-1">
+                <div class="text-center py-8 text-slate-500 text-sm">جاري تحميل البيانات...</div>
+              </div>
+            </div>
+
+            <!-- Categories Quick Grid -->
+            <div class="luxury-card p-6 flex flex-col">
+              <div class="flex items-center justify-between mb-5">
+                <h3 class="font-bold text-base text-white flex items-center gap-2">
+                  <i class="fa-solid fa-layer-group text-brand-gold"></i>
+                  <span>التصنيفات الحالية</span>
+                </h3>
+                <button onclick="switchTab('categories')" class="text-xs text-brand-gold hover:underline font-semibold">إدارة التصنيفات &larr;</button>
+              </div>
+              <div id="dashboard-categories-list" class="grid grid-cols-2 gap-3 flex-1">
+                <div class="col-span-2 text-center py-8 text-slate-500 text-sm">جاري تحميل التصنيفات...</div>
+              </div>
+            </div>
+          </div>
+
+        </section>
+
+        <!-- ================================================================= -->
+        <!-- TAB 2: MATERIALS MANAGEMENT (PRODUCTS)                            -->
+        <!-- ================================================================= -->
+        <section id="tab-materials" class="tab-content hidden space-y-6">
+          
+          <!-- Actions & Search Header -->
+          <div class="luxury-card p-5 space-y-4">
+            
+            <div class="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4">
+              <div>
+                <h2 class="text-xl font-bold text-white flex items-center gap-2">
+                  <span>إدارة المنتجات والخامات الطبيعية</span>
+                  <span id="materials-count-badge" class="text-xs font-bold px-2.5 py-0.5 rounded-full bg-brand-gold/20 text-brand-gold border border-brand-gold/30">0</span>
+                </h2>
+                <p class="text-xs text-slate-400 mt-1">كتالوج الرخام، الجرانيت، الترافرتين، والأحجار الطبيعية في Prime Scope</p>
+              </div>
+              <button onclick="openMaterialModal()" class="px-5 py-2.5 rounded-xl gold-gradient-bg text-slate-950 font-bold text-sm flex items-center justify-center gap-2 hover:opacity-95 shadow-md transition">
+                <i class="fa-solid fa-plus"></i>
+                <span>إضافة منتج جديد</span>
+              </button>
+            </div>
+
+            <!-- Search Bar & Filters -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-3 pt-3 border-t border-brand-border">
+              
+              <!-- Search Box -->
+              <div class="lg:col-span-2 relative">
+                <input type="text" id="mat-filter-search" oninput="debounceFilterMaterials()" placeholder="ابحث بالاسم، المنشأ، أو النوع..." 
+                  class="w-full bg-brand-input border border-slate-700 rounded-xl px-4 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-brand-gold transition pl-9">
+                <i class="fa-solid fa-magnifying-glass absolute left-3 top-3 text-slate-500 text-xs"></i>
+              </div>
+
+              <!-- Filter: Country/Origin (Extracted Dynamically) -->
+              <div>
+                <select id="mat-filter-origin" onchange="filterMaterials()" class="w-full bg-brand-input border border-slate-700 rounded-xl px-3 py-2.5 text-xs text-slate-300 focus:outline-none focus:border-brand-gold">
+                  <option value="all">كل البلاد (المنشأ)</option>
+                </select>
+              </div>
+
+              <!-- Filter: Category (Extracted from DB) -->
+              <div>
+                <select id="mat-filter-category" onchange="filterMaterials()" class="w-full bg-brand-input border border-slate-700 rounded-xl px-3 py-2.5 text-xs text-slate-300 focus:outline-none focus:border-brand-gold">
+                  <option value="all">كل التصنيفات</option>
+                </select>
+              </div>
+
+              <!-- Filter: Stone Type (Extracted Dynamically) -->
+              <div>
+                <select id="mat-filter-stone-type" onchange="filterMaterials()" class="w-full bg-brand-input border border-slate-700 rounded-xl px-3 py-2.5 text-xs text-slate-300 focus:outline-none focus:border-brand-gold">
+                  <option value="all">نوع الحجر (الكل)</option>
+                </select>
+              </div>
+
+              <!-- Filter: Status & Reset -->
+              <div class="flex items-center gap-2">
+                <select id="mat-filter-status" onchange="filterMaterials()" class="w-full bg-brand-input border border-slate-700 rounded-xl px-3 py-2.5 text-xs text-slate-300 focus:outline-none focus:border-brand-gold">
+                  <option value="all">الحالة (الكل)</option>
+                  <option value="active">نشط (ظاهر)</option>
+                  <option value="inactive">معطل (مخفي)</option>
+                </select>
+                <button onclick="resetMaterialFilters()" title="إعادة ضبط الفلاتر" class="p-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 transition text-xs">
+                  <i class="fa-solid fa-filter-circle-xmark"></i>
+                </button>
+              </div>
+
+            </div>
+
+          </div>
+
+          <!-- Materials Table Container -->
+          <div class="table-container shadow-xl">
+            <div class="overflow-x-auto">
+              <table class="w-full text-right text-xs">
+                <thead class="bg-slate-900/90 text-slate-300 font-bold border-b border-brand-border">
+                  <tr>
+                    <th class="py-3.5 px-4">الصورة والخامة</th>
+                    <th class="py-3.5 px-4">التصنيف والمنشأ</th>
+                    <th class="py-3.5 px-4">نوع الحجر واللون</th>
+                    <th class="py-3.5 px-4">فئة السعر والتشطيب</th>
+                    <th class="py-3.5 px-4 text-center">مميز</th>
+                    <th class="py-3.5 px-4 text-center">الحالة</th>
+                    <th class="py-3.5 px-4 text-center">الإجراءات</th>
+                  </tr>
+                </thead>
+                <tbody id="materials-table-body" class="divide-y divide-slate-800/60 text-slate-300">
+                  <tr>
+                    <td colspan="7" class="py-12 text-center text-slate-500">
+                      <i class="fa-solid fa-circle-notch fa-spin text-2xl text-brand-gold mb-3"></i>
+                      <p>جاري تحميل قائمة الخامات والمنتجات من قاعدة البيانات...</p>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            
+            <!-- Table Footer info -->
+            <div class="p-4 bg-slate-900/60 border-t border-brand-border flex items-center justify-between text-xs text-slate-400">
+              <span id="materials-showing-text">عرض 0 من 0 منتج</span>
+              <span class="text-[11px] text-slate-500">تحديث فوري مباشر مع Supabase</span>
+            </div>
+          </div>
+
+        </section>
+
+        <!-- ================================================================= -->
+        <!-- TAB 3: CATEGORIES MANAGEMENT                                      -->
+        <!-- ================================================================= -->
+        <section id="tab-categories" class="tab-content hidden space-y-6">
+          
+          <div class="luxury-card p-5 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
+            <div>
+              <h2 class="text-xl font-bold text-white flex items-center gap-2">
+                <span>إدارة التصنيفات والمجموعات الحجرية</span>
+                <span id="categories-count-badge" class="text-xs font-bold px-2.5 py-0.5 rounded-full bg-brand-gold/20 text-brand-gold border border-brand-gold/30">0</span>
+              </h2>
+              <p class="text-xs text-slate-400 mt-1">تحديد مجموعات المنشأ، الأيقونات، الشارات الترويجية، وترتيب الظهور</p>
+            </div>
+            <button onclick="openCategoryModal()" class="px-5 py-2.5 rounded-xl gold-gradient-bg text-slate-950 font-bold text-sm flex items-center justify-center gap-2 hover:opacity-95 shadow-md transition">
+              <i class="fa-solid fa-plus"></i>
+              <span>+ إضافة تصنيف جديد</span>
+            </button>
+          </div>
+
+          <!-- Categories Table -->
+          <div class="table-container shadow-xl">
+            <div class="overflow-x-auto">
+              <table class="w-full text-right text-xs">
+                <thead class="bg-slate-900/90 text-slate-300 font-bold border-b border-brand-border">
+                  <tr>
+                    <th class="py-3.5 px-4">المعرف (ID)</th>
+                    <th class="py-3.5 px-4">الأيقونة والاسم العربي</th>
+                    <th class="py-3.5 px-4">الاسم بالإنجليزي</th>
+                    <th class="py-3.5 px-4 text-center">الشارة (Badge)</th>
+                    <th class="py-3.5 px-4 text-center">الترتيب</th>
+                    <th class="py-3.5 px-4 text-center">الحالة</th>
+                    <th class="py-3.5 px-4 text-center">الإجراءات</th>
+                  </tr>
+                </thead>
+                <tbody id="categories-table-body" class="divide-y divide-slate-800/60 text-slate-300">
+                  <tr>
+                    <td colspan="7" class="py-12 text-center text-slate-500">
+                      <i class="fa-solid fa-circle-notch fa-spin text-2xl text-brand-gold mb-3"></i>
+                      <p>جاري تحميل التصنيفات...</p>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+        </section>
+
+        <!-- ================================================================= -->
+        <!-- TAB 4: RFQS & QUOTATION REQUESTS                                  -->
+        <!-- ================================================================= -->
+        <section id="tab-rfqs" class="tab-content hidden space-y-6">
+          <div class="luxury-card p-5 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
+            <div>
+              <h2 class="text-xl font-bold text-white flex items-center gap-2">
+                <span>طلبات عروض الأسعار والمقايسات (RFQ)</span>
+                <span id="rfqs-count-badge" class="text-xs font-bold px-2.5 py-0.5 rounded-full bg-brand-gold/20 text-brand-gold border border-brand-gold/30">0</span>
+              </h2>
+              <p class="text-xs text-slate-400 mt-1">استعراض وإدارة طلبات العملاء وتحديث مراحل تسعير المشاريع</p>
+            </div>
+            <button onclick="loadRfqs()" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold flex items-center justify-center gap-2 transition border border-slate-700">
+              <i class="fa-solid fa-rotate"></i>
+              <span>تحديث الطلبات</span>
+            </button>
+          </div>
+
+          <div class="table-container shadow-xl">
+            <div class="overflow-x-auto">
+              <table class="w-full text-right text-xs">
+                <thead class="bg-slate-900/90 text-slate-300 font-bold border-b border-brand-border">
+                  <tr>
+                    <th class="py-3.5 px-4">رقم المرجع (RFQ Ref)</th>
+                    <th class="py-3.5 px-4">العميل ورقم الهاتف</th>
+                    <th class="py-3.5 px-4">المدينة والخامة المطلوبة</th>
+                    <th class="py-3.5 px-4">الكمية والتطبيق</th>
+                    <th class="py-3.5 px-4">تاريخ الطلب</th>
+                    <th class="py-3.5 px-4 text-center">حالة الطلب</th>
+                    <th class="py-3.5 px-4 text-center">تواصل سريع</th>
+                  </tr>
+                </thead>
+                <tbody id="rfqs-table-body" class="divide-y divide-slate-800/60 text-slate-300">
+                  <tr>
+                    <td colspan="7" class="py-12 text-center text-slate-500">
+                      <i class="fa-solid fa-circle-notch fa-spin text-2xl text-brand-gold mb-3"></i>
+                      <p>جاري تحميل طلبات عروض الأسعار...</p>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- MODAL: ADD / EDIT MATERIAL                                                -->
+  <!-- ========================================================================= -->
+  <div id="material-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 modal-backdrop overflow-y-auto">
+    <div class="luxury-card w-full max-w-4xl max-h-[92vh] flex flex-col overflow-hidden shadow-2xl border border-brand-gold/30 my-auto">
+      
+      <!-- Modal Header -->
+      <div class="p-5 border-b border-brand-border flex items-center justify-between bg-slate-900/90">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-brand-gold/10 text-brand-gold flex items-center justify-center text-lg">
+            <i class="fa-solid fa-cubes"></i>
+          </div>
+          <div>
+            <h3 id="material-modal-title" class="text-base font-bold text-white">إضافة خامة جديدة</h3>
+            <p class="text-xs text-slate-400">إدخال كافة المواصفات والخصائص والصور الخاصة بالخامة الحجرية</p>
+          </div>
+        </div>
+        <button onclick="closeMaterialModal()" class="w-8 h-8 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white flex items-center justify-center transition">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <!-- Modal Body (Scrollable Form) -->
+      <form id="material-form" onsubmit="handleSaveMaterial(event)" class="flex-1 overflow-y-auto p-5 sm:p-6 space-y-6">
+        
+        <!-- Section 1: Basic Info -->
+        <div class="space-y-4">
+          <div class="flex items-center gap-2 text-xs font-bold text-brand-gold uppercase tracking-wider">
+            <i class="fa-solid fa-info-circle"></i>
+            <span>1. المعلومات الأساسية</span>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 mb-1.5">معرف المنتج (Product ID) *</label>
+              <input type="text" id="mat-id" required placeholder="مثال: it-25" 
+                class="w-full bg-brand-input border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-brand-gold transition">
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 mb-1.5">التصنيف (Category) *</label>
+              <select id="mat-category-id" required 
+                class="w-full bg-brand-input border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-brand-gold transition">
+                <option value="">اختر التصنيف...</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 mb-1.5">الاسم بالعربي (Name AR) *</label>
+              <input type="text" id="mat-name-ar" required placeholder="مثال: كالاكاتا جولد فاخر" 
+                class="w-full bg-brand-input border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-brand-gold transition">
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 mb-1.5">الاسم بالإنجليزي (Name EN) *</label>
+              <input type="text" id="mat-name-en" required placeholder="مثال: Calacatta Gold Extra" 
+                class="w-full bg-brand-input border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-brand-gold transition">
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 2: Origin & Stone Type -->
+        <div class="space-y-4 pt-4 border-t border-brand-border">
+          <div class="flex items-center gap-2 text-xs font-bold text-brand-gold uppercase tracking-wider">
+            <i class="fa-solid fa-earth-americas"></i>
+            <span>2. المنشأ ونوع الحجر</span>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 mb-1.5">بلد المنشأ (Origin) *</label>
+              <input type="text" id="mat-origin" list="origins-datalist" required placeholder="إيطاليا / Italy" 
+                class="w-full bg-brand-input border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-brand-gold transition">
+              <datalist id="origins-datalist"></datalist>
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 mb-1.5">نوع الحجر (Stone Type) *</label>
+              <select id="mat-stone-type" required 
+                class="w-full bg-brand-input border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-brand-gold transition">
+                <option value="marble">رخام (Marble)</option>
+                <option value="granite">جرانيت (Granite)</option>
+                <option value="travertine">ترافرتين (Travertine)</option>
+                <option value="stone">حجر طبيعي (Natural Stone)</option>
+                <option value="limestone">حجر جيري (Limestone)</option>
+                <option value="onyx">أونيكس (Onyx)</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 mb-1.5">النوع بالعربي (Type AR)</label>
+              <input type="text" id="mat-type-ar" placeholder="مثال: رخام إيطالي نخب أول" 
+                class="w-full bg-brand-input border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-brand-gold transition">
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 mb-1.5">النوع بالإنجليزي (Type EN)</label>
+              <input type="text" id="mat-type-en" placeholder="مثال: Premium Italian Marble" 
+                class="w-full bg-brand-input border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-brand-gold transition">
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 3: Color & Appearance -->
+        <div class="space-y-4 pt-4 border-t border-brand-border">
+          <div class="flex items-center gap-2 text-xs font-bold text-brand-gold uppercase tracking-wider">
+            <i class="fa-solid fa-palette"></i>
+            <span>3. اللون والمظهر</span>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div class="sm:col-span-1">
+              <label class="block text-xs font-semibold text-slate-300 mb-1.5">مجموعة اللون (Color Group) *</label>
+              <select id="mat-color-group" required 
+                class="w-full bg-brand-input border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-brand-gold transition">
+                <option value="white">أبيض (White)</option>
+                <option value="beige">بيج / كريمي (Beige)</option>
+                <option value="black">أسود (Black)</option>
+                <option value="grey">رمادي (Grey)</option>
+                <option value="gold">ذهبي / أصفر (Gold)</option>
+                <option value="pink">وردي / أحمر (Pink/Red)</option>
+                <option value="green">أخضر (Green)</option>
+                <option value="blue">أزرق (Blue)</option>
+                <option value="brown">بني (Brown)</option>
+              </select>
+            </div>
+            <div class="sm:col-span-1">
+              <label class="block text-xs font-semibold text-slate-300 mb-1.5">كود اللون (Color Hex)</label>
+              <div class="flex items-center gap-2">
+                <input type="color" id="mat-color-picker" value="#ffffff" oninput="syncColorHex(this.value)" 
+                  class="w-10 h-9 p-0.5 rounded-lg bg-brand-input border border-slate-700 cursor-pointer">
+                <input type="text" id="mat-color-hex" value="#ffffff" oninput="syncColorPicker(this.value)" 
+                  class="flex-1 bg-brand-input border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-white uppercase focus:outline-none focus:border-brand-gold">
+              </div>
+            </div>
+            <div class="sm:col-span-1">
+              <label class="block text-xs font-semibold text-slate-300 mb-1.5">وصف اللون والتعريقات</label>
+              <input type="text" id="mat-color-desc" placeholder="مثال: أبيض ناصع بعروق ذهبية عريضة" 
+                class="w-full bg-brand-input border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-brand-gold transition">
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 4: Finish & Pricing -->
+        <div class="space-y-4 pt-4 border-t border-brand-border">
+          <div class="flex items-center gap-2 text-xs font-bold text-brand-gold uppercase tracking-wider">
+            <i class="fa-solid fa-tag"></i>
+            <span>4. التشطيب والسعر</span>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 mb-1.5">نوع التشطيب (Finish)</label>
+              <input type="text" id="mat-finish" placeholder="مثال: لامع (Polished) / بوكماتش / مطفي" 
+                class="w-full bg-brand-input border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-brand-gold transition">
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 mb-1.5">فئة السعر (Price Tier) *</label>
+              <select id="mat-price-tier" required 
+                class="w-full bg-brand-input border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-brand-gold transition">
+                <option value="VIP">VIP (فاخر جداً)</option>
+                <option value="Ultra VIP">Ultra VIP (نادر وفائق الفخامة)</option>
+                <option value="مميز">مميز (Premium)</option>
+                <option value="الأكثر طلباً">الأكثر طلباً (Popular)</option>
+                <option value="اقتصادي راقي">اقتصادي راقي (Economic Luxury)</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 5: Technical Specifications -->
+        <div class="space-y-4 pt-4 border-t border-brand-border">
+          <div class="flex items-center gap-2 text-xs font-bold text-brand-gold uppercase tracking-wider">
+            <i class="fa-solid fa-sliders"></i>
+            <span>5. المواصفات الفنية والهندسية</span>
+          </div>
+          <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+            <div>
+              <label class="block text-[11px] font-semibold text-slate-300 mb-1">الكثافة</label>
+              <input type="text" id="mat-density" placeholder="2720 kg/m³" 
+                class="w-full bg-brand-input border border-slate-700 rounded-xl px-3 py-2 text-xs text-white focus:border-brand-gold">
+            </div>
+            <div>
+              <label class="block text-[11px] font-semibold text-slate-300 mb-1">امتصاص الماء</label>
+              <input type="text" id="mat-water-absorption" placeholder="0.12%" 
+                class="w-full bg-brand-input border border-slate-700 rounded-xl px-3 py-2 text-xs text-white focus:border-brand-gold">
+            </div>
+            <div>
+              <label class="block text-[11px] font-semibold text-slate-300 mb-1">مقاومة الضغط</label>
+              <input type="text" id="mat-compressive-strength" placeholder="140 MPa" 
+                class="w-full bg-brand-input border border-slate-700 rounded-xl px-3 py-2 text-xs text-white focus:border-brand-gold">
+            </div>
+            <div>
+              <label class="block text-[11px] font-semibold text-slate-300 mb-1">درجة المتانة (1-5)</label>
+              <input type="number" step="0.1" min="1" max="5" id="mat-durability-score" value="4.5" 
+                class="w-full bg-brand-input border border-slate-700 rounded-xl px-3 py-2 text-xs text-white focus:border-brand-gold">
+            </div>
+            <div>
+              <label class="block text-[11px] font-semibold text-slate-300 mb-1">درجة الصيانة</label>
+              <input type="text" id="mat-maintenance-tier" placeholder="سهلة / متوسطة" 
+                class="w-full bg-brand-input border border-slate-700 rounded-xl px-3 py-2 text-xs text-white focus:border-brand-gold">
+            </div>
+            <div>
+              <label class="block text-[11px] font-semibold text-slate-300 mb-1">درجة الملمس</label>
+              <input type="text" id="mat-texture-grad" placeholder="ناعم بلوري" 
+                class="w-full bg-brand-input border border-slate-700 rounded-xl px-3 py-2 text-xs text-white focus:border-brand-gold">
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 6: Usage & Applications -->
+        <div class="space-y-4 pt-4 border-t border-brand-border">
+          <div class="flex items-center gap-2 text-xs font-bold text-brand-gold uppercase tracking-wider">
+            <i class="fa-solid fa-building"></i>
+            <span>6. الاستخدام والتطبيقات المناسبة</span>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 mb-1.5">الاستخدام بالعربي (Usage AR)</label>
+              <textarea id="mat-usage-ar" rows="2" placeholder="مثال: أرضيات الصالات الرئيسية، جدران المجالس، جزر المطابخ، المغاسل الفاخرة" 
+                class="w-full bg-brand-input border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-brand-gold transition"></textarea>
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 mb-1.5">الاستخدام بالإنجليزي (Usage EN)</label>
+              <textarea id="mat-usage-en" rows="2" placeholder="Example: Luxury living floors, accent walls, kitchen islands, master baths" 
+                class="w-full bg-brand-input border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-brand-gold transition"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 7: Visibility Options -->
+        <div class="p-4 rounded-xl bg-slate-900/80 border border-brand-border flex flex-wrap items-center justify-between gap-4">
+          <label class="flex items-center gap-3 cursor-pointer">
+            <input type="checkbox" id="mat-is-featured" class="w-4 h-4 rounded text-brand-gold focus:ring-brand-gold bg-brand-input border-slate-700">
+            <div>
+              <div class="text-xs font-bold text-white">منتج مميز (Featured Product)</div>
+              <div class="text-[11px] text-slate-400">يظهر في واجهة المتجر وقائمة الخامات المميزة</div>
+            </div>
+          </label>
+          <label class="flex items-center gap-3 cursor-pointer">
+            <input type="checkbox" id="mat-is-active" checked class="w-4 h-4 rounded text-brand-gold focus:ring-brand-gold bg-brand-input border-slate-700">
+            <div>
+              <div class="text-xs font-bold text-white">منتج نشط (Active)</div>
+              <div class="text-[11px] text-slate-400">ظاهر على الموقع وفي محرك البحث</div>
+            </div>
+          </label>
+        </div>
+
+        <!-- Section 8: Image Gallery & Supabase Storage -->
+        <div class="space-y-4 pt-4 border-t border-brand-border">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2 text-xs font-bold text-brand-gold uppercase tracking-wider">
+              <i class="fa-solid fa-images"></i>
+              <span>8. صور المنتج (Supabase Storage: materials)</span>
+            </div>
+            <span class="text-[11px] text-slate-400" id="mat-images-count-label">0 صور</span>
+          </div>
+
+          <!-- Existing Images Grid -->
+          <div id="mat-existing-images-grid" class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 gap-3">
+            <!-- Rendered by JS -->
+          </div>
+
+          <!-- Upload Dropzone -->
+          <div class="border-2 border-dashed border-slate-700 hover:border-brand-gold/60 rounded-2xl p-6 text-center bg-slate-950/40 transition">
+            <input type="file" id="mat-image-files" multiple accept="image/jpeg,image/png,image/webp,image/avif" 
+              class="hidden" onchange="handleImageSelection(event)">
+            <div class="flex flex-col items-center justify-center cursor-pointer" onclick="document.getElementById('mat-image-files').click()">
+              <div class="w-12 h-12 rounded-full bg-brand-gold/10 text-brand-gold flex items-center justify-center mb-3">
+                <i class="fa-solid fa-cloud-arrow-up text-xl"></i>
+              </div>
+              <p class="text-xs font-bold text-white">اضغط لاختيار صور من جهازك أو اسحبها هنا</p>
+              <p class="text-[11px] text-slate-400 mt-1">يدعم JPG, PNG, WEBP, AVIF (تصل إلى 10MB لكل صورة)</p>
+            </div>
+          </div>
+
+          <!-- Selected Staged Images Preview -->
+          <div id="mat-staged-images-container" class="hidden space-y-2">
+            <div class="text-xs font-semibold text-amber-400">صور جديدة بانتظار الحفظ والرفع:</div>
+            <div id="mat-staged-images-grid" class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 gap-3"></div>
+          </div>
+        </div>
+
+      </form>
+
+      <!-- Modal Footer -->
+      <div class="p-5 border-t border-brand-border bg-slate-900/95 flex items-center justify-between">
+        <button type="button" onclick="closeMaterialModal()" class="px-5 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold transition">
+          إلغاء
+        </button>
+        <button type="button" onclick="document.getElementById('material-form').requestSubmit()" id="mat-save-btn" 
+          class="px-6 py-2.5 rounded-xl gold-gradient-bg text-slate-950 text-xs font-bold flex items-center gap-2 hover:opacity-95 shadow-md transition">
+          <i class="fa-solid fa-floppy-disk"></i>
+          <span id="mat-save-btn-text">حفظ الخامة</span>
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- MODAL: ADD / EDIT CATEGORY                                                -->
+  <!-- ========================================================================= -->
+  <div id="category-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 modal-backdrop">
+    <div class="luxury-card w-full max-w-lg overflow-hidden shadow-2xl border border-brand-gold/30">
+      
+      <div class="p-5 border-b border-brand-border flex items-center justify-between bg-slate-900/90">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-brand-gold/10 text-brand-gold flex items-center justify-center text-lg">
+            <i class="fa-solid fa-layer-group"></i>
+          </div>
+          <div>
+            <h3 id="category-modal-title" class="text-base font-bold text-white">إضافة تصنيف جديد</h3>
+            <p class="text-xs text-slate-400">إدارة مجموعات ومصادر الخامات</p>
+          </div>
+        </div>
+        <button onclick="closeCategoryModal()" class="w-8 h-8 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white flex items-center justify-center transition">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <form id="category-form" onsubmit="handleSaveCategory(event)" class="p-6 space-y-4">
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 mb-1.5">معرف التصنيف (ID) *</label>
+          <input type="text" id="cat-id" required placeholder="مثال: italian أو omani" 
+            class="w-full bg-brand-input border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-brand-gold transition">
+          <span class="text-[10px] text-slate-500 mt-1 block">يُستخدم للربط الداخلي مع المنتجات (أحرف إنجليزية وأرقام)</span>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1.5">الاسم بالعربي (Name AR) *</label>
+            <input type="text" id="cat-name-ar" required placeholder="الرخام الإيطالي" 
+              class="w-full bg-brand-input border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-brand-gold transition">
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1.5">الاسم بالإنجليزي (Name EN) *</label>
+            <input type="text" id="cat-name-en" required placeholder="Italian Marble" 
+              class="w-full bg-brand-input border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-brand-gold transition">
+          </div>
+        </div>
+
+        <div class="grid grid-cols-3 gap-3">
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1.5">الأيقونة (Icon)</label>
+            <input type="text" id="cat-icon" value="💎" placeholder="🇮🇹 أو 💎" 
+              class="w-full bg-brand-input border border-slate-700 rounded-xl px-3 py-2.5 text-xs text-center text-white focus:outline-none focus:border-brand-gold">
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1.5">الشارة (Badge)</label>
+            <input type="text" id="cat-badge" placeholder="فاخر / مميز" 
+              class="w-full bg-brand-input border border-slate-700 rounded-xl px-3 py-2.5 text-xs text-white focus:outline-none focus:border-brand-gold">
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1.5">الترتيب (Order)</label>
+            <input type="number" id="cat-sort-order" value="1" 
+              class="w-full bg-brand-input border border-slate-700 rounded-xl px-3 py-2.5 text-xs text-white text-center focus:outline-none focus:border-brand-gold">
+          </div>
+        </div>
+
+        <div class="pt-2">
+          <label class="flex items-center gap-3 cursor-pointer p-3 rounded-xl bg-slate-900/60 border border-slate-800">
+            <input type="checkbox" id="cat-is-active" checked class="w-4 h-4 rounded text-brand-gold focus:ring-brand-gold bg-brand-input border-slate-700">
+            <div>
+              <div class="text-xs font-bold text-white">التصنيف ظاهر على الموقع</div>
+              <div class="text-[11px] text-slate-400">تفعيل أو تعطيل ظهور هذا القسم بالكامل في الواجهة</div>
+            </div>
+          </label>
+        </div>
+
+        <div class="pt-4 border-t border-brand-border flex items-center justify-between">
+          <button type="button" onclick="closeCategoryModal()" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold transition">
+            إلغاء
+          </button>
+          <button type="submit" id="cat-save-btn" class="px-5 py-2 rounded-xl gold-gradient-bg text-slate-950 text-xs font-bold flex items-center gap-2 hover:opacity-95 shadow transition">
+            <i class="fa-solid fa-floppy-disk"></i>
+            <span>حفظ التصنيف</span>
+          </button>
+        </div>
+      </form>
+
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- MODAL: CONFIRMATION DIALOG (Delete)                                       -->
+  <!-- ========================================================================= -->
+  <div id="confirm-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 modal-backdrop">
+    <div class="luxury-card w-full max-w-sm p-6 text-center space-y-4 shadow-2xl border border-red-500/30">
+      <div class="w-14 h-14 mx-auto rounded-full bg-red-500/10 text-red-400 flex items-center justify-center text-2xl">
+        <i class="fa-solid fa-triangle-exclamation"></i>
+      </div>
+      <div>
+        <h3 id="confirm-modal-title" class="text-base font-bold text-white">تأكيد الحذف</h3>
+        <p id="confirm-modal-desc" class="text-xs text-slate-400 mt-1">هل أنت متأكد من حذف هذا العنصر؟ لا يمكن التراجع عن هذه الخطوة.</p>
+      </div>
+      <div class="flex items-center justify-center gap-3 pt-2">
+        <button id="confirm-cancel-btn" class="flex-1 py-2.5 px-4 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold transition">
+          إلغاء
+        </button>
+        <button id="confirm-action-btn" class="flex-1 py-2.5 px-4 rounded-xl bg-red-600 hover:bg-red-500 text-white text-xs font-bold transition shadow-lg shadow-red-600/20">
+          حذف نهائي
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- SCRIPTS & LOGIC                                                           -->
+  <!-- ========================================================================= -->
+  <!-- 1. Supabase CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  
+  <!-- 2. Local App Config & Supabase Client -->
+  <script src="config.js"></script>
+  <script src="supabaseClient.js"></script>
+
+  <!-- 3. Admin Application Controller -->
+  <script>
+    // ==========================================================================
+    // State Management
+    // ==========================================================================
+    const State = {
+      supabase: null,
+      currentUser: null,
+      currentProfile: null,
+      currentTab: 'dashboard',
+      categories: [],
+      materials: [],
+      filteredMaterials: [],
+      rfqs: [],
+      editingMaterialId: null,
+      editingCategoryId: null,
+      materialImages: [],       // Array of current existing image URLs
+      stagedImageFiles: []      // Array of File objects to upload upon saving
     };
 
+    // ==========================================================================
+    // Toast Notification System
+    // ==========================================================================
+    function showToast(message, type = 'success', duration = 3500) {
+      const container = document.getElementById('toast-container');
+      const toast = document.createElement('div');
+      
+      const icons = {
+        success: 'fa-circle-check text-emerald-400',
+        error: 'fa-circle-exclamation text-red-400',
+        warning: 'fa-triangle-exclamation text-amber-400',
+        info: 'fa-circle-info text-blue-400'
+      };
 
-    if (!data.id) {
+      const borderColors = {
+        success: 'border-emerald-500/40 bg-emerald-950/80',
+        error: 'border-red-500/40 bg-red-950/80',
+        warning: 'border-amber-500/40 bg-amber-950/80',
+        info: 'border-blue-500/40 bg-blue-950/80'
+      };
 
-      throw new Error(
-        "ID المنتج مطلوب."
-      );
+      toast.className = `toast-item p-4 rounded-xl border ${borderColors[type] || borderColors.info} shadow-xl backdrop-blur-md flex items-center justify-between gap-3 text-xs text-white`;
+      toast.innerHTML = `
+        <div class="flex items-center gap-3">
+          <i class="fa-solid ${icons[type] || icons.info} text-base"></i>
+          <span class="font-medium">${escapeHtml(message)}</span>
+        </div>
+        <button onclick="this.parentElement.remove()" class="text-slate-400 hover:text-white p-1">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      `;
+
+      container.appendChild(toast);
+
+      setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateX(-30px)';
+        toast.style.transition = 'all 0.3s ease';
+        setTimeout(() => toast.remove(), 300);
+      }, duration);
     }
 
-
-    if (!data.name_ar) {
-
-      throw new Error(
-        "اسم المنتج بالعربي مطلوب."
-      );
-    }
-
-
-    if (!data.name_en) {
-
-      throw new Error(
-        "اسم المنتج بالإنجليزي مطلوب."
-      );
-    }
-
-
-    if (editingMaterialId) {
-
-      const {
-        error
-      } =
-        await supabaseClient
-          .from("materials")
-          .update(data)
-          .eq(
-            "id",
-            editingMaterialId
-          );
-
-
-      if (error) {
-        throw error;
+    // ==========================================================================
+    // Initialization & Auth Guard
+    // ==========================================================================
+    async function init() {
+      // 1. Resolve Supabase Client instance
+      if (window.PrimeSupabase && typeof window.PrimeSupabase.getClient === 'function') {
+        State.supabase = window.PrimeSupabase.getClient();
       }
 
-
-      showMessage(
-        "تم تعديل المنتج بنجاح.",
-        "success"
-      );
-
-    } else {
-
-      const {
-        error
-      } =
-        await supabaseClient
-          .from("materials")
-          .insert(data);
-
-
-      if (error) {
-        throw error;
+      if (!State.supabase && window.PRIME_CONFIG) {
+        const url = window.PRIME_CONFIG.SUPABASE_URL;
+        const key = window.PRIME_CONFIG.SUPABASE_ANON_KEY;
+        if (url && key && typeof window.supabase !== 'undefined' && !url.includes("your-project-ref")) {
+          try {
+            State.supabase = window.supabase.createClient(url, key);
+          } catch (e) {
+            console.error("Supabase createClient error:", e);
+          }
+        }
       }
 
+      if (!State.supabase) {
+        console.warn("⚠️ Supabase Client is not initialized. Please verify config.js credentials.");
+      }
 
-      showMessage(
-        "تم إضافة المنتج بنجاح.",
-        "success"
-      );
+      // 2. Check active session
+      await checkSession();
     }
 
+    async function checkSession() {
+      if (!State.supabase) {
+        showLoginView();
+        return;
+      }
 
-    closeModal();
+      try {
+        const { data: { session }, error } = await State.supabase.auth.getSession();
+        if (error || !session) {
+          showLoginView();
+          return;
+        }
 
-    editingMaterialId = null;
-
-    materialImages = [];
-
-    await loadData();
-
-
-  } catch (error) {
-
-    console.error(
-      "MATERIAL SAVE ERROR:",
-      error
-    );
-
-
-    showMessage(
-      "فشل حفظ المنتج: " +
-      error.message,
-      "error"
-    );
-
-
-    button.disabled = false;
-
-    button.textContent =
-      editingMaterialId
-        ? "حفظ تعديلات المنتج"
-        : "إضافة المنتج";
-  }
-}
-
-
-/* =========================================================
-   NUMBER HELPER
-========================================================= */
-
-function numberOrNull(value) {
-
-  if (
-    value ===
-    null ||
-    value ===
-    undefined ||
-    String(value).trim() === ""
-  ) {
-    return null;
-  }
-
-
-  const number =
-    Number(value);
-
-
-  return Number.isFinite(number)
-    ? number
-    : null;
-}
-
-
-/* =========================================================
-   DELETE MATERIAL
-========================================================= */
-
-async function deleteMaterial(id) {
-
-  const material =
-    materials.find(
-      item =>
-        String(item.id) ===
-        String(id)
-    );
-
-
-  if (!material) {
-    return;
-  }
-
-
-  const name =
-    material.name_en ||
-    material.name_ar ||
-    id;
-
-
-  const confirmed =
-    confirm(
-      هل أنت متأكد من حذف المنتج:
-
-${name}
-
-سيتم حذف سجل المنتج من قاعدة البيانات.
-    );
-
-
-  if (!confirmed) {
-    return;
-  }
-
-
-  try {
-
-    const {
-      error
-    } =
-      await supabaseClient
-        .from("materials")
-        .delete()
-        .eq(
-          "id",
-          id
-        );
-
-
-    if (error) {
-      throw error;
+        // Verify admin role in profiles table
+        const isAdmin = await verifyAdminRole(session.user.id);
+        if (isAdmin) {
+          State.currentUser = session.user;
+          showAppView();
+          await loadAllData();
+        } else {
+          await State.supabase.auth.signOut();
+          showLoginView("هذا الحساب لا يمتلك صلاحية الدخول إلى لوحة الإدارة (يتطلب صلاحية Admin).");
+        }
+      } catch (err) {
+        console.error("Session check error:", err);
+        showLoginView();
+      }
     }
 
+    async function verifyAdminRole(userId) {
+      try {
+        const { data, error } = await State.supabase
+          .from('profiles')
+          .select('id, full_name, role')
+          .eq('id', userId)
+          .single();
 
-    showMessage(
-      "تم حذف المنتج بنجاح.",
-      "success"
-    );
+        if (error || !data) {
+          console.warn("Could not find profile for user:", userId, error);
+          return false;
+        }
 
+        State.currentProfile = data;
+        return data.role === 'admin';
+      } catch (err) {
+        console.error("Error verifying admin role:", err);
+        return false;
+      }
+    }
 
-    await loadData();
+    // ==========================================================================
+    // Auth Handlers (Login / Logout)
+    // ==========================================================================
+    async function handleLogin(event) {
+      event.preventDefault();
+      const email = document.getElementById('login-email').value.trim();
+      const password = document.getElementById('login-password').value;
+      const submitBtn = document.getElementById('login-submit-btn');
+      const errorBox = document.getElementById('login-error-box');
+      const errorMsg = document.getElementById('login-error-msg');
 
+      if (!email || !password) {
+        errorBox.classList.remove('hidden');
+        errorMsg.textContent = "يرجى كتابة البريد الإلكتروني وكلمة المرور.";
+        return;
+      }
 
-  } catch (error) {
+      if (!State.supabase) {
+        errorBox.classList.remove('hidden');
+        errorMsg.textContent = "لم يتم تهيئة الاتصال بـ Supabase. يرجى مراجعة ملف config.js.";
+        return;
+      }
 
-    console.error(
-      "MATERIAL DELETE ERROR:",
-      error
-    );
+      try {
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = `<i class="fa-solid fa-circle-notch fa-spin"></i> <span>جاري التحقق...</span>`;
+        errorBox.classList.add('hidden');
 
+        const { data, error } = await State.supabase.auth.signInWithPassword({
+          email: email,
+          password: password
+        });
 
-    showMessage(
-      "فشل حذف المنتج: " +
-      error.message,
-      "error"
-    );
-  }
-}
+        if (error || !data?.user) {
+          throw new Error(error?.message || "بيانات الدخول غير صحيحة.");
+        }
+
+        // Verify Admin Role in profiles
+        const isAdmin = await verifyAdminRole(data.user.id);
+        if (!isAdmin) {
+          await State.supabase.auth.signOut();
+          throw new Error("هذا الحساب لا يمتلك صلاحية الدخول إلى لوحة الإدارة.");
+        }
+
+        State.currentUser = data.user;
+        showToast("تم تسجيل الدخول بنجاح. مرحباً بك في لوحة الإدارة.", "success");
+        showAppView();
+        await loadAllData();
+
+      } catch (err) {
+        console.error("Login failed:", err);
+        errorBox.classList.remove('hidden');
+        errorMsg.textContent = err.message || "فشل تسجيل الدخول. تأكد من صحة البيانات.";
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = `<span>تسجيل الدخول</span> <i class="fa-solid fa-arrow-left"></i>`;
+      }
+    }
+
+    async function handleLogout() {
+      if (State.supabase) {
+        await State.supabase.auth.signOut();
+      }
+      State.currentUser = null;
+      State.currentProfile = null;
+      showLoginView();
+      showToast("تم تسجيل الخروج بنجاح.", "info");
+    }
+
+    function showLoginView(customError = null) {
+      document.getElementById('login-view').classList.remove('hidden');
+      document.getElementById('app-view').classList.add('hidden');
+      if (customError) {
+        const errorBox = document.getElementById('login-error-box');
+        const errorMsg = document.getElementById('login-error-msg');
+        errorBox.classList.remove('hidden');
+        errorMsg.textContent = customError;
+      }
+    }
+
+    function showAppView() {
+      document.getElementById('login-view').classList.add('hidden');
+      document.getElementById('app-view').classList.remove('hidden');
+      
+      // Update header profile info
+      const nameEl = document.getElementById('admin-user-name');
+      const emailEl = document.getElementById('admin-user-email');
+      if (nameEl && State.currentProfile?.full_name) {
+        nameEl.textContent = State.currentProfile.full_name;
+      }
+      if (emailEl && State.currentUser?.email) {
+        emailEl.textContent = State.currentUser.email;
+      }
+    }
+
+    // ==========================================================================
+    // Navigation & Tabs
+    // ==========================================================================
+    function switchTab(tabId) {
+      State.currentTab = tabId;
+
+      // Update Nav Buttons
+      ['dashboard', 'materials', 'categories', 'rfqs'].forEach(id => {
+        const navBtn = document.getElementById(`nav-${id}`);
+        const contentSec = document.getElementById(`tab-${id}`);
+        if (navBtn) {
+          if (id === tabId) {
+            navBtn.className = "w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-bold bg-brand-gold/10 text-brand-gold border border-brand-gold/30 shadow-sm transition";
+          } else {
+            navBtn.className = "w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-brand-gold transition duration-200";
+          }
+        }
+        if (contentSec) {
+          if (id === tabId) {
+            contentSec.classList.remove('hidden');
+          } else {
+            contentSec.classList.add('hidden');
+          }
+        }
+      });
+
+      // Update Header Title
+      const titles = {
+        dashboard: "لوحة الإحصائيات الشاملة",
+        materials: "إدارة المنتجات والخامات الحجرية",
+        categories: "إدارة التصنيفات الإقليمية",
+        rfqs: "طلبات عروض الأسعار (RFQ)"
+      };
+      document.getElementById('page-title').textContent = titles[tabId] || "لوحة الإدارة";
+
+      // Mobile close sidebar
+      toggleSidebar(false);
+
+      // Lazy load tab specific data if empty
+      if (tabId === 'rfqs' && State.rfqs.length === 0) {
+        loadRfqs();
+      }
+    }
+
+    function toggleSidebar(open) {
+      const sidebar = document.getElementById('main-sidebar');
+      const overlay = document.getElementById('sidebar-overlay');
+      if (open) {
+        sidebar.classList.remove('translate-x-full');
+        overlay.classList.remove('hidden');
+      } else {
+        sidebar.classList.add('translate-x-full');
+        overlay.classList.add('hidden');
+      }
+    }
+
+    function refreshCurrentTab() {
+      loadAllData();
+      showToast("تم تحديث البيانات من السيرفر.", "info");
+    }
+
+    // ==========================================================================
+    // Data Loading Orchestrator
+    // ==========================================================================
+    async function loadAllData() {
+      await Promise.all([
+        loadCategories(),
+        loadMaterials(),
+        loadDashboardStats()
+      ]);
+    }
+
+    async function loadDashboardStats() {
+      if (!State.supabase) return;
+
+      try {
+        const [matRes, catRes, rfqRes] = await Promise.all([
+          State.supabase.from('materials').select('id, is_active, is_featured'),
+          State.supabase.from('categories').select('id', { count: 'exact', head: true }),
+          State.supabase.from('rfqs').select('id', { count: 'exact', head: true })
+        ]);
+
+        const materialsList = matRes.data || [];
+        const totalMaterials = materialsList.length;
+        const activeMaterials = materialsList.filter(m => m.is_active).length;
+        const featuredMaterials = materialsList.filter(m => m.is_featured).length;
+        const totalCategories = catRes.count || State.categories.length;
+
+        document.getElementById('stat-total-materials').textContent = totalMaterials;
+        document.getElementById('stat-active-materials').textContent = activeMaterials;
+        document.getElementById('stat-featured-materials').textContent = featuredMaterials;
+        document.getElementById('stat-total-categories').textContent = totalCategories;
+
+        renderDashboardOverviews();
+      } catch (err) {
+        console.error("Error loading dashboard stats:", err);
+      }
+    }
+
+    function renderDashboardOverviews() {
+      // 1. Recent Materials
+      const recentContainer = document.getElementById('dashboard-recent-materials');
+      if (recentContainer) {
+        const recent = State.materials.slice(0, 5);
+        if (recent.length === 0) {
+          recentContainer.innerHTML = `<div class="text-center py-6 text-slate-500 text-xs">لا توجد خامات مضافة حالياً.</div>`;
+        } else {
+          recentContainer.innerHTML = recent.map(m => `
+            <div class="flex items-center justify-between p-3 rounded-xl bg-slate-900/60 border border-slate-800/80 hover:border-brand-gold/30 transition">
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-lg bg-slate-800 flex items-center justify-center overflow-hidden border border-slate-700">
+                  ${m.images && m.images.length > 0 
+                    ? `<img src="${m.images[0]}" alt="${escapeHtml(m.name_ar)}" class="w-full h-full object-cover">`
+                    : `<span class="text-xs font-bold" style="color: ${m.color_hex || '#fff'}"><i class="fa-solid fa-gem"></i></span>`
+                  }
+                </div>
+                <div>
+                  <div class="font-bold text-xs text-white">${escapeHtml(m.name_ar)}</div>
+                  <div class="text-[10px] text-slate-400">${escapeHtml(m.name_en)} &bull; ${escapeHtml(m.origin || '')}</div>
+                </div>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="text-[10px] px-2 py-0.5 rounded ${m.is_active ? 'bg-emerald-500/10 text-emerald-400' : 'bg-slate-700 text-slate-400'}">
+                  ${m.is_active ? 'نشط' : 'مخفي'}
+                </span>
+                <button onclick="editMaterial('${m.id}')" class="p-1.5 text-slate-400 hover:text-brand-gold transition">
+                  <i class="fa-regular fa-pen-to-square"></i>
+                </button>
+              </div>
+            </div>
+          `).join('');
+        }
+      }
+
+      // 2. Categories Grid
+      const catContainer = document.getElementById('dashboard-categories-list');
+      if (catContainer) {
+        if (State.categories.length === 0) {
+          catContainer.innerHTML = `<div class="col-span-2 text-center py-6 text-slate-500 text-xs">لا توجد تصنيفات.</div>`;
+        } else {
+          catContainer.innerHTML = State.categories.map(c => {
+            const matCount = State.materials.filter(m => m.category_id === c.id).length;
+            return `
+              <div class="p-3 rounded-xl bg-slate-900/60 border border-slate-800/80 hover:border-brand-gold/30 transition flex items-center justify-between">
+                <div class="flex items-center gap-2.5">
+                  <span class="text-lg">${c.icon || '💎'}</span>
+                  <div>
+                    <div class="font-bold text-xs text-white">${escapeHtml(c.name_ar)}</div>
+                    <div class="text-[10px] text-slate-400">${escapeHtml(c.name_en)}</div>
+                  </div>
+                </div>
+                <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-slate-800 text-brand-gold">${matCount}</span>
+              </div>
+            `;
+          }).join('');
+        }
+      }
+    }
+
+    // ==========================================================================
+    // Categories Module
+    // ==========================================================================
+    async function loadCategories() {
+      if (!State.supabase) return;
+
+      try {
+        const { data, error } = await State.supabase
+          .from('categories')
+          .select('*')
+          .order('sort_order', { ascending: true });
+
+        if (error) throw error;
+        State.categories = data || [];
+        renderCategories();
+        populateCategoryDropdowns();
+      } catch (err) {
+        console.error("Error loading categories:", err);
+        showToast("فشل تحميل التصنيفات من السيرفر.", "error");
+      }
+    }
+
+    function renderCategories() {
+      const tbody = document.getElementById('categories-table-body');
+      const badge = document.getElementById('categories-count-badge');
+      if (badge) badge.textContent = State.categories.length;
+
+      if (!tbody) return;
+
+      if (State.categories.length === 0) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="7" class="py-12 text-center text-slate-500">
+              <i class="fa-solid fa-folder-open text-3xl mb-2"></i>
+              <p>لا توجد أي تصنيفات مضافة حتى الآن.</p>
+            </td>
+          </tr>
+        `;
+        return;
+      }
+
+      tbody.innerHTML = State.categories.map(cat => `
+        <tr class="hover:bg-slate-800/40 transition">
+          <td class="py-3 px-4 font-mono font-bold text-brand-gold text-[11px]">${escapeHtml(cat.id)}</td>
+          <td class="py-3 px-4">
+            <div class="flex items-center gap-2">
+              <span class="text-base">${cat.icon || '💎'}</span>
+              <span class="font-bold text-white">${escapeHtml(cat.name_ar)}</span>
+            </div>
+          </td>
+          <td class="py-3 px-4 text-slate-400">${escapeHtml(cat.name_en)}</td>
+          <td class="py-3 px-4 text-center">
+            ${cat.badge ? `<span class="px-2 py-0.5 rounded-full bg-brand-gold/10 text-brand-gold border border-brand-gold/20 text-[10px] font-bold">${escapeHtml(cat.badge)}</span>` : '<span class="text-slate-600">-</span>'}
+          </td>
+          <td class="py-3 px-4 text-center font-bold text-slate-300">${cat.sort_order || 0}</td>
+          <td class="py-3 px-4 text-center">
+            <label class="custom-switch inline-block">
+              <input type="checkbox" ${cat.is_active ? 'checked' : ''} onchange="toggleCategoryStatus('${cat.id}', this.checked)">
+              <span class="slider"></span>
+            </label>
+          </td>
+          <td class="py-3 px-4 text-center">
+            <div class="flex items-center justify-center gap-2">
+              <button onclick="editCategory('${cat.id}')" title="تعديل التصنيف" class="p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-brand-gold transition">
+                <i class="fa-solid fa-pen-to-square"></i>
+              </button>
+              <button onclick="confirmDeleteCategory('${cat.id}')" title="حذف التصنيف" class="p-1.5 rounded-lg bg-slate-800 hover:bg-red-950/60 text-slate-300 hover:text-red-400 transition">
+                <i class="fa-solid fa-trash"></i>
+              </button>
+            </div>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    function populateCategoryDropdowns() {
+      // 1. Material Filter dropdown
+      const filterSelect = document.getElementById('mat-filter-category');
+      if (filterSelect) {
+        const currentVal = filterSelect.value;
+        filterSelect.innerHTML = `<option value="all">كل التصنيفات</option>` + 
+          State.categories.map(c => `<option value="${c.id}">${c.icon || ''} ${escapeHtml(c.name_ar)}</option>`).join('');
+        filterSelect.value = currentVal;
+      }
+
+      // 2. Material Modal category dropdown
+      const modalSelect = document.getElementById('mat-category-id');
+      if (modalSelect) {
+        modalSelect.innerHTML = `<option value="">اختر التصنيف...</option>` + 
+          State.categories.map(c => `<option value="${c.id}">${c.icon || ''} ${escapeHtml(c.name_ar)} (${escapeHtml(c.name_en)})</option>`).join('');
+      }
+    }
+
+    function openCategoryModal(cat = null) {
+      const modal = document.getElementById('category-modal');
+      const title = document.getElementById('category-modal-title');
+      const idInput = document.getElementById('cat-id');
+
+      if (cat) {
+        State.editingCategoryId = cat.id;
+        title.textContent = "تعديل التصنيف";
+        idInput.value = cat.id;
+        idInput.disabled = true; // Primary key should not change on edit
+        document.getElementById('cat-name-ar').value = cat.name_ar || '';
+        document.getElementById('cat-name-en').value = cat.name_en || '';
+        document.getElementById('cat-icon').value = cat.icon || '💎';
+        document.getElementById('cat-badge').value = cat.badge || '';
+        document.getElementById('cat-sort-order').value = cat.sort_order || 0;
+        document.getElementById('cat-is-active').checked = cat.is_active !== false;
+      } else {
+        State.editingCategoryId = null;
+        title.textContent = "إضافة تصنيف جديد";
+        document.getElementById('category-form').reset();
+        idInput.disabled = false;
+        document.getElementById('cat-icon').value = '💎';
+        document.getElementById('cat-sort-order').value = (State.categories.length + 1);
+        document.getElementById('cat-is-active').checked = true;
+      }
+
+      modal.classList.remove('hidden');
+    }
+
+    function closeCategoryModal() {
+      document.getElementById('category-modal').classList.add('hidden');
+      State.editingCategoryId = null;
+    }
+
+    function editCategory(id) {
+      const cat = State.categories.find(c => c.id === id);
+      if (cat) openCategoryModal(cat);
+    }
+
+    async function handleSaveCategory(event) {
+      event.preventDefault();
+      if (!State.supabase) return;
+
+      const saveBtn = document.getElementById('cat-save-btn');
+      const id = document.getElementById('cat-id').value.trim().toLowerCase();
+      const name_ar = document.getElementById('cat-name-ar').value.trim();
+      const name_en = document.getElementById('cat-name-en').value.trim();
+      const icon = document.getElementById('cat-icon').value.trim() || '💎';
+      const badge = document.getElementById('cat-badge').value.trim();
+      const sort_order = parseInt(document.getElementById('cat-sort-order').value, 10) || 0;
+      const is_active = document.getElementById('cat-is-active').checked;
+
+      if (!id || !name_ar || !name_en) {
+        showToast("يرجى ملء الحقول الإلزامية المطلوبة.", "warning");
+        return;
+      }
+
+      try {
+        saveBtn.disabled = true;
+        saveBtn.innerHTML = `<i class="fa-solid fa-circle-notch fa-spin"></i> <span>جاري الحفظ...</span>`;
+
+        const payload = {
+          id,
+          name_ar,
+          name_en,
+          icon,
+          badge,
+          sort_order,
+          is_active
+        };
+
+        const { error } = await State.supabase
+          .from('categories')
+          .upsert(payload, { onConflict: 'id' });
+
+        if (error) throw error;
+
+        showToast(State.editingCategoryId ? "تم تعديل التصنيف بنجاح." : "تم إضافة التصنيف بنجاح.", "success");
+        closeCategoryModal();
+        await loadCategories();
+        await loadDashboardStats();
+      } catch (err) {
+        console.error("Error saving category:", err);
+        showToast("فشل حفظ التصنيف: " + (err.message || "حدث خطأ"), "error");
+      } finally {
+        saveBtn.disabled = false;
+        saveBtn.innerHTML = `<i class="fa-solid fa-floppy-disk"></i> <span>حفظ التصنيف</span>`;
+      }
+    }
+
+    async function toggleCategoryStatus(id, newStatus) {
+      if (!State.supabase) return;
+
+      try {
+        const { error } = await State.supabase
+          .from('categories')
+          .update({ is_active: newStatus })
+          .eq('id', id);
+
+        if (error) throw error;
+        showToast(`تم ${newStatus ? 'تفعيل' : 'تعطيل'} التصنيف بنجاح.`, "info");
+        const target = State.categories.find(c => c.id === id);
+        if (target) target.is_active = newStatus;
+      } catch (err) {
+        console.error("Error toggling category status:", err);
+        showToast("فشل تحديث حالة التصنيف.", "error");
+        await loadCategories();
+      }
+    }
+
+    function confirmDeleteCategory(id) {
+      const cat = State.categories.find(c => c.id === id);
+      const name = cat ? cat.name_ar : id;
+      
+      openConfirmModal({
+        title: "حذف التصنيف",
+        desc: `هل أنت متأكد من حذف تصنيف "${name}"؟ إذا كان هناك منتجات مرتبطة بهذا التصنيف، قد يؤثر ذلك على عرضها.`,
+        actionText: "نعم، حذف التصنيف",
+        onConfirm: async () => {
+          try {
+            const { error } = await State.supabase
+              .from('categories')
+              .delete()
+              .eq('id', id);
+
+            if (error) throw error;
+            showToast("تم حذف التصنيف بنجاح.", "success");
+            await loadCategories();
+            await loadDashboardStats();
+          } catch (err) {
+            console.error("Error deleting category:", err);
+            showToast("فشل حذف التصنيف: " + (err.message || "مرتبط ببيانات أخرى"), "error");
+          }
+        }
+      });
+    }
+
+    // ==========================================================================
+    // Materials (Products) Module
+    // ==========================================================================
+    async function loadMaterials() {
+      if (!State.supabase) return;
+
+      const tbody = document.getElementById('materials-table-body');
+      try {
+        const { data, error } = await State.supabase
+          .from('materials')
+          .select('*')
+          .order('created_at', { ascending: false });
+
+        if (error) throw error;
+        State.materials = data || [];
+        populateDynamicFilters();
+        filterMaterials();
+      } catch (err) {
+        console.error("Error loading materials:", err);
+        if (tbody) {
+          tbody.innerHTML = `
+            <tr>
+              <td colspan="7" class="py-12 text-center text-red-400">
+                <i class="fa-solid fa-triangle-exclamation text-2xl mb-2"></i>
+                <p>فشل تحميل المنتجات من قاعدة البيانات: ${escapeHtml(err.message || '')}</p>
+              </td>
+            </tr>
+          `;
+        }
+        showToast("فشل تحميل المنتجات من السيرفر.", "error");
+      }
+    }
+
+    // Dynamic Filter Extraction: Origin and Stone Types
+    function populateDynamicFilters() {
+      // 1. Dynamic Country / Origin Filter
+      const originSelect = document.getElementById('mat-filter-origin');
+      const originDatalist = document.getElementById('origins-datalist');
+      
+      if (originSelect) {
+        const currentOrigin = originSelect.value;
+        const uniqueOrigins = [...new Set(State.materials.map(m => m.origin).filter(Boolean))].sort();
+        
+        originSelect.innerHTML = `<option value="all">كل البلاد (المنشأ)</option>` + 
+          uniqueOrigins.map(o => `<option value="${escapeHtml(o)}">${escapeHtml(o)}</option>`).join('');
+        originSelect.value = currentOrigin;
+
+        // Datalist for modal auto-suggest
+        if (originDatalist) {
+          originDatalist.innerHTML = uniqueOrigins.map(o => `<option value="${escapeHtml(o)}">`).join('');
+        }
+      }
+
+      // 2. Dynamic Stone Type Filter
+      const stoneSelect = document.getElementById('mat-filter-stone-type');
+      if (stoneSelect) {
+        const currentStone = stoneSelect.value;
+        const uniqueStones = [...new Set(State.materials.map(m => m.stone_type).filter(Boolean))].sort();
+        
+        const stoneLabels = {
+          marble: 'رخام (Marble)',
+          granite: 'جرانيت (Granite)',
+          travertine: 'ترافرتين (Travertine)',
+          stone: 'حجر طبيعي (Stone)',
+          limestone: 'حجر جيري (Limestone)',
+          onyx: 'أونيكس (Onyx)'
+        };
+
+        stoneSelect.innerHTML = `<option value="all">نوع الحجر (الكل)</option>` + 
+          uniqueStones.map(s => `<option value="${s}">${stoneLabels[s] || s}</option>`).join('');
+        stoneSelect.value = currentStone;
+      }
+    }
+
+    let filterDebounceTimer = null;
+    function debounceFilterMaterials() {
+      clearTimeout(filterDebounceTimer);
+      filterDebounceTimer = setTimeout(filterMaterials, 200);
+    }
+
+    function filterMaterials() {
+      const search = (document.getElementById('mat-filter-search')?.value || '').trim().toLowerCase();
+      const origin = document.getElementById('mat-filter-origin')?.value || 'all';
+      const category = document.getElementById('mat-filter-category')?.value || 'all';
+      const stoneType = document.getElementById('mat-filter-stone-type')?.value || 'all';
+      const status = document.getElementById('mat-filter-status')?.value || 'all';
+
+      State.filteredMaterials = State.materials.filter(m => {
+        // Search term
+        if (search) {
+          const matchNameAr = (m.name_ar || '').toLowerCase().includes(search);
+          const matchNameEn = (m.name_en || '').toLowerCase().includes(search);
+          const matchOrigin = (m.origin || '').toLowerCase().includes(search);
+          const matchTypeAr = (m.type_ar || '').toLowerCase().includes(search);
+          const matchTypeEn = (m.type_en || '').toLowerCase().includes(search);
+          const matchStone = (m.stone_type || '').toLowerCase().includes(search);
+          const matchId = (m.id || '').toLowerCase().includes(search);
+          if (!matchNameAr && !matchNameEn && !matchOrigin && !matchTypeAr && !matchTypeEn && !matchStone && !matchId) {
+            return false;
+          }
+        }
+
+        // Origin Filter
+        if (origin !== 'all' && m.origin !== origin) return false;
+
+        // Category Filter
+        if (category !== 'all' && m.category_id !== category) return false;
+
+        // Stone Type Filter
+        if (stoneType !== 'all' && m.stone_type !== stoneType) return false;
+
+        // Status Filter
+        if (status === 'active' && !m.is_active) return false;
+        if (status === 'inactive' && m.is_active) return false;
+
+        return true;
+      });
+
+      renderMaterials();
+    }
+
+    function resetMaterialFilters() {
+      if (document.getElementById('mat-filter-search')) document.getElementById('mat-filter-search').value = '';
+      if (document.getElementById('mat-filter-origin')) document.getElementById('mat-filter-origin').value = 'all';
+      if (document.getElementById('mat-filter-category')) document.getElementById('mat-filter-category').value = 'all';
+      if (document.getElementById('mat-filter-stone-type')) document.getElementById('mat-filter-stone-type').value = 'all';
+      if (document.getElementById('mat-filter-status')) document.getElementById('mat-filter-status').value = 'all';
+      filterMaterials();
+    }
+
+    function renderMaterials() {
+      const tbody = document.getElementById('materials-table-body');
+      const badge = document.getElementById('materials-count-badge');
+      const showingText = document.getElementById('materials-showing-text');
+
+      if (badge) badge.textContent = State.materials.length;
+      if (showingText) showingText.textContent = `عرض ${State.filteredMaterials.length} من إجمالي ${State.materials.length} خامة`;
+
+      if (!tbody) return;
+
+      if (State.filteredMaterials.length === 0) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="7" class="py-12 text-center text-slate-500">
+              <i class="fa-solid fa-filter-circle-xmark text-3xl mb-2"></i>
+              <p>لا توجد نتائج تطابق خيارات البحث والفلترة المحددة.</p>
+            </td>
+          </tr>
+        `;
+        return;
+      }
+
+      const stoneTypeMap = {
+        marble: 'رخام',
+        granite: 'جرانيت',
+        travertine: 'ترافرتين',
+        stone: 'حجر طبيعي',
+        limestone: 'حجر جيري',
+        onyx: 'أونيكس'
+      };
+
+      tbody.innerHTML = State.filteredMaterials.map(m => {
+        const cat = State.categories.find(c => c.id === m.category_id);
+        const hasImages = Array.isArray(m.images) && m.images.length > 0;
+        const mainImage = hasImages ? m.images[0] : null;
+
+        return `
+          <tr class="hover:bg-slate-800/40 transition">
+            
+            <!-- 1. Thumbnail & Name -->
+            <td class="py-3 px-4">
+              <div class="flex items-center gap-3">
+                <div class="w-12 h-12 rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center overflow-hidden flex-shrink-0 relative group">
+                  ${mainImage 
+                    ? `<img src="${mainImage}" alt="${escapeHtml(m.name_ar)}" class="w-full h-full object-cover">` 
+                    : `<div class="w-full h-full flex items-center justify-center text-sm font-bold" style="background-color: ${m.color_hex || '#334155'}; color: #fff"><i class="fa-solid fa-gem"></i></div>`
+                  }
+                  ${hasImages && m.images.length > 1 ? `<span class="absolute bottom-1 right-1 bg-black/80 text-white text-[9px] font-bold px-1 rounded">${m.images.length}</span>` : ''}
+                </div>
+                <div>
+                  <div class="font-bold text-white text-xs">${escapeHtml(m.name_ar)}</div>
+                  <div class="text-[11px] text-slate-400 font-serif">${escapeHtml(m.name_en)}</div>
+                  <div class="text-[10px] text-brand-gold font-mono">${escapeHtml(m.id)}</div>
+                </div>
+              </div>
+            </td>
+
+            <!-- 2. Category & Origin -->
+            <td class="py-3 px-4">
+              <div class="font-semibold text-slate-200 text-xs">${cat ? `${cat.icon || '💎'} ${escapeHtml(cat.name_ar)}` : '<span class="text-slate-500">بدون تصنيف</span>'}</div>
+              <div class="text-[11px] text-slate-400 flex items-center gap-1 mt-0.5">
+                <i class="fa-solid fa-location-dot text-[10px] text-brand-gold"></i>
+                <span>${escapeHtml(m.origin || '-')}</span>
+              </div>
+            </td>
+
+            <!-- 3. Stone Type & Color -->
+            <td class="py-3 px-4">
+              <div class="flex items-center gap-1.5">
+                <span class="w-3 h-3 rounded-full border border-slate-600 inline-block shadow-sm" style="background-color: ${m.color_hex || '#ffffff'}"></span>
+                <span class="text-xs text-slate-200 font-medium">${stoneTypeMap[m.stone_type] || m.stone_type}</span>
+              </div>
+              <div class="text-[10px] text-slate-400 mt-0.5 truncate max-w-[160px]">${escapeHtml(m.color_desc || '-')}</div>
+            </td>
+
+            <!-- 4. Price Tier & Finish -->
+            <td class="py-3 px-4">
+              <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-amber-500/10 text-amber-400 border border-amber-500/20">
+                ${escapeHtml(m.price_tier || 'مميز')}
+              </span>
+              <div class="text-[10px] text-slate-400 mt-1 truncate max-w-[130px]">${escapeHtml(m.finish || '-')}</div>
+            </td>
+
+            <!-- 5. Featured Toggle -->
+            <td class="py-3 px-4 text-center">
+              <button onclick="toggleMaterialFeatured('${m.id}', ${!m.is_featured})" title="${m.is_featured ? 'إلغاء التمييز' : 'تمييز المنتج'}" 
+                class="p-1.5 rounded-lg transition ${m.is_featured ? 'text-amber-400 bg-amber-500/10 hover:bg-amber-500/20' : 'text-slate-600 hover:text-slate-400'}">
+                <i class="fa-solid fa-star text-sm"></i>
+              </button>
+            </td>
+
+            <!-- 6. Active Toggle -->
+            <td class="py-3 px-4 text-center">
+              <label class="custom-switch inline-block">
+                <input type="checkbox" ${m.is_active ? 'checked' : ''} onchange="toggleMaterialStatus('${m.id}', this.checked)">
+                <span class="slider"></span>
+              </label>
+            </td>
+
+            <!-- 7. Actions -->
+            <td class="py-3 px-4 text-center">
+              <div class="flex items-center justify-center gap-2">
+                <button onclick="editMaterial('${m.id}')" title="تعديل الخامة" class="p-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-brand-gold transition">
+                  <i class="fa-solid fa-pen-to-square"></i>
+                </button>
+                <button onclick="confirmDeleteMaterial('${m.id}')" title="حذف الخامة" class="p-2 rounded-lg bg-slate-800 hover:bg-red-950/60 text-slate-300 hover:text-red-400 transition">
+                  <i class="fa-solid fa-trash"></i>
+                </button>
+              </div>
+            </td>
+
+          </tr>
+        `;
+      }).join('');
+    }
+
+    // ==========================================================================
+    // Add / Edit Material Modal Flow
+    // ==========================================================================
+    function openMaterialModal(material = null) {
+      const modal = document.getElementById('material-modal');
+      const title = document.getElementById('material-modal-title');
+      const saveBtnText = document.getElementById('mat-save-btn-text');
+      const idInput = document.getElementById('mat-id');
+
+      populateCategoryDropdowns();
+      State.stagedImageFiles = [];
+      document.getElementById('mat-staged-images-container').classList.add('hidden');
+      document.getElementById('mat-staged-images-grid').innerHTML = '';
+
+      if (material) {
+        State.editingMaterialId = material.id;
+        State.materialImages = Array.isArray(material.images) ? [...material.images] : [];
+        title.textContent = "تعديل بيانات الخامة: " + material.name_ar;
+        saveBtnText.textContent = "حفظ التعديلات";
+
+        idInput.value = material.id;
+        idInput.disabled = true; // Primary key preserved
+
+        document.getElementById('mat-category-id').value = material.category_id || '';
+        document.getElementById('mat-name-ar').value = material.name_ar || '';
+        document.getElementById('mat-name-en').value = material.name_en || '';
+        document.getElementById('mat-origin').value = material.origin || '';
+        document.getElementById('mat-stone-type').value = material.stone_type || 'marble';
+        document.getElementById('mat-type-ar').value = material.type_ar || '';
+        document.getElementById('mat-type-en').value = material.type_en || '';
+        document.getElementById('mat-color-desc').value = material.color_desc || '';
+        document.getElementById('mat-color-group').value = material.color_group || 'white';
+        
+        const hex = material.color_hex || '#ffffff';
+        document.getElementById('mat-color-hex').value = hex;
+        document.getElementById('mat-color-picker').value = hex;
+
+        document.getElementById('mat-finish').value = material.finish || '';
+        document.getElementById('mat-price-tier').value = material.price_tier || 'مميز';
+        document.getElementById('mat-density').value = material.density || '';
+        document.getElementById('mat-water-absorption').value = material.water_absorption || '';
+        document.getElementById('mat-compressive-strength').value = material.compressive_strength || '';
+        document.getElementById('mat-durability-score').value = material.durability_score || 4.5;
+        document.getElementById('mat-maintenance-tier').value = material.maintenance_tier || '';
+        document.getElementById('mat-texture-grad').value = material.texture_grad || '';
+        document.getElementById('mat-usage-ar').value = material.usage_ar || '';
+        document.getElementById('mat-usage-en').value = material.usage_en || '';
+
+        document.getElementById('mat-is-featured').checked = !!material.is_featured;
+        document.getElementById('mat-is-active').checked = material.is_active !== false;
+
+      } else {
+        State.editingMaterialId = null;
+        State.materialImages = [];
+        title.textContent = "إضافة خامة جديدة";
+        saveBtnText.textContent = "حفظ الخامة";
+
+        document.getElementById('material-form').reset();
+        idInput.disabled = false;
+        idInput.value = generateSuggestedMaterialId();
+        document.getElementById('mat-color-hex').value = '#ffffff';
+        document.getElementById('mat-color-picker').value = '#ffffff';
+        document.getElementById('mat-durability-score').value = 4.5;
+        document.getElementById('mat-is-active').checked = true;
+        document.getElementById('mat-is-featured').checked = false;
+      }
+
+      renderExistingImagesInModal();
+      modal.classList.remove('hidden');
+    }
+
+    function closeMaterialModal() {
+      document.getElementById('material-modal').classList.add('hidden');
+      State.editingMaterialId = null;
+      State.stagedImageFiles = [];
+    }
+
+    function generateSuggestedMaterialId() {
+      const count = State.materials.length + 1;
+      return `stone-${count}`;
+    }
+
+    function syncColorHex(val) {
+      document.getElementById('mat-color-hex').value = val.toUpperCase();
+    }
+
+    function syncColorPicker(val) {
+      if (/^#[0-9A-F]{6}$/i.test(val)) {
+        document.getElementById('mat-color-picker').value = val;
+      }
+    }
+
+    function editMaterial(id) {
+      const material = State.materials.find(m => m.id === id);
+      if (material) openMaterialModal(material);
+    }
+
+    // ==========================================================================
+    // Image Handling & Supabase Storage
+    // ==========================================================================
+    function renderExistingImagesInModal() {
+      const container = document.getElementById('mat-existing-images-grid');
+      const countLabel = document.getElementById('mat-images-count-label');
+      
+      if (countLabel) countLabel.textContent = `${State.materialImages.length} صور محفوظة`;
+      if (!container) return;
+
+      if (State.materialImages.length === 0) {
+        container.innerHTML = `<div class="col-span-full text-center py-3 text-slate-500 text-xs">لا توجد صور محفوظة مسبقاً لهذا المنتج.</div>`;
+        return;
+      }
+
+      container.innerHTML = State.materialImages.map((url, idx) => `
+        <div class="relative group rounded-xl overflow-hidden bg-slate-900 border border-slate-700 aspect-square shadow">
+          <img src="${url}" alt="صورة ${idx + 1}" class="w-full h-full object-cover">
+          <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition flex items-center justify-center gap-2">
+            <button type="button" onclick="removeExistingImage(${idx})" title="حذف الصورة" class="w-8 h-8 rounded-full bg-red-600 hover:bg-red-500 text-white flex items-center justify-center text-xs shadow transition">
+              <i class="fa-solid fa-trash"></i>
+            </button>
+            <a href="${url}" target="_blank" title="عرض الحجم الكامل" class="w-8 h-8 rounded-full bg-slate-800 hover:bg-slate-700 text-white flex items-center justify-center text-xs shadow transition">
+              <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function removeExistingImage(index) {
+      State.materialImages.splice(index, 1);
+      renderExistingImagesInModal();
+      showToast("تم حذف الصورة من القائمة. اضغط حفظ لتأكيد التغييرات.", "info");
+    }
+
+    function handleImageSelection(event) {
+      const files = Array.from(event.target.files);
+      if (!files.length) return;
+
+      files.forEach(file => {
+        State.stagedImageFiles.push(file);
+      });
+
+      renderStagedImages();
+      event.target.value = ''; // Reset input
+    }
+
+    function renderStagedImages() {
+      const container = document.getElementById('mat-staged-images-container');
+      const grid = document.getElementById('mat-staged-images-grid');
+
+      if (State.stagedImageFiles.length === 0) {
+        container.classList.add('hidden');
+        grid.innerHTML = '';
+        return;
+      }
+
+      container.classList.remove('hidden');
+      grid.innerHTML = State.stagedImageFiles.map((file, idx) => {
+        const previewUrl = URL.createObjectURL(file);
+        return `
+          <div class="relative group rounded-xl overflow-hidden bg-slate-900 border border-amber-500/50 aspect-square shadow">
+            <img src="${previewUrl}" alt="${file.name}" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+              <button type="button" onclick="removeStagedImage(${idx})" class="w-8 h-8 rounded-full bg-red-600 text-white flex items-center justify-center text-xs">
+                <i class="fa-solid fa-xmark"></i>
+              </button>
+            </div>
+            <span class="absolute bottom-1 right-1 bg-amber-500 text-slate-950 font-bold text-[9px] px-1 rounded">جديدة</span>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function removeStagedImage(index) {
+      State.stagedImageFiles.splice(index, 1);
+      renderStagedImages();
+    }
+
+    async function uploadStagedImages(productId) {
+      if (!State.stagedImageFiles.length || !State.supabase) return [];
+
+      const uploadedUrls = [];
+      const bucket = window.PRIME_CONFIG?.STORAGE_BUCKETS?.MATERIALS || 'materials';
+
+      for (const file of State.stagedImageFiles) {
+        try {
+          const ext = file.name.split('.').pop() || 'jpg';
+          const uniqueId = typeof crypto !== 'undefined' && crypto.randomUUID ? crypto.randomUUID() : (Date.now() + '-' + Math.random().toString(36).substring(2, 8));
+          const filePath = `${productId}/${uniqueId}.${ext}`;
+
+          const { data, error } = await State.supabase.storage
+            .from(bucket)
+            .upload(filePath, file, {
+              cacheControl: '3600',
+              upsert: true
+            });
+
+          if (error) throw error;
+
+          // Get Public URL
+          const { data: publicUrlData } = State.supabase.storage
+            .from(bucket)
+            .getPublicUrl(filePath);
+
+          if (publicUrlData?.publicUrl) {
+            uploadedUrls.push(publicUrlData.publicUrl);
+          }
+        } catch (err) {
+          console.error("Error uploading file:", file.name, err);
+          showToast(`فشل رفع الصورة: ${file.name}`, "error");
+        }
+      }
+
+      return uploadedUrls;
+    }
+
+    // ==========================================================================
+    // Save / Delete Material
+    // ==========================================================================
+    async function handleSaveMaterial(event) {
+      event.preventDefault();
+      if (!State.supabase) return;
+
+      const saveBtn = document.getElementById('mat-save-btn');
+      const id = document.getElementById('mat-id').value.trim();
+      const category_id = document.getElementById('mat-category-id').value;
+      const name_ar = document.getElementById('mat-name-ar').value.trim();
+      const name_en = document.getElementById('mat-name-en').value.trim();
+      const origin = document.getElementById('mat-origin').value.trim();
+      const stone_type = document.getElementById('mat-stone-type').value;
+      const type_ar = document.getElementById('mat-type-ar').value.trim();
+      const type_en = document.getElementById('mat-type-en').value.trim();
+      const color_desc = document.getElementById('mat-color-desc').value.trim();
+      const color_group = document.getElementById('mat-color-group').value;
+      const color_hex = document.getElementById('mat-color-hex').value.trim() || '#ffffff';
+      const finish = document.getElementById('mat-finish').value.trim();
+      const price_tier = document.getElementById('mat-price-tier').value;
+      const density = document.getElementById('mat-density').value.trim();
+      const water_absorption = document.getElementById('mat-water-absorption').value.trim();
+      const compressive_strength = document.getElementById('mat-compressive-strength').value.trim();
+      const durability_score = parseFloat(document.getElementById('mat-durability-score').value) || 4.5;
+      const maintenance_tier = document.getElementById('mat-maintenance-tier').value.trim();
+      const texture_grad = document.getElementById('mat-texture-grad').value.trim();
+      const usage_ar = document.getElementById('mat-usage-ar').value.trim();
+      const usage_en = document.getElementById('mat-usage-en').value.trim();
+      const is_featured = document.getElementById('mat-is-featured').checked;
+      const is_active = document.getElementById('mat-is-active').checked;
+
+      if (!id || !name_ar || !name_en || !origin || !category_id) {
+        showToast("يرجى ملء الحقول الإلزامية المطلوبة (المعرف، التصنيف، الأسماء، والمنشأ).", "warning");
+        return;
+      }
+
+      try {
+        saveBtn.disabled = true;
+        saveBtn.innerHTML = `<i class="fa-solid fa-circle-notch fa-spin"></i> <span>جاري حفظ الخامة والصور...</span>`;
+
+        // 1. Upload newly staged images to Supabase Storage
+        let newUploadedUrls = [];
+        if (State.stagedImageFiles.length > 0) {
+          newUploadedUrls = await uploadStagedImages(id);
+        }
+
+        // 2. Merge existing and newly uploaded images
+        const finalImages = [...State.materialImages, ...newUploadedUrls];
+
+        // 3. Assemble complete DB payload
+        const payload = {
+          id,
+          name_ar,
+          name_en,
+          category_id,
+          origin,
+          stone_type,
+          type_ar,
+          type_en,
+          color_desc,
+          color_group,
+          color_hex,
+          finish,
+          price_tier,
+          density,
+          water_absorption,
+          compressive_strength,
+          durability_score,
+          maintenance_tier,
+          texture_grad,
+          usage_ar,
+          usage_en,
+          is_featured,
+          is_active,
+          images: finalImages
+        };
+
+        const { error } = await State.supabase
+          .from('materials')
+          .upsert(payload, { onConflict: 'id' });
+
+        if (error) throw error;
+
+        showToast(State.editingMaterialId ? "تم تعديل الخامة وحفظ الصور بنجاح." : "تم إضافة الخامة وحفظ الصور بنجاح.", "success");
+        closeMaterialModal();
+        await loadMaterials();
+        await loadDashboardStats();
+
+      } catch (err) {
+        console.error("Error saving material:", err);
+        showToast("فشل حفظ الخامة: " + (err.message || "حدث خطأ غير متوقع"), "error");
+      } finally {
+        saveBtn.disabled = false;
+        saveBtn.innerHTML = `<i class="fa-solid fa-floppy-disk"></i> <span id="mat-save-btn-text">حفظ الخامة</span>`;
+      }
+    }
+
+    async function toggleMaterialStatus(id, newStatus) {
+      if (!State.supabase) return;
+
+      try {
+        const { error } = await State.supabase
+          .from('materials')
+          .update({ is_active: newStatus })
+          .eq('id', id);
+
+        if (error) throw error;
+        showToast(`تم ${newStatus ? 'تفعيل' : 'إخفاء'} الخامة بنجاح.`, "info");
+        const target = State.materials.find(m => m.id === id);
+        if (target) target.is_active = newStatus;
+        loadDashboardStats();
+      } catch (err) {
+        console.error("Error updating material status:", err);
+        showToast("فشل تغيير حالة الخامة.", "error");
+        await loadMaterials();
+      }
+    }
+
+    async function toggleMaterialFeatured(id, newStatus) {
+      if (!State.supabase) return;
+
+      try {
+        const { error } = await State.supabase
+          .from('materials')
+          .update({ is_featured: newStatus })
+          .eq('id', id);
+
+        if (error) throw error;
+        showToast(newStatus ? "تم تمييز الخامة (Featured)." : "تم إلغاء تمييز الخامة.", "success");
+        const target = State.materials.find(m => m.id === id);
+        if (target) target.is_featured = newStatus;
+        renderMaterials();
+        loadDashboardStats();
+      } catch (err) {
+        console.error("Error toggling featured:", err);
+        showToast("فشل تحديث حالة التمييز.", "error");
+      }
+    }
+
+    function confirmDeleteMaterial(id) {
+      const mat = State.materials.find(m => m.id === id);
+      const name = mat ? mat.name_ar : id;
+
+      openConfirmModal({
+        title: "حذف خامة حجرية",
+        desc: `هل أنت متأكد من حذف الخامة "${name}" (${id}) نهائياً من قاعدة البيانات؟`,
+        actionText: "نعم، حذف الخامة",
+        onConfirm: async () => {
+          try {
+            const { error } = await State.supabase
+              .from('materials')
+              .delete()
+              .eq('id', id);
+
+            if (error) throw error;
+            showToast("تم حذف الخامة بنجاح.", "success");
+            await loadMaterials();
+            await loadDashboardStats();
+          } catch (err) {
+            console.error("Error deleting material:", err);
+            showToast("فشل حذف الخامة: " + (err.message || "حدث خطأ"), "error");
+          }
+        }
+      });
+    }
+
+    // ==========================================================================
+    // RFQ Quotation Requests Module
+    // ==========================================================================
+    async function loadRfqs() {
+      if (!State.supabase) return;
+
+      const tbody = document.getElementById('rfqs-table-body');
+      const badge = document.getElementById('rfqs-count-badge');
+
+      try {
+        const { data, error } = await State.supabase
+          .from('rfqs')
+          .select('*')
+          .order('created_at', { ascending: false });
+
+        if (error) throw error;
+        State.rfqs = data || [];
+        if (badge) badge.textContent = State.rfqs.length;
+        renderRfqs();
+      } catch (err) {
+        console.error("Error loading RFQs:", err);
+        if (tbody) {
+          tbody.innerHTML = `
+            <tr>
+              <td colspan="7" class="py-12 text-center text-slate-500">
+                <i class="fa-solid fa-file-excel text-3xl mb-2"></i>
+                <p>لا توجد طلبات عروض أسعار حتى الآن أو تعذر تحميلها.</p>
+              </td>
+            </tr>
+          `;
+        }
+      }
+    }
+
+    function renderRfqs() {
+      const tbody = document.getElementById('rfqs-table-body');
+      if (!tbody) return;
+
+      if (State.rfqs.length === 0) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="7" class="py-12 text-center text-slate-500">
+              <i class="fa-solid fa-file-invoice text-3xl mb-2"></i>
+              <p>لم يتم تسجيل أي طلبات عروض أسعار بعد.</p>
+            </td>
+          </tr>
+        `;
+        return;
+      }
+
+      const statusMap = {
+        received: { label: 'تم الاستلام', class: 'bg-blue-500/10 text-blue-400 border-blue-500/30' },
+        reviewing: { label: 'قيد الدراسة الفنية', class: 'bg-amber-500/10 text-amber-400 border-amber-500/30' },
+        ready: { label: 'العرض جاهز', class: 'bg-purple-500/10 text-purple-400 border-purple-500/30' },
+        completed: { label: 'مكتمل ومعتمد', class: 'bg-emerald-500/10 text-emerald-400 border-emerald-500/30' },
+        cancelled: { label: 'ملغي', class: 'bg-red-500/10 text-red-400 border-red-500/30' }
+      };
+
+      tbody.innerHTML = State.rfqs.map(r => {
+        const statusInfo = statusMap[r.status] || { label: r.status, class: 'bg-slate-700 text-slate-300' };
+        const dateStr = r.created_at ? new Date(r.created_at).toLocaleDateString('ar-SA', { day: 'numeric', month: 'short', year: 'numeric' }) : '-';
+        const phoneClean = (r.customer_phone || '').replace(/[^0-9]/g, '');
+
+        return `
+          <tr class="hover:bg-slate-800/40 transition">
+            <td class="py-3 px-4 font-mono font-bold text-brand-gold text-[11px]">${escapeHtml(r.rfq_ref || '-')}</td>
+            <td class="py-3 px-4">
+              <div class="font-bold text-white text-xs">${escapeHtml(r.customer_name || '-')}</div>
+              <div class="text-[11px] text-slate-400 font-mono" dir="ltr">${escapeHtml(r.customer_phone || '-')}</div>
+            </td>
+            <td class="py-3 px-4">
+              <div class="text-xs text-slate-200 font-medium">${escapeHtml(r.project_city || '-')}</div>
+              <div class="text-[10px] text-brand-gold">${escapeHtml(r.selected_material_name || 'عام')}</div>
+            </td>
+            <td class="py-3 px-4">
+              <div class="text-xs text-slate-300">${escapeHtml(r.quantity || '-')}</div>
+              <div class="text-[10px] text-slate-400">${escapeHtml(r.application || '-')}</div>
+            </td>
+            <td class="py-3 px-4 text-slate-400 text-[11px]">${dateStr}</td>
+            <td class="py-3 px-4 text-center">
+              <select onchange="updateRfqStatus('${r.id}', this.value)" class="bg-brand-input border border-slate-700 rounded-lg px-2.5 py-1 text-[11px] text-slate-200 focus:border-brand-gold">
+                <option value="received" ${r.status === 'received' ? 'selected' : ''}>تم الاستلام</option>
+                <option value="reviewing" ${r.status === 'reviewing' ? 'selected' : ''}>قيد الدراسة</option>
+                <option value="ready" ${r.status === 'ready' ? 'selected' : ''}>العرض جاهز</option>
+                <option value="completed" ${r.status === 'completed' ? 'selected' : ''}>مكتمل</option>
+                <option value="cancelled" ${r.status === 'cancelled' ? 'selected' : ''}>ملغي</option>
+              </select>
+            </td>
+            <td class="py-3 px-4 text-center">
+              ${phoneClean ? `
+                <a href="https://wa.me/${phoneClean}?text=${encodeURIComponent('مرحباً ' + (r.customer_name || '') + '، بخصوص طلبك في Prime Scope رقم ' + (r.rfq_ref || ''))}" 
+                  target="_blank" title="مراسلة عبر واتساب" class="p-2 rounded-lg bg-emerald-600/20 hover:bg-emerald-600/40 text-emerald-400 inline-flex items-center justify-center transition">
+                  <i class="fa-brands fa-whatsapp text-sm"></i>
+                </a>
+              ` : '<span class="text-slate-600">-</span>'}
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    async function updateRfqStatus(rfqId, newStatus) {
+      if (!State.supabase) return;
+
+      try {
+        const { error } = await State.supabase
+          .from('rfqs')
+          .update({ status: newStatus })
+          .eq('id', rfqId);
+
+        if (error) throw error;
+        showToast("تم تحديث حالة طلب التسعير بنجاح.", "success");
+      } catch (err) {
+        console.error("Error updating RFQ status:", err);
+        showToast("فشل تحديث حالة الطلب.", "error");
+        loadRfqs();
+      }
+    }
+
+    // ==========================================================================
+    // Confirmation Modal Helper
+    // ==========================================================================
+    function openConfirmModal({ title, desc, actionText, onConfirm }) {
+      const modal = document.getElementById('confirm-modal');
+      const titleEl = document.getElementById('confirm-modal-title');
+      const descEl = document.getElementById('confirm-modal-desc');
+      const actionBtn = document.getElementById('confirm-action-btn');
+      const cancelBtn = document.getElementById('confirm-cancel-btn');
+
+      if (titleEl) titleEl.textContent = title;
+      if (descEl) descEl.textContent = desc;
+      if (actionBtn) actionBtn.textContent = actionText || 'تأكيد الحذف';
+
+      // Replace listeners cleanly
+      actionBtn.onclick = async () => {
+        modal.classList.add('hidden');
+        if (typeof onConfirm === 'function') await onConfirm();
+      };
+
+      cancelBtn.onclick = () => {
+        modal.classList.add('hidden');
+      };
+
+      modal.classList.remove('hidden');
+    }
+
+    // Escape HTML to prevent XSS
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    // Start App on DOM Ready
+    document.addEventListener('DOMContentLoaded', init);
+  </script>
+</body>
+</html>
