@@ -1,40 +1,59 @@
-// Prime Scope - API Service
+// ============================================================
+// PRIME SCOPE - API SERVICE
 // Supabase Data Access Layer
+// ============================================================
 
 (function (window) {
   "use strict";
 
   const ApiService = {
 
-    // =========================
-    // Categories
-    // =========================
+    // ==========================================================
+    // CATEGORIES
+    // ==========================================================
+
     async getCategories() {
+
       const client = window.PrimeSupabase?.getClient();
 
       if (!client || !window.PrimeSupabase?.isReady()) {
-        return typeof CATEGORIES !== "undefined" ? CATEGORIES : [];
+        return typeof CATEGORIES !== "undefined"
+          ? CATEGORIES
+          : [];
       }
 
       try {
+
         const { data, error } = await client
           .from("categories")
           .select("*")
           .eq("is_active", true)
-          .order("sort_order", { ascending: true });
+          .order("sort_order", {
+            ascending: true
+          });
 
-        if (error) throw error;
+        if (error) {
+          throw error;
+        }
 
-        return (data || []).map(c => ({
-          id: c.id,
-          nameAr: c.name_ar || "",
-          nameEn: c.name_en || "",
-          icon: c.icon || "💎",
-          badge: c.badge || ""
-        }));
+        return (data || []).map(function (c) {
+
+          return {
+            id: c.id,
+            nameAr: c.name_ar || "",
+            nameEn: c.name_en || "",
+            icon: c.icon || "💎",
+            badge: c.badge || ""
+          };
+
+        });
 
       } catch (error) {
-        console.error("Categories error:", error);
+
+        console.error(
+          "CATEGORIES ERROR:",
+          error
+        );
 
         return typeof CATEGORIES !== "undefined"
           ? CATEGORIES
@@ -42,266 +61,623 @@
       }
     },
 
-    // =========================
-    // Materials
-    // =========================
+
+    // ==========================================================
+    // MATERIALS
+    // ==========================================================
+
     async getMaterials() {
+
       const client = window.PrimeSupabase?.getClient();
 
       if (!client || !window.PrimeSupabase?.isReady()) {
+
         return typeof PRODUCTS !== "undefined"
           ? PRODUCTS
           : [];
       }
 
       try {
+
         const { data, error } = await client
           .from("materials")
           .select("*")
           .eq("is_active", true);
 
-        if (error) throw error;
+        if (error) {
+          throw error;
+        }
 
-        console.log("SUPABASE MATERIALS:", data);
+        console.log(
+          "SUPABASE MATERIALS:",
+          data
+        );
 
-        return (data || []).map(m => ({
-          id: m.id,
+        return (data || []).map(function (m) {
 
-          nameAr: m.name_ar || "",
-          nameEn: m.name_en || "",
+          return {
 
-          category: m.category_id || "",
+            // Basic
+            id: m.id,
 
-          color: m.color  m.color_desc  "",
-          origin: m.origin || "",
+            nameAr: m.name_ar || "",
 
-          typeAr: m.type_ar || "",
-          typeEn: m.type_en || "",
+            nameEn: m.name_en || "",
 
-          finish: m.finish || "",
 
-          usage: m.usage_ar || "",
-          usageEn: m.usage_en || "",
+            // Category
+            category: m.category_id || "",
 
-          priceCategory: m.price_tier || "",
 
-          colorCode: m.color_hex || "#ffffff",
+            // Color
+            color: m.color || m.color_desc || "",
 
-          stoneType: m.stone_type || "",
-          colorGroup: m.color_group || "",
+            colorCode:
+              m.color_hex || "#ffffff",
 
-          density: m.density,
-          waterAbsorption: m.water_absorption,
-          compressiveStrength: m.compressive_strength,
+            colorGroup:
+              m.color_group || "",
 
-          durabilityScore:
-            m.durability_score != null
-              ? parseFloat(m.durability_score)
-              : 4.5,
 
-          maintenanceTier: m.maintenance_tier || "",
+            // Origin
+            origin: m.origin || "",
 
-          textureGrad:
-            m.texture_grad ||
-            (typeof getStoneGrad === "function"
-              ? getStoneGrad(m.category_id, m.color_hex)
-              : "linear-gradient(135deg,#333,#777)"),
 
-          // مهم جدًا:
-          // images لازم تفضل Array
-          images: Array.isArray(m.images)
-            ? m.images
-            : []
-        }));
+            // Type
+            typeAr: m.type_ar || "",
+
+            typeEn: m.type_en || "",
+
+            stoneType:
+              m.stone_type || "",
+
+
+            // Finish
+            finish:
+              m.finish || "",
+
+
+            // Usage
+            usageAr:
+              m.usage_ar || "",
+
+            usage:
+              m.usage_ar || "",
+
+            usageEn:
+              m.usage_en || "",
+
+
+            // Price
+            priceCategory:
+              m.price_tier || "",
+
+
+            // Technical data
+            density:
+              m.density,
+
+            waterAbsorption:
+              m.water_absorption,
+
+            compressiveStrength:
+              m.compressive_strength,
+
+            durabilityScore:
+              m.durability_score != null
+                ? parseFloat(
+                    m.durability_score
+                  )
+                : 4.5,
+
+            maintenanceTier:
+              m.maintenance_tier || "",
+
+            textureGrad:
+              m.texture_grad ||
+              (
+                typeof getStoneGrad === "function"
+                  ? getStoneGrad(
+                      m.category_id,
+                      m.color_hex
+                    )
+                  : "linear-gradient(135deg,#333,#777)"
+              ),
+
+
+            // ==================================================
+            // IMAGES
+            // ==================================================
+
+            // مهم جدًا:
+            // images في Supabase لازم تفضل Array
+
+            images:
+              Array.isArray(m.images)
+                ? m.images
+                : [],
+
+
+            // Status
+            isFeatured:
+              m.is_featured === true,
+
+            isActive:
+              m.is_active !== false
+
+          };
+
+        });
 
       } catch (error) {
-        console.error("MATERIALS ERROR:", error);
 
+        console.error(
+          "MATERIALS ERROR:",
+          error
+        );
+
+        // Fallback
         return typeof PRODUCTS !== "undefined"
           ? PRODUCTS
           : [];
       }
     },
 
-    // =========================
-    // Projects
-    // =========================
+
+    // ==========================================================
+    // PROJECTS
+    // ==========================================================
+
     async getProjects(category = "all") {
-      const client = window.PrimeSupabase?.getClient();
 
-      if (!client || !window.PrimeSupabase?.isReady()) {
-        if (typeof PRIME_PROJECTS === "undefined") return [];
+      const client =
+        window.PrimeSupabase?.getClient();
 
-        return category === "all"
-          ? PRIME_PROJECTS
-          : PRIME_PROJECTS.filter(
-              p => p.category === category
-            );
-      }
+      if (
+        !client ||
+        !window.PrimeSupabase?.isReady()
+      ) {
 
-      try {
-        let query = client
-          .from("projects")
-          .select("*")
-          .eq("is_active", true);
-
-        if (category !== "all") {
-          query = query.eq("category", category);
-        }
-
-        const { data, error } = await query;
-
-        if (error) throw error;return (data || []).map(p => ({
-          id: p.id,
-          titleAr: p.title_ar || "",
-          titleEn: p.title_en || "",
-          category: p.category || "",
-          categoryAr: p.category_ar || "",
-          categoryEn: p.category_en || "",
-          locationAr: p.location_ar || "",
-          locationEn: p.location_en || "",
-          area: p.area || "",
-          scopeAr: p.scope_ar || "",
-          scopeEn: p.scope_en || "",
-          stonesUsed: p.stones_used || [],
-          heroGrad: p.hero_grad || "",
-          tags: p.tags || []
-        }));
-
-      } catch (error) {
-        console.error("PROJECTS ERROR:", error);
-
-        if (typeof PRIME_PROJECTS === "undefined") {
+        if (
+          typeof PRIME_PROJECTS ===
+          "undefined"
+        ) {
           return [];
         }
 
         return category === "all"
           ? PRIME_PROJECTS
           : PRIME_PROJECTS.filter(
-              p => p.category === category
+              function (p) {
+                return p.category === category;
+              }
+            );
+      }
+
+      try {
+
+        let query = client
+          .from("projects")
+          .select("*")
+          .eq("is_active", true);
+
+        if (category !== "all") {
+
+          query = query.eq(
+            "category",
+            category
+          );
+        }
+
+        const {
+          data,
+          error
+        } = await query;
+
+        if (error) {
+          throw error;
+        }
+
+        return (data || []).map(
+          function (p) {
+
+            return {
+
+              id: p.id,
+
+              titleAr:
+                p.title_ar || "",
+
+              titleEn:
+                p.title_en || "",
+
+              category:
+                p.category || "",
+
+              categoryAr:
+                p.category_ar || "",
+
+              categoryEn:
+                p.category_en || "",
+
+              locationAr:
+                p.location_ar || "",
+
+              locationEn:
+                p.location_en || "",
+
+              area:
+                p.area || "",
+
+              scopeAr:
+                p.scope_ar || "",
+
+              scopeEn:
+                p.scope_en || "",
+
+              stonesUsed:
+                Array.isArray(
+                  p.stones_used
+                )
+                  ? p.stones_used
+                  : [],
+
+              heroGrad:
+                p.hero_grad || "",
+
+              tags:
+                Array.isArray(p.tags)
+                  ? p.tags
+                  : []
+
+            };
+
+          }
+        );
+
+      } catch (error) {
+
+        console.error(
+          "PROJECTS ERROR:",
+          error
+        );
+
+        if (
+          typeof PRIME_PROJECTS ===
+          "undefined"
+        ) {
+          return [];
+        }
+
+        return category === "all"
+          ? PRIME_PROJECTS
+          : PRIME_PROJECTS.filter(
+              function (p) {
+                return p.category === category;
+              }
             );
       }
     },
 
-    // =========================
+
+    // ==========================================================
     // RFQ
-    // =========================
-    async submitRFQ(rfqData, fileBlob = null) {
-      const client = window.PrimeSupabase?.getClient();
+    // ==========================================================
+
+    async submitRFQ(
+      rfqData,
+      fileBlob = null
+    ) {
+
+      const client =
+        window.PrimeSupabase?.getClient();
 
       const rfqRef =
         rfqData.rfqRef ||
-        PS-RFQ-${new Date().getFullYear()}-${Math.floor(
+        `PS-RFQ-${new Date().getFullYear()}-${Math.floor(
           1000 + Math.random() * 9000
-        )};
+        )}`;
 
       let savedToDb = false;
       let fileUploaded = false;
 
-      if (client && window.PrimeSupabase?.isReady()) {
-        try {
-          const { data: rfqRow, error: rfqErr } =
-            await client
-              .from("rfqs")
-              .insert([{
-                rfq_ref: rfqRef,
-                customer_name: rfqData.customerName,
-                customer_phone: rfqData.customerPhone,
-                project_city: rfqData.projectCity,
-                quantity: rfqData.quantity,
-                application: rfqData.application,
-                thickness: rfqData.thickness,
-                waterjet: rfqData.waterjet,
-                notes: rfqData.notes,
-                selected_material_id:
-                  rfqData.selectedMaterialId || null,
-                selected_material_name:
-                  rfqData.selectedMaterialName || null,
-                status: "received"
-              }])
-              .select()
-              .single();
+      if (
+        client &&
+        window.PrimeSupabase?.isReady()
+      ) {
 
-          if (rfqErr) throw rfqErr;
+        try {
+
+          const {
+            data: rfqRow,
+            error: rfqErr
+          } = await client
+            .from("rfqs")
+            .insert([
+              {
+
+                rfq_ref: rfqRef,
+
+                customer_name:
+                  rfqData.customerName,
+
+                customer_phone:
+                  rfqData.customerPhone,
+
+                project_city:
+                  rfqData.projectCity,
+
+                quantity:
+                  rfqData.quantity,
+
+                application:
+                  rfqData.application,
+
+                thickness:
+                  rfqData.thickness,
+
+                waterjet:
+                  rfqData.waterjet,
+
+                notes:
+                  rfqData.notes,
+
+                selected_material_id:
+                  rfqData.selectedMaterialId ||
+                  null,
+
+                selected_material_name:
+                  rfqData.selectedMaterialName ||
+                  null,
+
+                status:
+                  "received"
+
+              }
+            ])
+            .select()
+            .single();
+
+          if (rfqErr) {
+            throw rfqErr;
+          }
 
           if (rfqRow) {
             savedToDb = true;
           }
 
+
+          // ====================================================
+          // OPTIONAL FILE UPLOAD
+          // ====================================================
+
+          if (
+            fileBlob &&
+            fileBlob.name
+          ) {
+
+            const fileExt =
+              fileBlob.name
+                .split(".")
+                .pop();
+
+            const sanitizedName =
+              fileBlob.name.replace(
+                /[^a-zA-Z0-9._-]/g,
+                "_"
+              );
+
+            const storagePath =
+              `rfqs/${rfqRef}/${Date.now()}_${sanitizedName}`;
+
+            const {
+              data: uploadData,
+              error: uploadErr
+            } = await client.storage
+              .from("rfq-files")
+              .upload(
+                storagePath,
+                fileBlob,
+                {
+                  cacheControl: "3600",
+                  upsert: false
+                }
+              );
+
+            if (
+              !uploadErr &&
+              uploadData
+            ) {
+
+              fileUploaded = true;
+
+              await client
+                .from("rfq_files")
+                .insert([
+                  {
+
+                    rfq_id:
+                      rfqRow.id,
+
+                    file_name:
+                      fileBlob.name,
+
+                    file_size:
+                      fileBlob.size,
+
+                    file_type:
+                      fileBlob.type ||
+                      fileExt,
+
+                    storage_path:
+                      storagePath
+
+                  }
+                ]);
+            }
+          }
+
         } catch (error) {
-          console.error("RFQ ERROR:", error);
+
+          console.error(
+            "RFQ ERROR:",
+            error
+          );
         }
       }
 
       return {
+
         success: true,
-        rfqRef,
-        savedToDb,
-        fileUploaded
+
+        rfqRef:
+
+          rfqRef,
+
+        savedToDb:
+
+          savedToDb,
+
+        fileUploaded:
+
+          fileUploaded
+
       };
     },
 
-    // =========================
-    // Track RFQ
-    // =========================
-    async trackRFQ(rfqRef) {
-      const client = window.PrimeSupabase?.getClient();
 
-      if (client && window.PrimeSupabase?.isReady()) {
+    // ==========================================================
+    // TRACK RFQ
+    // ==========================================================
+
+    async trackRFQ(
+      rfqRef
+    ) {
+
+      const client =
+        window.PrimeSupabase?.getClient();
+
+      if (
+        client &&
+        window.PrimeSupabase?.isReady()
+      ) {
+
         try {
-          const { data, error } = await client
+
+          const {
+            data,
+            error
+          } = await client
+
             .from("rfqs")
+
             .select(
               "rfq_ref,status,created_at,customer_name,project_city,selected_material_name"
             )
-            .eq("rfq_ref", rfqRef.trim())
+
+            .eq(
+              "rfq_ref",
+              rfqRef.trim()
+            )
+
             .single();
 
-          if (!error && data) {
+          if (
+            !error &&
+            data
+          ) {
+
             return {
+
               found: true,
-              data
+
+              data: data
+
             };
           }
 
         } catch (error) {
-          console.error("TRACK RFQ ERROR:", error);
+
+          console.error(
+            "TRACK RFQ ERROR:",
+            error
+          );
         }
       }
 
       return {
+
         found: false,
+
         data: null
+
       };
     },
 
-    // =========================
-    // AI Logs
-    // =========================
-    async logAIRequest(logData) {
-      const client = window.PrimeSupabase?.getClient();
 
-      if (!client || !window.PrimeSupabase?.isReady()) {
+    // ==========================================================
+    // AI REQUEST LOG
+    // ==========================================================
+
+    async logAIRequest(
+      logData
+    ) {
+
+      const client =
+        window.PrimeSupabase?.getClient();
+
+      if (
+        !client ||
+        !window.PrimeSupabase?.isReady()
+      ) {
         return;
       }
 
       try {
+
         await client
           .from("ai_requests")
-          .insert([{
-            query: logData.query,
-            response: logData.response,
-            project_type: logData.projectType,
-            surface_area: logData.surfaceArea,
-            budget_tier: logData.budgetTier,
-            style_pref: logData.stylePref
-          }]);
+          .insert([
+            {
+
+              query:
+                logData.query,
+
+              response:
+                logData.response,
+
+              project_type:
+                logData.projectType,
+
+              surface_area:
+                logData.surfaceArea,
+
+              budget_tier:
+                logData.budgetTier,
+
+              style_pref:
+                logData.stylePref
+
+            }
+          ]);
+
       } catch (error) {
-        console.warn("AI LOG ERROR:", error);
+
+        console.warn(
+          "AI LOG ERROR:",
+          error
+        );
       }
     }
+
   };
 
-  window.PrimeAPI = ApiService;
+
+  // ============================================================
+  // EXPORT
+  // ============================================================
+
+  window.PrimeAPI =
+    ApiService;
 
 })(window);
