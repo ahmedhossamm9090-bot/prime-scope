@@ -42,12 +42,15 @@
   // Global helper namespace
   window.PrimeSupabase = {
     getClient: function() {
-      if (!supabaseInstance && !isConfigured) {
+      if (!supabaseInstance) {
         initSupabase();
       }
       return supabaseInstance;
     },
     isReady: function() {
+      if (!supabaseInstance) {
+        initSupabase();
+      }
       return isConfigured && supabaseInstance !== null;
     }
   };

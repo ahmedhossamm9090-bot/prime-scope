@@ -1,12 +1,14 @@
 -- ==============================================================================
 -- Prime Scope - Enterprise Database Schema (Supabase PostgreSQL)
--- Description: Core tables, relational constraints, indexes, and audit triggers
+-- Description: Core tables, relational constraints, indexes, triggers & auth sync
 -- ==============================================================================
 
 -- Enable UUID extension
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
+-- ==============================================================================
 -- 1. Profiles Table (Linked to Supabase Auth)
+-- ==============================================================================
 CREATE TABLE IF NOT EXISTS public.profiles (
     id UUID PRIMARY KEY REFERENCES auth.users(id) ON DELETE CASCADE,
     full_name TEXT,
@@ -17,20 +19,24 @@ CREATE TABLE IF NOT EXISTS public.profiles (
     updated_at TIMESTAMPTZ DEFAULT NOW()
 );
 
+-- ==============================================================================
 -- 2. Categories Table (Stone Sources & Families)
+-- ==============================================================================
 CREATE TABLE IF NOT EXISTS public.categories (
     id TEXT PRIMARY KEY,
     name_ar TEXT NOT NULL,
     name_en TEXT NOT NULL,
-    icon TEXT,
-    badge TEXT,
+    icon TEXT DEFAULT '💎',
+    badge TEXT DEFAULT '',
     sort_order INT DEFAULT 0,
     is_active BOOLEAN DEFAULT true,
     created_at TIMESTAMPTZ DEFAULT NOW(),
     updated_at TIMESTAMPTZ DEFAULT NOW()
 );
 
+-- ==============================================================================
 -- 3. Materials Table (Catalog of 140+ Natural Stones & Marble)
+-- ==============================================================================
 CREATE TABLE IF NOT EXISTS public.materials (
     id TEXT PRIMARY KEY,
     name_ar TEXT NOT NULL,
@@ -60,7 +66,9 @@ CREATE TABLE IF NOT EXISTS public.materials (
     updated_at TIMESTAMPTZ DEFAULT NOW()
 );
 
+-- ==============================================================================
 -- 4. Projects Table (Showcase Portfolio)
+-- ==============================================================================
 CREATE TABLE IF NOT EXISTS public.projects (
     id TEXT PRIMARY KEY,
     title_ar TEXT NOT NULL,
@@ -82,7 +90,9 @@ CREATE TABLE IF NOT EXISTS public.projects (
     updated_at TIMESTAMPTZ DEFAULT NOW()
 );
 
+-- ==============================================================================
 -- 5. RFQs Table (Request for Quotations & Orders)
+-- ==============================================================================
 CREATE TABLE IF NOT EXISTS public.rfqs (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     rfq_ref TEXT UNIQUE NOT NULL,
@@ -103,7 +113,9 @@ CREATE TABLE IF NOT EXISTS public.rfqs (
     updated_at TIMESTAMPTZ DEFAULT NOW()
 );
 
+-- ==============================================================================
 -- 6. RFQ Files Table (Uploaded BOQ & Blueprints - Private)
+-- ==============================================================================
 CREATE TABLE IF NOT EXISTS public.rfq_files (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     rfq_id UUID NOT NULL REFERENCES public.rfqs(id) ON DELETE CASCADE,
@@ -115,7 +127,9 @@ CREATE TABLE IF NOT EXISTS public.rfq_files (
     created_at TIMESTAMPTZ DEFAULT NOW()
 );
 
--- 7. AI Requests Table (Usage & Smart Advisor Logs)
+-- ==============================================================================
+-- 7. AI Requests Table (Usage & Smart Advisor Telemetry)
+-- ==============================================================================
 CREATE TABLE IF NOT EXISTS public.ai_requests (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     query TEXT,
@@ -129,20 +143,22 @@ CREATE TABLE IF NOT EXISTS public.ai_requests (
 );
 
 -- ==============================================================================
--- Performance Indexes
+-- Performance & Lookup Indexes
 -- ==============================================================================
 CREATE INDEX IF NOT EXISTS idx_materials_category ON public.materials(category_id);
 CREATE INDEX IF NOT EXISTS idx_materials_stone_type ON public.materials(stone_type);
 CREATE INDEX IF NOT EXISTS idx_materials_color_group ON public.materials(color_group);
 CREATE INDEX IF NOT EXISTS idx_materials_is_active ON public.materials(is_active);
 CREATE INDEX IF NOT EXISTS idx_projects_category ON public.projects(category);
+CREATE INDEX IF NOT EXISTS idx_projects_is_active ON public.projects(is_active);
 CREATE INDEX IF NOT EXISTS idx_rfqs_rfq_ref ON public.rfqs(rfq_ref);
 CREATE INDEX IF NOT EXISTS idx_rfqs_status ON public.rfqs(status);
 CREATE INDEX IF NOT EXISTS idx_rfqs_customer_phone ON public.rfqs(customer_phone);
+CREATE INDEX IF NOT EXISTS idx_rfqs_user_id ON public.rfqs(user_id);
 CREATE INDEX IF NOT EXISTS idx_rfq_files_rfq_id ON public.rfq_files(rfq_id);
 
 -- ==============================================================================
--- Updated At Automatic Triggers
+-- Triggers: Updated At Timestamp
 -- ==============================================================================
 CREATE OR REPLACE FUNCTION public.handle_updated_at()
 RETURNS TRIGGER AS $$
@@ -152,8 +168,40 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
+DROP TRIGGER IF EXISTS tr_profiles_updated_at ON public.profiles;
 CREATE TRIGGER tr_profiles_updated_at BEFORE UPDATE ON public.profiles FOR EACH ROW EXECUTE PROCEDURE public.handle_updated_at();
+
+DROP TRIGGER IF EXISTS tr_categories_updated_at ON public.categories;
 CREATE TRIGGER tr_categories_updated_at BEFORE UPDATE ON public.categories FOR EACH ROW EXECUTE PROCEDURE public.handle_updated_at();
+
+DROP TRIGGER IF EXISTS tr_materials_updated_at ON public.materials;
 CREATE TRIGGER tr_materials_updated_at BEFORE UPDATE ON public.materials FOR EACH ROW EXECUTE PROCEDURE public.handle_updated_at();
+
+DROP TRIGGER IF EXISTS tr_projects_updated_at ON public.projects;
 CREATE TRIGGER tr_projects_updated_at BEFORE UPDATE ON public.projects FOR EACH ROW EXECUTE PROCEDURE public.handle_updated_at();
+
+DROP TRIGGER IF EXISTS tr_rfqs_updated_at ON public.rfqs;
 CREATE TRIGGER tr_rfqs_updated_at BEFORE UPDATE ON public.rfqs FOR EACH ROW EXECUTE PROCEDURE public.handle_updated_at();
+
+-- ==============================================================================
+-- Trigger: Automatic Profile Creation on Supabase Auth Signup
+-- ==============================================================================
+CREATE OR REPLACE FUNCTION public.handle_new_user()
+RETURNS TRIGGER AS $$
+BEGIN
+    INSERT INTO public.profiles (id, full_name, phone, role)
+    VALUES (
+        NEW.id,
+        COALESCE(NEW.raw_user_meta_data->>'full_name', NEW.email),
+        NEW.raw_user_meta_data->>'phone',
+        COALESCE(NEW.raw_user_meta_data->>'role', 'customer')
+    )
+    ON CONFLICT (id) DO NOTHING;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql SECURITY DEFINER SET search_path = public;
+
+DROP TRIGGER IF EXISTS on_auth_user_created ON auth.users;
+CREATE TRIGGER on_auth_user_created
+    AFTER INSERT ON auth.users
+    FOR EACH ROW EXECUTE PROCEDURE public.handle_new_user();

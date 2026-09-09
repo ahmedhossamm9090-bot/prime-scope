@@ -170,6 +170,34 @@ function resetAllFilters() {
   renderProducts();
 }
 
+// Stone Image Resolution Helpers
+function getProductMainImageUrl(product) {
+  if (!product || !product.images) return null;
+  let imgs = product.images;
+  if (typeof imgs === 'string' && imgs.trim()) {
+    try { imgs = JSON.parse(imgs); } catch(e) { if (imgs.startsWith('http')) return imgs; }
+  }
+  if (!Array.isArray(imgs) || imgs.length === 0) return null;
+  const first = imgs[0];
+  if (typeof first === 'string' && first.startsWith('http')) return first;
+  if (first && typeof first === 'object' && first.url && typeof first.url === 'string' && first.url.startsWith('http')) return first.url;
+  return null;
+}
+
+function getProductAllImageUrls(product) {
+  if (!product || !product.images) return [];
+  let imgs = product.images;
+  if (typeof imgs === 'string' && imgs.trim()) {
+    try { imgs = JSON.parse(imgs); } catch(e) { if (imgs.startsWith('http')) return [imgs]; }
+  }
+  if (!Array.isArray(imgs)) return [];
+  return imgs.map(img => {
+    if (typeof img === 'string' && img.startsWith('http')) return img;
+    if (img && typeof img === 'object' && img.url && typeof img.url === 'string' && img.url.startsWith('http')) return img.url;
+    return null;
+  }).filter(Boolean);
+}
+
 // Filter and Render Products Grid
 function renderProducts() {
   const grid = document.getElementById('productsGrid');
@@ -219,10 +247,12 @@ function renderProducts() {
     const usage = currentLang === 'ar' ? product.usage : product.usageEn;
     const t = TRANSLATIONS[currentLang];
     const isCompared = comparisonList.some(item => item.id === product.id);
+    const mainImg = getProductMainImageUrl(product);
 
     return `
       <div class="product-card">
         <div class="card-sample" style="background: ${product.textureGrad};" onclick="openStoneDetail('${product.id}')">
+          ${mainImg ? `<img src="${mainImg}" alt="${name}" class="card-sample-img" loading="lazy" onerror="this.remove()">` : ''}
           <span class="sample-badge">${product.priceCategory || 'مميز'}</span>
           <button class="btn-compare-card ${isCompared ? 'active' : ''}" onclick="event.stopPropagation(); toggleCompareStone('${product.id}')">
             ${isCompared ? t.btnCompareAdded : '+ ' + t.btnCompareAdd}
@@ -310,17 +340,32 @@ function openStoneDetail(productId) {
   const t = TRANSLATIONS[currentLang];
   const isCompared = comparisonList.some(item => item.id === product.id);
 
+  const imageUrls = getProductAllImageUrls(product);
+  const hasUploadedImages = imageUrls.length > 0;
+
   body.innerHTML = `
     <div class="stone-detail-grid">
       <div>
-        <div class="stone-gallery-preview" style="background: ${product.textureGrad};">
-          <span class="sample-badge">${product.priceCategory || 'VIP'}</span>
+        <div class="stone-gallery-preview" style="background: ${product.textureGrad}; position: relative; overflow: hidden; border-radius: var(--radius-md);">
+          ${hasUploadedImages ? `<img id="detailMainPreviewImg" src="${imageUrls[0]}" alt="${name}" style="width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0;" onerror="this.style.display='none'">` : ''}
+          <span class="sample-badge" style="z-index: 2;">${product.priceCategory || 'VIP'}</span>
         </div>
-        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem;">
-          <div style="height: 65px; border-radius: 8px; border: 1px solid var(--border-gold); background: ${product.textureGrad};" title="Slab View"></div>
-          <div style="height: 65px; border-radius: 8px; border: 1px solid var(--border-gold); background: radial-gradient(circle, ${product.colorCode || '#fff'} 0%, #0f172a 90%);" title="Macro Veining"></div>
-          <div style="height: 65px; border-radius: 8px; border: 1px solid var(--border-gold); background: linear-gradient(to right, #0a0d14, ${product.colorCode || '#d4af37'});" title="Architecture Mockup"></div>
-        </div>
+        ${hasUploadedImages ? `
+          <div style="display: grid; grid-template-columns: repeat(${Math.min(imageUrls.length, 4)}, 1fr); gap: 0.5rem; margin-top: 0.5rem;">
+            ${imageUrls.map((url, idx) => `
+              <div onclick="const m = document.getElementById('detailMainPreviewImg'); if(m){ m.src='${url}'; m.style.display='block'; }" 
+                   style="height: 65px; border-radius: 8px; border: 1px solid var(--border-gold); overflow: hidden; cursor: pointer; background: #0f172a; position: relative;" title="صورة ${idx + 1}">
+                <img src="${url}" alt="Thumbnail ${idx + 1}" style="width: 100%; height: 100%; object-fit: cover;">
+              </div>
+            `).join('')}
+          </div>
+        ` : `
+          <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem; margin-top: 0.5rem;">
+            <div style="height: 65px; border-radius: 8px; border: 1px solid var(--border-gold); background: ${product.textureGrad};" title="Slab View"></div>
+            <div style="height: 65px; border-radius: 8px; border: 1px solid var(--border-gold); background: radial-gradient(circle, ${product.colorCode || '#fff'} 0%, #0f172a 90%);" title="Macro Veining"></div>
+            <div style="height: 65px; border-radius: 8px; border: 1px solid var(--border-gold); background: linear-gradient(to right, #0a0d14, ${product.colorCode || '#d4af37'});" title="Architecture Mockup"></div>
+          </div>
+        `}
         <div style="margin-top: 1rem;">
           <button class="btn-primary" style="width: 100%; margin-bottom: 0.5rem;" onclick="openQuoteModal('${product.id}'); closeStoneDetail();">
             <span>📋</span> ${t.btnRequestThis}

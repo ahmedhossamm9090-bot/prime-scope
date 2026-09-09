@@ -4,9 +4,9 @@
 // ==============================================================================
 
 window.PRIME_CONFIG = {
-  // Replace with your actual Supabase Project URL & Anon Key from your Supabase Dashboard
-  SUPABASE_URL: window.ENV?.SUPABASE_URL || "https://your-project-ref.supabase.co",
-  SUPABASE_ANON_KEY: window.ENV?.SUPABASE_ANON_KEY || "your-anon-key-here",
+  // Supabase Project URL & Anon Key from your Supabase Dashboard
+  SUPABASE_URL: window.ENV?.SUPABASE_URL || "https://vkpbcjjpoiktraiimhkf.supabase.co",
+  SUPABASE_ANON_KEY: window.ENV?.SUPABASE_ANON_KEY || "sb_publishable_Ws1bfQcuKimvf5fyHqRbRw_OnxpIPv9",
   
   // Storage Bucket Names
   STORAGE_BUCKETS: {
