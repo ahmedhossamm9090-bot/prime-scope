@@ -7,6 +7,9 @@
   const ApiService = {
     // 1. Fetch Categories
     getCategories: async function() {
+      if (window.PrimeSupabase?.waitForClient) {
+        await window.PrimeSupabase.waitForClient(3000);
+      }
       const client = window.PrimeSupabase?.getClient();
       if (window.PrimeSupabase?.isReady()) {
         try {
@@ -35,6 +38,9 @@
 
     // 2. Fetch Materials (Stone Catalog)
     getMaterials: async function() {
+      if (window.PrimeSupabase?.waitForClient) {
+        await window.PrimeSupabase.waitForClient(3000);
+      }
       const client = window.PrimeSupabase?.getClient();
       if (window.PrimeSupabase?.isReady()) {
         try {
@@ -44,6 +50,7 @@
             .eq('is_active', true);
 
           if (!error && data && data.length > 0) {
+            return data.map(m => {
               let imgs = [];
               if (Array.isArray(m.images)) {
                 imgs = m.images;
@@ -93,6 +100,9 @@
 
     // 3. Fetch Showcase Projects
     getProjects: async function(category = 'all') {
+      if (window.PrimeSupabase?.waitForClient) {
+        await window.PrimeSupabase.waitForClient(3000);
+      }
       const client = window.PrimeSupabase?.getClient();
       if (window.PrimeSupabase?.isReady()) {
         try {

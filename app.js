@@ -54,6 +54,10 @@ document.addEventListener('DOMContentLoaded', async () => {
 async function loadDynamicData() {
   if (typeof window.PrimeAPI !== 'undefined') {
     try {
+      if (window.PrimeSupabase && typeof window.PrimeSupabase.waitForClient === 'function') {
+        await window.PrimeSupabase.waitForClient(3500);
+      }
+
       const [cats, mats, projs] = await Promise.all([
         window.PrimeAPI.getCategories(),
         window.PrimeAPI.getMaterials(),
@@ -61,7 +65,10 @@ async function loadDynamicData() {
       ]);
 
       if (cats && cats.length > 0) appCategories = cats;
-      if (mats && mats.length > 0) appMaterials = mats;
+      if (mats && mats.length > 0) {
+        appMaterials = mats;
+        console.log(`⚡ [Prime Scope] Successfully synchronized ${mats.length} materials from Supabase.`);
+      }
       if (projs && projs.length > 0) appProjects = projs;
 
       // Re-render components with synchronized data
@@ -69,7 +76,7 @@ async function loadDynamicData() {
       renderProducts();
       renderProjects('all');
     } catch (err) {
-      console.log("ℹ️ [Prime Scope] Using cached local database dataset.");
+      console.warn("ℹ️ [Prime Scope] Error syncing dynamic data, using local dataset:", err);
     }
   }
 }

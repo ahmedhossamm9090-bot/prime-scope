@@ -5,34 +5,40 @@
   let supabaseInstance = null;
   let isConfigured = false;
 
+  // Default credentials fallback (prevents breakdown if browser caches older config.js)
+  const FALLBACK_URL = "https://vkpbcjjpoiktraiimhkf.supabase.co";
+  const FALLBACK_KEY = "sb_publishable_Ws1bfQcuKimvf5fyHqRbRw_OnxpIPv9";
+
   function initSupabase() {
-    const config = window.PRIME_CONFIG;
-    if (!config) return null;
+    const config = window.PRIME_CONFIG || {};
 
-    const url = config.SUPABASE_URL;
-    const key = config.SUPABASE_ANON_KEY;
+    let url = config.SUPABASE_URL;
+    let key = config.SUPABASE_ANON_KEY;
 
-    // Check if real credentials are provided (not placeholders)
-    if (url && key && !url.includes("your-project-ref") && !key.includes("your-anon-key")) {
-      if (typeof window.supabase !== 'undefined' && typeof window.supabase.createClient === 'function') {
-        try {
-          supabaseInstance = window.supabase.createClient(url, key, {
-            auth: {
-              persistSession: true,
-              autoRefreshToken: true
-            }
-          });
-          isConfigured = true;
-          console.log("⚡ [Prime Scope] Supabase client initialized successfully.");
-        } catch (e) {
-          console.warn("⚠️ [Prime Scope] Error initializing Supabase:", e);
-          isConfigured = false;
-        }
-      } else {
-        console.warn("⚠️ [Prime Scope] Supabase CDN library not loaded yet.");
+    // If missing or using old placeholder from browser cache, automatically use active project credentials
+    if (!url || url.includes("your-project-ref")) {
+      url = FALLBACK_URL;
+    }
+    if (!key || key.includes("your-anon-key")) {
+      key = FALLBACK_KEY;
+    }
+
+    if (typeof window.supabase !== 'undefined' && typeof window.supabase.createClient === 'function') {
+      try {
+        supabaseInstance = window.supabase.createClient(url, key, {
+          auth: {
+            persistSession: true,
+            autoRefreshToken: true
+          }
+        });
+        isConfigured = true;
+        console.log("⚡ [Prime Scope] Supabase client initialized successfully.");
+      } catch (e) {
+        console.warn("⚠️ [Prime Scope] Error initializing Supabase:", e);
+        isConfigured = false;
       }
     } else {
-      console.log("ℹ️ [Prime Scope] Running in Offline / Built-in Data mode (Supabase credentials not configured yet).");
+      console.warn("⚠️ [Prime Scope] Supabase CDN library not loaded yet.");
       isConfigured = false;
     }
 
@@ -52,6 +58,15 @@
         initSupabase();
       }
       return isConfigured && supabaseInstance !== null;
+    },
+    waitForClient: async function(timeoutMs = 4000) {
+      const start = Date.now();
+      while (Date.now() - start < timeoutMs) {
+        const client = this.getClient();
+        if (client && isConfigured) return client;
+        await new Promise(resolve => setTimeout(resolve, 50));
+      }
+      return this.getClient();
     }
   };
 

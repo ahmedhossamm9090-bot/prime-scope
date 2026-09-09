@@ -21,8 +21,12 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap">
   </noscript>
 
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+
   <!-- Core Styles -->
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v=2.5">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏛️</text></svg>">
 
   <!-- JSON-LD SEO Structured Data -->
@@ -773,19 +777,24 @@
     </div>
   </footer>
 
-  <!-- Scripts: Loaded with defer & in correct dependency order -->
-  <!-- 1. Supabase Official JS SDK from CDN -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
-  <!-- 2. Client Config & Supabase Client Wrapper -->
-  <script src="config.js" defer></script>
-  <script src="supabaseClient.js" defer></script>
+  <!-- Scripts: Loaded with CDN fallback & cache-busting -->
+  <!-- 1. Supabase Official JS SDK from CDN with automatic unpkg fallback -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+    if (typeof window.supabase === 'undefined') {
+      document.write('<script src="https://unpkg.com/@supabase/supabase-js@2"><\/script>');
+    }
+  </script>
+  <!-- 2. Client Config & Supabase Client Wrapper (forced fresh via version tag) -->
+  <script src="config.js?v=2.5"></script>
+  <script src="supabaseClient.js?v=2.5"></script>
   <!-- 3. Base Fallback Data -->
-  <script src="products.js" defer></script>
+  <script src="products.js?v=2.5"></script>
   <!-- 4. API Service Layer -->
-  <script src="api.js" defer></script>
+  <script src="api.js?v=2.5"></script>
   <!-- 5. Translations -->
-  <script src="translations.js" defer></script>
+  <script src="translations.js?v=2.5"></script>
   <!-- 6. Main Application Controller -->
-  <script src="app.js" defer></script>
+  <script src="app.js?v=2.5"></script>
 </body>
 </html>

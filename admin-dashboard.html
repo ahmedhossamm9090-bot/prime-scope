@@ -3,6 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
   <title>لوحة التحكم الإدارية | Prime Scope CMS</title>
   <meta name="description" content="لوحة إدارة المحتوى والمنتجات والتصنيفات لمنصة Prime Scope للرخام والأحجار الطبيعية">
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23d4af37'><polygon points='12 2 2 7 12 12 22 7 12 2'/><polyline points='2 17 12 22 22 17'/><polyline points='2 12 12 17 22 12'/></svg>">
@@ -1079,12 +1082,17 @@
   <!-- ========================================================================= -->
   <!-- SCRIPTS & LOGIC                                                           -->
   <!-- ========================================================================= -->
-  <!-- 1. Supabase CDN -->
+  <!-- 1. Supabase CDN with automatic unpkg fallback -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+    if (typeof window.supabase === 'undefined') {
+      document.write('<script src="https://unpkg.com/@supabase/supabase-js@2"><\/script>');
+    }
+  </script>
   
-  <!-- 2. Local App Config & Supabase Client -->
-  <script src="config.js"></script>
-  <script src="supabaseClient.js"></script>
+  <!-- 2. Local App Config & Supabase Client (cache-busted) -->
+  <script src="config.js?v=2.5"></script>
+  <script src="supabaseClient.js?v=2.5"></script>
 
   <!-- 3. Admin Application Controller -->
   <script>
@@ -1152,17 +1160,32 @@
     // Initialization & Auth Guard
     // ==========================================================================
     async function init() {
-      // 1. Resolve Supabase Client instance
+      // 1. Ensure Supabase SDK is ready (wait up to 3s if CDN was slightly delayed)
+      if (typeof window.supabase === 'undefined') {
+        for (let i = 0; i < 30; i++) {
+          if (typeof window.supabase !== 'undefined') break;
+          await new Promise(r => setTimeout(r, 100));
+        }
+      }
+
+      // 2. Resolve Supabase Client instance
       if (window.PrimeSupabase && typeof window.PrimeSupabase.getClient === 'function') {
         State.supabase = window.PrimeSupabase.getClient();
       }
 
-      if (!State.supabase && window.PRIME_CONFIG) {
-        const url = window.PRIME_CONFIG.SUPABASE_URL;
-        const key = window.PRIME_CONFIG.SUPABASE_ANON_KEY;
-        if (url && key && typeof window.supabase !== 'undefined' && !url.includes("your-project-ref")) {
+      if (!State.supabase) {
+        const url = (window.PRIME_CONFIG?.SUPABASE_URL && !window.PRIME_CONFIG.SUPABASE_URL.includes("your-project-ref"))
+          ? window.PRIME_CONFIG.SUPABASE_URL
+          : "https://vkpbcjjpoiktraiimhkf.supabase.co";
+        const key = (window.PRIME_CONFIG?.SUPABASE_ANON_KEY && !window.PRIME_CONFIG.SUPABASE_ANON_KEY.includes("your-anon-key"))
+          ? window.PRIME_CONFIG.SUPABASE_ANON_KEY
+          : "sb_publishable_Ws1bfQcuKimvf5fyHqRbRw_OnxpIPv9";
+
+        if (typeof window.supabase !== 'undefined' && typeof window.supabase.createClient === 'function') {
           try {
-            State.supabase = window.supabase.createClient(url, key);
+            State.supabase = window.supabase.createClient(url, key, {
+              auth: { persistSession: true, autoRefreshToken: true }
+            });
           } catch (e) {
             console.error("Supabase createClient error:", e);
           }
@@ -1170,10 +1193,10 @@
       }
 
       if (!State.supabase) {
-        console.warn("⚠️ Supabase Client is not initialized. Please verify config.js credentials.");
+        console.warn("⚠️ Supabase Client is not initialized.");
       }
 
-      // 2. Check active session
+      // 3. Check active session
       await checkSession();
     }
 
@@ -1245,8 +1268,26 @@
       }
 
       if (!State.supabase) {
+        if (typeof window.supabase !== 'undefined' && typeof window.supabase.createClient === 'function') {
+          try {
+            State.supabase = window.supabase.createClient(
+              "https://vkpbcjjpoiktraiimhkf.supabase.co",
+              "sb_publishable_Ws1bfQcuKimvf5fyHqRbRw_OnxpIPv9",
+              { auth: { persistSession: true, autoRefreshToken: true } }
+            );
+          } catch(e) {
+            console.error("Instant createClient error:", e);
+          }
+        }
+      }
+
+      if (!State.supabase) {
         errorBox.classList.remove('hidden');
-        errorMsg.textContent = "لم يتم تهيئة الاتصال بـ Supabase. يرجى مراجعة ملف config.js.";
+        if (typeof window.supabase === 'undefined') {
+          errorMsg.textContent = "تعذر تحميل مكتبة الاتصال بسيرفر Supabase (قد يكون هناك حجب أو بطء في شبكة الإنترنت). يرجى التحقق من اتصال الإنترنت.";
+        } else {
+          errorMsg.textContent = "لم يتم تهيئة الاتصال بـ Supabase. يرجى تحديث الصفحة بالكامل (Ctrl+F5).";
+        }
         return;
       }
 
