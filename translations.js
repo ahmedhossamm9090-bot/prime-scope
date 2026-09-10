@@ -2,6 +2,13 @@
 
 const TRANSLATIONS = {
   ar: {
+    // Top Banner
+    bannerBadge: '🇸🇦 عروض اليوم الوطني 96 في Prime Scope 🇸🇦',
+    bannerDiscount: 'تخفيضات تصل إلى <strong>9.6%</strong>',
+    bannerOffers: 'عروض خاصة على الكميات',
+    bannerDate: 'حتى 30/9/2026',
+    bannerPatriot: 'دام عزك يا وطن 🇸🇦',
+
     // Brand & Navigation
     brandName: 'برايم سكوب - PRIME SCOPE',
     brandTagline: 'منصة برايم سكوب للرخام والحجر الطبيعي المعمارية الفاخرة',
@@ -174,6 +181,13 @@ const TRANSLATIONS = {
   },
 
   en: {
+    // Top Banner
+    bannerBadge: '🇸🇦 Saudi National Day 96 Offers 🇸🇦',
+    bannerDiscount: 'Discounts up to <strong>9.6%</strong>',
+    bannerOffers: 'Special offers on bulk quantities',
+    bannerDate: 'Valid until 30/9/2026',
+    bannerPatriot: 'Long Live Our Nation 🇸🇦',
+
     // Brand & Navigation
     brandName: 'PRIME SCOPE',
     brandTagline: 'Luxury Architectural Natural Stone & Marble Platform',
