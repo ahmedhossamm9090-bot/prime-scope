@@ -362,7 +362,7 @@ function openStoneDetail(productId) {
             ${imageUrls.map((url, idx) => `
               <div onclick="const m = document.getElementById('detailMainPreviewImg'); if(m){ m.src='${url}'; m.style.display='block'; }" 
                    style="height: 65px; border-radius: 8px; border: 1px solid var(--border-gold); overflow: hidden; cursor: pointer; background: #0f172a; position: relative;" title="صورة ${idx + 1}">
-                <img src="${url}" alt="Thumbnail ${idx + 1}" style="width: 100%; height: 100%; object-fit: cover;">
+                <img src="${url}" alt="${name} - تفاصيل وصور المنتج ${idx + 1}" style="width: 100%; height: 100%; object-fit: cover;">
               </div>
             `).join('')}
           </div>

@@ -3,8 +3,8 @@
 const TRANSLATIONS = {
   ar: {
     // Brand & Navigation
-    brandName: 'PRIME SCOPE',
-    brandTagline: 'منصة الرخام والحجر الطبيعي المعمارية الفاخرة',
+    brandName: 'برايم سكوب - PRIME SCOPE',
+    brandTagline: 'منصة برايم سكوب للرخام والحجر الطبيعي المعمارية الفاخرة',
     navHome: 'الرئيسية',
     navCatalog: 'كتالوج الخامات',
     navProjects: 'معرض المشاريع',
@@ -18,8 +18,8 @@ const TRANSLATIONS = {
 
     // Hero Section
     heroBadge: '✨ المنصة المعمارية الأولى لتوريد وتكسية الرخام والحجر الطبيعي بالمملكة',
-    heroTitle: 'فخامة <span>الرخام العالمي</span> وهندسة <span>الحجر الطبيعي</span>',
-    heroSubtitle: 'وجهتكم المعتمدة لأكثر من 140 نوعاً من أفخر أحجار ورخام إيطاليا، إسبانيا، تركيا، اليونان، البرتغال، والجرانيت وحجر الرياض ونساح مع أدوات هندسية متطورة لتسعير المشاريع فورياً.',
+    heroTitle: 'فخامة <span>الرخام العالمي</span> وهندسة <span>الحجر الطبيعي</span> مع برايم سكوب',
+    heroSubtitle: 'منصة برايم سكوب (Prime Scope) هي وجهتكم المعتمدة لأكثر من 140 نوعاً من أفخر أحجار ورخام إيطاليا، إسبانيا، تركيا، والجرانيت وحجر الرياض ونساح.',
     heroBtnExplore: 'استكشف كتالوج الخامات',
     heroBtnProjects: 'تصفح المشاريع المنجزة',
     heroBtnQuote: 'طلب تسعير مباشر (RFQ)',
@@ -78,8 +78,8 @@ const TRANSLATIONS = {
     compareRequestAll: 'طلب عرض سعر للخامات المقارنة 📋',
 
     // Projects Showcase (New in v2.0)
-    projectsTitle: '🏛️ معرض المشاريع المعمارية المنجزة',
-    projectsSubtitle: 'نخبة من القصور، الفنادق، والفلل الحديثة التي تم توريد وتكسية رخامها وحجرها عبر Prime Scope.',
+    projectsTitle: '🏛️ معرض مشاريع برايم سكوب المنجزة',
+    projectsSubtitle: 'نخبة من القصور، الفنادق، والفلل الحديثة التي تم توريد وتكسية رخامها وحجرها عبر برايم سكوب.',
     projTabAll: 'جميع المشاريع',
     projTabPalaces: 'قصور وفلل كبرى',
     projTabHotels: 'فنادق ومنتجعات',
@@ -92,7 +92,7 @@ const TRANSLATIONS = {
     btnViewProject: 'استعراض تفاصيل المشروع',
 
     // Guided AI Stone Advisor (New in v2.0)
-    aiTitle: '🤖 المستشار المعماري الذكي (AI Stone Advisor 2.0)',
+    aiTitle: '🤖 المستشار المعماري الذكي من برايم سكوب',
     aiSubtitle: 'احصل على تحليل هندسي فوري يحدد أفضل 3 خامات ملائمة لمشروعك وميزانيتك مع نسبة التوافق.',
     aiStep1Title: '1. ما هو نوع مشروعك؟',
     aiStep2Title: '2. ما هي المساحة المراد تكسيتها؟',
@@ -107,7 +107,7 @@ const TRANSLATIONS = {
     aiFreeChatTab: 'أو اسأل المستشار الذكي بحرية في شات تفاعلي 💬',
 
     // Multi-Zone Calculator (New in v2.0)
-    calcTitle: '📐 حاسبة الأمتار والكميات متعددة المناطق',
+    calcTitle: '📐 حاسبة برايم سكوب للأمتار والكميات',
     calcSubtitle: 'احسب كميات مشروعك بدقة لمختلف الغرف والواجهات مع حساب الهدر الطبيعي للقص.',
     calcAddZoneBtn: '+ إضافة منطقة أو غرفة جديدة',
     calcZoneName: 'اسم المساحة (مثال: الصالة الرئيسية):',
@@ -140,7 +140,7 @@ const TRANSLATIONS = {
     btnSubmitWhatsapp: 'إرسال الطلب واعتماده للواتساب فوراً 💬',
     
     // Tracker Section
-    trackerTitle: '🔍 متابعة حالة عرض السعر والطلبات',
+    trackerTitle: '🔍 متابعة حالة عرض السعر والطلبات مع برايم سكوب',
     trackerSubtitle: 'أدخل الرقم المرجعي لطلبك (RFQ Reference ID) لمعرفة مرحلة التسعير والتوريد الحالية.',
     trackerInputPlaceholder: 'مثال: PS-RFQ-2026-8492',
     trackerBtnSearch: 'استعلام عن الطلب',
@@ -149,7 +149,7 @@ const TRANSLATIONS = {
     trackerStatusReady: 'عرض السعر وجدول التوريد جاهز للإرسال',
 
     // Trust & Why Prime Scope (New in v2.0)
-    whyTitle: '🏆 لماذا تختار منصة Prime Scope؟',
+    whyTitle: '🏆 لماذا تختار منصة برايم سكوب (Prime Scope)؟',
     whySubtitle: 'المعايير الهندسية والاحترافية التي تجعلنا الشريك الأول للمشاريع الفاخرة في المملكة.',
     why1Title: 'توريد مباشر من المحاجر العالمية',
     why1Desc: 'علاقات حصرية مع أعرق محاجر إيطاليا، إسبانيا، تركيا، واليونان والمملكة لضمان جودة النخب الأول.',
