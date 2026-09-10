@@ -186,21 +186,19 @@ button, input, select, textarea {
 }
 
 .brand-logo-img {
-  height: 45px;
+  height: 28px;
   width: auto;
   object-fit: contain;
   transition: transform 0.3s;
-  background: #ffffff; /* white bg for the logo if needed, but the uploaded logo is png, let's see. It's a dark text on white/transparent, wait, the site is dark mode! */
-  /* Wait, the site bg is #0a0d14. The logo image has dark grey text and gold. It might need a white background or glow to be visible. Let's add a subtle white background or glow to it if it's transparent, or just a small white rounded box. */
   background: rgba(255, 255, 255, 0.9);
-  padding: 4px 8px;
-  border-radius: 8px;
+  padding: 2px 6px;
+  border-radius: 6px;
 }
 
 @media (max-width: 480px) {
   .brand-logo-img {
-    height: 38px;
-    padding: 2px 6px;
+    height: 24px;
+    padding: 2px 4px;
   }
 }
 
