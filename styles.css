@@ -73,6 +73,19 @@ button, input, select, textarea {
   max-width: 100%;
 }
 
+/* Accessibility */
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
 /* Container */
 .container {
   width: 100%;
@@ -107,6 +120,45 @@ button, input, select, textarea {
   font-size: 0.92rem;
 }
 
+/* National Day Banner */
+.national-day-banner {
+  background: linear-gradient(90deg, #106634 0%, #178344 50%, #106634 100%);
+  color: #fff;
+  text-align: center;
+  padding: 0.5rem 0;
+  font-size: 0.85rem;
+  font-weight: 700;
+  position: relative;
+  z-index: 101;
+}
+
+.banner-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.banner-badge {
+  color: #fef08a;
+  font-weight: 900;
+}
+
+.banner-action a {
+  text-decoration: underline;
+}
+
+@media (min-width: 768px) {
+  .banner-inner {
+    flex-direction: row;
+    justify-content: center;
+    gap: 1.5rem;
+  }
+  .national-day-banner {
+    font-size: 0.95rem;
+  }
+}
+
 /* Site Header */
 .site-header {
   position: sticky;
@@ -116,6 +168,7 @@ button, input, select, textarea {
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   border-bottom: 1px solid var(--border-gold);
+  transition: all 0.3s ease;
 }
 
 .header-inner {
@@ -123,44 +176,32 @@ button, input, select, textarea {
   align-items: center;
   justify-content: space-between;
   height: 72px;
-  gap: 0.75rem;
+  gap: 0.5rem;
 }
 
 .brand-logo {
   display: flex;
   align-items: center;
-  gap: 0.6rem;
   flex-shrink: 0;
 }
 
-.logo-badge {
-  width: 40px;
-  height: 40px;
-  border-radius: 10px;
-  background: var(--gold-gradient);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #0a0d14;
-  font-weight: 900;
-  font-size: 1.15rem;
-  box-shadow: var(--gold-glow);
+.brand-logo-img {
+  height: 45px;
+  width: auto;
+  object-fit: contain;
+  transition: transform 0.3s;
+  background: #ffffff; /* white bg for the logo if needed, but the uploaded logo is png, let's see. It's a dark text on white/transparent, wait, the site is dark mode! */
+  /* Wait, the site bg is #0a0d14. The logo image has dark grey text and gold. It might need a white background or glow to be visible. Let's add a subtle white background or glow to it if it's transparent, or just a small white rounded box. */
+  background: rgba(255, 255, 255, 0.9);
+  padding: 4px 8px;
+  border-radius: 8px;
 }
 
-.logo-text h1 {
-  font-size: 1.18rem;
-  font-weight: 800;
-  letter-spacing: 0.5px;
-  background: var(--gold-gradient);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  line-height: 1.2;
-}
-
-.logo-text p {
-  font-size: 0.68rem;
-  color: var(--text-muted);
-  white-space: nowrap;
+@media (max-width: 480px) {
+  .brand-logo-img {
+    height: 38px;
+    padding: 2px 6px;
+  }
 }
 
 .nav-links {
@@ -192,21 +233,26 @@ button, input, select, textarea {
 .header-actions {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.4rem;
   flex-shrink: 0;
+  /* Prevent horizontal scroll */
+  max-width: 100%;
 }
 
 .btn-lang {
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid var(--border-gold);
   color: var(--text-main);
-  padding: 0.45rem 0.8rem;
+  padding: 0.4rem 0.6rem;
   border-radius: 20px;
   cursor: pointer;
   font-weight: 700;
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   white-space: nowrap;
   transition: background 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 4px;
 }
 
 .btn-lang:hover {
@@ -217,16 +263,29 @@ button, input, select, textarea {
   background: var(--gold-gradient);
   color: #0a0d14;
   font-weight: 800;
-  padding: 0.5rem 1rem;
+  padding: 0.4rem 0.8rem;
   border-radius: 20px;
   border: none;
   cursor: pointer;
-  font-size: 0.82rem;
+  font-size: 0.75rem;
   display: flex;
   align-items: center;
   gap: 0.35rem;
   white-space: nowrap;
   box-shadow: var(--gold-glow);
+}
+
+@media (max-width: 480px) {
+  .btn-rfq-nav span:last-child {
+    display: none; /* Hide text on very small screens, keep icon */
+  }
+  .btn-rfq-nav {
+    padding: 0.4rem;
+    border-radius: 50%;
+    width: 34px;
+    height: 34px;
+    justify-content: center;
+  }
 }
 
 /* Hero Section */
