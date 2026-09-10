@@ -192,6 +192,7 @@ button, input, select, textarea {
   transition: transform 0.3s;
   /* Added a subtle glow instead of white box to make the dark logo visible on dark bg */
   filter: drop-shadow(0 0 8px rgba(212,175,55,0.3));
+  border-radius: 6px;
 }
 
 @media (max-width: 480px) {
