@@ -186,19 +186,20 @@ button, input, select, textarea {
 }
 
 .brand-logo-img {
-  height: 28px;
+  height: 32px;
   width: auto;
   object-fit: contain;
   transition: transform 0.3s;
-  background: rgba(255, 255, 255, 0.9);
-  padding: 2px 6px;
-  border-radius: 6px;
+  /* Added a subtle glow instead of white box to make the dark logo visible on dark bg */
+  filter: drop-shadow(0 0 8px rgba(212,175,55,0.3));
 }
 
 @media (max-width: 480px) {
   .brand-logo-img {
-    height: 24px;
-    padding: 2px 4px;
+    height: 28px;
+  }
+  .logo-text h1 {
+    font-size: 0.85rem !important;
   }
 }
 
