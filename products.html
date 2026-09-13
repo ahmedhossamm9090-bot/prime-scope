@@ -41,7 +41,7 @@
   </noscript>
 
   <!-- Core Styles -->
-  <link rel="stylesheet" href="styles.css?v=3.1">
+  <link rel="stylesheet" href="styles.css?v=3.3">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏛️</text></svg>">
 
   <!-- JSON-LD SEO Structured Data -->
@@ -613,7 +613,17 @@
   <script src="app.js?v=3.0"></script>
 
 <script>
-  function toggleMobileMenu(forceState) {
+  
+  function toggleTheme() {
+    const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+    document.documentElement.setAttribute('data-theme', isLight ? 'dark' : 'light');
+    localStorage.setItem('primeTheme', isLight ? 'dark' : 'light');
+    const btn = document.getElementById('themeToggleBtn');
+    if (btn) {
+      btn.innerHTML = isLight ? '☀️' : '🌙';
+    }
+  }
+\n  function toggleMobileMenu(forceState) {
     const nav = document.querySelector('.nav-links');
     if (!nav) return;
     if (forceState === false) {
