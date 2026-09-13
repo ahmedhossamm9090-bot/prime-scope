@@ -41,7 +41,7 @@
   </noscript>
 
   <!-- Core Styles -->
-  <link rel="stylesheet" href="styles.css?v=2.7">
+  <link rel="stylesheet" href="styles.css?v=2.8">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏛️</text></svg>">
 
   <!-- JSON-LD SEO Structured Data -->
@@ -596,6 +596,19 @@
   <!-- 5. Translations -->
   <script src="translations.js?v=2.5"></script>
   <!-- 6. Main Application Controller -->
-  <script src="app.js?v=2.5"></script>
+  <script src="app.js?v=2.8"></script>
+
+<script>
+  function toggleMobileMenu(forceState) {
+    const nav = document.querySelector('.nav-links');
+    if (!nav) return;
+    if (forceState === false) {
+      nav.classList.remove('active');
+    } else {
+      nav.classList.toggle('active');
+    }
+  }
+</script>
+
 </body>
 </html>

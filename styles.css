@@ -1711,3 +1711,4 @@ body.lang-en .floating-whatsapp {
     padding: 0.5rem 0;
   }
 }
+@media (max-width: 1079px) { .nav-links { z-index: 9999 !important; } }
