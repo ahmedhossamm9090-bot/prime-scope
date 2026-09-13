@@ -1200,3 +1200,4 @@ function setupEventListeners() {
     });
   }
 }
+function toggleMobileMenu(forceState) { const nav = document.querySelector('.nav-links'); if (!nav) return; if (forceState === false) { nav.classList.remove('active'); } else { nav.classList.toggle('active'); } }

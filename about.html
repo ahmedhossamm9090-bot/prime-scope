@@ -72,16 +72,14 @@
        ========================================== -->
   <div class="national-day-banner">
     <div class="container banner-inner" style="display: block; overflow: hidden; padding: 0.2rem 0;">
-      <marquee behavior="scroll" direction="right" scrollamount="6">
-        <div style="text-align: center; line-height: 1.8; direction: inherit;">
-          <span class="banner-badge" data-i18n="bannerBadge">🇸🇦 عروض اليوم الوطني 96 في Prime Scope 🇸🇦</span> &nbsp;|&nbsp; 
-          <span class="banner-text" data-i18n="bannerDiscount">تخفيضات تصل إلى <strong>9.6%</strong></span> &nbsp;|&nbsp; 
-          <span class="banner-text" data-i18n="bannerOffers">عروض خاصة على الكميات</span> &nbsp;|&nbsp; 
-          <span class="banner-action" data-i18n="bannerDate">حتى 30/9/2026</span>
-          <br>
-          <span style="color: #fef08a; font-weight: bold; font-size: 1.05rem;" data-i18n="bannerPatriot">دام عزك يا وطن 🇸🇦</span>
-        </div>
-      </marquee>
+      <marquee behavior="scroll" direction="right" scrollamount="6" style="font-size: 0.85rem; font-weight: 700;">
+  <span style="margin: 0 2rem;">🇸🇦 عروض اليوم الوطني 96 في Prime Scope 🇸🇦</span>
+  <span style="margin: 0 2rem; color: #ffeb3b;">تخفيضات تصل إلى 9.5%</span>
+  <span style="margin: 0 2rem;">دام عزك يا وطن 🇸🇦</span>
+  <span style="margin: 0 2rem; color: #4caf50;">عروض خاصة على الكميات</span>
+  <span style="margin: 0 2rem;">العروض سارية حتى 30/9/2026</span>
+  <span style="margin: 0 2rem; font-weight: bold;">للاستفسار والطلبات: <span dir="ltr">00966555046937</span></span>
+</marquee>
     </div>
   </div>
 
@@ -102,19 +100,20 @@
       <!-- Navigation Links -->
       <nav>
         <ul class="nav-links">
-          <li><a href="index.html" class="nav-link active" data-i18n="navHome">الرئيسية</a></li>
-          <li><a href="products.html" class="nav-link" data-i18n="navCatalog">كتالوج الخامات</a></li>
-          <li><a href="projects.html" class="nav-link" data-i18n="navProjects">معرض المشاريع</a></li>
-          <li><a href="products.html#calculator" class="nav-link" data-i18n="navCalculator">حاسبة الأمتار</a></li>
-          <li><a href="products.html#consultant" class="nav-link" data-i18n="navConsultant">المستشار الذكي</a></li>
-          <li><a href="contact.html#tracker" class="nav-link" data-i18n="navTracker">تتبع الطلبات</a></li>
-          <li><a href="about.html" class="nav-link" data-i18n="navAbout">من نحن</a></li>
-          <li><a href="contact.html" class="nav-link" data-i18n="navContact">تواصل معنا</a></li>
+          <li><a href="index.html" class="nav-link active" onclick="toggleMobileMenu(false)" data-i18n="navHome">الرئيسية</a></li>
+          <li><a href="products.html" class="nav-link" onclick="toggleMobileMenu(false)" data-i18n="navCatalog">كتالوج الخامات</a></li>
+          <li><a href="projects.html" class="nav-link" onclick="toggleMobileMenu(false)" data-i18n="navProjects">معرض المشاريع</a></li>
+          <li><a href="products.html#calculator" class="nav-link" onclick="toggleMobileMenu(false)" data-i18n="navCalculator">حاسبة الأمتار</a></li>
+          <li><a href="products.html#consultant" class="nav-link" onclick="toggleMobileMenu(false)" data-i18n="navConsultant">المستشار الذكي</a></li>
+          <li><a href="contact.html#tracker" class="nav-link" onclick="toggleMobileMenu(false)" data-i18n="navTracker">تتبع الطلبات</a></li>
+          <li><a href="about.html" class="nav-link" onclick="toggleMobileMenu(false)" data-i18n="navAbout">من نحن</a></li>
+          <li><a href="contact.html" class="nav-link" onclick="toggleMobileMenu(false)" data-i18n="navContact">تواصل معنا</a></li>
         </ul>
       </nav>
 
       <!-- Header Actions -->
       <div class="header-actions">
+        <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
         <button id="langToggleBtn" class="btn-lang" onclick="toggleLanguage()">
           English 🇬🇧
         </button>
