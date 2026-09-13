@@ -103,7 +103,7 @@
       <nav>
         <ul class="nav-links">
           <li><a href="index.html" class="nav-link active" onclick="toggleMobileMenu(false)" data-i18n="navHome">الرئيسية</a></li>
-          <li><a href="products.html" class="nav-link" onclick="toggleMobileMenu(false)" data-i18n="navCatalog">كتالوج الخامات</a></li>
+          <li><a href="#catalog" class="nav-link" onclick="toggleMobileMenu(false)" data-i18n="navCatalog">كتالوج الخامات</a></li>
           <li><a href="projects.html" class="nav-link" onclick="toggleMobileMenu(false)" data-i18n="navProjects">معرض المشاريع</a></li>
           <li><a href="products.html#calculator" class="nav-link" onclick="toggleMobileMenu(false)" data-i18n="navCalculator">حاسبة الأمتار</a></li>
           <li><a href="products.html#consultant" class="nav-link" onclick="toggleMobileMenu(false)" data-i18n="navConsultant">المستشار الذكي</a></li>
@@ -154,7 +154,7 @@
       </p>
 
       <div class="hero-cta">
-        <a href="products.html" class="btn-primary">
+        <a href="#catalog" class="btn-primary">
           <span>🏛️</span>
           <span data-i18n="heroBtnExplore">استكشف كتالوج الخامات</span>
         </a>
@@ -184,6 +184,85 @@
         </div>
       </div>
 
+    </div>
+  </section>
+
+  <!-- ==========================================
+       Materials / Catalog Section
+       ========================================== -->
+<section id="catalog" class="filter-section">
+    <div class="container">
+      
+      <!-- Live Search Box -->
+      <div class="search-box-wrap">
+        <input 
+          type="text" 
+          id="searchInput" 
+          class="search-input" 
+          placeholder="ابحث عن الخامة بالاسم، اللون، الاستخدام أو المنشأ (مثال: كالاكاتا، حجر نساح، جالاكسي)..." 
+          data-i18n-placeholder="searchPlaceholder"
+        >
+        <span class="search-icon">🔍</span>
+      </div>
+
+      <!-- Origin Category Filter Tabs -->
+      <div id="categoriesScroll" class="category-scroll">
+        <!-- Rendered dynamically -->
+      </div>
+
+      <!-- Advanced Multi-Filter Drawer -->
+      <div class="filter-drawer">
+        <div class="filter-group">
+          <label data-i18n="filterTypeLabel">نوع الخامة:</label>
+          <select id="filterTypeSelect" class="filter-select">
+            <!-- Dynamic options -->
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <label data-i18n="filterColorLabel">اللون السائد:</label>
+          <select id="filterColorSelect" class="filter-select">
+            <!-- Dynamic options -->
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <label data-i18n="filterPriceLabel">مستوى الفخامة والسعر:</label>
+          <select id="filterPriceSelect" class="filter-select">
+            <option value="all" data-i18n="filterAll">جميع المستويات</option>
+            <option value="VIP">فئة VIP الفاخرة</option>
+            <option value="Ultra VIP">Ultra VIP (أعلى فئات القصور)</option>
+            <option value="مميز">فئة مميزة (Premium)</option>
+            <option value="شائع">فئات شائعة ومطلوبة</option>
+            <option value="اقتصادي">فئات اقتصادية راقية</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Results Meta Information & Reset Button -->
+      <div class="results-meta">
+        <div>
+          <span data-i18n="showingResults">عرض</span>: 
+          <strong id="productsCountDisplay">149</strong> 
+          <span data-i18n="itemsCount">صنف من خامات النخبة</span>
+        </div>
+        <button class="btn-reset-filters" onclick="resetAllFilters()" data-i18n="filterResetBtn">
+          🔄 إعادة ضبط الفلاتر
+        </button>
+      </div>
+
+    </div>
+  </section>
+<section class="products-section">
+    <div class="container">
+      <div id="productsGrid" class="products-grid">
+        <!-- Rendered dynamically -->
+      </div>
+
+      <!-- Load More Container -->
+      <div id="loadMoreContainer" class="load-more-wrap">
+        <!-- Rendered dynamically -->
+      </div>
     </div>
   </section>
 
