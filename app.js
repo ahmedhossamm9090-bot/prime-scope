@@ -287,7 +287,7 @@ function renderProducts() {
     return `
       <div class="product-card">
         <div class="card-sample" style="background: ${product.textureGrad};" onclick="openStoneDetail('${product.id}')">
-          ${mainImg ? `<img src="${mainImg}" alt="${name}" class="card-sample-img" loading="lazy" onerror="this.remove()">` : ''}
+          ${mainImg ? `<img src="${mainImg}" alt="${name}" class="card-sample-img"  >` : ''}
           <span class="sample-badge">${product.priceCategory || 'مميز'}</span>
           <button class="btn-compare-card ${isCompared ? 'active' : ''}" onclick="event.stopPropagation(); toggleCompareStone('${product.id}')">
             ${isCompared ? t.btnCompareAdded : '+ ' + t.btnCompareAdd}
@@ -382,7 +382,7 @@ function openStoneDetail(productId) {
     <div class="stone-detail-grid">
       <div>
         <div class="stone-gallery-preview" style="background: ${product.textureGrad}; position: relative; overflow: hidden; border-radius: var(--radius-md);">
-          ${hasUploadedImages ? `<img id="detailMainPreviewImg" src="${imageUrls[0]}" alt="${name}" style="width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0;" onerror="this.style.display='none'">` : ''}
+          ${hasUploadedImages ? `<img id="detailMainPreviewImg" src="${imageUrls[0]}" alt="${name}" style="width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0;" >` : ''}
           <span class="sample-badge" style="z-index: 2;">${product.priceCategory || 'VIP'}</span>
         </div>
         ${hasUploadedImages ? `
