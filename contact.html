@@ -128,51 +128,32 @@
   </header>
 
   <!-- ==========================================
-       2. Hero Section
+       7. RFQ & Order Status Tracker
        ========================================== -->
-  <section id="home" class="hero-section">
+  <section id="tracker" class="tracker-section">
     <div class="container">
       
-      <div class="hero-badge">
-        <span data-i18n="heroBadge">✨ المنصة المعمارية الأولى لتوريد وتكسية الرخام والحجر الطبيعي بالمملكة</span>
-      </div>
+      <div class="tracker-card">
+        <h2 style="font-size: 1.4rem; font-weight: 900; margin-bottom: 0.4rem;" data-i18n="trackerTitle">🔍 متابعة حالة عرض السعر والطلبات مع برايم سكوب</h2>
+        <p style="color: var(--text-muted); font-size: 0.85rem;" data-i18n="trackerSubtitle">
+          أدخل الرقم المرجعي لطلبك (RFQ Reference ID) لمعرفة مرحلة التسعير والتوريد الحالية.
+        </p>
 
-      <h2 class="hero-title" data-i18n="heroTitle">
-        فخامة <span>الرخام العالمي</span> وهندسة <span>الحجر الطبيعي</span>
-      </h2>
-
-      <p class="hero-subtitle" data-i18n="heroSubtitle">
-        وجهتكم المعتمدة لأكثر من 140 نوعاً من أفخر أحجار ورخام إيطاليا، إسبانيا، تركيا، اليونان، البرتغال، والجرانيت وحجر الرياض ونساح مع أدوات هندسية متطورة لتسعير المشاريع فورياً.
-      </p>
-
-      <div class="hero-cta">
-        <a href="#catalog" class="btn-primary">
-          <span>🏛️</span>
-          <span data-i18n="heroBtnExplore">استكشف كتالوج الخامات</span>
-        </a>
-        <a href="#projects" class="btn-secondary">
-          <span>🏆</span>
-          <span data-i18n="heroBtnProjects">تصفح المشاريع المنجزة</span>
-        </a>
-      </div>
-
-      <!-- Stats Counters -->
-      <div class="hero-stats">
-        <div class="stat-item">
-          <span class="stat-num">+140</span>
-          <span class="stat-label" data-i18n="heroStatProducts">+140 نوع معتمد</span>
+        <div class="tracker-form">
+          <input 
+            type="text" 
+            id="trackerInput" 
+            class="form-control" 
+            placeholder="مثال: PS-RFQ-2026-8492" 
+            data-i18n-placeholder="trackerInputPlaceholder"
+          >
+          <button class="btn-primary" onclick="trackOrderStatus()" data-i18n="trackerBtnSearch">
+            استعلام عن الطلب
+          </button>
         </div>
-        <div class="stat-item">
-          <span class="stat-num">50+</span>
-          <span class="stat-label" data-i18n="heroStatProjects">مشاريع منفذة بالمملكة</span>
-        </div>
-        <div class="stat-item">
-          <span class="stat-num">8</span>
-          <span class="stat-label" data-i18n="heroStatCountries">8 دول ومصادر عالمية</span>
-        </div>
-        <div class="stat-item">
-          <span class="stat-num">100%</span>
-          <span class="stat-label" data-i18n="heroStatService">توريد وتركيب هندسي</span>
+
+        <div id="trackerStatusDisplay" class="tracker-status-display">
+          <!-- Rendered dynamically -->
         </div>
       </div>
 
@@ -180,79 +161,39 @@
   </section>
 
   <!-- ==========================================
-       8. Why Prime Scope & Quality Authority
+       10. Direct Sales & Contact Section
        ========================================== -->
-  <section class="why-section">
+  <section id="contact" class="contact-section">
     <div class="container">
       
-      <div class="section-header">
-        <h2 data-i18n="whyTitle">🏆 لماذا تختار منصة برايم سكوب (Prime Scope)؟</h2>
-        <p data-i18n="whySubtitle">المعايير الهندسية والاحترافية التي تجعلنا الشريك الأول للمشاريع الفاخرة في المملكة.</p>
-      </div>
+      <div class="contact-card">
+        <h2 style="font-size: clamp(1.4rem, 2.5vw, 2rem); font-weight: 900; margin-bottom: 0.5rem;" data-i18n="contactTitle">تواصل مباشر مع الإدارة والمكتب الفني</h2>
+        <p style="color: var(--text-muted); max-width: 650px; margin-inline: auto; font-size: 0.9rem;" data-i18n="contactSubtitle">
+          فريقنا الهندسي جاهز لتزويدكم بالعينات وعروض الأسعار التنافسية لجميع مشاريع المملكة.
+        </p>
 
-      <div class="why-grid">
-        <div class="why-card">
-          <div class="why-icon">⛏️</div>
-          <h3 data-i18n="why1Title">توريد مباشر من المحاجر العالمية</h3>
-          <p data-i18n="why1Desc">علاقات حصرية مع أعرق محاجر إيطاليا، إسبانيا، تركيا، واليونان والمملكة لضمان جودة النخب الأول.</p>
-        </div>
-
-        <div class="why-card">
-          <div class="why-icon">📐</div>
-          <h3 data-i18n="why2Title">دقة قص بالليزر والووترجيت</h3>
-          <p data-i18n="why2Desc">أحدث خطوط الإنتاج والقص الرقمي بالمليمتر لتنفيذ أعقد لوحات البوكماتش والزخارف الهندسية.</p>
-        </div>
-
-        <div class="why-card">
-          <div class="why-icon">🔬</div>
-          <h3 data-i18n="why3Title">فحص جودة ومعايير أوروبية</h3>
-          <p data-i18n="why3Desc">تدقيق صارم على خلو الألواح من الشروخ والمسامية العالية مع تقديم شهادات المواصفات المعتمدة.</p>
-        </div>
-
-        <div class="why-card">
-          <div class="why-icon">🚛</div>
-          <h3 data-i18n="why4Title">أسطول توريد لكافة مدن المملكة</h3>
-          <p data-i18n="why4Desc">شحن آمن ومؤمن مع رافعات متخصصة إلى موقع مشروعك مباشرة في الرياض، جدة، الدمام، وكافة المناطق.</p>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- ==========================================
-       9. Testimonials Section
-       ========================================== -->
-  <section class="testimonials-section">
-    <div class="container">
-      
-      <div class="section-header">
-        <h2 data-i18n="testimonialsTitle">⭐ ثقة نخبة المهندسين والمطورين</h2>
-        <p data-i18n="testimonialsSubtitle">ماذا يقول كبار المصممين والمقاولين عن تجربتهم مع Prime Scope.</p>
-      </div>
-
-      <div class="testimonials-grid">
-        <div class="testimonial-card">
-          <div>
-            <div class="test-stars">★★★★★</div>
-            <p class="test-text">"تعاملنا مع Prime Scope لتوريد رخام كالاكاتا جولد وبوكماتش لفيلا في حي النخيل بالرياض. دقة الألواح وتطابق العروق فاق توقعات العميل تماماً."</p>
+        <div style="margin: 1.5rem 0;">
+          <span style="color: var(--gold-primary); font-size: 0.9rem; font-weight: 700;" data-i18n="salesManagerTitle">مدير المبيعات والتوريد المباشر:</span>
+          <div style="font-size: 1.5rem; font-weight: 900; letter-spacing: 0.5px; color: #ffffff; margin-top: 0.2rem; direction: ltr;">
+            +966 53 424 8861
           </div>
-          <div class="test-author">— م. عبد الله الشهري / مكتب استشارات معمارية - الرياض</div>
+          <div style="font-size: 1.5rem; font-weight: 900; letter-spacing: 0.5px; color: #ffffff; margin-top: 0.2rem; direction: ltr;">
+            +966 55 504 6937
+          </div>
+          <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.25rem;" data-i18n="locationText">
+            المملكة العربية السعودية — الرياض — توريد لجميع مناطق المملكة
+          </p>
         </div>
 
-        <div class="testimonial-card">
-          <div>
-            <div class="test-stars">★★★★★</div>
-            <p class="test-text">"حجر نساح الطبيعي المنشور من Prime Scope كان الخيار الأنجح لواجهات الفندق لدينا بجدة، عزل حراري فائق ومظهر ناصع وثابت."</p>
-          </div>
-          <div class="test-author">— م. فهد الغامدي / مطور عقاري - جدة</div>
-        </div>
-
-        <div class="testimonial-card">
-          <div>
-            <div class="test-stars">★★★★★</div>
-            <p class="test-text">"سرعة تجهيز عروض الأسعار (RFQ) والحاسبة الهندسية سهلت علينا مراجعة كشوف الكميات وتوريد 3,500 م² من جرانيت بني نجران في زمن قياسي."</p>
-          </div>
-          <div class="test-author">— م. طارق المنصور / شركة مقاولات كبرى - الشرقية</div>
+        <div class="contact-actions">
+          <a href="https://api.whatsapp.com/send?phone=966534248861&text=السلام%20عليكم%20ورحمة%20الله%2C%20أرغب%20في%20الاستفسار%20عن%20توريد%20خامات%20الرخام%20والحجر%20عبر%20Prime%20Scope" target="_blank" class="btn-whatsapp-large">
+            <span>💬</span>
+            <span data-i18n="btnWhatsappDirect">محادثة واتساب فورية 💬</span>
+          </a>
+          <a href="tel:+966534248861" class="btn-call-large">
+            <span>📞</span>
+            <span data-i18n="btnCallNow">اتصال مباشر 📞</span>
+          </a>
         </div>
       </div>
 

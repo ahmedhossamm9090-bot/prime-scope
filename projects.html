@@ -128,132 +128,28 @@
   </header>
 
   <!-- ==========================================
-       2. Hero Section
+       4. Architectural Projects Showcase Gallery
        ========================================== -->
-  <section id="home" class="hero-section">
-    <div class="container">
-      
-      <div class="hero-badge">
-        <span data-i18n="heroBadge">✨ المنصة المعمارية الأولى لتوريد وتكسية الرخام والحجر الطبيعي بالمملكة</span>
-      </div>
-
-      <h2 class="hero-title" data-i18n="heroTitle">
-        فخامة <span>الرخام العالمي</span> وهندسة <span>الحجر الطبيعي</span>
-      </h2>
-
-      <p class="hero-subtitle" data-i18n="heroSubtitle">
-        وجهتكم المعتمدة لأكثر من 140 نوعاً من أفخر أحجار ورخام إيطاليا، إسبانيا، تركيا، اليونان، البرتغال، والجرانيت وحجر الرياض ونساح مع أدوات هندسية متطورة لتسعير المشاريع فورياً.
-      </p>
-
-      <div class="hero-cta">
-        <a href="#catalog" class="btn-primary">
-          <span>🏛️</span>
-          <span data-i18n="heroBtnExplore">استكشف كتالوج الخامات</span>
-        </a>
-        <a href="#projects" class="btn-secondary">
-          <span>🏆</span>
-          <span data-i18n="heroBtnProjects">تصفح المشاريع المنجزة</span>
-        </a>
-      </div>
-
-      <!-- Stats Counters -->
-      <div class="hero-stats">
-        <div class="stat-item">
-          <span class="stat-num">+140</span>
-          <span class="stat-label" data-i18n="heroStatProducts">+140 نوع معتمد</span>
-        </div>
-        <div class="stat-item">
-          <span class="stat-num">50+</span>
-          <span class="stat-label" data-i18n="heroStatProjects">مشاريع منفذة بالمملكة</span>
-        </div>
-        <div class="stat-item">
-          <span class="stat-num">8</span>
-          <span class="stat-label" data-i18n="heroStatCountries">8 دول ومصادر عالمية</span>
-        </div>
-        <div class="stat-item">
-          <span class="stat-num">100%</span>
-          <span class="stat-label" data-i18n="heroStatService">توريد وتركيب هندسي</span>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- ==========================================
-       8. Why Prime Scope & Quality Authority
-       ========================================== -->
-  <section class="why-section">
+  <section id="projects" class="projects-section">
     <div class="container">
       
       <div class="section-header">
-        <h2 data-i18n="whyTitle">🏆 لماذا تختار منصة برايم سكوب (Prime Scope)؟</h2>
-        <p data-i18n="whySubtitle">المعايير الهندسية والاحترافية التي تجعلنا الشريك الأول للمشاريع الفاخرة في المملكة.</p>
+        <h2 data-i18n="projectsTitle">🏛️ معرض مشاريع برايم سكوب المنجزة</h2>
+        <p data-i18n="projectsSubtitle">نخبة من القصور، الفنادق، والفلل الحديثة التي تم توريد وتكسية رخامها وحجرها عبر برايم سكوب.</p>
       </div>
 
-      <div class="why-grid">
-        <div class="why-card">
-          <div class="why-icon">⛏️</div>
-          <h3 data-i18n="why1Title">توريد مباشر من المحاجر العالمية</h3>
-          <p data-i18n="why1Desc">علاقات حصرية مع أعرق محاجر إيطاليا، إسبانيا، تركيا، واليونان والمملكة لضمان جودة النخب الأول.</p>
-        </div>
-
-        <div class="why-card">
-          <div class="why-icon">📐</div>
-          <h3 data-i18n="why2Title">دقة قص بالليزر والووترجيت</h3>
-          <p data-i18n="why2Desc">أحدث خطوط الإنتاج والقص الرقمي بالمليمتر لتنفيذ أعقد لوحات البوكماتش والزخارف الهندسية.</p>
-        </div>
-
-        <div class="why-card">
-          <div class="why-icon">🔬</div>
-          <h3 data-i18n="why3Title">فحص جودة ومعايير أوروبية</h3>
-          <p data-i18n="why3Desc">تدقيق صارم على خلو الألواح من الشروخ والمسامية العالية مع تقديم شهادات المواصفات المعتمدة.</p>
-        </div>
-
-        <div class="why-card">
-          <div class="why-icon">🚛</div>
-          <h3 data-i18n="why4Title">أسطول توريد لكافة مدن المملكة</h3>
-          <p data-i18n="why4Desc">شحن آمن ومؤمن مع رافعات متخصصة إلى موقع مشروعك مباشرة في الرياض، جدة، الدمام، وكافة المناطق.</p>
-        </div>
+      <!-- Filter Tabs -->
+      <div class="projects-filter-bar">
+        <button class="proj-tab-btn active" onclick="filterProjects('all', this)" data-i18n="projTabAll">جميع المشاريع</button>
+        <button class="proj-tab-btn" onclick="filterProjects('palace', this)" data-i18n="projTabPalaces">قصور وفلل كبرى</button>
+        <button class="proj-tab-btn" onclick="filterProjects('hotel', this)" data-i18n="projTabHotels">فنادق ومنتجعات</button>
+        <button class="proj-tab-btn" onclick="filterProjects('villa', this)" data-i18n="projTabVillas">فلل مودرن</button>
+        <button class="proj-tab-btn" onclick="filterProjects('commercial', this)" data-i18n="projTabCommercial">مشاريع تجارية وإدارية</button>
       </div>
 
-    </div>
-  </section>
-
-  <!-- ==========================================
-       9. Testimonials Section
-       ========================================== -->
-  <section class="testimonials-section">
-    <div class="container">
-      
-      <div class="section-header">
-        <h2 data-i18n="testimonialsTitle">⭐ ثقة نخبة المهندسين والمطورين</h2>
-        <p data-i18n="testimonialsSubtitle">ماذا يقول كبار المصممين والمقاولين عن تجربتهم مع Prime Scope.</p>
-      </div>
-
-      <div class="testimonials-grid">
-        <div class="testimonial-card">
-          <div>
-            <div class="test-stars">★★★★★</div>
-            <p class="test-text">"تعاملنا مع Prime Scope لتوريد رخام كالاكاتا جولد وبوكماتش لفيلا في حي النخيل بالرياض. دقة الألواح وتطابق العروق فاق توقعات العميل تماماً."</p>
-          </div>
-          <div class="test-author">— م. عبد الله الشهري / مكتب استشارات معمارية - الرياض</div>
-        </div>
-
-        <div class="testimonial-card">
-          <div>
-            <div class="test-stars">★★★★★</div>
-            <p class="test-text">"حجر نساح الطبيعي المنشور من Prime Scope كان الخيار الأنجح لواجهات الفندق لدينا بجدة، عزل حراري فائق ومظهر ناصع وثابت."</p>
-          </div>
-          <div class="test-author">— م. فهد الغامدي / مطور عقاري - جدة</div>
-        </div>
-
-        <div class="testimonial-card">
-          <div>
-            <div class="test-stars">★★★★★</div>
-            <p class="test-text">"سرعة تجهيز عروض الأسعار (RFQ) والحاسبة الهندسية سهلت علينا مراجعة كشوف الكميات وتوريد 3,500 م² من جرانيت بني نجران في زمن قياسي."</p>
-          </div>
-          <div class="test-author">— م. طارق المنصور / شركة مقاولات كبرى - الشرقية</div>
-        </div>
+      <!-- Projects Grid -->
+      <div id="projectsGrid" class="projects-grid">
+        <!-- Rendered dynamically -->
       </div>
 
     </div>

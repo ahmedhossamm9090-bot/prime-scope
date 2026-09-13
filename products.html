@@ -128,132 +128,269 @@
   </header>
 
   <!-- ==========================================
-       2. Hero Section
+       3. Multi-Faceted Precision Catalog & Filter Section
        ========================================== -->
-  <section id="home" class="hero-section">
+  <section id="catalog" class="filter-section">
     <div class="container">
       
-      <div class="hero-badge">
-        <span data-i18n="heroBadge">✨ المنصة المعمارية الأولى لتوريد وتكسية الرخام والحجر الطبيعي بالمملكة</span>
+      <!-- Live Search Box -->
+      <div class="search-box-wrap">
+        <input 
+          type="text" 
+          id="searchInput" 
+          class="search-input" 
+          placeholder="ابحث عن الخامة بالاسم، اللون، الاستخدام أو المنشأ (مثال: كالاكاتا، حجر نساح، جالاكسي)..." 
+          data-i18n-placeholder="searchPlaceholder"
+        >
+        <span class="search-icon">🔍</span>
       </div>
 
-      <h2 class="hero-title" data-i18n="heroTitle">
-        فخامة <span>الرخام العالمي</span> وهندسة <span>الحجر الطبيعي</span>
-      </h2>
-
-      <p class="hero-subtitle" data-i18n="heroSubtitle">
-        وجهتكم المعتمدة لأكثر من 140 نوعاً من أفخر أحجار ورخام إيطاليا، إسبانيا، تركيا، اليونان، البرتغال، والجرانيت وحجر الرياض ونساح مع أدوات هندسية متطورة لتسعير المشاريع فورياً.
-      </p>
-
-      <div class="hero-cta">
-        <a href="#catalog" class="btn-primary">
-          <span>🏛️</span>
-          <span data-i18n="heroBtnExplore">استكشف كتالوج الخامات</span>
-        </a>
-        <a href="#projects" class="btn-secondary">
-          <span>🏆</span>
-          <span data-i18n="heroBtnProjects">تصفح المشاريع المنجزة</span>
-        </a>
+      <!-- Origin Category Filter Tabs -->
+      <div id="categoriesScroll" class="category-scroll">
+        <!-- Rendered dynamically -->
       </div>
 
-      <!-- Stats Counters -->
-      <div class="hero-stats">
-        <div class="stat-item">
-          <span class="stat-num">+140</span>
-          <span class="stat-label" data-i18n="heroStatProducts">+140 نوع معتمد</span>
+      <!-- Advanced Multi-Filter Drawer -->
+      <div class="filter-drawer">
+        <div class="filter-group">
+          <label data-i18n="filterTypeLabel">نوع الخامة:</label>
+          <select id="filterTypeSelect" class="filter-select">
+            <!-- Dynamic options -->
+          </select>
         </div>
-        <div class="stat-item">
-          <span class="stat-num">50+</span>
-          <span class="stat-label" data-i18n="heroStatProjects">مشاريع منفذة بالمملكة</span>
+
+        <div class="filter-group">
+          <label data-i18n="filterColorLabel">اللون السائد:</label>
+          <select id="filterColorSelect" class="filter-select">
+            <!-- Dynamic options -->
+          </select>
         </div>
-        <div class="stat-item">
-          <span class="stat-num">8</span>
-          <span class="stat-label" data-i18n="heroStatCountries">8 دول ومصادر عالمية</span>
+
+        <div class="filter-group">
+          <label data-i18n="filterPriceLabel">مستوى الفخامة والسعر:</label>
+          <select id="filterPriceSelect" class="filter-select">
+            <option value="all" data-i18n="filterAll">جميع المستويات</option>
+            <option value="VIP">فئة VIP الفاخرة</option>
+            <option value="Ultra VIP">Ultra VIP (أعلى فئات القصور)</option>
+            <option value="مميز">فئة مميزة (Premium)</option>
+            <option value="شائع">فئات شائعة ومطلوبة</option>
+            <option value="اقتصادي">فئات اقتصادية راقية</option>
+          </select>
         </div>
-        <div class="stat-item">
-          <span class="stat-num">100%</span>
-          <span class="stat-label" data-i18n="heroStatService">توريد وتركيب هندسي</span>
+      </div>
+
+      <!-- Results Meta Information & Reset Button -->
+      <div class="results-meta">
+        <div>
+          <span data-i18n="showingResults">عرض</span>: 
+          <strong id="productsCountDisplay">149</strong> 
+          <span data-i18n="itemsCount">صنف من خامات النخبة</span>
         </div>
+        <button class="btn-reset-filters" onclick="resetAllFilters()" data-i18n="filterResetBtn">
+          🔄 إعادة ضبط الفلاتر
+        </button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Products Grid Section -->
+  <section class="products-section">
+    <div class="container">
+      <div id="productsGrid" class="products-grid">
+        <!-- Rendered dynamically -->
+      </div>
+
+      <!-- Load More Container -->
+      <div id="loadMoreContainer" class="load-more-wrap">
+        <!-- Rendered dynamically -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       5. Guided AI Stone Advisor
+       ========================================== -->
+  <section id="consultant" class="ai-section">
+    <div class="container">
+      
+      <div class="section-header">
+        <h2 data-i18n="aiTitle">🤖 المستشار المعماري الذكي من برايم سكوب</h2>
+        <p data-i18n="aiSubtitle">احصل على تحليل هندسي فوري يحدد أفضل 3 خامات ملائمة لمشروعك وميزانيتك مع نسبة التوافق.</p>
+      </div>
+
+      <div class="ai-advisor-card">
+        <div class="ai-advisor-header">
+          <div class="ai-avatar">🏛️</div>
+          <div>
+            <h4 style="font-weight: 800; color: var(--gold-primary); font-size: 1rem;">Prime Scope Smart Architecture Advisor</h4>
+            <p style="font-size: 0.75rem; color: var(--text-muted);">تحليل ذكي لمعايير المشروع، الميزانية، والصلابة المطلوبة</p>
+          </div>
+        </div>
+
+        <!-- Wizard Step 1: Project Type -->
+        <div id="aiStep1" class="ai-wizard-step active">
+          <h3 class="ai-step-question" data-i18n="aiStep1Title">1. ما هو نوع مشروعك؟</h3>
+          <div class="ai-options-grid">
+            <button class="ai-opt-btn selected" onclick="selectWizardOption('projectType', 'villa', this)">
+              <span>🏡</span> فيلا خاصة مودرن / كلاسيك
+            </button>
+            <button class="ai-opt-btn" onclick="selectWizardOption('projectType', 'palace', this)">
+              <span>👑</span> قصر ملكي أو مزرعة فاخرة
+            </button>
+            <button class="ai-opt-btn" onclick="selectWizardOption('projectType', 'hotel', this)">
+              <span>🏨</span> فندق أو منتجع سياحي
+            </button>
+            <button class="ai-opt-btn" onclick="selectWizardOption('projectType', 'commercial', this)">
+              <span>🏢</span> مبنى إداري / مجمع تجاري
+            </button>
+          </div>
+          <div class="ai-step-nav" style="justify-content: flex-end;">
+            <button class="btn-primary" onclick="nextWizardStep()" data-i18n="aiBtnNext">التالي ➡️</button>
+          </div>
+        </div>
+
+        <!-- Wizard Step 2: Surface Area -->
+        <div id="aiStep2" class="ai-wizard-step">
+          <h3 class="ai-step-question" data-i18n="aiStep2Title">2. ما هي المساحة المراد تكسيتها؟</h3>
+          <div class="ai-options-grid">
+            <button class="ai-opt-btn selected" onclick="selectWizardOption('surfaceArea', 'facade', this)">
+              <span>🏛️</span> واجهات خارجية وأسوار محيطة
+            </button>
+            <button class="ai-opt-btn" onclick="selectWizardOption('surfaceArea', 'flooring', this)">
+              <span>✨</span> صالات استقبال رئيسية ومجالس
+            </button>
+            <button class="ai-opt-btn" onclick="selectWizardOption('surfaceArea', 'kitchen', this)">
+              <span>🍳</span> مطابخ ثقيلة وكاونترات وجزر طبخ
+            </button>
+            <button class="ai-opt-btn" onclick="selectWizardOption('surfaceArea', 'bath', this)">
+              <span>🛁</span> حمامات ماستر ومغاسل معلقة
+            </button>
+          </div>
+          <div class="ai-step-nav">
+            <button class="btn-secondary" onclick="prevWizardStep()" data-i18n="aiBtnPrev">السابق ⬅️</button>
+            <button class="btn-primary" onclick="nextWizardStep()" data-i18n="aiBtnNext">التالي ➡️</button>
+          </div>
+        </div>
+
+        <!-- Wizard Step 3: Budget Tier -->
+        <div id="aiStep3" class="ai-wizard-step">
+          <h3 class="ai-step-question" data-i18n="aiStep3Title">3. ما هي ميزانيتك التقديرية؟</h3>
+          <div class="ai-options-grid">
+            <button class="ai-opt-btn" onclick="selectWizardOption('budgetTier', 'value', this)">
+              <span>💰</span> اقتصادي وعملي (أفضل قيمة للمشاريع الكبيرة)
+            </button>
+            <button class="ai-opt-btn selected" onclick="selectWizardOption('budgetTier', 'premium', this)">
+              <span>💎</span> فاخر ومميز (أفضل الخامات الشائعة في الفلل)
+            </button>
+            <button class="ai-opt-btn" onclick="selectWizardOption('budgetTier', 'ultra', this)">
+              <span>👑</span> Ultra VIP (خامات إيطالية ويونانية نادرة بلا قيود)
+            </button>
+          </div>
+          <div class="ai-step-nav">
+            <button class="btn-secondary" onclick="prevWizardStep()" data-i18n="aiBtnPrev">السابق ⬅️</button>
+            <button class="btn-primary" onclick="nextWizardStep()" data-i18n="aiBtnNext">التالي ➡️</button>
+          </div>
+        </div>
+
+        <!-- Wizard Step 4: Style & Aesthetics -->
+        <div id="aiStep4" class="ai-wizard-step">
+          <h3 class="ai-step-question" data-i18n="aiStep4Title">4. ما هو الستايل المعماري واللون المفضل؟</h3>
+          <div class="ai-options-grid">
+            <button class="ai-opt-btn selected" onclick="selectWizardOption('stylePref', 'modern', this)">
+              <span>⚪</span> مودرن ناصع (أبيض، رمادي سحابي، خطوط نقية)
+            </button>
+            <button class="ai-opt-btn" onclick="selectWizardOption('stylePref', 'classic', this)">
+              <span>🟡</span> كلاسيكي فخم (بيج كريمي، عروق ذهبية دافئة)
+            </button>
+            <button class="ai-opt-btn" onclick="selectWizardOption('stylePref', 'bold', this)">
+              <span>⚫</span> دارك وجريء (أسود ملكي، رخام فيولا، تباين قوي)
+            </button>
+            <button class="ai-opt-btn" onclick="selectWizardOption('stylePref', 'earthy', this)">
+              <span>🟤</span> طبيعي صحراوي (حجر طبيعي، ترافرتين، ألوان ترابية)
+            </button>
+          </div>
+          <div class="ai-step-nav">
+            <button class="btn-secondary" onclick="prevWizardStep()" data-i18n="aiBtnPrev">السابق ⬅️</button>
+            <button class="btn-primary" onclick="calculateAIRecommendations()" data-i18n="aiBtnCalculate">تحليل واقتراح أفضل الخامات ✨</button>
+          </div>
+        </div>
+
+        <!-- AI Wizard Results Box -->
+        <div id="aiResultsContainer" class="ai-results-box" style="display: none;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+            <h3 style="font-weight: 800; color: var(--gold-primary);">🎯 أفضل الخامات المتوافقة هندسياً مع مشروعك:</h3>
+            <button class="btn-secondary" style="font-size: 0.75rem; padding: 0.35rem 0.75rem;" onclick="resetAIWizard()" data-i18n="aiRetakeBtn">🔄 إعادة الاستشارة</button>
+          </div>
+          <div id="aiRecommendationsList">
+            <!-- Dynamic Recommendations Rendered Here -->
+          </div>
+        </div>
+
+        <!-- Free Conversational AI Chat -->
+        <div style="border-top: 1px solid var(--border-gold); padding: 1.25rem 1.5rem; background: #0a0d14;">
+          <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 0.75rem;" data-i18n="aiFreeChatTab">
+            أو اسأل المستشار الذكي بحرية في شات تفاعلي 💬:
+          </p>
+          <div id="aiChatBody" class="ai-chat-body" style="max-height: 200px; margin-bottom: 0.75rem;">
+            <div class="ai-msg bot">
+              مرحباً بك في <strong>Prime Scope Advisor</strong>! اسألني عن مقارنة الخامات، درجات الصلابة، نسب امتصاص الماء، أو أنسب خامة لمشروعك.
+            </div>
+          </div>
+          <div class="ai-input-bar" style="background: var(--bg-card); border-radius: 20px; padding: 0.4rem 0.6rem;">
+            <input 
+              type="text" 
+              id="aiInput" 
+              class="ai-input" 
+              placeholder="اكتب استفسارك الهندسي هنا..." 
+              onkeypress="if(event.key === 'Enter') sendAIMessage()"
+            >
+            <button class="btn-ai-send" onclick="sendAIMessage()" data-i18n="aiBtnSend">استشارة</button>
+          </div>
+        </div>
+
       </div>
 
     </div>
   </section>
 
   <!-- ==========================================
-       8. Why Prime Scope & Quality Authority
+       6. Multi-Zone Smart Area Calculator
        ========================================== -->
-  <section class="why-section">
+  <section id="calculator" class="calc-section">
     <div class="container">
       
       <div class="section-header">
-        <h2 data-i18n="whyTitle">🏆 لماذا تختار منصة برايم سكوب (Prime Scope)؟</h2>
-        <p data-i18n="whySubtitle">المعايير الهندسية والاحترافية التي تجعلنا الشريك الأول للمشاريع الفاخرة في المملكة.</p>
+        <h2 data-i18n="calcTitle">📐 حاسبة برايم سكوب للأمتار والكميات</h2>
+        <p data-i18n="calcSubtitle">احسب كميات مشروعك بدقة لمختلف الغرف والواجهات مع حساب الهدر الطبيعي للقص.</p>
       </div>
 
-      <div class="why-grid">
-        <div class="why-card">
-          <div class="why-icon">⛏️</div>
-          <h3 data-i18n="why1Title">توريد مباشر من المحاجر العالمية</h3>
-          <p data-i18n="why1Desc">علاقات حصرية مع أعرق محاجر إيطاليا، إسبانيا، تركيا، واليونان والمملكة لضمان جودة النخب الأول.</p>
+      <div class="calc-box">
+        
+        <!-- Multi-Zone Rows -->
+        <div id="calcZonesContainer" class="calc-zones-list">
+          <!-- Rendered dynamically -->
         </div>
 
-        <div class="why-card">
-          <div class="why-icon">📐</div>
-          <h3 data-i18n="why2Title">دقة قص بالليزر والووترجيت</h3>
-          <p data-i18n="why2Desc">أحدث خطوط الإنتاج والقص الرقمي بالمليمتر لتنفيذ أعقد لوحات البوكماتش والزخارف الهندسية.</p>
-        </div>
+        <button class="btn-add-zone" onclick="addCalcZone()" data-i18n="calcAddZoneBtn">
+          + إضافة منطقة أو غرفة جديدة
+        </button>
 
-        <div class="why-card">
-          <div class="why-icon">🔬</div>
-          <h3 data-i18n="why3Title">فحص جودة ومعايير أوروبية</h3>
-          <p data-i18n="why3Desc">تدقيق صارم على خلو الألواح من الشروخ والمسامية العالية مع تقديم شهادات المواصفات المعتمدة.</p>
-        </div>
-
-        <div class="why-card">
-          <div class="why-icon">🚛</div>
-          <h3 data-i18n="why4Title">أسطول توريد لكافة مدن المملكة</h3>
-          <p data-i18n="why4Desc">شحن آمن ومؤمن مع رافعات متخصصة إلى موقع مشروعك مباشرة في الرياض، جدة، الدمام، وكافة المناطق.</p>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- ==========================================
-       9. Testimonials Section
-       ========================================== -->
-  <section class="testimonials-section">
-    <div class="container">
-      
-      <div class="section-header">
-        <h2 data-i18n="testimonialsTitle">⭐ ثقة نخبة المهندسين والمطورين</h2>
-        <p data-i18n="testimonialsSubtitle">ماذا يقول كبار المصممين والمقاولين عن تجربتهم مع Prime Scope.</p>
-      </div>
-
-      <div class="testimonials-grid">
-        <div class="testimonial-card">
+        <!-- Summary Display -->
+        <div class="calc-summary-results">
           <div>
-            <div class="test-stars">★★★★★</div>
-            <p class="test-text">"تعاملنا مع Prime Scope لتوريد رخام كالاكاتا جولد وبوكماتش لفيلا في حي النخيل بالرياض. دقة الألواح وتطابق العروق فاق توقعات العميل تماماً."</p>
+            <span style="color: var(--text-muted); font-size: 0.85rem;" data-i18n="calcNetTotal">إجمالي المساحة الصافية:</span>
+            <div class="res-val"><span id="calcNetDisplay">96.00</span> <small style="font-size: 0.85rem;">م²</small></div>
           </div>
-          <div class="test-author">— م. عبد الله الشهري / مكتب استشارات معمارية - الرياض</div>
+          <div>
+            <span style="color: var(--gold-primary); font-size: 0.85rem;" data-i18n="calcGrossTotal">إجمالي الكمية المطلوبة مع الهدر:</span>
+            <div class="res-val" style="color: #22c55e;"><span id="calcTotalDisplay">105.60</span> <small style="font-size: 0.85rem;">م²</small></div>
+          </div>
         </div>
 
-        <div class="testimonial-card">
-          <div>
-            <div class="test-stars">★★★★★</div>
-            <p class="test-text">"حجر نساح الطبيعي المنشور من Prime Scope كان الخيار الأنجح لواجهات الفندق لدينا بجدة، عزل حراري فائق ومظهر ناصع وثابت."</p>
-          </div>
-          <div class="test-author">— م. فهد الغامدي / مطور عقاري - جدة</div>
-        </div>
-
-        <div class="testimonial-card">
-          <div>
-            <div class="test-stars">★★★★★</div>
-            <p class="test-text">"سرعة تجهيز عروض الأسعار (RFQ) والحاسبة الهندسية سهلت علينا مراجعة كشوف الكميات وتوريد 3,500 م² من جرانيت بني نجران في زمن قياسي."</p>
-          </div>
-          <div class="test-author">— م. طارق المنصور / شركة مقاولات كبرى - الشرقية</div>
-        </div>
+        <button class="btn-calc-apply" onclick="applyCalcToQuote()">
+          <span data-i18n="btnApplyMultiToQuote">تحويل الحسبة الكاملة لنموذج عرض السعر 📋</span>
+        </button>
       </div>
 
     </div>
