@@ -1201,3 +1201,4 @@ function setupEventListeners() {
   }
 }
 function toggleMobileMenu(forceState) { const nav = document.querySelector('.nav-links'); if (!nav) return; if (forceState === false) { nav.classList.remove('active'); } else { nav.classList.toggle('active'); } }
+function toggleTheme() { const isLight = document.documentElement.getAttribute('data-theme') === 'light'; document.documentElement.setAttribute('data-theme', isLight ? 'dark' : 'light'); localStorage.setItem('primeTheme', isLight ? 'dark' : 'light'); const btn = document.getElementById('themeToggleBtn'); if (btn) { btn.innerHTML = isLight ? '??' : '??'; } } document.addEventListener('DOMContentLoaded', () => { const savedTheme = localStorage.getItem('primeTheme'); if (savedTheme === 'light') { document.documentElement.setAttribute('data-theme', 'light'); const btn = document.getElementById('themeToggleBtn'); if (btn) btn.innerHTML = '??'; } });
