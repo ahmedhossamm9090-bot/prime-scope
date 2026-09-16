@@ -46,7 +46,7 @@
   </noscript>
 
   <!-- Core Styles -->
-  <link rel="stylesheet" href="styles.css?v=4.5">
+  <link rel="stylesheet" href="styles.css?v=5.0">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏛️</text></svg>">
 
   <!-- JSON-LD SEO Structured Data -->
@@ -82,22 +82,18 @@
        ========================================== -->
   <div class="national-day-banner">
     <div class="container banner-static-wrap">
-      <div class="banner-badge">
+      <div class="banner-main-badge">
         <span class="badge-flag">🇸🇦</span>
-        <span>اليوم الوطني 96</span>
+        <span class="badge-text">عروض اليوم الوطني 96</span>
+        <span class="badge-discount">خصم 9.6%</span>
       </div>
-      <div class="banner-content-text">
-        <span class="banner-main-text">عروض وتخفيضات كبرى في Prime Scope</span>
-        <span class="banner-highlight">خصم يصل إلى 9.6%</span>
-        <span class="banner-slogan">| دام عزك يا وطن 🇸🇦</span>
-      </div>
-      <div class="banner-actions">
+      <div class="banner-sub-info">
+        <span class="slogan-text">دام عزك يا وطن</span>
+        <span class="banner-divider">•</span>
         <a href="tel:00966555046937" class="banner-phone-link" dir="ltr">📞 00966555046937</a>
-        <button type="button" onclick="launchNationalDayCelebration(true)" class="btn-celebrate-pill" title="احتفال اليوم الوطني مع الصوت والمفرقعات">
-          <span>🎆 احتفل معنا</span>
-        </button>
       </div>
     </div>
+  </div>
   </div>
 
   <!-- ==========================================
@@ -616,11 +612,11 @@
   <!-- 3. Base Fallback Data -->
   <script src="products.js?v=4.0"></script>
   <!-- 4. API Service Layer -->
-  <script src="api.js?v=4.5"></script>
+  <script src="api.js?v=5.0"></script>
   <!-- 5. Translations -->
   <script src="translations.js?v=4.0"></script>
   <!-- 6. Main Application Controller -->
-  <script src="app.js?v=4.5"></script>
+  <script src="app.js?v=5.0"></script>
 
 <script>
   
@@ -644,47 +640,7 @@
   }
 </script>
 
-  <!-- ==========================================
-       Saudi National Day 96 Celebration Modal (Character & Large Flag)
-       ========================================== -->
-  <div id="nationalDayCelebrationModal" class="hidden nd-modal-overlay">
-    <!-- Fireworks Canvas Background -->
-    <canvas id="ndFireworksCanvas" class="nd-fireworks-canvas"></canvas>
-
-    <div class="nd-modal-dialog">
-      <!-- Close Button -->
-      <button type="button" class="nd-close-btn" onclick="closeNationalDayCelebration()" title="إغلاق النافذة">✕</button>
-
-      <!-- Header Ribbon -->
-      <div class="nd-ribbon">
-        <span>🇸🇦 احتفالات اليوم الوطني السعودي 96 🇸🇦</span>
-      </div>
-
-      <!-- Main Visual Showcase: Large Saudi Flag & Saudi Character -->
-      <div class="nd-visual-showcase">
-        
-        <!-- Large Saudi Flag Representation -->
-        <div class="nd-flag-container">
-          <div class="nd-flag-card">
-            <svg viewBox="0 0 300 200" class="nd-saudi-flag-svg" xmlns="http://www.w3.org/2000/svg">
-              <rect width="300" height="200" fill="#006C35" rx="8"/>
-              <rect x="3" y="3" width="294" height="194" fill="none" stroke="#d4af37" stroke-width="2.5" rx="6" opacity="0.85"/>
-              
-              <!-- Calligraphy Simulation (Shahada) in Arabic -->
-              <text x="150" y="90" font-family="'Tajawal', sans-serif" font-size="20" font-weight="900" fill="#ffffff" text-anchor="middle" letter-spacing="1">
-                لا إله إلا الله محمد رسول الله
-              </text>
-              
-              <!-- Saudi Traditional Sword -->
-              <g transform="translate(150, 130)">
-                <path d="M-85,-2 L65,-2 L78,-7 L85,0 L78,7 L65,2 L-85,2 Z" fill="#ffffff"/>
-                <rect x="-86" y="-12" width="7" height="24" rx="2" fill="#ffffff"/>
-                <rect x="-100" y="-3" width="14" height="6" rx="1.5" fill="#ffffff"/>
-                <circle cx="-103" cy="0" r="4.5" fill="#ffffff"/>
-              </g>
-            </svg>
-            <div class="nd-flag-label">المملكة العربية السعودية</div>
-          </div>
+  
         </div>
 
         <!-- Saudi Character Illustration (In Traditional Saudi Dress) -->
@@ -780,7 +736,5 @@
 
     </div>
   </div>
-
-  <script src="nationalDay.js?v=4.5"></script>
 </body>
 </html>
