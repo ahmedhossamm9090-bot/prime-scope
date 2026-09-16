@@ -270,7 +270,6 @@
           // Non-blocking telemetry
         }
       }
-    }
     },
 
     // 7. Admin: Upload Image to Storage (Products or Projects)

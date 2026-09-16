@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
@@ -6,7 +6,7 @@
   <title>Prime Scope - Admin</title>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="config.js"></script>
+  <script src="config.js?v=4.0"></script>
 
   <style>
     * {
@@ -91,13 +91,13 @@
     </div>
 
     <div class="subtitle">
-      Ù„ÙˆØ­Ø© ØªØ­ÙƒÙ… Ø§Ù„Ø¥Ø¯Ø§Ø±Ø©
+      لوحة تحكم الإدارة
     </div>
 
     <form id="loginForm">
 
       <label for="email">
-        Ø§Ù„Ø¨Ø±ÙŠØ¯ Ø§Ù„Ø¥Ù„ÙƒØªØ±ÙˆÙ†ÙŠ
+        البريد الإلكتروني
       </label>
 
       <input
@@ -109,7 +109,7 @@
       >
 
       <label for="password">
-        ÙƒÙ„Ù…Ø© Ø§Ù„Ù…Ø±ÙˆØ±
+        كلمة المرور
       </label>
 
       <input
@@ -117,11 +117,11 @@
         id="password"
         required
         autocomplete="current-password"
-        placeholder="ÙƒÙ„Ù…Ø© Ø§Ù„Ù…Ø±ÙˆØ±"
+        placeholder="كلمة المرور"
       >
 
       <button id="loginButton" type="submit">
-        ØªØ³Ø¬ÙŠÙ„ Ø§Ù„Ø¯Ø®ÙˆÙ„
+        تسجيل الدخول
       </button>
 
       <div id="message"></div>
@@ -150,7 +150,7 @@ form.addEventListener("submit", async function(event) {
   message.style.color = "";
 
   button.disabled = true;
-  button.textContent = "Ø¬Ø§Ø±ÙŠ ØªØ³Ø¬ÙŠÙ„ Ø§Ù„Ø¯Ø®ÙˆÙ„...";
+  button.textContent = "جاري تسجيل الدخول...";
 
   try {
 
@@ -164,11 +164,11 @@ form.addEventListener("submit", async function(event) {
       .value;
 
     if (!email || !password) {
-      throw new Error("Ø§ÙƒØªØ¨ Ø§Ù„Ø¨Ø±ÙŠØ¯ Ø§Ù„Ø¥Ù„ÙƒØªØ±ÙˆÙ†ÙŠ ÙˆÙƒÙ„Ù…Ø© Ø§Ù„Ù…Ø±ÙˆØ±.");
+      throw new Error("اكتب البريد الإلكتروني وكلمة المرور.");
     }
 
 
-    // ØªØ³Ø¬ÙŠÙ„ Ø§Ù„Ø¯Ø®ÙˆÙ„ ÙÙŠ Supabase
+    // تسجيل الدخول في Supabase
     const { data, error } =
       await supabaseClient.auth.signInWithPassword({
         email: email,
@@ -182,12 +182,12 @@ form.addEventListener("submit", async function(event) {
 
 
     if (!data.user) {
-      throw new Error("Ù„Ù… ÙŠØªÙ… Ø§Ù„Ø¹Ø«ÙˆØ± Ø¹Ù„Ù‰ Ø§Ù„Ù…Ø³ØªØ®Ø¯Ù….");
+      throw new Error("لم يتم العثور على المستخدم.");
     }
 
 
-    // Ø§Ù„Ø¨Ø­Ø« Ø¹Ù† Ø§Ù„Ù…Ø³ØªØ®Ø¯Ù… ÙÙŠ Ø¬Ø¯ÙˆÙ„ profiles
-    // Ø§Ù„Ø¹Ù…ÙˆØ¯ Ø¹Ù†Ø¯Ùƒ Ø§Ø³Ù…Ù‡ id Ø­Ø³Ø¨ Ø¬Ø¯ÙˆÙ„ Supabase
+    // البحث عن المستخدم في جدول profiles
+    // العمود عندك اسمه id حسب جدول Supabase
     const { data: profile, error: profileError } =
       await supabaseClient
         .from("profiles")
@@ -203,25 +203,25 @@ form.addEventListener("submit", async function(event) {
       await supabaseClient.auth.signOut();
 
       throw new Error(
-        "ØªÙ… ØªØ³Ø¬ÙŠÙ„ Ø§Ù„Ø¯Ø®ÙˆÙ„ Ù„ÙƒÙ† Ù„Ù… ÙŠØªÙ… Ø§Ù„Ø¹Ø«ÙˆØ± Ø¹Ù„Ù‰ Ø¨ÙŠØ§Ù†Ø§Øª Ø§Ù„Ø­Ø³Ø§Ø¨ ÙÙŠ profiles."
+        "تم تسجيل الدخول لكن لم يتم العثور على بيانات الحساب في profiles."
       );
     }
 
 
-    // Ø§Ù„ØªØ£ÙƒØ¯ Ø£Ù† Ø§Ù„Ø­Ø³Ø§Ø¨ Admin
+    // التأكد أن الحساب Admin
     if (profile.role !== "admin") {
 
       await supabaseClient.auth.signOut();throw new Error(
-        "Ù‡Ø°Ø§ Ø§Ù„Ø­Ø³Ø§Ø¨ Ù„ÙŠØ³ Ù„Ø¯ÙŠÙ‡ ØµÙ„Ø§Ø­ÙŠØ© Admin."
+        "هذا الحساب ليس لديه صلاحية Admin."
       );
     }
 
 
     message.style.color = "green";
-    message.textContent = "ØªÙ… ØªØ³Ø¬ÙŠÙ„ Ø§Ù„Ø¯Ø®ÙˆÙ„ Ø¨Ù†Ø¬Ø§Ø­...";
+    message.textContent = "تم تسجيل الدخول بنجاح...";
 
 
-    // Ø§Ù„Ø§Ù†ØªÙ‚Ø§Ù„ Ù„Ù„ÙˆØ­Ø© Ø§Ù„Ø¥Ø¯Ø§Ø±Ø©
+    // الانتقال للوحة الإدارة
     setTimeout(function() {
       window.location.href = "admin-dashboard.html";
     }, 700);
@@ -233,10 +233,10 @@ form.addEventListener("submit", async function(event) {
 
     message.style.color = "red";
     message.textContent =
-      error.message || "Ø­Ø¯Ø« Ø®Ø·Ø£ Ø£Ø«Ù†Ø§Ø¡ ØªØ³Ø¬ÙŠÙ„ Ø§Ù„Ø¯Ø®ÙˆÙ„.";
+      error.message || "حدث خطأ أثناء تسجيل الدخول.";
 
     button.disabled = false;
-    button.textContent = "ØªØ³Ø¬ÙŠÙ„ Ø§Ù„Ø¯Ø®ÙˆÙ„";
+    button.textContent = "تسجيل الدخول";
 
   }
 
@@ -247,5 +247,3 @@ form.addEventListener("submit", async function(event) {
 </body>
 </html>
     
-
-

@@ -6,8 +6,8 @@
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
-  <title>Ù„ÙˆØ­Ø© Ø§Ù„ØªØ­ÙƒÙ… Ø§Ù„Ø¥Ø¯Ø§Ø±ÙŠØ© | Prime Scope CMS</title>
-  <meta name="description" content="Ù„ÙˆØ­Ø© Ø¥Ø¯Ø§Ø±Ø© Ø§Ù„Ù…Ø­ØªÙˆÙ‰ ÙˆØ§Ù„Ù…Ù†ØªØ¬Ø§Øª ÙˆØ§Ù„ØªØµÙ†ÙŠÙØ§Øª Ù„Ù…Ù†ØµØ© Prime Scope Ù„Ù„Ø±Ø®Ø§Ù… ÙˆØ§Ù„Ø£Ø­Ø¬Ø§Ø± Ø§Ù„Ø·Ø¨ÙŠØ¹ÙŠØ©">
+  <title>لوحة التحكم الإدارية | Prime Scope CMS</title>
+  <meta name="description" content="لوحة إدارة المحتوى والمنتجات والتصنيفات لمنصة Prime Scope للرخام والأحجار الطبيعية">
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23d4af37'><polygon points='12 2 2 7 12 12 22 7 12 2'/><polyline points='2 17 12 22 22 17'/><polyline points='2 12 12 17 22 12'/></svg>">
 
   <!-- Google Fonts: Tajawal & Playfair Display -->
@@ -205,8 +205,8 @@
           <i class="fa-solid fa-gem text-2xl text-slate-950"></i>
         </div>
         <h1 class="text-2xl font-bold font-serif gold-gradient-text tracking-wider">PRIME SCOPE</h1>
-        <p class="text-xs uppercase tracking-widest text-slate-400 mt-1">Ù„ÙˆØ­Ø© Ø§Ù„Ø¥Ø¯Ø§Ø±Ø© ÙˆØ§Ù„ØªØ­ÙƒÙ… CMS</p>
-        <p class="text-sm text-slate-400 mt-3">Ø³Ø¬Ù‘Ù„ Ø§Ù„Ø¯Ø®ÙˆÙ„ Ø¨Ø­Ø³Ø§Ø¨ Ø§Ù„Ù…Ø´Ø±Ù Ù„Ù„ÙˆØµÙˆÙ„ Ø¥Ù„Ù‰ Ù‚Ø§Ø¹Ø¯Ø© Ø§Ù„Ø¨ÙŠØ§Ù†Ø§Øª</p>
+        <p class="text-xs uppercase tracking-widest text-slate-400 mt-1">لوحة الإدارة والتحكم CMS</p>
+        <p class="text-sm text-slate-400 mt-3">سجّل الدخول بحساب المشرف للوصول إلى قاعدة البيانات</p>
       </div>
 
       <div id="login-error-box" class="hidden mb-6 p-4 rounded-xl bg-red-950/60 border border-red-500/30 text-red-300 text-sm flex items-start gap-3">
@@ -216,7 +216,7 @@
 
       <form id="login-form" class="space-y-5 relative z-10" onsubmit="handleLogin(event)">
         <div>
-          <label class="block text-xs font-semibold text-slate-300 mb-2">Ø§Ù„Ø¨Ø±ÙŠØ¯ Ø§Ù„Ø¥Ù„ÙƒØªØ±ÙˆÙ†ÙŠ</label>
+          <label class="block text-xs font-semibold text-slate-300 mb-2">البريد الإلكتروني</label>
           <div class="relative">
             <input type="email" id="login-email" required placeholder="admin@primescope.com" 
               class="w-full bg-brand-input border border-slate-700 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-brand-gold transition duration-200 pl-10">
@@ -225,9 +225,9 @@
         </div>
 
         <div>
-          <label class="block text-xs font-semibold text-slate-300 mb-2">ÙƒÙ„Ù…Ø© Ø§Ù„Ù…Ø±ÙˆØ±</label>
+          <label class="block text-xs font-semibold text-slate-300 mb-2">كلمة المرور</label>
           <div class="relative">
-            <input type="password" id="login-password" required placeholder="â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢" 
+            <input type="password" id="login-password" required placeholder="••••••••" 
               class="w-full bg-brand-input border border-slate-700 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-brand-gold transition duration-200 pl-10">
             <i class="fa-solid fa-lock absolute left-3 top-3.5 text-slate-500"></i>
           </div>
@@ -235,13 +235,13 @@
 
         <button type="submit" id="login-submit-btn" 
           class="w-full py-3.5 px-4 rounded-xl gold-gradient-bg text-slate-950 font-bold text-sm hover:opacity-95 active:scale-[0.99] transition shadow-lg shadow-amber-500/20 flex items-center justify-center gap-2">
-          <span>ØªØ³Ø¬ÙŠÙ„ Ø§Ù„Ø¯Ø®ÙˆÙ„</span>
+          <span>تسجيل الدخول</span>
           <i class="fa-solid fa-arrow-left"></i>
         </button>
       </form>
 
       <div class="mt-8 text-center text-xs text-slate-500">
-        Ù…Ù†Ø¸ÙˆÙ…Ø© Ø¢Ù…Ù†Ø© Ù…Ø´ÙØ±Ø© Ù…ØªØµÙ„Ø© Ø¨Ù‚Ø§Ø¹Ø¯Ø© Ø¨ÙŠØ§Ù†Ø§Øª Supabase
+        منظومة آمنة مشفرة متصلة بقاعدة بيانات Supabase
       </div>
     </div>
   </div>
@@ -265,7 +265,7 @@
           </div>
           <div>
             <h2 class="font-serif font-bold text-lg gold-gradient-text tracking-wide">PRIME SCOPE</h2>
-            <span class="text-[10px] text-brand-gold font-bold px-1.5 py-0.5 rounded bg-brand-gold/10 border border-brand-gold/20">Ù„ÙˆØ­Ø© Ø§Ù„Ø¥Ø¯Ø§Ø±Ø©</span>
+            <span class="text-[10px] text-brand-gold font-bold px-1.5 py-0.5 rounded bg-brand-gold/10 border border-brand-gold/20">لوحة الإدارة</span>
           </div>
         </div>
         <button onclick="toggleSidebar(false)" class="md:hidden text-slate-400 hover:text-white p-1">
@@ -275,39 +275,39 @@
 
       <!-- Navigation Links -->
       <nav class="flex-1 p-4 space-y-1.5 overflow-y-auto">
-        <div class="text-[11px] font-bold text-slate-400 px-3 py-2 uppercase tracking-wider">Ø§Ù„Ø£Ù‚Ø³Ø§Ù… Ø§Ù„Ø±Ø¦ÙŠØ³ÙŠØ©</div>
+        <div class="text-[11px] font-bold text-slate-400 px-3 py-2 uppercase tracking-wider">الأقسام الرئيسية</div>
         
         <button onclick="switchTab('dashboard')" id="nav-dashboard" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-slate-200 hover:bg-slate-800 hover:text-brand-gold transition duration-200">
           <i class="fa-solid fa-chart-pie w-5 text-center text-brand-gold"></i>
-          <span>Ù„ÙˆØ­Ø© Ø§Ù„Ø¥Ø­ØµØ§Ø¦ÙŠØ§Øª</span>
+          <span>لوحة الإحصائيات</span>
         </button>
 
         <button onclick="switchTab('materials')" id="nav-materials" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-slate-200 hover:bg-slate-800 hover:text-brand-gold transition duration-200">
           <i class="fa-solid fa-cubes w-5 text-center text-brand-gold"></i>
-          <span>Ø¥Ø¯Ø§Ø±Ø© Ø§Ù„Ù…Ù†ØªØ¬Ø§Øª ÙˆØ§Ù„Ø®Ø§Ù…Ø§Øª</span>
+          <span>إدارة المنتجات والخامات</span>
         </button>
 
         <button onclick="switchTab('categories')" id="nav-categories" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-slate-200 hover:bg-slate-800 hover:text-brand-gold transition duration-200">
           <i class="fa-solid fa-layer-group w-5 text-center text-brand-gold"></i>
-          <span>Ø¥Ø¯Ø§Ø±Ø© Ø§Ù„ØªØµÙ†ÙŠÙØ§Øª</span>
+          <span>إدارة التصنيفات</span>
         </button>
 
         <button onclick="switchTab('rfqs')" id="nav-rfqs" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-slate-200 hover:bg-slate-800 hover:text-brand-gold transition duration-200">
           <i class="fa-solid fa-file-invoice-dollar w-5 text-center text-brand-gold"></i>
-          <span>Ø·Ù„Ø¨Ø§Øª Ø¹Ø±ÙˆØ¶ Ø§Ù„Ø£Ø³Ø¹Ø§Ø± (RFQ)</span>
+          <span>طلبات عروض الأسعار (RFQ)</span>
         </button>
 
         <button onclick="switchTab('projects')" id="nav-projects" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-slate-200 hover:bg-slate-800 hover:text-brand-gold transition duration-200">
           <i class="fa-solid fa-images w-5 text-center text-brand-gold"></i>
-          <span>Ø¥Ø¯Ø§Ø±Ø© Ø§Ù„Ù…Ø´Ø§Ø±ÙŠØ¹ Ø§Ù„Ù…Ù†Ø¬Ø²Ø©</span>
+          <span>إدارة المشاريع المنجزة</span>
         </button>
 
         <div class="pt-4 border-t border-brand-border mt-4">
-          <div class="text-[11px] font-bold text-slate-400 px-3 py-2 uppercase tracking-wider">Ø±ÙˆØ§Ø¨Ø· Ø³Ø±ÙŠØ¹Ø©</div>
+          <div class="text-[11px] font-bold text-slate-400 px-3 py-2 uppercase tracking-wider">روابط سريعة</div>
           <a href="index.html" target="_blank" class="w-full flex items-center justify-between px-4 py-3 rounded-xl text-sm font-medium text-slate-400 hover:bg-slate-800/50 hover:text-slate-200 transition">
             <span class="flex items-center gap-3">
               <i class="fa-solid fa-globe w-5 text-center text-slate-400"></i>
-              <span>Ø¹Ø±Ø¶ Ø§Ù„Ù…ÙˆÙ‚Ø¹ Ø§Ù„Ø¹Ø§Ù…</span>
+              <span>عرض الموقع العام</span>
             </span>
             <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
           </a>
@@ -321,13 +321,13 @@
             <i class="fa-solid fa-user-shield"></i>
           </div>
           <div class="overflow-hidden flex-1">
-            <div id="admin-user-name" class="text-sm font-semibold text-slate-200 truncate">Ø§Ù„Ù…Ø´Ø±Ù Ø§Ù„Ø¹Ø§Ù…</div>
+            <div id="admin-user-name" class="text-sm font-semibold text-slate-200 truncate">المشرف العام</div>
             <div id="admin-user-email" class="text-[11px] text-slate-400 truncate">admin@primescope.com</div>
           </div>
         </div>
         <button onclick="handleLogout()" class="w-full py-2 px-3 rounded-lg border border-red-500/30 text-red-400 hover:bg-red-950/50 text-xs font-semibold flex items-center justify-center gap-2 transition">
           <i class="fa-solid fa-right-from-bracket"></i>
-          <span>ØªØ³Ø¬ÙŠÙ„ Ø§Ù„Ø®Ø±ÙˆØ¬</span>
+          <span>تسجيل الخروج</span>
         </button>
       </div>
 
@@ -343,18 +343,18 @@
             <i class="fa-solid fa-bars"></i>
           </button>
           <div>
-            <h2 id="page-title" class="text-base md:text-lg font-bold text-white">Ù„ÙˆØ­Ø© Ø§Ù„Ø¥Ø­ØµØ§Ø¦ÙŠØ§Øª</h2>
+            <h2 id="page-title" class="text-base md:text-lg font-bold text-white">لوحة الإحصائيات</h2>
           </div>
         </div>
 
         <div class="flex items-center gap-3">
           <button onclick="openMaterialModal()" class="hidden sm:flex items-center gap-2 px-3.5 py-1.5 rounded-lg gold-gradient-bg text-slate-950 font-bold text-xs hover:opacity-90 shadow transition">
             <i class="fa-solid fa-plus"></i>
-            <span>Ø¥Ø¶Ø§ÙØ© Ù…Ù†ØªØ¬ Ø³Ø±ÙŠØ¹</span>
+            <span>إضافة منتج سريع</span>
           </button>
-          <button onclick="refreshCurrentTab()" title="ØªØ­Ø¯ÙŠØ« Ø§Ù„Ø¨ÙŠØ§Ù†Ø§Øª" class="p-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-brand-gold transition text-xs flex items-center gap-1.5">
+          <button onclick="refreshCurrentTab()" title="تحديث البيانات" class="p-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-brand-gold transition text-xs flex items-center gap-1.5">
             <i class="fa-solid fa-rotate"></i>
-            <span class="hidden md:inline">ØªØ­Ø¯ÙŠØ«</span>
+            <span class="hidden md:inline">تحديث</span>
           </button>
         </div>
       </header>
@@ -370,20 +370,20 @@
           <!-- Welcome Banner -->
           <div class="luxury-card p-6 md:p-8 relative overflow-hidden flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
             <div class="space-y-2 relative z-10">
-              <span class="text-xs font-bold text-brand-gold uppercase tracking-wider">Ù…Ù†ØµØ© Prime Scope Ø§Ù„ÙØ§Ø®Ø±Ø©</span>
-              <h2 class="text-2xl md:text-3xl font-bold font-serif text-white">Ù…Ø±Ø­Ø¨Ø§Ù‹ Ø¨Ùƒ ÙÙŠ Ù„ÙˆØ­Ø© Ø§Ù„Ø¥Ø¯Ø§Ø±Ø©</h2>
+              <span class="text-xs font-bold text-brand-gold uppercase tracking-wider">منصة Prime Scope الفاخرة</span>
+              <h2 class="text-2xl md:text-3xl font-bold font-serif text-white">مرحباً بك في لوحة الإدارة</h2>
               <p class="text-slate-400 text-sm max-w-xl leading-relaxed">
-                ØªØ­ÙƒÙ‘Ù… Ø¨Ø´ÙƒÙ„ ÙƒØ§Ù…Ù„ ÙÙŠ ÙƒØªØ§Ù„ÙˆØ¬ Ø§Ù„Ù…Ù†ØªØ¬Ø§Øª ÙˆØ§Ù„Ø®Ø§Ù…Ø§Øª Ø§Ù„Ø­Ø¬Ø±ÙŠØ©ØŒ Ø§Ù„ØªØµÙ†ÙŠÙØ§Øª Ø§Ù„Ø¥Ù‚Ù„ÙŠÙ…ÙŠØ©ØŒ ÙˆÙ…ØªØ§Ø¨Ø¹Ø© Ø¹Ø±ÙˆØ¶ Ø§Ù„Ø£Ø³Ø¹Ø§Ø± Ù…Ø¨Ø§Ø´Ø±Ø© Ù…Ø¹ Ù‚Ø§Ø¹Ø¯Ø© Ø¨ÙŠØ§Ù†Ø§Øª Supabase.
+                تحكّم بشكل كامل في كتالوج المنتجات والخامات الحجرية، التصنيفات الإقليمية، ومتابعة عروض الأسعار مباشرة مع قاعدة بيانات Supabase.
               </p>
             </div>
             <div class="flex flex-wrap gap-3 relative z-10">
               <button onclick="switchTab('materials'); openMaterialModal();" class="px-5 py-2.5 rounded-xl gold-gradient-bg text-slate-950 font-bold text-sm flex items-center gap-2 hover:opacity-95 shadow-lg shadow-amber-500/20 transition">
                 <i class="fa-solid fa-plus"></i>
-                <span>Ø¥Ø¶Ø§ÙØ© Ø®Ø§Ù…Ø© Ø¬Ø¯ÙŠØ¯Ø©</span>
+                <span>إضافة خامة جديدة</span>
               </button>
               <button onclick="switchTab('categories'); openCategoryModal();" class="px-5 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-semibold text-sm flex items-center gap-2 border border-slate-700 transition">
                 <i class="fa-solid fa-folder-plus"></i>
-                <span>Ø¥Ø¶Ø§ÙØ© ØªØµÙ†ÙŠÙ</span>
+                <span>إضافة تصنيف</span>
               </button>
             </div>
           </div>
@@ -394,51 +394,51 @@
             <!-- Card 1: Total Materials -->
             <div class="luxury-card p-6 border-r-4 border-r-brand-gold">
               <div class="flex items-center justify-between mb-4">
-                <span class="text-xs font-semibold text-slate-400">Ø¥Ø¬Ù…Ø§Ù„ÙŠ Ø§Ù„Ù…Ù†ØªØ¬Ø§Øª ÙˆØ§Ù„Ø®Ø§Ù…Ø§Øª</span>
+                <span class="text-xs font-semibold text-slate-400">إجمالي المنتجات والخامات</span>
                 <div class="w-10 h-10 rounded-xl bg-brand-gold/10 text-brand-gold flex items-center justify-center">
                   <i class="fa-solid fa-cubes text-lg"></i>
                 </div>
               </div>
               <div id="stat-total-materials" class="text-3xl font-bold font-serif text-white">--</div>
               <p class="text-xs text-slate-400 mt-2 flex items-center gap-1.5">
-                <span class="text-emerald-400 font-semibold"><i class="fa-solid fa-database"></i> ÙƒØªØ§Ù„ÙˆØ¬ Ù…ØªÙƒØ§Ù…Ù„</span>
+                <span class="text-emerald-400 font-semibold"><i class="fa-solid fa-database"></i> كتالوج متكامل</span>
               </p>
             </div>
 
             <!-- Card 2: Active Materials -->
             <div class="luxury-card p-6 border-r-4 border-r-emerald-500">
               <div class="flex items-center justify-between mb-4">
-                <span class="text-xs font-semibold text-slate-400">Ø§Ù„Ù…Ù†ØªØ¬Ø§Øª Ø§Ù„Ù†Ø´Ø·Ø© (Ø§Ù„Ø¸Ø§Ù‡Ø±Ø©)</span>
+                <span class="text-xs font-semibold text-slate-400">المنتجات النشطة (الظاهرة)</span>
                 <div class="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center">
                   <i class="fa-solid fa-circle-check text-lg"></i>
                 </div>
               </div>
               <div id="stat-active-materials" class="text-3xl font-bold font-serif text-white">--</div>
-              <p class="text-xs text-slate-400 mt-2">Ø¸Ø§Ù‡Ø±Ø© Ù„Ù„Ø¹Ù…Ù„Ø§Ø¡ ÙÙŠ ÙˆØ§Ø¬Ù‡Ø© Ø§Ù„Ù…ØªØ¬Ø±</p>
+              <p class="text-xs text-slate-400 mt-2">ظاهرة للعملاء في واجهة المتجر</p>
             </div>
 
             <!-- Card 3: Featured Materials -->
             <div class="luxury-card p-6 border-r-4 border-r-amber-500">
               <div class="flex items-center justify-between mb-4">
-                <span class="text-xs font-semibold text-slate-400">Ø§Ù„Ù…Ù†ØªØ¬Ø§Øª Ø§Ù„Ù…Ù…ÙŠØ²Ø© (Featured)</span>
+                <span class="text-xs font-semibold text-slate-400">المنتجات المميزة (Featured)</span>
                 <div class="w-10 h-10 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center">
                   <i class="fa-solid fa-star text-lg"></i>
                 </div>
               </div>
               <div id="stat-featured-materials" class="text-3xl font-bold font-serif text-white">--</div>
-              <p class="text-xs text-slate-400 mt-2">Ù…Ø¹Ø±ÙˆØ¶Ø© ÙÙŠ Ù…Ù‚Ø¯Ù…Ø© Ø§Ù„Ø£Ù‚Ø³Ø§Ù…</p>
+              <p class="text-xs text-slate-400 mt-2">معروضة في مقدمة الأقسام</p>
             </div>
 
             <!-- Card 4: Total Categories -->
             <div class="luxury-card p-6 border-r-4 border-r-indigo-500">
               <div class="flex items-center justify-between mb-4">
-                <span class="text-xs font-semibold text-slate-400">Ø¥Ø¬Ù…Ø§Ù„ÙŠ Ø§Ù„ØªØµÙ†ÙŠÙØ§Øª</span>
+                <span class="text-xs font-semibold text-slate-400">إجمالي التصنيفات</span>
                 <div class="w-10 h-10 rounded-xl bg-indigo-500/10 text-indigo-400 flex items-center justify-center">
                   <i class="fa-solid fa-layer-group text-lg"></i>
                 </div>
               </div>
               <div id="stat-total-categories" class="text-3xl font-bold font-serif text-white">--</div>
-              <p class="text-xs text-slate-400 mt-2">Ø§Ù„Ù…Ø¬Ù…ÙˆØ¹Ø§Øª Ø§Ù„Ø¥Ù‚Ù„ÙŠÙ…ÙŠØ© ÙˆÙ…ØµØ§Ø¯Ø± Ø§Ù„Ø£Ø­Ø¬Ø§Ø±</p>
+              <p class="text-xs text-slate-400 mt-2">المجموعات الإقليمية ومصادر الأحجار</p>
             </div>
 
           </div>
@@ -450,12 +450,12 @@
               <div class="flex items-center justify-between mb-5">
                 <h3 class="font-bold text-base text-white flex items-center gap-2">
                   <i class="fa-solid fa-gem text-brand-gold"></i>
-                  <span>Ø£Ø­Ø¯Ø« Ø§Ù„Ø®Ø§Ù…Ø§Øª Ø§Ù„Ù…Ø¶Ø§ÙØ©</span>
+                  <span>أحدث الخامات المضافة</span>
                 </h3>
-                <button onclick="switchTab('materials')" class="text-xs text-brand-gold hover:underline font-semibold">Ø¹Ø±Ø¶ Ø§Ù„ÙƒÙ„ &larr;</button>
+                <button onclick="switchTab('materials')" class="text-xs text-brand-gold hover:underline font-semibold">عرض الكل &larr;</button>
               </div>
               <div id="dashboard-recent-materials" class="space-y-3 flex-1">
-                <div class="text-center py-8 text-slate-500 text-sm">Ø¬Ø§Ø±ÙŠ ØªØ­Ù…ÙŠÙ„ Ø§Ù„Ø¨ÙŠØ§Ù†Ø§Øª...</div>
+                <div class="text-center py-8 text-slate-500 text-sm">جاري تحميل البيانات...</div>
               </div>
             </div>
 
@@ -464,12 +464,12 @@
               <div class="flex items-center justify-between mb-5">
                 <h3 class="font-bold text-base text-white flex items-center gap-2">
                   <i class="fa-solid fa-layer-group text-brand-gold"></i>
-                  <span>Ø§Ù„ØªØµÙ†ÙŠÙØ§Øª Ø§Ù„Ø­Ø§Ù„ÙŠØ©</span>
+                  <span>التصنيفات الحالية</span>
                 </h3>
-                <button onclick="switchTab('categories')" class="text-xs text-brand-gold hover:underline font-semibold">Ø¥Ø¯Ø§Ø±Ø© Ø§Ù„ØªØµÙ†ÙŠÙØ§Øª &larr;</button>
+                <button onclick="switchTab('categories')" class="text-xs text-brand-gold hover:underline font-semibold">إدارة التصنيفات &larr;</button>
               </div>
               <div id="dashboard-categories-list" class="grid grid-cols-2 gap-3 flex-1">
-                <div class="col-span-2 text-center py-8 text-slate-500 text-sm">Ø¬Ø§Ø±ÙŠ ØªØ­Ù…ÙŠÙ„ Ø§Ù„ØªØµÙ†ÙŠÙØ§Øª...</div>
+                <div class="col-span-2 text-center py-8 text-slate-500 text-sm">جاري تحميل التصنيفات...</div>
               </div>
             </div>
           </div>
@@ -487,14 +487,14 @@
             <div class="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4">
               <div>
                 <h2 class="text-xl font-bold text-white flex items-center gap-2">
-                  <span>Ø¥Ø¯Ø§Ø±Ø© Ø§Ù„Ù…Ù†ØªØ¬Ø§Øª ÙˆØ§Ù„Ø®Ø§Ù…Ø§Øª Ø§Ù„Ø·Ø¨ÙŠØ¹ÙŠØ©</span>
+                  <span>إدارة المنتجات والخامات الطبيعية</span>
                   <span id="materials-count-badge" class="text-xs font-bold px-2.5 py-0.5 rounded-full bg-brand-gold/20 text-brand-gold border border-brand-gold/30">0</span>
                 </h2>
-                <p class="text-xs text-slate-400 mt-1">ÙƒØªØ§Ù„ÙˆØ¬ Ø§Ù„Ø±Ø®Ø§Ù…ØŒ Ø§Ù„Ø¬Ø±Ø§Ù†ÙŠØªØŒ Ø§Ù„ØªØ±Ø§ÙØ±ØªÙŠÙ†ØŒ ÙˆØ§Ù„Ø£Ø­Ø¬Ø§Ø± Ø§Ù„Ø·Ø¨ÙŠØ¹ÙŠØ© ÙÙŠ Prime Scope</p>
+                <p class="text-xs text-slate-400 mt-1">كتالوج الرخام، الجرانيت، الترافرتين، والأحجار الطبيعية في Prime Scope</p>
               </div>
               <button onclick="openMaterialModal()" class="px-5 py-2.5 rounded-xl gold-gradient-bg text-slate-950 font-bold text-sm flex items-center justify-center gap-2 hover:opacity-95 shadow-md transition">
                 <i class="fa-solid fa-plus"></i>
-                <span>Ø¥Ø¶Ø§ÙØ© Ù…Ù†ØªØ¬ Ø¬Ø¯ÙŠØ¯</span>
+                <span>إضافة منتج جديد</span>
               </button>
             </div>
 
@@ -503,7 +503,7 @@
               
               <!-- Search Box -->
               <div class="lg:col-span-2 relative">
-                <input type="text" id="mat-filter-search" oninput="debounceFilterMaterials()" placeholder="Ø§Ø¨Ø­Ø« Ø¨Ø§Ù„Ø§Ø³Ù…ØŒ Ø§Ù„Ù…Ù†Ø´Ø£ØŒ Ø£Ùˆ Ø§Ù„Ù†ÙˆØ¹..." 
+                <input type="text" id="mat-filter-search" oninput="debounceFilterMaterials()" placeholder="ابحث بالاسم، المنشأ، أو النوع..." 
                   class="w-full bg-brand-input border border-slate-700 rounded-xl px-4 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-brand-gold transition pl-9">
                 <i class="fa-solid fa-magnifying-glass absolute left-3 top-3 text-slate-500 text-xs"></i>
               </div>
@@ -511,32 +511,32 @@
               <!-- Filter: Country/Origin (Extracted Dynamically) -->
               <div>
                 <select id="mat-filter-origin" onchange="filterMaterials()" class="w-full bg-brand-input border border-slate-700 rounded-xl px-3 py-2.5 text-xs text-slate-300 focus:outline-none focus:border-brand-gold">
-                  <option value="all">ÙƒÙ„ Ø§Ù„Ø¨Ù„Ø§Ø¯ (Ø§Ù„Ù…Ù†Ø´Ø£)</option>
+                  <option value="all">كل البلاد (المنشأ)</option>
                 </select>
               </div>
 
               <!-- Filter: Category (Extracted from DB) -->
               <div>
                 <select id="mat-filter-category" onchange="filterMaterials()" class="w-full bg-brand-input border border-slate-700 rounded-xl px-3 py-2.5 text-xs text-slate-300 focus:outline-none focus:border-brand-gold">
-                  <option value="all">ÙƒÙ„ Ø§Ù„ØªØµÙ†ÙŠÙØ§Øª</option>
+                  <option value="all">كل التصنيفات</option>
                 </select>
               </div>
 
               <!-- Filter: Stone Type (Extracted Dynamically) -->
               <div>
                 <select id="mat-filter-stone-type" onchange="filterMaterials()" class="w-full bg-brand-input border border-slate-700 rounded-xl px-3 py-2.5 text-xs text-slate-300 focus:outline-none focus:border-brand-gold">
-                  <option value="all">Ù†ÙˆØ¹ Ø§Ù„Ø­Ø¬Ø± (Ø§Ù„ÙƒÙ„)</option>
+                  <option value="all">نوع الحجر (الكل)</option>
                 </select>
               </div>
 
               <!-- Filter: Status & Reset -->
               <div class="flex items-center gap-2">
                 <select id="mat-filter-status" onchange="filterMaterials()" class="w-full bg-brand-input border border-slate-700 rounded-xl px-3 py-2.5 text-xs text-slate-300 focus:outline-none focus:border-brand-gold">
-                  <option value="all">Ø§Ù„Ø­Ø§Ù„Ø© (Ø§Ù„ÙƒÙ„)</option>
-                  <option value="active">Ù†Ø´Ø· (Ø¸Ø§Ù‡Ø±)</option>
-                  <option value="inactive">Ù…Ø¹Ø·Ù„ (Ù…Ø®ÙÙŠ)</option>
+                  <option value="all">الحالة (الكل)</option>
+                  <option value="active">نشط (ظاهر)</option>
+                  <option value="inactive">معطل (مخفي)</option>
                 </select>
-                <button onclick="resetMaterialFilters()" title="Ø¥Ø¹Ø§Ø¯Ø© Ø¶Ø¨Ø· Ø§Ù„ÙÙ„Ø§ØªØ±" class="p-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 transition text-xs">
+                <button onclick="resetMaterialFilters()" title="إعادة ضبط الفلاتر" class="p-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 transition text-xs">
                   <i class="fa-solid fa-filter-circle-xmark"></i>
                 </button>
               </div>
@@ -551,20 +551,20 @@
               <table class="w-full text-right text-xs">
                 <thead class="bg-slate-900/90 text-slate-300 font-bold border-b border-brand-border">
                   <tr>
-                    <th class="py-3.5 px-4">Ø§Ù„ØµÙˆØ±Ø© ÙˆØ§Ù„Ø®Ø§Ù…Ø©</th>
-                    <th class="py-3.5 px-4">Ø§Ù„ØªØµÙ†ÙŠÙ ÙˆØ§Ù„Ù…Ù†Ø´Ø£</th>
-                    <th class="py-3.5 px-4">Ù†ÙˆØ¹ Ø§Ù„Ø­Ø¬Ø± ÙˆØ§Ù„Ù„ÙˆÙ†</th>
-                    <th class="py-3.5 px-4">ÙØ¦Ø© Ø§Ù„Ø³Ø¹Ø± ÙˆØ§Ù„ØªØ´Ø·ÙŠØ¨</th>
-                    <th class="py-3.5 px-4 text-center">Ù…Ù…ÙŠØ²</th>
-                    <th class="py-3.5 px-4 text-center">Ø§Ù„Ø­Ø§Ù„Ø©</th>
-                    <th class="py-3.5 px-4 text-center">Ø§Ù„Ø¥Ø¬Ø±Ø§Ø¡Ø§Øª</th>
+                    <th class="py-3.5 px-4">الصورة والخامة</th>
+                    <th class="py-3.5 px-4">التصنيف والمنشأ</th>
+                    <th class="py-3.5 px-4">نوع الحجر واللون</th>
+                    <th class="py-3.5 px-4">فئة السعر والتشطيب</th>
+                    <th class="py-3.5 px-4 text-center">مميز</th>
+                    <th class="py-3.5 px-4 text-center">الحالة</th>
+                    <th class="py-3.5 px-4 text-center">الإجراءات</th>
                   </tr>
                 </thead>
                 <tbody id="materials-table-body" class="divide-y divide-slate-800/60 text-slate-300">
                   <tr>
                     <td colspan="7" class="py-12 text-center text-slate-500">
                       <i class="fa-solid fa-circle-notch fa-spin text-2xl text-brand-gold mb-3"></i>
-                      <p>Ø¬Ø§Ø±ÙŠ ØªØ­Ù…ÙŠÙ„ Ù‚Ø§Ø¦Ù…Ø© Ø§Ù„Ø®Ø§Ù…Ø§Øª ÙˆØ§Ù„Ù…Ù†ØªØ¬Ø§Øª Ù…Ù† Ù‚Ø§Ø¹Ø¯Ø© Ø§Ù„Ø¨ÙŠØ§Ù†Ø§Øª...</p>
+                      <p>جاري تحميل قائمة الخامات والمنتجات من قاعدة البيانات...</p>
                     </td>
                   </tr>
                 </tbody>
@@ -573,8 +573,8 @@
             
             <!-- Table Footer info -->
             <div class="p-4 bg-slate-900/60 border-t border-brand-border flex items-center justify-between text-xs text-slate-400">
-              <span id="materials-showing-text">Ø¹Ø±Ø¶ 0 Ù…Ù† 0 Ù…Ù†ØªØ¬</span>
-              <span class="text-[11px] text-slate-500">ØªØ­Ø¯ÙŠØ« ÙÙˆØ±ÙŠ Ù…Ø¨Ø§Ø´Ø± Ù…Ø¹ Supabase</span>
+              <span id="materials-showing-text">عرض 0 من 0 منتج</span>
+              <span class="text-[11px] text-slate-500">تحديث فوري مباشر مع Supabase</span>
             </div>
           </div>
 
@@ -588,14 +588,14 @@
           <div class="luxury-card p-5 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
             <div>
               <h2 class="text-xl font-bold text-white flex items-center gap-2">
-                <span>Ø¥Ø¯Ø§Ø±Ø© Ø§Ù„ØªØµÙ†ÙŠÙØ§Øª ÙˆØ§Ù„Ù…Ø¬Ù…ÙˆØ¹Ø§Øª Ø§Ù„Ø­Ø¬Ø±ÙŠØ©</span>
+                <span>إدارة التصنيفات والمجموعات الحجرية</span>
                 <span id="categories-count-badge" class="text-xs font-bold px-2.5 py-0.5 rounded-full bg-brand-gold/20 text-brand-gold border border-brand-gold/30">0</span>
               </h2>
-              <p class="text-xs text-slate-400 mt-1">ØªØ­Ø¯ÙŠØ¯ Ù…Ø¬Ù…ÙˆØ¹Ø§Øª Ø§Ù„Ù…Ù†Ø´Ø£ØŒ Ø§Ù„Ø£ÙŠÙ‚ÙˆÙ†Ø§ØªØŒ Ø§Ù„Ø´Ø§Ø±Ø§Øª Ø§Ù„ØªØ±ÙˆÙŠØ¬ÙŠØ©ØŒ ÙˆØªØ±ØªÙŠØ¨ Ø§Ù„Ø¸Ù‡ÙˆØ±</p>
+              <p class="text-xs text-slate-400 mt-1">تحديد مجموعات المنشأ، الأيقونات، الشارات الترويجية، وترتيب الظهور</p>
             </div>
             <button onclick="openCategoryModal()" class="px-5 py-2.5 rounded-xl gold-gradient-bg text-slate-950 font-bold text-sm flex items-center justify-center gap-2 hover:opacity-95 shadow-md transition">
               <i class="fa-solid fa-plus"></i>
-              <span>+ Ø¥Ø¶Ø§ÙØ© ØªØµÙ†ÙŠÙ Ø¬Ø¯ÙŠØ¯</span>
+              <span>+ إضافة تصنيف جديد</span>
             </button>
           </div>
 
@@ -605,20 +605,20 @@
               <table class="w-full text-right text-xs">
                 <thead class="bg-slate-900/90 text-slate-300 font-bold border-b border-brand-border">
                   <tr>
-                    <th class="py-3.5 px-4">Ø§Ù„Ù…Ø¹Ø±Ù (ID)</th>
-                    <th class="py-3.5 px-4">Ø§Ù„Ø£ÙŠÙ‚ÙˆÙ†Ø© ÙˆØ§Ù„Ø§Ø³Ù… Ø§Ù„Ø¹Ø±Ø¨ÙŠ</th>
-                    <th class="py-3.5 px-4">Ø§Ù„Ø§Ø³Ù… Ø¨Ø§Ù„Ø¥Ù†Ø¬Ù„ÙŠØ²ÙŠ</th>
-                    <th class="py-3.5 px-4 text-center">Ø§Ù„Ø´Ø§Ø±Ø© (Badge)</th>
-                    <th class="py-3.5 px-4 text-center">Ø§Ù„ØªØ±ØªÙŠØ¨</th>
-                    <th class="py-3.5 px-4 text-center">Ø§Ù„Ø­Ø§Ù„Ø©</th>
-                    <th class="py-3.5 px-4 text-center">Ø§Ù„Ø¥Ø¬Ø±Ø§Ø¡Ø§Øª</th>
+                    <th class="py-3.5 px-4">المعرف (ID)</th>
+                    <th class="py-3.5 px-4">الأيقونة والاسم العربي</th>
+                    <th class="py-3.5 px-4">الاسم بالإنجليزي</th>
+                    <th class="py-3.5 px-4 text-center">الشارة (Badge)</th>
+                    <th class="py-3.5 px-4 text-center">الترتيب</th>
+                    <th class="py-3.5 px-4 text-center">الحالة</th>
+                    <th class="py-3.5 px-4 text-center">الإجراءات</th>
                   </tr>
                 </thead>
                 <tbody id="categories-table-body" class="divide-y divide-slate-800/60 text-slate-300">
                   <tr>
                     <td colspan="7" class="py-12 text-center text-slate-500">
                       <i class="fa-solid fa-circle-notch fa-spin text-2xl text-brand-gold mb-3"></i>
-                      <p>Ø¬Ø§Ø±ÙŠ ØªØ­Ù…ÙŠÙ„ Ø§Ù„ØªØµÙ†ÙŠÙØ§Øª...</p>
+                      <p>جاري تحميل التصنيفات...</p>
                     </td>
                   </tr>
                 </tbody>
@@ -635,14 +635,14 @@
           <div class="luxury-card p-5 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
             <div>
               <h2 class="text-xl font-bold text-white flex items-center gap-2">
-                <span>Ø·Ù„Ø¨Ø§Øª Ø¹Ø±ÙˆØ¶ Ø§Ù„Ø£Ø³Ø¹Ø§Ø± ÙˆØ§Ù„Ù…Ù‚Ø§ÙŠØ³Ø§Øª (RFQ)</span>
+                <span>طلبات عروض الأسعار والمقايسات (RFQ)</span>
                 <span id="rfqs-count-badge" class="text-xs font-bold px-2.5 py-0.5 rounded-full bg-brand-gold/20 text-brand-gold border border-brand-gold/30">0</span>
               </h2>
-              <p class="text-xs text-slate-400 mt-1">Ø§Ø³ØªØ¹Ø±Ø§Ø¶ ÙˆØ¥Ø¯Ø§Ø±Ø© Ø·Ù„Ø¨Ø§Øª Ø§Ù„Ø¹Ù…Ù„Ø§Ø¡ ÙˆØªØ­Ø¯ÙŠØ« Ù…Ø±Ø§Ø­Ù„ ØªØ³Ø¹ÙŠØ± Ø§Ù„Ù…Ø´Ø§Ø±ÙŠØ¹</p>
+              <p class="text-xs text-slate-400 mt-1">استعراض وإدارة طلبات العملاء وتحديث مراحل تسعير المشاريع</p>
             </div>
             <button onclick="loadRfqs()" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold flex items-center justify-center gap-2 transition border border-slate-700">
               <i class="fa-solid fa-rotate"></i>
-              <span>ØªØ­Ø¯ÙŠØ« Ø§Ù„Ø·Ù„Ø¨Ø§Øª</span>
+              <span>تحديث الطلبات</span>
             </button>
           </div>
 
@@ -651,20 +651,20 @@
               <table class="w-full text-right text-xs">
                 <thead class="bg-slate-900/90 text-slate-300 font-bold border-b border-brand-border">
                   <tr>
-                    <th class="py-3.5 px-4">Ø±Ù‚Ù… Ø§Ù„Ù…Ø±Ø¬Ø¹ (RFQ Ref)</th>
-                    <th class="py-3.5 px-4">Ø§Ù„Ø¹Ù…ÙŠÙ„ ÙˆØ±Ù‚Ù… Ø§Ù„Ù‡Ø§ØªÙ</th>
-                    <th class="py-3.5 px-4">Ø§Ù„Ù…Ø¯ÙŠÙ†Ø© ÙˆØ§Ù„Ø®Ø§Ù…Ø© Ø§Ù„Ù…Ø·Ù„ÙˆØ¨Ø©</th>
-                    <th class="py-3.5 px-4">Ø§Ù„ÙƒÙ…ÙŠØ© ÙˆØ§Ù„ØªØ·Ø¨ÙŠÙ‚</th>
-                    <th class="py-3.5 px-4">ØªØ§Ø±ÙŠØ® Ø§Ù„Ø·Ù„Ø¨</th>
-                    <th class="py-3.5 px-4 text-center">Ø­Ø§Ù„Ø© Ø§Ù„Ø·Ù„Ø¨</th>
-                    <th class="py-3.5 px-4 text-center">ØªÙˆØ§ØµÙ„ Ø³Ø±ÙŠØ¹</th>
+                    <th class="py-3.5 px-4">رقم المرجع (RFQ Ref)</th>
+                    <th class="py-3.5 px-4">العميل ورقم الهاتف</th>
+                    <th class="py-3.5 px-4">المدينة والخامة المطلوبة</th>
+                    <th class="py-3.5 px-4">الكمية والتطبيق</th>
+                    <th class="py-3.5 px-4">تاريخ الطلب</th>
+                    <th class="py-3.5 px-4 text-center">حالة الطلب</th>
+                    <th class="py-3.5 px-4 text-center">تواصل سريع</th>
                   </tr>
                 </thead>
                 <tbody id="rfqs-table-body" class="divide-y divide-slate-800/60 text-slate-300">
                   <tr>
                     <td colspan="7" class="py-12 text-center text-slate-500">
                       <i class="fa-solid fa-circle-notch fa-spin text-2xl text-brand-gold mb-3"></i>
-                      <p>Ø¬Ø§Ø±ÙŠ ØªØ­Ù…ÙŠÙ„ Ø·Ù„Ø¨Ø§Øª Ø¹Ø±ÙˆØ¶ Ø§Ù„Ø£Ø³Ø¹Ø§Ø±...</p>
+                      <p>جاري تحميل طلبات عروض الأسعار...</p>
                     </td>
                   </tr>
                 </tbody>
@@ -673,18 +673,18 @@
           </div>
         </section>
 
-        <!-- ================================================================= -->
-        <!-- TAB 5: PROJECTS MANAGEMENT                                        -->
-        <!-- ================================================================= -->
+        <!-- ====================================================================
+             TAB 5: Projects Management
+             ==================================================================== -->
         <section id="tab-projects" class="tab-content hidden space-y-6">
           <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
             <div>
-              <h3 class="text-xl font-bold font-serif text-white">Ø¥Ø¯Ø§Ø±Ø© Ø§Ù„Ù…Ø´Ø§Ø±ÙŠØ¹ Ø§Ù„Ù…Ù†Ø¬Ø²Ø©</h3>
-              <p class="text-sm text-slate-400 mt-1">Ø£Ø¶Ù Ø£Ùˆ Ø¹Ø¯Ù„ Ø£Ùˆ Ø§Ø­Ø°Ù Ø§Ù„Ù…Ø´Ø§Ø±ÙŠØ¹ Ø§Ù„ØªÙŠ ÙŠØªÙ… Ø¹Ø±Ø¶Ù‡Ø§ ÙÙŠ Ù…Ø¹Ø±Ø¶ Ø§Ù„Ù…ÙˆÙ‚Ø¹.</p>
+              <h3 class="text-xl font-bold font-serif text-white">إدارة المشاريع المنجزة</h3>
+              <p class="text-sm text-slate-400 mt-1">أضف أو عدل أو احذف المشاريع المعروضة في معرض المشاريع على الموقع.</p>
             </div>
             <button onclick="openProjectModal()" class="px-4 py-2 rounded-xl gold-gradient-bg text-slate-950 font-bold text-sm flex items-center gap-2 hover:opacity-95 shadow transition">
               <i class="fa-solid fa-plus"></i>
-              <span>Ø¥Ø¶Ø§ÙØ© Ù…Ø´Ø±ÙˆØ¹ Ø¬Ø¯ÙŠØ¯</span>
+              <span>إضافة مشروع جديد</span>
             </button>
           </div>
 
@@ -693,15 +693,15 @@
               <table class="w-full text-sm text-right text-slate-300">
                 <thead class="bg-slate-900 border-b border-brand-border text-slate-400 text-xs uppercase font-semibold">
                   <tr>
-                    <th class="px-4 py-3">Ø§Ù„ØµÙˆØ±Ø©</th>
-                    <th class="px-4 py-3">Ø§Ø³Ù… Ø§Ù„Ù…Ø´Ø±ÙˆØ¹</th>
-                    <th class="px-4 py-3">Ø§Ù„Ù…ÙˆÙ‚Ø¹ / Ø§Ù„Ù…Ø¯ÙŠÙ†Ø©</th>
-                    <th class="px-4 py-3 text-center">Ø§Ù„Ø¥Ø¬Ø±Ø§Ø¡Ø§Øª</th>
+                    <th class="px-4 py-3">الصورة</th>
+                    <th class="px-4 py-3">اسم المشروع</th>
+                    <th class="px-4 py-3">الموقع / المدينة</th>
+                    <th class="px-4 py-3 text-center">الإجراءات</th>
                   </tr>
                 </thead>
                 <tbody id="admin-projects-table-body" class="divide-y divide-brand-border bg-slate-950/20">
                   <tr>
-                    <td colspan="4" class="px-4 py-8 text-center text-slate-500">Ø¬Ø§Ø±ÙŠ ØªØ­Ù…ÙŠÙ„ Ø§Ù„Ù…Ø´Ø§Ø±ÙŠØ¹...</td>
+                    <td colspan="4" class="px-4 py-8 text-center text-slate-500">جاري تحميل المشاريع...</td>
                   </tr>
                 </tbody>
               </table>
@@ -726,8 +726,8 @@
             <i class="fa-solid fa-cubes"></i>
           </div>
           <div>
-            <h3 id="material-modal-title" class="text-base font-bold text-white">Ø¥Ø¶Ø§ÙØ© Ø®Ø§Ù…Ø© Ø¬Ø¯ÙŠØ¯Ø©</h3>
-            <p class="text-xs text-slate-400">Ø¥Ø¯Ø®Ø§Ù„ ÙƒØ§ÙØ© Ø§Ù„Ù…ÙˆØ§ØµÙØ§Øª ÙˆØ§Ù„Ø®ØµØ§Ø¦Øµ ÙˆØ§Ù„ØµÙˆØ± Ø§Ù„Ø®Ø§ØµØ© Ø¨Ø§Ù„Ø®Ø§Ù…Ø© Ø§Ù„Ø­Ø¬Ø±ÙŠØ©</p>
+            <h3 id="material-modal-title" class="text-base font-bold text-white">إضافة خامة جديدة</h3>
+            <p class="text-xs text-slate-400">إدخال كافة المواصفات والخصائص والصور الخاصة بالخامة الحجرية</p>
           </div>
         </div>
         <button onclick="closeMaterialModal()" class="w-8 h-8 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white flex items-center justify-center transition">
@@ -742,29 +742,29 @@
         <div class="space-y-4">
           <div class="flex items-center gap-2 text-xs font-bold text-brand-gold uppercase tracking-wider">
             <i class="fa-solid fa-info-circle"></i>
-            <span>1. Ø§Ù„Ù…Ø¹Ù„ÙˆÙ…Ø§Øª Ø§Ù„Ø£Ø³Ø§Ø³ÙŠØ©</span>
+            <span>1. المعلومات الأساسية</span>
           </div>
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             <div>
-              <label class="block text-xs font-semibold text-slate-300 mb-1.5">Ù…Ø¹Ø±Ù Ø§Ù„Ù…Ù†ØªØ¬ (Product ID) *</label>
-              <input type="text" id="mat-id" required placeholder="Ù…Ø«Ø§Ù„: it-25" 
+              <label class="block text-xs font-semibold text-slate-300 mb-1.5">معرف المنتج (Product ID) *</label>
+              <input type="text" id="mat-id" required placeholder="مثال: it-25" 
                 class="w-full bg-brand-input border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-brand-gold transition">
             </div>
             <div>
-              <label class="block text-xs font-semibold text-slate-300 mb-1.5">Ø§Ù„ØªØµÙ†ÙŠÙ (Category) *</label>
+              <label class="block text-xs font-semibold text-slate-300 mb-1.5">التصنيف (Category) *</label>
               <select id="mat-category-id" required 
                 class="w-full bg-brand-input border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-brand-gold transition">
-                <option value="">Ø§Ø®ØªØ± Ø§Ù„ØªØµÙ†ÙŠÙ...</option>
+                <option value="">اختر التصنيف...</option>
               </select>
             </div>
             <div>
-              <label class="block text-xs font-semibold text-slate-300 mb-1.5">Ø§Ù„Ø§Ø³Ù… Ø¨Ø§Ù„Ø¹Ø±Ø¨ÙŠ (Name AR) *</label>
-              <input type="text" id="mat-name-ar" required placeholder="Ù…Ø«Ø§Ù„: ÙƒØ§Ù„Ø§ÙƒØ§ØªØ§ Ø¬ÙˆÙ„Ø¯ ÙØ§Ø®Ø±" 
+              <label class="block text-xs font-semibold text-slate-300 mb-1.5">الاسم بالعربي (Name AR) *</label>
+              <input type="text" id="mat-name-ar" required placeholder="مثال: كالاكاتا جولد فاخر" 
                 class="w-full bg-brand-input border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-brand-gold transition">
             </div>
             <div>
-              <label class="block text-xs font-semibold text-slate-300 mb-1.5">Ø§Ù„Ø§Ø³Ù… Ø¨Ø§Ù„Ø¥Ù†Ø¬Ù„ÙŠØ²ÙŠ (Name EN) *</label>
-              <input type="text" id="mat-name-en" required placeholder="Ù…Ø«Ø§Ù„: Calacatta Gold Extra" 
+              <label class="block text-xs font-semibold text-slate-300 mb-1.5">الاسم بالإنجليزي (Name EN) *</label>
+              <input type="text" id="mat-name-en" required placeholder="مثال: Calacatta Gold Extra" 
                 class="w-full bg-brand-input border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-brand-gold transition">
             </div>
           </div>
@@ -774,35 +774,35 @@
         <div class="space-y-4 pt-4 border-t border-brand-border">
           <div class="flex items-center gap-2 text-xs font-bold text-brand-gold uppercase tracking-wider">
             <i class="fa-solid fa-earth-americas"></i>
-            <span>2. Ø§Ù„Ù…Ù†Ø´Ø£ ÙˆÙ†ÙˆØ¹ Ø§Ù„Ø­Ø¬Ø±</span>
+            <span>2. المنشأ ونوع الحجر</span>
           </div>
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             <div>
-              <label class="block text-xs font-semibold text-slate-300 mb-1.5">Ø¨Ù„Ø¯ Ø§Ù„Ù…Ù†Ø´Ø£ (Origin) *</label>
-              <input type="text" id="mat-origin" list="origins-datalist" required placeholder="Ø¥ÙŠØ·Ø§Ù„ÙŠØ§ / Italy" 
+              <label class="block text-xs font-semibold text-slate-300 mb-1.5">بلد المنشأ (Origin) *</label>
+              <input type="text" id="mat-origin" list="origins-datalist" required placeholder="إيطاليا / Italy" 
                 class="w-full bg-brand-input border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-brand-gold transition">
               <datalist id="origins-datalist"></datalist>
             </div>
             <div>
-              <label class="block text-xs font-semibold text-slate-300 mb-1.5">Ù†ÙˆØ¹ Ø§Ù„Ø­Ø¬Ø± (Stone Type) *</label>
+              <label class="block text-xs font-semibold text-slate-300 mb-1.5">نوع الحجر (Stone Type) *</label>
               <select id="mat-stone-type" required 
                 class="w-full bg-brand-input border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-brand-gold transition">
-                <option value="marble">Ø±Ø®Ø§Ù… (Marble)</option>
-                <option value="granite">Ø¬Ø±Ø§Ù†ÙŠØª (Granite)</option>
-                <option value="travertine">ØªØ±Ø§ÙØ±ØªÙŠÙ† (Travertine)</option>
-                <option value="stone">Ø­Ø¬Ø± Ø·Ø¨ÙŠØ¹ÙŠ (Natural Stone)</option>
-                <option value="limestone">Ø­Ø¬Ø± Ø¬ÙŠØ±ÙŠ (Limestone)</option>
-                <option value="onyx">Ø£ÙˆÙ†ÙŠÙƒØ³ (Onyx)</option>
+                <option value="marble">رخام (Marble)</option>
+                <option value="granite">جرانيت (Granite)</option>
+                <option value="travertine">ترافرتين (Travertine)</option>
+                <option value="stone">حجر طبيعي (Natural Stone)</option>
+                <option value="limestone">حجر جيري (Limestone)</option>
+                <option value="onyx">أونيكس (Onyx)</option>
               </select>
             </div>
             <div>
-              <label class="block text-xs font-semibold text-slate-300 mb-1.5">Ø§Ù„Ù†ÙˆØ¹ Ø¨Ø§Ù„Ø¹Ø±Ø¨ÙŠ (Type AR)</label>
-              <input type="text" id="mat-type-ar" placeholder="Ù…Ø«Ø§Ù„: Ø±Ø®Ø§Ù… Ø¥ÙŠØ·Ø§Ù„ÙŠ Ù†Ø®Ø¨ Ø£ÙˆÙ„" 
+              <label class="block text-xs font-semibold text-slate-300 mb-1.5">النوع بالعربي (Type AR)</label>
+              <input type="text" id="mat-type-ar" placeholder="مثال: رخام إيطالي نخب أول" 
                 class="w-full bg-brand-input border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-brand-gold transition">
             </div>
             <div>
-              <label class="block text-xs font-semibold text-slate-300 mb-1.5">Ø§Ù„Ù†ÙˆØ¹ Ø¨Ø§Ù„Ø¥Ù†Ø¬Ù„ÙŠØ²ÙŠ (Type EN)</label>
-              <input type="text" id="mat-type-en" placeholder="Ù…Ø«Ø§Ù„: Premium Italian Marble" 
+              <label class="block text-xs font-semibold text-slate-300 mb-1.5">النوع بالإنجليزي (Type EN)</label>
+              <input type="text" id="mat-type-en" placeholder="مثال: Premium Italian Marble" 
                 class="w-full bg-brand-input border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-brand-gold transition">
             </div>
           </div>
@@ -812,26 +812,26 @@
         <div class="space-y-4 pt-4 border-t border-brand-border">
           <div class="flex items-center gap-2 text-xs font-bold text-brand-gold uppercase tracking-wider">
             <i class="fa-solid fa-palette"></i>
-            <span>3. Ø§Ù„Ù„ÙˆÙ† ÙˆØ§Ù„Ù…Ø¸Ù‡Ø±</span>
+            <span>3. اللون والمظهر</span>
           </div>
           <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div class="sm:col-span-1">
-              <label class="block text-xs font-semibold text-slate-300 mb-1.5">Ù…Ø¬Ù…ÙˆØ¹Ø© Ø§Ù„Ù„ÙˆÙ† (Color Group) *</label>
+              <label class="block text-xs font-semibold text-slate-300 mb-1.5">مجموعة اللون (Color Group) *</label>
               <select id="mat-color-group" required 
                 class="w-full bg-brand-input border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-brand-gold transition">
-                <option value="white">Ø£Ø¨ÙŠØ¶ (White)</option>
-                <option value="beige">Ø¨ÙŠØ¬ / ÙƒØ±ÙŠÙ…ÙŠ (Beige)</option>
-                <option value="black">Ø£Ø³ÙˆØ¯ (Black)</option>
-                <option value="grey">Ø±Ù…Ø§Ø¯ÙŠ (Grey)</option>
-                <option value="gold">Ø°Ù‡Ø¨ÙŠ / Ø£ØµÙØ± (Gold)</option>
-                <option value="pink">ÙˆØ±Ø¯ÙŠ / Ø£Ø­Ù…Ø± (Pink/Red)</option>
-                <option value="green">Ø£Ø®Ø¶Ø± (Green)</option>
-                <option value="blue">Ø£Ø²Ø±Ù‚ (Blue)</option>
-                <option value="brown">Ø¨Ù†ÙŠ (Brown)</option>
+                <option value="white">أبيض (White)</option>
+                <option value="beige">بيج / كريمي (Beige)</option>
+                <option value="black">أسود (Black)</option>
+                <option value="grey">رمادي (Grey)</option>
+                <option value="gold">ذهبي / أصفر (Gold)</option>
+                <option value="pink">وردي / أحمر (Pink/Red)</option>
+                <option value="green">أخضر (Green)</option>
+                <option value="blue">أزرق (Blue)</option>
+                <option value="brown">بني (Brown)</option>
               </select>
             </div>
             <div class="sm:col-span-1">
-              <label class="block text-xs font-semibold text-slate-300 mb-1.5">ÙƒÙˆØ¯ Ø§Ù„Ù„ÙˆÙ† (Color Hex)</label>
+              <label class="block text-xs font-semibold text-slate-300 mb-1.5">كود اللون (Color Hex)</label>
               <div class="flex items-center gap-2">
                 <input type="color" id="mat-color-picker" value="#ffffff" oninput="syncColorHex(this.value)" 
                   class="w-10 h-9 p-0.5 rounded-lg bg-brand-input border border-slate-700 cursor-pointer">
@@ -840,8 +840,8 @@
               </div>
             </div>
             <div class="sm:col-span-1">
-              <label class="block text-xs font-semibold text-slate-300 mb-1.5">ÙˆØµÙ Ø§Ù„Ù„ÙˆÙ† ÙˆØ§Ù„ØªØ¹Ø±ÙŠÙ‚Ø§Øª</label>
-              <input type="text" id="mat-color-desc" placeholder="Ù…Ø«Ø§Ù„: Ø£Ø¨ÙŠØ¶ Ù†Ø§ØµØ¹ Ø¨Ø¹Ø±ÙˆÙ‚ Ø°Ù‡Ø¨ÙŠØ© Ø¹Ø±ÙŠØ¶Ø©" 
+              <label class="block text-xs font-semibold text-slate-300 mb-1.5">وصف اللون والتعريقات</label>
+              <input type="text" id="mat-color-desc" placeholder="مثال: أبيض ناصع بعروق ذهبية عريضة" 
                 class="w-full bg-brand-input border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-brand-gold transition">
             </div>
           </div>
@@ -851,23 +851,23 @@
         <div class="space-y-4 pt-4 border-t border-brand-border">
           <div class="flex items-center gap-2 text-xs font-bold text-brand-gold uppercase tracking-wider">
             <i class="fa-solid fa-tag"></i>
-            <span>4. Ø§Ù„ØªØ´Ø·ÙŠØ¨ ÙˆØ§Ù„Ø³Ø¹Ø±</span>
+            <span>4. التشطيب والسعر</span>
           </div>
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label class="block text-xs font-semibold text-slate-300 mb-1.5">Ù†ÙˆØ¹ Ø§Ù„ØªØ´Ø·ÙŠØ¨ (Finish)</label>
-              <input type="text" id="mat-finish" placeholder="Ù…Ø«Ø§Ù„: Ù„Ø§Ù…Ø¹ (Polished) / Ø¨ÙˆÙƒÙ…Ø§ØªØ´ / Ù…Ø·ÙÙŠ" 
+              <label class="block text-xs font-semibold text-slate-300 mb-1.5">نوع التشطيب (Finish)</label>
+              <input type="text" id="mat-finish" placeholder="مثال: لامع (Polished) / بوكماتش / مطفي" 
                 class="w-full bg-brand-input border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-brand-gold transition">
             </div>
             <div>
-              <label class="block text-xs font-semibold text-slate-300 mb-1.5">ÙØ¦Ø© Ø§Ù„Ø³Ø¹Ø± (Price Tier) *</label>
+              <label class="block text-xs font-semibold text-slate-300 mb-1.5">فئة السعر (Price Tier) *</label>
               <select id="mat-price-tier" required 
                 class="w-full bg-brand-input border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-brand-gold transition">
-                <option value="VIP">VIP (ÙØ§Ø®Ø± Ø¬Ø¯Ø§Ù‹)</option>
-                <option value="Ultra VIP">Ultra VIP (Ù†Ø§Ø¯Ø± ÙˆÙØ§Ø¦Ù‚ Ø§Ù„ÙØ®Ø§Ù…Ø©)</option>
-                <option value="Ù…Ù…ÙŠØ²">Ù…Ù…ÙŠØ² (Premium)</option>
-                <option value="Ø§Ù„Ø£ÙƒØ«Ø± Ø·Ù„Ø¨Ø§Ù‹">Ø§Ù„Ø£ÙƒØ«Ø± Ø·Ù„Ø¨Ø§Ù‹ (Popular)</option>
-                <option value="Ø§Ù‚ØªØµØ§Ø¯ÙŠ Ø±Ø§Ù‚ÙŠ">Ø§Ù‚ØªØµØ§Ø¯ÙŠ Ø±Ø§Ù‚ÙŠ (Economic Luxury)</option>
+                <option value="VIP">VIP (فاخر جداً)</option>
+                <option value="Ultra VIP">Ultra VIP (نادر وفائق الفخامة)</option>
+                <option value="مميز">مميز (Premium)</option>
+                <option value="الأكثر طلباً">الأكثر طلباً (Popular)</option>
+                <option value="اقتصادي راقي">اقتصادي راقي (Economic Luxury)</option>
               </select>
             </div>
           </div>
@@ -877,37 +877,37 @@
         <div class="space-y-4 pt-4 border-t border-brand-border">
           <div class="flex items-center gap-2 text-xs font-bold text-brand-gold uppercase tracking-wider">
             <i class="fa-solid fa-sliders"></i>
-            <span>5. Ø§Ù„Ù…ÙˆØ§ØµÙØ§Øª Ø§Ù„ÙÙ†ÙŠØ© ÙˆØ§Ù„Ù‡Ù†Ø¯Ø³ÙŠØ©</span>
+            <span>5. المواصفات الفنية والهندسية</span>
           </div>
           <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
             <div>
-              <label class="block text-[11px] font-semibold text-slate-300 mb-1">Ø§Ù„ÙƒØ«Ø§ÙØ©</label>
-              <input type="text" id="mat-density" placeholder="2720 kg/mÂ³" 
+              <label class="block text-[11px] font-semibold text-slate-300 mb-1">الكثافة</label>
+              <input type="text" id="mat-density" placeholder="2720 kg/m³" 
                 class="w-full bg-brand-input border border-slate-700 rounded-xl px-3 py-2 text-xs text-white focus:border-brand-gold">
             </div>
             <div>
-              <label class="block text-[11px] font-semibold text-slate-300 mb-1">Ø§Ù…ØªØµØ§Øµ Ø§Ù„Ù…Ø§Ø¡</label>
+              <label class="block text-[11px] font-semibold text-slate-300 mb-1">امتصاص الماء</label>
               <input type="text" id="mat-water-absorption" placeholder="0.12%" 
                 class="w-full bg-brand-input border border-slate-700 rounded-xl px-3 py-2 text-xs text-white focus:border-brand-gold">
             </div>
             <div>
-              <label class="block text-[11px] font-semibold text-slate-300 mb-1">Ù…Ù‚Ø§ÙˆÙ…Ø© Ø§Ù„Ø¶ØºØ·</label>
+              <label class="block text-[11px] font-semibold text-slate-300 mb-1">مقاومة الضغط</label>
               <input type="text" id="mat-compressive-strength" placeholder="140 MPa" 
                 class="w-full bg-brand-input border border-slate-700 rounded-xl px-3 py-2 text-xs text-white focus:border-brand-gold">
             </div>
             <div>
-              <label class="block text-[11px] font-semibold text-slate-300 mb-1">Ø¯Ø±Ø¬Ø© Ø§Ù„Ù…ØªØ§Ù†Ø© (1-5)</label>
+              <label class="block text-[11px] font-semibold text-slate-300 mb-1">درجة المتانة (1-5)</label>
               <input type="number" step="0.1" min="1" max="5" id="mat-durability-score" value="4.5" 
                 class="w-full bg-brand-input border border-slate-700 rounded-xl px-3 py-2 text-xs text-white focus:border-brand-gold">
             </div>
             <div>
-              <label class="block text-[11px] font-semibold text-slate-300 mb-1">Ø¯Ø±Ø¬Ø© Ø§Ù„ØµÙŠØ§Ù†Ø©</label>
-              <input type="text" id="mat-maintenance-tier" placeholder="Ø³Ù‡Ù„Ø© / Ù…ØªÙˆØ³Ø·Ø©" 
+              <label class="block text-[11px] font-semibold text-slate-300 mb-1">درجة الصيانة</label>
+              <input type="text" id="mat-maintenance-tier" placeholder="سهلة / متوسطة" 
                 class="w-full bg-brand-input border border-slate-700 rounded-xl px-3 py-2 text-xs text-white focus:border-brand-gold">
             </div>
             <div>
-              <label class="block text-[11px] font-semibold text-slate-300 mb-1">Ø¯Ø±Ø¬Ø© Ø§Ù„Ù…Ù„Ù…Ø³</label>
-              <input type="text" id="mat-texture-grad" placeholder="Ù†Ø§Ø¹Ù… Ø¨Ù„ÙˆØ±ÙŠ" 
+              <label class="block text-[11px] font-semibold text-slate-300 mb-1">درجة الملمس</label>
+              <input type="text" id="mat-texture-grad" placeholder="ناعم بلوري" 
                 class="w-full bg-brand-input border border-slate-700 rounded-xl px-3 py-2 text-xs text-white focus:border-brand-gold">
             </div>
           </div>
@@ -917,16 +917,16 @@
         <div class="space-y-4 pt-4 border-t border-brand-border">
           <div class="flex items-center gap-2 text-xs font-bold text-brand-gold uppercase tracking-wider">
             <i class="fa-solid fa-building"></i>
-            <span>6. Ø§Ù„Ø§Ø³ØªØ®Ø¯Ø§Ù… ÙˆØ§Ù„ØªØ·Ø¨ÙŠÙ‚Ø§Øª Ø§Ù„Ù…Ù†Ø§Ø³Ø¨Ø©</span>
+            <span>6. الاستخدام والتطبيقات المناسبة</span>
           </div>
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label class="block text-xs font-semibold text-slate-300 mb-1.5">Ø§Ù„Ø§Ø³ØªØ®Ø¯Ø§Ù… Ø¨Ø§Ù„Ø¹Ø±Ø¨ÙŠ (Usage AR)</label>
-              <textarea id="mat-usage-ar" rows="2" placeholder="Ù…Ø«Ø§Ù„: Ø£Ø±Ø¶ÙŠØ§Øª Ø§Ù„ØµØ§Ù„Ø§Øª Ø§Ù„Ø±Ø¦ÙŠØ³ÙŠØ©ØŒ Ø¬Ø¯Ø±Ø§Ù† Ø§Ù„Ù…Ø¬Ø§Ù„Ø³ØŒ Ø¬Ø²Ø± Ø§Ù„Ù…Ø·Ø§Ø¨Ø®ØŒ Ø§Ù„Ù…ØºØ§Ø³Ù„ Ø§Ù„ÙØ§Ø®Ø±Ø©" 
+              <label class="block text-xs font-semibold text-slate-300 mb-1.5">الاستخدام بالعربي (Usage AR)</label>
+              <textarea id="mat-usage-ar" rows="2" placeholder="مثال: أرضيات الصالات الرئيسية، جدران المجالس، جزر المطابخ، المغاسل الفاخرة" 
                 class="w-full bg-brand-input border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-brand-gold transition"></textarea>
             </div>
             <div>
-              <label class="block text-xs font-semibold text-slate-300 mb-1.5">Ø§Ù„Ø§Ø³ØªØ®Ø¯Ø§Ù… Ø¨Ø§Ù„Ø¥Ù†Ø¬Ù„ÙŠØ²ÙŠ (Usage EN)</label>
+              <label class="block text-xs font-semibold text-slate-300 mb-1.5">الاستخدام بالإنجليزي (Usage EN)</label>
               <textarea id="mat-usage-en" rows="2" placeholder="Example: Luxury living floors, accent walls, kitchen islands, master baths" 
                 class="w-full bg-brand-input border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-brand-gold transition"></textarea>
             </div>
@@ -938,15 +938,15 @@
           <label class="flex items-center gap-3 cursor-pointer">
             <input type="checkbox" id="mat-is-featured" class="w-4 h-4 rounded text-brand-gold focus:ring-brand-gold bg-brand-input border-slate-700">
             <div>
-              <div class="text-xs font-bold text-white">Ù…Ù†ØªØ¬ Ù…Ù…ÙŠØ² (Featured Product)</div>
-              <div class="text-[11px] text-slate-400">ÙŠØ¸Ù‡Ø± ÙÙŠ ÙˆØ§Ø¬Ù‡Ø© Ø§Ù„Ù…ØªØ¬Ø± ÙˆÙ‚Ø§Ø¦Ù…Ø© Ø§Ù„Ø®Ø§Ù…Ø§Øª Ø§Ù„Ù…Ù…ÙŠØ²Ø©</div>
+              <div class="text-xs font-bold text-white">منتج مميز (Featured Product)</div>
+              <div class="text-[11px] text-slate-400">يظهر في واجهة المتجر وقائمة الخامات المميزة</div>
             </div>
           </label>
           <label class="flex items-center gap-3 cursor-pointer">
             <input type="checkbox" id="mat-is-active" checked class="w-4 h-4 rounded text-brand-gold focus:ring-brand-gold bg-brand-input border-slate-700">
             <div>
-              <div class="text-xs font-bold text-white">Ù…Ù†ØªØ¬ Ù†Ø´Ø· (Active)</div>
-              <div class="text-[11px] text-slate-400">Ø¸Ø§Ù‡Ø± Ø¹Ù„Ù‰ Ø§Ù„Ù…ÙˆÙ‚Ø¹ ÙˆÙÙŠ Ù…Ø­Ø±Ùƒ Ø§Ù„Ø¨Ø­Ø«</div>
+              <div class="text-xs font-bold text-white">منتج نشط (Active)</div>
+              <div class="text-[11px] text-slate-400">ظاهر على الموقع وفي محرك البحث</div>
             </div>
           </label>
         </div>
@@ -956,9 +956,9 @@
           <div class="flex items-center justify-between">
             <div class="flex items-center gap-2 text-xs font-bold text-brand-gold uppercase tracking-wider">
               <i class="fa-solid fa-images"></i>
-              <span>8. ØµÙˆØ± Ø§Ù„Ù…Ù†ØªØ¬ (Supabase Storage: materials)</span>
+              <span>8. صور المنتج (Supabase Storage: materials)</span>
             </div>
-            <span class="text-[11px] text-slate-400" id="mat-images-count-label">0 ØµÙˆØ±</span>
+            <span class="text-[11px] text-slate-400" id="mat-images-count-label">0 صور</span>
           </div>
 
           <!-- Existing Images Grid -->
@@ -974,24 +974,24 @@
               <div class="w-12 h-12 rounded-full bg-brand-gold/10 text-brand-gold flex items-center justify-center mb-3">
                 <i class="fa-solid fa-cloud-arrow-up text-xl"></i>
               </div>
-              <p class="text-xs font-bold text-white">Ø§Ø¶ØºØ· Ù„Ø§Ø®ØªÙŠØ§Ø± ØµÙˆØ± Ù…Ù† Ø¬Ù‡Ø§Ø²Ùƒ Ø£Ùˆ Ø§Ø³Ø­Ø¨Ù‡Ø§ Ù‡Ù†Ø§</p>
-              <p class="text-[11px] text-slate-400 mt-1">ÙŠØ¯Ø¹Ù… JPG, PNG, WEBP, AVIF (ØªØµÙ„ Ø¥Ù„Ù‰ 10MB Ù„ÙƒÙ„ ØµÙˆØ±Ø©)</p>
+              <p class="text-xs font-bold text-white">اضغط لاختيار صور من جهازك أو اسحبها هنا</p>
+              <p class="text-[11px] text-slate-400 mt-1">يدعم JPG, PNG, WEBP, AVIF (تصل إلى 10MB لكل صورة)</p>
             </div>
           </div>
 
           <!-- Add by Direct Image URL -->
           <div class="flex items-center gap-2 pt-1">
-            <input type="url" id="mat-direct-image-url" placeholder="Ø£Ùˆ Ø£Ø¶Ù Ø±Ø§Ø¨Ø· ØµÙˆØ±Ø© Ù…Ø¨Ø§Ø´Ø± (https://...)" 
+            <input type="url" id="mat-direct-image-url" placeholder="أو أضف رابط صورة مباشر (https://...)" 
               class="flex-1 bg-brand-input border border-slate-700 rounded-xl px-3.5 py-2 text-xs text-white focus:border-brand-gold">
             <button type="button" onclick="addDirectImageUrl()" 
               class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-brand-gold text-xs font-bold border border-brand-gold/30 transition whitespace-nowrap">
-              <i class="fa-solid fa-plus"></i> Ø¥Ø¶Ø§ÙØ© Ø±Ø§Ø¨Ø·
+              <i class="fa-solid fa-plus"></i> إضافة رابط
             </button>
           </div>
 
           <!-- Selected Staged Images Preview -->
           <div id="mat-staged-images-container" class="hidden space-y-2">
-            <div class="text-xs font-semibold text-amber-400">ØµÙˆØ± Ø¬Ø¯ÙŠØ¯Ø© Ø¨Ø§Ù†ØªØ¸Ø§Ø± Ø§Ù„Ø­ÙØ¸ ÙˆØ§Ù„Ø±ÙØ¹:</div>
+            <div class="text-xs font-semibold text-amber-400">صور جديدة بانتظار الحفظ والرفع:</div>
             <div id="mat-staged-images-grid" class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 gap-3"></div>
           </div>
         </div>
@@ -1001,12 +1001,12 @@
       <!-- Modal Footer -->
       <div class="p-5 border-t border-brand-border bg-slate-900/95 flex items-center justify-between">
         <button type="button" onclick="closeMaterialModal()" class="px-5 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold transition">
-          Ø¥Ù„ØºØ§Ø¡
+          إلغاء
         </button>
         <button type="button" onclick="document.getElementById('material-form').requestSubmit()" id="mat-save-btn" 
           class="px-6 py-2.5 rounded-xl gold-gradient-bg text-slate-950 text-xs font-bold flex items-center gap-2 hover:opacity-95 shadow-md transition">
           <i class="fa-solid fa-floppy-disk"></i>
-          <span id="mat-save-btn-text">Ø­ÙØ¸ Ø§Ù„Ø®Ø§Ù…Ø©</span>
+          <span id="mat-save-btn-text">حفظ الخامة</span>
         </button>
       </div>
 
@@ -1025,8 +1025,8 @@
             <i class="fa-solid fa-layer-group"></i>
           </div>
           <div>
-            <h3 id="category-modal-title" class="text-base font-bold text-white">Ø¥Ø¶Ø§ÙØ© ØªØµÙ†ÙŠÙ Ø¬Ø¯ÙŠØ¯</h3>
-            <p class="text-xs text-slate-400">Ø¥Ø¯Ø§Ø±Ø© Ù…Ø¬Ù…ÙˆØ¹Ø§Øª ÙˆÙ…ØµØ§Ø¯Ø± Ø§Ù„Ø®Ø§Ù…Ø§Øª</p>
+            <h3 id="category-modal-title" class="text-base font-bold text-white">إضافة تصنيف جديد</h3>
+            <p class="text-xs text-slate-400">إدارة مجموعات ومصادر الخامات</p>
           </div>
         </div>
         <button onclick="closeCategoryModal()" class="w-8 h-8 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white flex items-center justify-center transition">
@@ -1036,20 +1036,20 @@
 
       <form id="category-form" onsubmit="handleSaveCategory(event)" class="p-6 space-y-4">
         <div>
-          <label class="block text-xs font-semibold text-slate-300 mb-1.5">Ù…Ø¹Ø±Ù Ø§Ù„ØªØµÙ†ÙŠÙ (ID) *</label>
-          <input type="text" id="cat-id" required placeholder="Ù…Ø«Ø§Ù„: italian Ø£Ùˆ omani" 
+          <label class="block text-xs font-semibold text-slate-300 mb-1.5">معرف التصنيف (ID) *</label>
+          <input type="text" id="cat-id" required placeholder="مثال: italian أو omani" 
             class="w-full bg-brand-input border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-brand-gold transition">
-          <span class="text-[10px] text-slate-500 mt-1 block">ÙŠÙØ³ØªØ®Ø¯Ù… Ù„Ù„Ø±Ø¨Ø· Ø§Ù„Ø¯Ø§Ø®Ù„ÙŠ Ù…Ø¹ Ø§Ù„Ù…Ù†ØªØ¬Ø§Øª (Ø£Ø­Ø±Ù Ø¥Ù†Ø¬Ù„ÙŠØ²ÙŠØ© ÙˆØ£Ø±Ù‚Ø§Ù…)</span>
+          <span class="text-[10px] text-slate-500 mt-1 block">يُستخدم للربط الداخلي مع المنتجات (أحرف إنجليزية وأرقام)</span>
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label class="block text-xs font-semibold text-slate-300 mb-1.5">Ø§Ù„Ø§Ø³Ù… Ø¨Ø§Ù„Ø¹Ø±Ø¨ÙŠ (Name AR) *</label>
-            <input type="text" id="cat-name-ar" required placeholder="Ø§Ù„Ø±Ø®Ø§Ù… Ø§Ù„Ø¥ÙŠØ·Ø§Ù„ÙŠ" 
+            <label class="block text-xs font-semibold text-slate-300 mb-1.5">الاسم بالعربي (Name AR) *</label>
+            <input type="text" id="cat-name-ar" required placeholder="الرخام الإيطالي" 
               class="w-full bg-brand-input border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-brand-gold transition">
           </div>
           <div>
-            <label class="block text-xs font-semibold text-slate-300 mb-1.5">Ø§Ù„Ø§Ø³Ù… Ø¨Ø§Ù„Ø¥Ù†Ø¬Ù„ÙŠØ²ÙŠ (Name EN) *</label>
+            <label class="block text-xs font-semibold text-slate-300 mb-1.5">الاسم بالإنجليزي (Name EN) *</label>
             <input type="text" id="cat-name-en" required placeholder="Italian Marble" 
               class="w-full bg-brand-input border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-brand-gold transition">
           </div>
@@ -1057,17 +1057,17 @@
 
         <div class="grid grid-cols-3 gap-3">
           <div>
-            <label class="block text-xs font-semibold text-slate-300 mb-1.5">Ø§Ù„Ø£ÙŠÙ‚ÙˆÙ†Ø© (Icon)</label>
-            <input type="text" id="cat-icon" value="ðŸ’Ž" placeholder="ðŸ‡®ðŸ‡¹ Ø£Ùˆ ðŸ’Ž" 
+            <label class="block text-xs font-semibold text-slate-300 mb-1.5">الأيقونة (Icon)</label>
+            <input type="text" id="cat-icon" value="💎" placeholder="🇮🇹 أو 💎" 
               class="w-full bg-brand-input border border-slate-700 rounded-xl px-3 py-2.5 text-xs text-center text-white focus:outline-none focus:border-brand-gold">
           </div>
           <div>
-            <label class="block text-xs font-semibold text-slate-300 mb-1.5">Ø§Ù„Ø´Ø§Ø±Ø© (Badge)</label>
-            <input type="text" id="cat-badge" placeholder="ÙØ§Ø®Ø± / Ù…Ù…ÙŠØ²" 
+            <label class="block text-xs font-semibold text-slate-300 mb-1.5">الشارة (Badge)</label>
+            <input type="text" id="cat-badge" placeholder="فاخر / مميز" 
               class="w-full bg-brand-input border border-slate-700 rounded-xl px-3 py-2.5 text-xs text-white focus:outline-none focus:border-brand-gold">
           </div>
           <div>
-            <label class="block text-xs font-semibold text-slate-300 mb-1.5">Ø§Ù„ØªØ±ØªÙŠØ¨ (Order)</label>
+            <label class="block text-xs font-semibold text-slate-300 mb-1.5">الترتيب (Order)</label>
             <input type="number" id="cat-sort-order" value="1" 
               class="w-full bg-brand-input border border-slate-700 rounded-xl px-3 py-2.5 text-xs text-white text-center focus:outline-none focus:border-brand-gold">
           </div>
@@ -1077,19 +1077,19 @@
           <label class="flex items-center gap-3 cursor-pointer p-3 rounded-xl bg-slate-900/60 border border-slate-800">
             <input type="checkbox" id="cat-is-active" checked class="w-4 h-4 rounded text-brand-gold focus:ring-brand-gold bg-brand-input border-slate-700">
             <div>
-              <div class="text-xs font-bold text-white">Ø§Ù„ØªØµÙ†ÙŠÙ Ø¸Ø§Ù‡Ø± Ø¹Ù„Ù‰ Ø§Ù„Ù…ÙˆÙ‚Ø¹</div>
-              <div class="text-[11px] text-slate-400">ØªÙØ¹ÙŠÙ„ Ø£Ùˆ ØªØ¹Ø·ÙŠÙ„ Ø¸Ù‡ÙˆØ± Ù‡Ø°Ø§ Ø§Ù„Ù‚Ø³Ù… Ø¨Ø§Ù„ÙƒØ§Ù…Ù„ ÙÙŠ Ø§Ù„ÙˆØ§Ø¬Ù‡Ø©</div>
+              <div class="text-xs font-bold text-white">التصنيف ظاهر على الموقع</div>
+              <div class="text-[11px] text-slate-400">تفعيل أو تعطيل ظهور هذا القسم بالكامل في الواجهة</div>
             </div>
           </label>
         </div>
 
         <div class="pt-4 border-t border-brand-border flex items-center justify-between">
           <button type="button" onclick="closeCategoryModal()" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold transition">
-            Ø¥Ù„ØºØ§Ø¡
+            إلغاء
           </button>
           <button type="submit" id="cat-save-btn" class="px-5 py-2 rounded-xl gold-gradient-bg text-slate-950 text-xs font-bold flex items-center gap-2 hover:opacity-95 shadow transition">
             <i class="fa-solid fa-floppy-disk"></i>
-            <span>Ø­ÙØ¸ Ø§Ù„ØªØµÙ†ÙŠÙ</span>
+            <span>حفظ التصنيف</span>
           </button>
         </div>
       </form>
@@ -1098,14 +1098,17 @@
   </div>
 
   <!-- ========================================================================= -->
-  <!-- MODAL: ADD / EDIT PROJECT                                                 -->
+  <!-- MODAL: CONFIRMATION DIALOG (Delete)                                       -->
   <!-- ========================================================================= -->
+  <!-- =====================================
+       Modal: Add / Edit Project
+       ===================================== -->
   <div id="project-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 modal-backdrop">
     <div class="luxury-card w-full max-w-2xl flex flex-col max-h-[90vh] shadow-2xl overflow-hidden relative">
       <div class="p-5 border-b border-brand-border bg-slate-900/80 flex items-center justify-between sticky top-0 z-10">
         <h3 id="project-modal-title" class="text-lg font-bold font-serif text-white flex items-center gap-2">
           <i class="fa-solid fa-image text-brand-gold"></i>
-          <span>Ø¥Ø¶Ø§ÙØ© Ù…Ø´Ø±ÙˆØ¹ Ø¬Ø¯ÙŠØ¯</span>
+          <span>إضافة مشروع جديد</span>
         </h3>
         <button type="button" onclick="closeProjectModal()" class="text-slate-400 hover:text-white p-1 rounded-lg hover:bg-slate-800 transition">
           <i class="fa-solid fa-xmark text-xl"></i>
@@ -1118,57 +1121,54 @@
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <label class="block text-xs font-semibold text-slate-300 mb-1.5">Ø§Ø³Ù… Ø§Ù„Ù…Ø´Ø±ÙˆØ¹ *</label>
-            <input type="text" id="proj-title" required class="w-full bg-brand-input border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-brand-gold transition">
+            <label class="block text-xs font-semibold text-slate-300 mb-1.5">اسم المشروع *</label>
+            <input type="text" id="proj-title" required class="w-full bg-brand-input border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-brand-gold transition" placeholder="مثال: قصر الندى السكني">
           </div>
           <div>
-            <label class="block text-xs font-semibold text-slate-300 mb-1.5">Ø§Ù„Ù…ÙˆÙ‚Ø¹ / Ø§Ù„Ù…Ø¯ÙŠÙ†Ø©</label>
-            <input type="text" id="proj-location" class="w-full bg-brand-input border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-brand-gold transition">
+            <label class="block text-xs font-semibold text-slate-300 mb-1.5">الموقع / المدينة</label>
+            <input type="text" id="proj-location" class="w-full bg-brand-input border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-brand-gold transition" placeholder="مثال: الرياض - حي النخيل">
           </div>
         </div>
 
         <div>
-          <label class="block text-xs font-semibold text-slate-300 mb-1.5">ÙˆØµÙ Ù…Ø®ØªØµØ±</label>
-          <textarea id="proj-description" rows="2" class="w-full bg-brand-input border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-brand-gold transition"></textarea>
+          <label class="block text-xs font-semibold text-slate-300 mb-1.5">وصف ونطاق المشروع</label>
+          <textarea id="proj-description" rows="2" class="w-full bg-brand-input border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-brand-gold transition" placeholder="أرضيات رخام ستاتواريتو، واجهات حجر طبيعي..."></textarea>
         </div>
 
         <div>
-          <label class="block text-xs font-semibold text-slate-300 mb-1.5">ØµÙˆØ±Ø© Ø§Ù„Ù…Ø´Ø±ÙˆØ¹ *</label>
+          <label class="block text-xs font-semibold text-slate-300 mb-1.5">صورة المشروع *</label>
           <div class="flex items-center gap-4">
-            <input type="file" id="proj-image-file" accept="image/*" class="text-xs text-slate-400 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-slate-800 file:text-brand-gold hover:file:bg-slate-700">
-            <div id="proj-image-preview" class="hidden w-16 h-16 rounded-lg bg-cover bg-center border border-slate-600"></div>
+            <input type="file" id="proj-image-file" accept="image/*" onchange="handleProjectImagePreview(this)" class="text-xs text-slate-400 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-slate-800 file:text-brand-gold hover:file:bg-slate-700 cursor-pointer">
+            <div id="proj-image-preview" class="hidden w-16 h-16 rounded-lg bg-cover bg-center border border-slate-600 shrink-0"></div>
           </div>
         </div>
 
         <div class="flex items-center justify-end gap-3 pt-4 border-t border-brand-border sticky bottom-0 bg-slate-900/80 p-5 mt-auto">
-          <button type="button" onclick="closeProjectModal()" class="px-5 py-2.5 rounded-xl border border-slate-600 text-slate-300 hover:bg-slate-800 text-sm font-semibold transition">Ø¥Ù„ØºØ§Ø¡</button>
+          <button type="button" onclick="closeProjectModal()" class="px-5 py-2.5 rounded-xl border border-slate-600 text-slate-300 hover:bg-slate-800 text-sm font-semibold transition">إلغاء</button>
           <button type="submit" id="proj-submit-btn" class="px-6 py-2.5 rounded-xl gold-gradient-bg text-slate-950 font-bold text-sm shadow hover:opacity-90 transition flex items-center gap-2">
             <i class="fa-solid fa-save"></i>
-            <span id="proj-submit-text">Ø­ÙØ¸ Ø§Ù„Ù…Ø´Ø±ÙˆØ¹</span>
+            <span id="proj-submit-text">حفظ المشروع</span>
           </button>
         </div>
       </form>
     </div>
   </div>
 
-  <!-- ========================================================================= -->
-  <!-- MODAL: CONFIRMATION DIALOG (Delete)                                       -->
-  <!-- ========================================================================= -->
   <div id="confirm-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 modal-backdrop">
     <div class="luxury-card w-full max-w-sm p-6 text-center space-y-4 shadow-2xl border border-red-500/30">
       <div class="w-14 h-14 mx-auto rounded-full bg-red-500/10 text-red-400 flex items-center justify-center text-2xl">
         <i class="fa-solid fa-triangle-exclamation"></i>
       </div>
       <div>
-        <h3 id="confirm-modal-title" class="text-base font-bold text-white">ØªØ£ÙƒÙŠØ¯ Ø§Ù„Ø­Ø°Ù</h3>
-        <p id="confirm-modal-desc" class="text-xs text-slate-400 mt-1">Ù‡Ù„ Ø£Ù†Øª Ù…ØªØ£ÙƒØ¯ Ù…Ù† Ø­Ø°Ù Ù‡Ø°Ø§ Ø§Ù„Ø¹Ù†ØµØ±ØŸ Ù„Ø§ ÙŠÙ…ÙƒÙ† Ø§Ù„ØªØ±Ø§Ø¬Ø¹ Ø¹Ù† Ù‡Ø°Ù‡ Ø§Ù„Ø®Ø·ÙˆØ©.</p>
+        <h3 id="confirm-modal-title" class="text-base font-bold text-white">تأكيد الحذف</h3>
+        <p id="confirm-modal-desc" class="text-xs text-slate-400 mt-1">هل أنت متأكد من حذف هذا العنصر؟ لا يمكن التراجع عن هذه الخطوة.</p>
       </div>
       <div class="flex items-center justify-center gap-3 pt-2">
         <button id="confirm-cancel-btn" class="flex-1 py-2.5 px-4 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold transition">
-          Ø¥Ù„ØºØ§Ø¡
+          إلغاء
         </button>
         <button id="confirm-action-btn" class="flex-1 py-2.5 px-4 rounded-xl bg-red-600 hover:bg-red-500 text-white text-xs font-bold transition shadow-lg shadow-red-600/20">
-          Ø­Ø°Ù Ù†Ù‡Ø§Ø¦ÙŠ
+          حذف نهائي
         </button>
       </div>
     </div>
@@ -1186,8 +1186,8 @@
   </script>
   
   <!-- 2. Local App Config & Supabase Client (cache-busted) -->
-  <script src="config.js?v=2.5"></script>
-  <script src="supabaseClient.js?v=2.5"></script>
+  <script src="config.js?v=4.0"></script>
+  <script src="supabaseClient.js?v=4.0"></script>
 
   <!-- 3. Admin Application Controller -->
   <script>
@@ -1289,7 +1289,7 @@
       }
 
       if (!State.supabase) {
-        console.warn("âš ï¸ Supabase Client is not initialized.");
+        console.warn("⚠️ Supabase Client is not initialized.");
       }
 
       // 3. Check active session
@@ -1317,7 +1317,7 @@
           await loadAllData();
         } else {
           await State.supabase.auth.signOut();
-          showLoginView("Ù‡Ø°Ø§ Ø§Ù„Ø­Ø³Ø§Ø¨ Ù„Ø§ ÙŠÙ…ØªÙ„Ùƒ ØµÙ„Ø§Ø­ÙŠØ© Ø§Ù„Ø¯Ø®ÙˆÙ„ Ø¥Ù„Ù‰ Ù„ÙˆØ­Ø© Ø§Ù„Ø¥Ø¯Ø§Ø±Ø© (ÙŠØªØ·Ù„Ø¨ ØµÙ„Ø§Ø­ÙŠØ© Admin).");
+          showLoginView("هذا الحساب لا يمتلك صلاحية الدخول إلى لوحة الإدارة (يتطلب صلاحية Admin).");
         }
       } catch (err) {
         console.error("Session check error:", err);
@@ -1359,7 +1359,7 @@
 
       if (!email || !password) {
         errorBox.classList.remove('hidden');
-        errorMsg.textContent = "ÙŠØ±Ø¬Ù‰ ÙƒØªØ§Ø¨Ø© Ø§Ù„Ø¨Ø±ÙŠØ¯ Ø§Ù„Ø¥Ù„ÙƒØªØ±ÙˆÙ†ÙŠ ÙˆÙƒÙ„Ù…Ø© Ø§Ù„Ù…Ø±ÙˆØ±.";
+        errorMsg.textContent = "يرجى كتابة البريد الإلكتروني وكلمة المرور.";
         return;
       }
 
@@ -1380,16 +1380,16 @@
       if (!State.supabase) {
         errorBox.classList.remove('hidden');
         if (typeof window.supabase === 'undefined') {
-          errorMsg.textContent = "ØªØ¹Ø°Ø± ØªØ­Ù…ÙŠÙ„ Ù…ÙƒØªØ¨Ø© Ø§Ù„Ø§ØªØµØ§Ù„ Ø¨Ø³ÙŠØ±ÙØ± Supabase (Ù‚Ø¯ ÙŠÙƒÙˆÙ† Ù‡Ù†Ø§Ùƒ Ø­Ø¬Ø¨ Ø£Ùˆ Ø¨Ø·Ø¡ ÙÙŠ Ø´Ø¨ÙƒØ© Ø§Ù„Ø¥Ù†ØªØ±Ù†Øª). ÙŠØ±Ø¬Ù‰ Ø§Ù„ØªØ­Ù‚Ù‚ Ù…Ù† Ø§ØªØµØ§Ù„ Ø§Ù„Ø¥Ù†ØªØ±Ù†Øª.";
+          errorMsg.textContent = "تعذر تحميل مكتبة الاتصال بسيرفر Supabase (قد يكون هناك حجب أو بطء في شبكة الإنترنت). يرجى التحقق من اتصال الإنترنت.";
         } else {
-          errorMsg.textContent = "Ù„Ù… ÙŠØªÙ… ØªÙ‡ÙŠØ¦Ø© Ø§Ù„Ø§ØªØµØ§Ù„ Ø¨Ù€ Supabase. ÙŠØ±Ø¬Ù‰ ØªØ­Ø¯ÙŠØ« Ø§Ù„ØµÙØ­Ø© Ø¨Ø§Ù„ÙƒØ§Ù…Ù„ (Ctrl+F5).";
+          errorMsg.textContent = "لم يتم تهيئة الاتصال بـ Supabase. يرجى تحديث الصفحة بالكامل (Ctrl+F5).";
         }
         return;
       }
 
       try {
         submitBtn.disabled = true;
-        submitBtn.innerHTML = `<i class="fa-solid fa-circle-notch fa-spin"></i> <span>Ø¬Ø§Ø±ÙŠ Ø§Ù„ØªØ­Ù‚Ù‚...</span>`;
+        submitBtn.innerHTML = `<i class="fa-solid fa-circle-notch fa-spin"></i> <span>جاري التحقق...</span>`;
         errorBox.classList.add('hidden');
 
         const { data, error } = await State.supabase.auth.signInWithPassword({
@@ -1398,28 +1398,28 @@
         });
 
         if (error || !data?.user) {
-          throw new Error(error?.message || "Ø¨ÙŠØ§Ù†Ø§Øª Ø§Ù„Ø¯Ø®ÙˆÙ„ ØºÙŠØ± ØµØ­ÙŠØ­Ø©.");
+          throw new Error(error?.message || "بيانات الدخول غير صحيحة.");
         }
 
         // Verify Admin Role in profiles
         const isAdmin = await verifyAdminRole(data.user.id);
         if (!isAdmin) {
           await State.supabase.auth.signOut();
-          throw new Error("Ù‡Ø°Ø§ Ø§Ù„Ø­Ø³Ø§Ø¨ Ù„Ø§ ÙŠÙ…ØªÙ„Ùƒ ØµÙ„Ø§Ø­ÙŠØ© Ø§Ù„Ø¯Ø®ÙˆÙ„ Ø¥Ù„Ù‰ Ù„ÙˆØ­Ø© Ø§Ù„Ø¥Ø¯Ø§Ø±Ø©.");
+          throw new Error("هذا الحساب لا يمتلك صلاحية الدخول إلى لوحة الإدارة.");
         }
 
         State.currentUser = data.user;
-        showToast("ØªÙ… ØªØ³Ø¬ÙŠÙ„ Ø§Ù„Ø¯Ø®ÙˆÙ„ Ø¨Ù†Ø¬Ø§Ø­. Ù…Ø±Ø­Ø¨Ø§Ù‹ Ø¨Ùƒ ÙÙŠ Ù„ÙˆØ­Ø© Ø§Ù„Ø¥Ø¯Ø§Ø±Ø©.", "success");
+        showToast("تم تسجيل الدخول بنجاح. مرحباً بك في لوحة الإدارة.", "success");
         showAppView();
         await loadAllData();
 
       } catch (err) {
         console.error("Login failed:", err);
         errorBox.classList.remove('hidden');
-        errorMsg.textContent = err.message || "ÙØ´Ù„ ØªØ³Ø¬ÙŠÙ„ Ø§Ù„Ø¯Ø®ÙˆÙ„. ØªØ£ÙƒØ¯ Ù…Ù† ØµØ­Ø© Ø§Ù„Ø¨ÙŠØ§Ù†Ø§Øª.";
+        errorMsg.textContent = err.message || "فشل تسجيل الدخول. تأكد من صحة البيانات.";
       } finally {
         submitBtn.disabled = false;
-        submitBtn.innerHTML = `<span>ØªØ³Ø¬ÙŠÙ„ Ø§Ù„Ø¯Ø®ÙˆÙ„</span> <i class="fa-solid fa-arrow-left"></i>`;
+        submitBtn.innerHTML = `<span>تسجيل الدخول</span> <i class="fa-solid fa-arrow-left"></i>`;
       }
     }
 
@@ -1430,7 +1430,7 @@
       State.currentUser = null;
       State.currentProfile = null;
       showLoginView();
-      showToast("ØªÙ… ØªØ³Ø¬ÙŠÙ„ Ø§Ù„Ø®Ø±ÙˆØ¬ Ø¨Ù†Ø¬Ø§Ø­.", "info");
+      showToast("تم تسجيل الخروج بنجاح.", "info");
     }
 
     function showLoginView(customError = null) {
@@ -1466,7 +1466,7 @@
       State.currentTab = tabId;
 
       // Update Nav Buttons
-      ['dashboard', 'materials', 'categories', 'rfqs'].forEach(id => {
+      ['dashboard', 'materials', 'categories', 'rfqs', 'projects'].forEach(id => {
         const navBtn = document.getElementById(`nav-${id}`);
         const contentSec = document.getElementById(`tab-${id}`);
         if (navBtn) {
@@ -1487,13 +1487,13 @@
 
       // Update Header Title
       const titles = {
-        dashboard: "Ù„ÙˆØ­Ø© Ø§Ù„Ø¥Ø­ØµØ§Ø¦ÙŠØ§Øª Ø§Ù„Ø´Ø§Ù…Ù„Ø©",
-        materials: "Ø¥Ø¯Ø§Ø±Ø© Ø§Ù„Ù…Ù†ØªØ¬Ø§Øª ÙˆØ§Ù„Ø®Ø§Ù…Ø§Øª Ø§Ù„Ø­Ø¬Ø±ÙŠØ©",
-        categories: "Ø¥Ø¯Ø§Ø±Ø© Ø§Ù„ØªØµÙ†ÙŠÙØ§Øª Ø§Ù„Ø¥Ù‚Ù„ÙŠÙ…ÙŠØ©",
-        rfqs: "Ø·Ù„Ø¨Ø§Øª Ø¹Ø±ÙˆØ¶ Ø§Ù„Ø£Ø³Ø¹Ø§Ø± (RFQ)",
-        projects: "Ø¥Ø¯Ø§Ø±Ø© Ø§Ù„Ù…Ø´Ø§Ø±ÙŠØ¹ Ø§Ù„Ù…Ù†Ø¬Ø²Ø©"
+        dashboard: "لوحة الإحصائيات الشاملة",
+        materials: "إدارة المنتجات والخامات الحجرية",
+        categories: "إدارة التصنيفات الإقليمية",
+        rfqs: "طلبات عروض الأسعار (RFQ)",
+        projects: "إدارة المشاريع المنجزة"
       };
-      document.getElementById('page-title').textContent = titles[tabId] || "Ù„ÙˆØ­Ø© Ø§Ù„Ø¥Ø¯Ø§Ø±Ø©";
+      document.getElementById('page-title').textContent = titles[tabId] || "لوحة الإدارة";
 
       // Mobile close sidebar
       toggleSidebar(false);
@@ -1501,9 +1501,6 @@
       // Lazy load tab specific data if empty
       if (tabId === 'rfqs' && State.rfqs.length === 0) {
         loadRfqs();
-      }
-      if (tabId === 'projects' && (!State.projects || State.projects.length === 0)) {
-        loadProjects();
       }
     }
 
@@ -1521,7 +1518,7 @@
 
     function refreshCurrentTab() {
       loadAllData();
-      showToast("ØªÙ… ØªØ­Ø¯ÙŠØ« Ø§Ù„Ø¨ÙŠØ§Ù†Ø§Øª Ù…Ù† Ø§Ù„Ø³ÙŠØ±ÙØ±.", "info");
+      showToast("تم تحديث البيانات من السيرفر.", "info");
     }
 
     // ==========================================================================
@@ -1531,7 +1528,6 @@
       await Promise.all([
         loadCategories(),
         loadMaterials(),
-        loadProjects(),
         loadDashboardStats()
       ]);
     }
@@ -1569,7 +1565,7 @@
       if (recentContainer) {
         const recent = State.materials.slice(0, 5);
         if (recent.length === 0) {
-          recentContainer.innerHTML = `<div class="text-center py-6 text-slate-500 text-xs">Ù„Ø§ ØªÙˆØ¬Ø¯ Ø®Ø§Ù…Ø§Øª Ù…Ø¶Ø§ÙØ© Ø­Ø§Ù„ÙŠØ§Ù‹.</div>`;
+          recentContainer.innerHTML = `<div class="text-center py-6 text-slate-500 text-xs">لا توجد خامات مضافة حالياً.</div>`;
         } else {
           recentContainer.innerHTML = recent.map(m => `
             <div class="flex items-center justify-between p-3 rounded-xl bg-slate-900/60 border border-slate-800/80 hover:border-brand-gold/30 transition">
@@ -1587,7 +1583,7 @@
               </div>
               <div class="flex items-center gap-2">
                 <span class="text-[10px] px-2 py-0.5 rounded ${m.is_active ? 'bg-emerald-500/10 text-emerald-400' : 'bg-slate-700 text-slate-400'}">
-                  ${m.is_active ? 'Ù†Ø´Ø·' : 'Ù…Ø®ÙÙŠ'}
+                  ${m.is_active ? 'نشط' : 'مخفي'}
                 </span>
                 <button onclick="editMaterial('${m.id}')" class="p-1.5 text-slate-400 hover:text-brand-gold transition">
                   <i class="fa-regular fa-pen-to-square"></i>
@@ -1602,14 +1598,14 @@
       const catContainer = document.getElementById('dashboard-categories-list');
       if (catContainer) {
         if (State.categories.length === 0) {
-          catContainer.innerHTML = `<div class="col-span-2 text-center py-6 text-slate-500 text-xs">Ù„Ø§ ØªÙˆØ¬Ø¯ ØªØµÙ†ÙŠÙØ§Øª.</div>`;
+          catContainer.innerHTML = `<div class="col-span-2 text-center py-6 text-slate-500 text-xs">لا توجد تصنيفات.</div>`;
         } else {
           catContainer.innerHTML = State.categories.map(c => {
             const matCount = State.materials.filter(m => m.category_id === c.id).length;
             return `
               <div class="p-3 rounded-xl bg-slate-900/60 border border-slate-800/80 hover:border-brand-gold/30 transition flex items-center justify-between">
                 <div class="flex items-center gap-2.5">
-                  <span class="text-lg">${c.icon || 'ðŸ’Ž'}</span>
+                  <span class="text-lg">${c.icon || '💎'}</span>
                   <div>
                     <div class="font-bold text-xs text-white">${escapeHtml(c.name_ar)}</div>
                     <div class="text-[10px] text-slate-400">${escapeHtml(c.name_en)}</div>
@@ -1641,7 +1637,7 @@
         populateCategoryDropdowns();
       } catch (err) {
         console.error("Error loading categories:", err);
-        showToast("ÙØ´Ù„ ØªØ­Ù…ÙŠÙ„ Ø§Ù„ØªØµÙ†ÙŠÙØ§Øª Ù…Ù† Ø§Ù„Ø³ÙŠØ±ÙØ±.", "error");
+        showToast("فشل تحميل التصنيفات من السيرفر.", "error");
       }
     }
 
@@ -1657,7 +1653,7 @@
           <tr>
             <td colspan="7" class="py-12 text-center text-slate-500">
               <i class="fa-solid fa-folder-open text-3xl mb-2"></i>
-              <p>Ù„Ø§ ØªÙˆØ¬Ø¯ Ø£ÙŠ ØªØµÙ†ÙŠÙØ§Øª Ù…Ø¶Ø§ÙØ© Ø­ØªÙ‰ Ø§Ù„Ø¢Ù†.</p>
+              <p>لا توجد أي تصنيفات مضافة حتى الآن.</p>
             </td>
           </tr>
         `;
@@ -1669,7 +1665,7 @@
           <td class="py-3 px-4 font-mono font-bold text-brand-gold text-[11px]">${escapeHtml(cat.id)}</td>
           <td class="py-3 px-4">
             <div class="flex items-center gap-2">
-              <span class="text-base">${cat.icon || 'ðŸ’Ž'}</span>
+              <span class="text-base">${cat.icon || '💎'}</span>
               <span class="font-bold text-white">${escapeHtml(cat.name_ar)}</span>
             </div>
           </td>
@@ -1686,10 +1682,10 @@
           </td>
           <td class="py-3 px-4 text-center">
             <div class="flex items-center justify-center gap-2">
-              <button onclick="editCategory('${cat.id}')" title="ØªØ¹Ø¯ÙŠÙ„ Ø§Ù„ØªØµÙ†ÙŠÙ" class="p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-brand-gold transition">
+              <button onclick="editCategory('${cat.id}')" title="تعديل التصنيف" class="p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-brand-gold transition">
                 <i class="fa-solid fa-pen-to-square"></i>
               </button>
-              <button onclick="confirmDeleteCategory('${cat.id}')" title="Ø­Ø°Ù Ø§Ù„ØªØµÙ†ÙŠÙ" class="p-1.5 rounded-lg bg-slate-800 hover:bg-red-950/60 text-slate-300 hover:text-red-400 transition">
+              <button onclick="confirmDeleteCategory('${cat.id}')" title="حذف التصنيف" class="p-1.5 rounded-lg bg-slate-800 hover:bg-red-950/60 text-slate-300 hover:text-red-400 transition">
                 <i class="fa-solid fa-trash"></i>
               </button>
             </div>
@@ -1703,7 +1699,7 @@
       const filterSelect = document.getElementById('mat-filter-category');
       if (filterSelect) {
         const currentVal = filterSelect.value;
-        filterSelect.innerHTML = `<option value="all">ÙƒÙ„ Ø§Ù„ØªØµÙ†ÙŠÙØ§Øª</option>` + 
+        filterSelect.innerHTML = `<option value="all">كل التصنيفات</option>` + 
           State.categories.map(c => `<option value="${c.id}">${c.icon || ''} ${escapeHtml(c.name_ar)}</option>`).join('');
         filterSelect.value = currentVal;
       }
@@ -1711,7 +1707,7 @@
       // 2. Material Modal category dropdown
       const modalSelect = document.getElementById('mat-category-id');
       if (modalSelect) {
-        modalSelect.innerHTML = `<option value="">Ø§Ø®ØªØ± Ø§Ù„ØªØµÙ†ÙŠÙ...</option>` + 
+        modalSelect.innerHTML = `<option value="">اختر التصنيف...</option>` + 
           State.categories.map(c => `<option value="${c.id}">${c.icon || ''} ${escapeHtml(c.name_ar)} (${escapeHtml(c.name_en)})</option>`).join('');
       }
     }
@@ -1723,21 +1719,21 @@
 
       if (cat) {
         State.editingCategoryId = cat.id;
-        title.textContent = "ØªØ¹Ø¯ÙŠÙ„ Ø§Ù„ØªØµÙ†ÙŠÙ";
+        title.textContent = "تعديل التصنيف";
         idInput.value = cat.id;
         idInput.disabled = true; // Primary key should not change on edit
         document.getElementById('cat-name-ar').value = cat.name_ar || '';
         document.getElementById('cat-name-en').value = cat.name_en || '';
-        document.getElementById('cat-icon').value = cat.icon || 'ðŸ’Ž';
+        document.getElementById('cat-icon').value = cat.icon || '💎';
         document.getElementById('cat-badge').value = cat.badge || '';
         document.getElementById('cat-sort-order').value = cat.sort_order || 0;
         document.getElementById('cat-is-active').checked = cat.is_active !== false;
       } else {
         State.editingCategoryId = null;
-        title.textContent = "Ø¥Ø¶Ø§ÙØ© ØªØµÙ†ÙŠÙ Ø¬Ø¯ÙŠØ¯";
+        title.textContent = "إضافة تصنيف جديد";
         document.getElementById('category-form').reset();
         idInput.disabled = false;
-        document.getElementById('cat-icon').value = 'ðŸ’Ž';
+        document.getElementById('cat-icon').value = '💎';
         document.getElementById('cat-sort-order').value = (State.categories.length + 1);
         document.getElementById('cat-is-active').checked = true;
       }
@@ -1763,19 +1759,19 @@
       const id = document.getElementById('cat-id').value.trim().toLowerCase();
       const name_ar = document.getElementById('cat-name-ar').value.trim();
       const name_en = document.getElementById('cat-name-en').value.trim();
-      const icon = document.getElementById('cat-icon').value.trim() || 'ðŸ’Ž';
+      const icon = document.getElementById('cat-icon').value.trim() || '💎';
       const badge = document.getElementById('cat-badge').value.trim();
       const sort_order = parseInt(document.getElementById('cat-sort-order').value, 10) || 0;
       const is_active = document.getElementById('cat-is-active').checked;
 
       if (!id || !name_ar || !name_en) {
-        showToast("ÙŠØ±Ø¬Ù‰ Ù…Ù„Ø¡ Ø§Ù„Ø­Ù‚ÙˆÙ„ Ø§Ù„Ø¥Ù„Ø²Ø§Ù…ÙŠØ© Ø§Ù„Ù…Ø·Ù„ÙˆØ¨Ø©.", "warning");
+        showToast("يرجى ملء الحقول الإلزامية المطلوبة.", "warning");
         return;
       }
 
       try {
         saveBtn.disabled = true;
-        saveBtn.innerHTML = `<i class="fa-solid fa-circle-notch fa-spin"></i> <span>Ø¬Ø§Ø±ÙŠ Ø§Ù„Ø­ÙØ¸...</span>`;
+        saveBtn.innerHTML = `<i class="fa-solid fa-circle-notch fa-spin"></i> <span>جاري الحفظ...</span>`;
 
         const payload = {
           id,
@@ -1793,16 +1789,16 @@
 
         if (error) throw error;
 
-        showToast(State.editingCategoryId ? "ØªÙ… ØªØ¹Ø¯ÙŠÙ„ Ø§Ù„ØªØµÙ†ÙŠÙ Ø¨Ù†Ø¬Ø§Ø­." : "ØªÙ… Ø¥Ø¶Ø§ÙØ© Ø§Ù„ØªØµÙ†ÙŠÙ Ø¨Ù†Ø¬Ø§Ø­.", "success");
+        showToast(State.editingCategoryId ? "تم تعديل التصنيف بنجاح." : "تم إضافة التصنيف بنجاح.", "success");
         closeCategoryModal();
         await loadCategories();
         await loadDashboardStats();
       } catch (err) {
         console.error("Error saving category:", err);
-        showToast("ÙØ´Ù„ Ø­ÙØ¸ Ø§Ù„ØªØµÙ†ÙŠÙ: " + (err.message || "Ø­Ø¯Ø« Ø®Ø·Ø£"), "error");
+        showToast("فشل حفظ التصنيف: " + (err.message || "حدث خطأ"), "error");
       } finally {
         saveBtn.disabled = false;
-        saveBtn.innerHTML = `<i class="fa-solid fa-floppy-disk"></i> <span>Ø­ÙØ¸ Ø§Ù„ØªØµÙ†ÙŠÙ</span>`;
+        saveBtn.innerHTML = `<i class="fa-solid fa-floppy-disk"></i> <span>حفظ التصنيف</span>`;
       }
     }
 
@@ -1816,12 +1812,12 @@
           .eq('id', id);
 
         if (error) throw error;
-        showToast(`ØªÙ… ${newStatus ? 'ØªÙØ¹ÙŠÙ„' : 'ØªØ¹Ø·ÙŠÙ„'} Ø§Ù„ØªØµÙ†ÙŠÙ Ø¨Ù†Ø¬Ø§Ø­.`, "info");
+        showToast(`تم ${newStatus ? 'تفعيل' : 'تعطيل'} التصنيف بنجاح.`, "info");
         const target = State.categories.find(c => c.id === id);
         if (target) target.is_active = newStatus;
       } catch (err) {
         console.error("Error toggling category status:", err);
-        showToast("ÙØ´Ù„ ØªØ­Ø¯ÙŠØ« Ø­Ø§Ù„Ø© Ø§Ù„ØªØµÙ†ÙŠÙ.", "error");
+        showToast("فشل تحديث حالة التصنيف.", "error");
         await loadCategories();
       }
     }
@@ -1831,9 +1827,9 @@
       const name = cat ? cat.name_ar : id;
       
       openConfirmModal({
-        title: "Ø­Ø°Ù Ø§Ù„ØªØµÙ†ÙŠÙ",
-        desc: `Ù‡Ù„ Ø£Ù†Øª Ù…ØªØ£ÙƒØ¯ Ù…Ù† Ø­Ø°Ù ØªØµÙ†ÙŠÙ "${name}"ØŸ Ø¥Ø°Ø§ ÙƒØ§Ù† Ù‡Ù†Ø§Ùƒ Ù…Ù†ØªØ¬Ø§Øª Ù…Ø±ØªØ¨Ø·Ø© Ø¨Ù‡Ø°Ø§ Ø§Ù„ØªØµÙ†ÙŠÙØŒ Ù‚Ø¯ ÙŠØ¤Ø«Ø± Ø°Ù„Ùƒ Ø¹Ù„Ù‰ Ø¹Ø±Ø¶Ù‡Ø§.`,
-        actionText: "Ù†Ø¹Ù…ØŒ Ø­Ø°Ù Ø§Ù„ØªØµÙ†ÙŠÙ",
+        title: "حذف التصنيف",
+        desc: `هل أنت متأكد من حذف تصنيف "${name}"؟ إذا كان هناك منتجات مرتبطة بهذا التصنيف، قد يؤثر ذلك على عرضها.`,
+        actionText: "نعم، حذف التصنيف",
         onConfirm: async () => {
           try {
             const { error } = await State.supabase
@@ -1842,12 +1838,12 @@
               .eq('id', id);
 
             if (error) throw error;
-            showToast("ØªÙ… Ø­Ø°Ù Ø§Ù„ØªØµÙ†ÙŠÙ Ø¨Ù†Ø¬Ø§Ø­.", "success");
+            showToast("تم حذف التصنيف بنجاح.", "success");
             await loadCategories();
             await loadDashboardStats();
           } catch (err) {
             console.error("Error deleting category:", err);
-            showToast("ÙØ´Ù„ Ø­Ø°Ù Ø§Ù„ØªØµÙ†ÙŠÙ: " + (err.message || "Ù…Ø±ØªØ¨Ø· Ø¨Ø¨ÙŠØ§Ù†Ø§Øª Ø£Ø®Ø±Ù‰"), "error");
+            showToast("فشل حذف التصنيف: " + (err.message || "مرتبط ببيانات أخرى"), "error");
           }
         }
       });
@@ -1894,12 +1890,12 @@
             <tr>
               <td colspan="7" class="py-12 text-center text-red-400">
                 <i class="fa-solid fa-triangle-exclamation text-2xl mb-2"></i>
-                <p>ÙØ´Ù„ ØªØ­Ù…ÙŠÙ„ Ø§Ù„Ù…Ù†ØªØ¬Ø§Øª Ù…Ù† Ù‚Ø§Ø¹Ø¯Ø© Ø§Ù„Ø¨ÙŠØ§Ù†Ø§Øª: ${escapeHtml(err.message || '')}</p>
+                <p>فشل تحميل المنتجات من قاعدة البيانات: ${escapeHtml(err.message || '')}</p>
               </td>
             </tr>
           `;
         }
-        showToast("ÙØ´Ù„ ØªØ­Ù…ÙŠÙ„ Ø§Ù„Ù…Ù†ØªØ¬Ø§Øª Ù…Ù† Ø§Ù„Ø³ÙŠØ±ÙØ±.", "error");
+        showToast("فشل تحميل المنتجات من السيرفر.", "error");
       }
     }
 
@@ -1913,7 +1909,7 @@
         const currentOrigin = originSelect.value;
         const uniqueOrigins = [...new Set(State.materials.map(m => m.origin).filter(Boolean))].sort();
         
-        originSelect.innerHTML = `<option value="all">ÙƒÙ„ Ø§Ù„Ø¨Ù„Ø§Ø¯ (Ø§Ù„Ù…Ù†Ø´Ø£)</option>` + 
+        originSelect.innerHTML = `<option value="all">كل البلاد (المنشأ)</option>` + 
           uniqueOrigins.map(o => `<option value="${escapeHtml(o)}">${escapeHtml(o)}</option>`).join('');
         originSelect.value = currentOrigin;
 
@@ -1930,15 +1926,15 @@
         const uniqueStones = [...new Set(State.materials.map(m => m.stone_type).filter(Boolean))].sort();
         
         const stoneLabels = {
-          marble: 'Ø±Ø®Ø§Ù… (Marble)',
-          granite: 'Ø¬Ø±Ø§Ù†ÙŠØª (Granite)',
-          travertine: 'ØªØ±Ø§ÙØ±ØªÙŠÙ† (Travertine)',
-          stone: 'Ø­Ø¬Ø± Ø·Ø¨ÙŠØ¹ÙŠ (Stone)',
-          limestone: 'Ø­Ø¬Ø± Ø¬ÙŠØ±ÙŠ (Limestone)',
-          onyx: 'Ø£ÙˆÙ†ÙŠÙƒØ³ (Onyx)'
+          marble: 'رخام (Marble)',
+          granite: 'جرانيت (Granite)',
+          travertine: 'ترافرتين (Travertine)',
+          stone: 'حجر طبيعي (Stone)',
+          limestone: 'حجر جيري (Limestone)',
+          onyx: 'أونيكس (Onyx)'
         };
 
-        stoneSelect.innerHTML = `<option value="all">Ù†ÙˆØ¹ Ø§Ù„Ø­Ø¬Ø± (Ø§Ù„ÙƒÙ„)</option>` + 
+        stoneSelect.innerHTML = `<option value="all">نوع الحجر (الكل)</option>` + 
           uniqueStones.map(s => `<option value="${s}">${stoneLabels[s] || s}</option>`).join('');
         stoneSelect.value = currentStone;
       }
@@ -2006,7 +2002,7 @@
       const showingText = document.getElementById('materials-showing-text');
 
       if (badge) badge.textContent = State.materials.length;
-      if (showingText) showingText.textContent = `Ø¹Ø±Ø¶ ${State.filteredMaterials.length} Ù…Ù† Ø¥Ø¬Ù…Ø§Ù„ÙŠ ${State.materials.length} Ø®Ø§Ù…Ø©`;
+      if (showingText) showingText.textContent = `عرض ${State.filteredMaterials.length} من إجمالي ${State.materials.length} خامة`;
 
       if (!tbody) return;
 
@@ -2015,7 +2011,7 @@
           <tr>
             <td colspan="7" class="py-12 text-center text-slate-500">
               <i class="fa-solid fa-filter-circle-xmark text-3xl mb-2"></i>
-              <p>Ù„Ø§ ØªÙˆØ¬Ø¯ Ù†ØªØ§Ø¦Ø¬ ØªØ·Ø§Ø¨Ù‚ Ø®ÙŠØ§Ø±Ø§Øª Ø§Ù„Ø¨Ø­Ø« ÙˆØ§Ù„ÙÙ„ØªØ±Ø© Ø§Ù„Ù…Ø­Ø¯Ø¯Ø©.</p>
+              <p>لا توجد نتائج تطابق خيارات البحث والفلترة المحددة.</p>
             </td>
           </tr>
         `;
@@ -2023,12 +2019,12 @@
       }
 
       const stoneTypeMap = {
-        marble: 'Ø±Ø®Ø§Ù…',
-        granite: 'Ø¬Ø±Ø§Ù†ÙŠØª',
-        travertine: 'ØªØ±Ø§ÙØ±ØªÙŠÙ†',
-        stone: 'Ø­Ø¬Ø± Ø·Ø¨ÙŠØ¹ÙŠ',
-        limestone: 'Ø­Ø¬Ø± Ø¬ÙŠØ±ÙŠ',
-        onyx: 'Ø£ÙˆÙ†ÙŠÙƒØ³'
+        marble: 'رخام',
+        granite: 'جرانيت',
+        travertine: 'ترافرتين',
+        stone: 'حجر طبيعي',
+        limestone: 'حجر جيري',
+        onyx: 'أونيكس'
       };
 
       tbody.innerHTML = State.filteredMaterials.map(m => {
@@ -2059,7 +2055,7 @@
 
             <!-- 2. Category & Origin -->
             <td class="py-3 px-4">
-              <div class="font-semibold text-slate-200 text-xs">${cat ? `${cat.icon || 'ðŸ’Ž'} ${escapeHtml(cat.name_ar)}` : '<span class="text-slate-500">Ø¨Ø¯ÙˆÙ† ØªØµÙ†ÙŠÙ</span>'}</div>
+              <div class="font-semibold text-slate-200 text-xs">${cat ? `${cat.icon || '💎'} ${escapeHtml(cat.name_ar)}` : '<span class="text-slate-500">بدون تصنيف</span>'}</div>
               <div class="text-[11px] text-slate-400 flex items-center gap-1 mt-0.5">
                 <i class="fa-solid fa-location-dot text-[10px] text-brand-gold"></i>
                 <span>${escapeHtml(m.origin || '-')}</span>
@@ -2078,14 +2074,14 @@
             <!-- 4. Price Tier & Finish -->
             <td class="py-3 px-4">
               <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-amber-500/10 text-amber-400 border border-amber-500/20">
-                ${escapeHtml(m.price_tier || 'Ù…Ù…ÙŠØ²')}
+                ${escapeHtml(m.price_tier || 'مميز')}
               </span>
               <div class="text-[10px] text-slate-400 mt-1 truncate max-w-[130px]">${escapeHtml(m.finish || '-')}</div>
             </td>
 
             <!-- 5. Featured Toggle -->
             <td class="py-3 px-4 text-center">
-              <button onclick="toggleMaterialFeatured('${m.id}', ${!m.is_featured})" title="${m.is_featured ? 'Ø¥Ù„ØºØ§Ø¡ Ø§Ù„ØªÙ…ÙŠÙŠØ²' : 'ØªÙ…ÙŠÙŠØ² Ø§Ù„Ù…Ù†ØªØ¬'}" 
+              <button onclick="toggleMaterialFeatured('${m.id}', ${!m.is_featured})" title="${m.is_featured ? 'إلغاء التمييز' : 'تمييز المنتج'}" 
                 class="p-1.5 rounded-lg transition ${m.is_featured ? 'text-amber-400 bg-amber-500/10 hover:bg-amber-500/20' : 'text-slate-600 hover:text-slate-400'}">
                 <i class="fa-solid fa-star text-sm"></i>
               </button>
@@ -2102,10 +2098,10 @@
             <!-- 7. Actions -->
             <td class="py-3 px-4 text-center">
               <div class="flex items-center justify-center gap-2">
-                <button onclick="editMaterial('${m.id}')" title="ØªØ¹Ø¯ÙŠÙ„ Ø§Ù„Ø®Ø§Ù…Ø©" class="p-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-brand-gold transition">
+                <button onclick="editMaterial('${m.id}')" title="تعديل الخامة" class="p-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-brand-gold transition">
                   <i class="fa-solid fa-pen-to-square"></i>
                 </button>
-                <button onclick="confirmDeleteMaterial('${m.id}')" title="Ø­Ø°Ù Ø§Ù„Ø®Ø§Ù…Ø©" class="p-2 rounded-lg bg-slate-800 hover:bg-red-950/60 text-slate-300 hover:text-red-400 transition">
+                <button onclick="confirmDeleteMaterial('${m.id}')" title="حذف الخامة" class="p-2 rounded-lg bg-slate-800 hover:bg-red-950/60 text-slate-300 hover:text-red-400 transition">
                   <i class="fa-solid fa-trash"></i>
                 </button>
               </div>
@@ -2144,8 +2140,8 @@
           }
         }
         State.materialImages = existingImgs.map(img => typeof img === 'string' ? img : (img?.url || '')).filter(Boolean);
-        title.textContent = "ØªØ¹Ø¯ÙŠÙ„ Ø¨ÙŠØ§Ù†Ø§Øª Ø§Ù„Ø®Ø§Ù…Ø©: " + material.name_ar;
-        saveBtnText.textContent = "Ø­ÙØ¸ Ø§Ù„ØªØ¹Ø¯ÙŠÙ„Ø§Øª";
+        title.textContent = "تعديل بيانات الخامة: " + material.name_ar;
+        saveBtnText.textContent = "حفظ التعديلات";
 
         idInput.value = material.id;
         idInput.disabled = true; // Primary key preserved
@@ -2165,7 +2161,7 @@
         document.getElementById('mat-color-picker').value = hex;
 
         document.getElementById('mat-finish').value = material.finish || '';
-        document.getElementById('mat-price-tier').value = material.price_tier || 'Ù…Ù…ÙŠØ²';
+        document.getElementById('mat-price-tier').value = material.price_tier || 'مميز';
         document.getElementById('mat-density').value = material.density || '';
         document.getElementById('mat-water-absorption').value = material.water_absorption || '';
         document.getElementById('mat-compressive-strength').value = material.compressive_strength || '';
@@ -2181,8 +2177,8 @@
       } else {
         State.editingMaterialId = null;
         State.materialImages = [];
-        title.textContent = "Ø¥Ø¶Ø§ÙØ© Ø®Ø§Ù…Ø© Ø¬Ø¯ÙŠØ¯Ø©";
-        saveBtnText.textContent = "Ø­ÙØ¸ Ø§Ù„Ø®Ø§Ù…Ø©";
+        title.textContent = "إضافة خامة جديدة";
+        saveBtnText.textContent = "حفظ الخامة";
 
         document.getElementById('material-form').reset();
         idInput.disabled = false;
@@ -2231,22 +2227,22 @@
       const container = document.getElementById('mat-existing-images-grid');
       const countLabel = document.getElementById('mat-images-count-label');
       
-      if (countLabel) countLabel.textContent = `${State.materialImages.length} ØµÙˆØ± Ù…Ø­ÙÙˆØ¸Ø©`;
+      if (countLabel) countLabel.textContent = `${State.materialImages.length} صور محفوظة`;
       if (!container) return;
 
       if (State.materialImages.length === 0) {
-        container.innerHTML = `<div class="col-span-full text-center py-3 text-slate-500 text-xs">Ù„Ø§ ØªÙˆØ¬Ø¯ ØµÙˆØ± Ù…Ø­ÙÙˆØ¸Ø© Ù…Ø³Ø¨Ù‚Ø§Ù‹ Ù„Ù‡Ø°Ø§ Ø§Ù„Ù…Ù†ØªØ¬.</div>`;
+        container.innerHTML = `<div class="col-span-full text-center py-3 text-slate-500 text-xs">لا توجد صور محفوظة مسبقاً لهذا المنتج.</div>`;
         return;
       }
 
       container.innerHTML = State.materialImages.map((url, idx) => `
         <div class="relative group rounded-xl overflow-hidden bg-slate-900 border border-slate-700 aspect-square shadow">
-          <img src="${url}" alt="ØµÙˆØ±Ø© ${idx + 1}" class="w-full h-full object-cover">
+          <img src="${url}" alt="صورة ${idx + 1}" class="w-full h-full object-cover">
           <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition flex items-center justify-center gap-2">
-            <button type="button" onclick="removeExistingImage(${idx})" title="Ø­Ø°Ù Ø§Ù„ØµÙˆØ±Ø©" class="w-8 h-8 rounded-full bg-red-600 hover:bg-red-500 text-white flex items-center justify-center text-xs shadow transition">
+            <button type="button" onclick="removeExistingImage(${idx})" title="حذف الصورة" class="w-8 h-8 rounded-full bg-red-600 hover:bg-red-500 text-white flex items-center justify-center text-xs shadow transition">
               <i class="fa-solid fa-trash"></i>
             </button>
-            <a href="${url}" target="_blank" title="Ø¹Ø±Ø¶ Ø§Ù„Ø­Ø¬Ù… Ø§Ù„ÙƒØ§Ù…Ù„" class="w-8 h-8 rounded-full bg-slate-800 hover:bg-slate-700 text-white flex items-center justify-center text-xs shadow transition">
+            <a href="${url}" target="_blank" title="عرض الحجم الكامل" class="w-8 h-8 rounded-full bg-slate-800 hover:bg-slate-700 text-white flex items-center justify-center text-xs shadow transition">
               <i class="fa-solid fa-arrow-up-right-from-square"></i>
             </a>
           </div>
@@ -2257,7 +2253,7 @@
     function removeExistingImage(index) {
       State.materialImages.splice(index, 1);
       renderExistingImagesInModal();
-      showToast("ØªÙ… Ø­Ø°Ù Ø§Ù„ØµÙˆØ±Ø© Ù…Ù† Ø§Ù„Ù‚Ø§Ø¦Ù…Ø©. Ø§Ø¶ØºØ· Ø­ÙØ¸ Ù„ØªØ£ÙƒÙŠØ¯ Ø§Ù„ØªØºÙŠÙŠØ±Ø§Øª.", "info");
+      showToast("تم حذف الصورة من القائمة. اضغط حفظ لتأكيد التغييرات.", "info");
     }
 
     function addDirectImageUrl() {
@@ -2265,13 +2261,13 @@
       if (!input) return;
       const url = (input.value || '').trim();
       if (!url || (!url.startsWith('http://') && !url.startsWith('https://'))) {
-        showToast("ÙŠØ±Ø¬Ù‰ Ø¥Ø¯Ø®Ø§Ù„ Ø±Ø§Ø¨Ø· ØµÙˆØ±Ø© ØµØ­ÙŠØ­ ÙŠØ¨Ø¯Ø£ Ø¨Ù€ https:// Ø£Ùˆ http://", "warning");
+        showToast("يرجى إدخال رابط صورة صحيح يبدأ بـ https:// أو http://", "warning");
         return;
       }
       State.materialImages.push(url);
       renderExistingImagesInModal();
       input.value = '';
-      showToast("ØªÙ…Øª Ø¥Ø¶Ø§ÙØ© Ø±Ø§Ø¨Ø· Ø§Ù„ØµÙˆØ±Ø© Ø¥Ù„Ù‰ Ø§Ù„Ù…Ø¹Ø±Ø¶. Ø§Ø¶ØºØ· Ø­ÙØ¸ Ù„ØªØ£ÙƒÙŠØ¯ Ø§Ù„ØªØºÙŠÙŠØ±Ø§Øª ÙÙŠ Ù‚Ø§Ø¹Ø¯Ø© Ø§Ù„Ø¨ÙŠØ§Ù†Ø§Øª.", "info");
+      showToast("تمت إضافة رابط الصورة إلى المعرض. اضغط حفظ لتأكيد التغييرات في قاعدة البيانات.", "info");
     }
 
     function handleImageSelection(event) {
@@ -2307,7 +2303,7 @@
                 <i class="fa-solid fa-xmark"></i>
               </button>
             </div>
-            <span class="absolute bottom-1 right-1 bg-amber-500 text-slate-950 font-bold text-[9px] px-1 rounded">Ø¬Ø¯ÙŠØ¯Ø©</span>
+            <span class="absolute bottom-1 right-1 bg-amber-500 text-slate-950 font-bold text-[9px] px-1 rounded">جديدة</span>
           </div>
         `;
       }).join('');
@@ -2349,7 +2345,7 @@
           }
         } catch (err) {
           console.error("Error uploading file:", file.name, err);
-          showToast(`ÙØ´Ù„ Ø±ÙØ¹ Ø§Ù„ØµÙˆØ±Ø©: ${file.name}`, "error");
+          showToast(`فشل رفع الصورة: ${file.name}`, "error");
         }
       }
 
@@ -2389,20 +2385,20 @@
       const is_active = document.getElementById('mat-is-active').checked;
 
       if (!id || !name_ar || !name_en || !origin || !category_id) {
-        showToast("ÙŠØ±Ø¬Ù‰ Ù…Ù„Ø¡ Ø§Ù„Ø­Ù‚ÙˆÙ„ Ø§Ù„Ø¥Ù„Ø²Ø§Ù…ÙŠØ© Ø§Ù„Ù…Ø·Ù„ÙˆØ¨Ø© (Ø§Ù„Ù…Ø¹Ø±ÙØŒ Ø§Ù„ØªØµÙ†ÙŠÙØŒ Ø§Ù„Ø£Ø³Ù…Ø§Ø¡ØŒ ÙˆØ§Ù„Ù…Ù†Ø´Ø£).", "warning");
+        showToast("يرجى ملء الحقول الإلزامية المطلوبة (المعرف، التصنيف، الأسماء، والمنشأ).", "warning");
         return;
       }
 
       try {
         saveBtn.disabled = true;
-        saveBtn.innerHTML = `<i class="fa-solid fa-circle-notch fa-spin"></i> <span>Ø¬Ø§Ø±ÙŠ Ø­ÙØ¸ Ø§Ù„Ø®Ø§Ù…Ø© ÙˆØ§Ù„ØµÙˆØ±...</span>`;
+        saveBtn.innerHTML = `<i class="fa-solid fa-circle-notch fa-spin"></i> <span>جاري حفظ الخامة والصور...</span>`;
 
         // 1. Upload newly staged images to Supabase Storage
         let newUploadedUrls = [];
         if (State.stagedImageFiles.length > 0) {
           newUploadedUrls = await uploadStagedImages(id);
           if (newUploadedUrls.length === 0 && State.stagedImageFiles.length > 0) {
-            throw new Error("ØªØ¹Ø°Ø± Ø±ÙØ¹ Ø§Ù„ØµÙˆØ± Ø¥Ù„Ù‰ Ù…Ø³Ø§Ø­Ø© Ø§Ù„ØªØ®Ø²ÙŠÙ† (Storage). ÙŠØ±Ø¬Ù‰ Ø§Ù„ØªØ£ÙƒØ¯ Ù…Ù† ÙˆØ¬ÙˆØ¯ Bucket Ø¨Ø§Ø³Ù… 'materials' ÙˆØµÙ„Ø§Ø­ÙŠØ§Øª Ø§Ù„Ø±ÙØ¹.");
+            throw new Error("تعذر رفع الصور إلى مساحة التخزين (Storage). يرجى التأكد من وجود Bucket باسم 'materials' وصلاحيات الرفع.");
           }
         }
 
@@ -2443,17 +2439,17 @@
 
         if (error) throw error;
 
-        showToast(State.editingMaterialId ? "ØªÙ… ØªØ¹Ø¯ÙŠÙ„ Ø§Ù„Ø®Ø§Ù…Ø© ÙˆØ­ÙØ¸ Ø§Ù„ØµÙˆØ± Ø¨Ù†Ø¬Ø§Ø­." : "ØªÙ… Ø¥Ø¶Ø§ÙØ© Ø§Ù„Ø®Ø§Ù…Ø© ÙˆØ­ÙØ¸ Ø§Ù„ØµÙˆØ± Ø¨Ù†Ø¬Ø§Ø­.", "success");
+        showToast(State.editingMaterialId ? "تم تعديل الخامة وحفظ الصور بنجاح." : "تم إضافة الخامة وحفظ الصور بنجاح.", "success");
         closeMaterialModal();
         await loadMaterials();
         await loadDashboardStats();
 
       } catch (err) {
         console.error("Error saving material:", err);
-        showToast("ÙØ´Ù„ Ø­ÙØ¸ Ø§Ù„Ø®Ø§Ù…Ø©: " + (err.message || "Ø­Ø¯Ø« Ø®Ø·Ø£ ØºÙŠØ± Ù…ØªÙˆÙ‚Ø¹"), "error");
+        showToast("فشل حفظ الخامة: " + (err.message || "حدث خطأ غير متوقع"), "error");
       } finally {
         saveBtn.disabled = false;
-        saveBtn.innerHTML = `<i class="fa-solid fa-floppy-disk"></i> <span id="mat-save-btn-text">Ø­ÙØ¸ Ø§Ù„Ø®Ø§Ù…Ø©</span>`;
+        saveBtn.innerHTML = `<i class="fa-solid fa-floppy-disk"></i> <span id="mat-save-btn-text">حفظ الخامة</span>`;
       }
     }
 
@@ -2467,13 +2463,13 @@
           .eq('id', id);
 
         if (error) throw error;
-        showToast(`ØªÙ… ${newStatus ? 'ØªÙØ¹ÙŠÙ„' : 'Ø¥Ø®ÙØ§Ø¡'} Ø§Ù„Ø®Ø§Ù…Ø© Ø¨Ù†Ø¬Ø§Ø­.`, "info");
+        showToast(`تم ${newStatus ? 'تفعيل' : 'إخفاء'} الخامة بنجاح.`, "info");
         const target = State.materials.find(m => m.id === id);
         if (target) target.is_active = newStatus;
         loadDashboardStats();
       } catch (err) {
         console.error("Error updating material status:", err);
-        showToast("ÙØ´Ù„ ØªØºÙŠÙŠØ± Ø­Ø§Ù„Ø© Ø§Ù„Ø®Ø§Ù…Ø©.", "error");
+        showToast("فشل تغيير حالة الخامة.", "error");
         await loadMaterials();
       }
     }
@@ -2488,14 +2484,14 @@
           .eq('id', id);
 
         if (error) throw error;
-        showToast(newStatus ? "ØªÙ… ØªÙ…ÙŠÙŠØ² Ø§Ù„Ø®Ø§Ù…Ø© (Featured)." : "ØªÙ… Ø¥Ù„ØºØ§Ø¡ ØªÙ…ÙŠÙŠØ² Ø§Ù„Ø®Ø§Ù…Ø©.", "success");
+        showToast(newStatus ? "تم تمييز الخامة (Featured)." : "تم إلغاء تمييز الخامة.", "success");
         const target = State.materials.find(m => m.id === id);
         if (target) target.is_featured = newStatus;
         renderMaterials();
         loadDashboardStats();
       } catch (err) {
         console.error("Error toggling featured:", err);
-        showToast("ÙØ´Ù„ ØªØ­Ø¯ÙŠØ« Ø­Ø§Ù„Ø© Ø§Ù„ØªÙ…ÙŠÙŠØ².", "error");
+        showToast("فشل تحديث حالة التمييز.", "error");
       }
     }
 
@@ -2504,9 +2500,9 @@
       const name = mat ? mat.name_ar : id;
 
       openConfirmModal({
-        title: "Ø­Ø°Ù Ø®Ø§Ù…Ø© Ø­Ø¬Ø±ÙŠØ©",
-        desc: `Ù‡Ù„ Ø£Ù†Øª Ù…ØªØ£ÙƒØ¯ Ù…Ù† Ø­Ø°Ù Ø§Ù„Ø®Ø§Ù…Ø© "${name}" (${id}) Ù†Ù‡Ø§Ø¦ÙŠØ§Ù‹ Ù…Ù† Ù‚Ø§Ø¹Ø¯Ø© Ø§Ù„Ø¨ÙŠØ§Ù†Ø§ØªØŸ`,
-        actionText: "Ù†Ø¹Ù…ØŒ Ø­Ø°Ù Ø§Ù„Ø®Ø§Ù…Ø©",
+        title: "حذف خامة حجرية",
+        desc: `هل أنت متأكد من حذف الخامة "${name}" (${id}) نهائياً من قاعدة البيانات؟`,
+        actionText: "نعم، حذف الخامة",
         onConfirm: async () => {
           try {
             const { error } = await State.supabase
@@ -2515,12 +2511,12 @@
               .eq('id', id);
 
             if (error) throw error;
-            showToast("ØªÙ… Ø­Ø°Ù Ø§Ù„Ø®Ø§Ù…Ø© Ø¨Ù†Ø¬Ø§Ø­.", "success");
+            showToast("تم حذف الخامة بنجاح.", "success");
             await loadMaterials();
             await loadDashboardStats();
           } catch (err) {
             console.error("Error deleting material:", err);
-            showToast("ÙØ´Ù„ Ø­Ø°Ù Ø§Ù„Ø®Ø§Ù…Ø©: " + (err.message || "Ø­Ø¯Ø« Ø®Ø·Ø£"), "error");
+            showToast("فشل حذف الخامة: " + (err.message || "حدث خطأ"), "error");
           }
         }
       });
@@ -2552,7 +2548,7 @@
             <tr>
               <td colspan="7" class="py-12 text-center text-slate-500">
                 <i class="fa-solid fa-file-excel text-3xl mb-2"></i>
-                <p>Ù„Ø§ ØªÙˆØ¬Ø¯ Ø·Ù„Ø¨Ø§Øª Ø¹Ø±ÙˆØ¶ Ø£Ø³Ø¹Ø§Ø± Ø­ØªÙ‰ Ø§Ù„Ø¢Ù† Ø£Ùˆ ØªØ¹Ø°Ø± ØªØ­Ù…ÙŠÙ„Ù‡Ø§.</p>
+                <p>لا توجد طلبات عروض أسعار حتى الآن أو تعذر تحميلها.</p>
               </td>
             </tr>
           `;
@@ -2569,7 +2565,7 @@
           <tr>
             <td colspan="7" class="py-12 text-center text-slate-500">
               <i class="fa-solid fa-file-invoice text-3xl mb-2"></i>
-              <p>Ù„Ù… ÙŠØªÙ… ØªØ³Ø¬ÙŠÙ„ Ø£ÙŠ Ø·Ù„Ø¨Ø§Øª Ø¹Ø±ÙˆØ¶ Ø£Ø³Ø¹Ø§Ø± Ø¨Ø¹Ø¯.</p>
+              <p>لم يتم تسجيل أي طلبات عروض أسعار بعد.</p>
             </td>
           </tr>
         `;
@@ -2577,11 +2573,11 @@
       }
 
       const statusMap = {
-        received: { label: 'ØªÙ… Ø§Ù„Ø§Ø³ØªÙ„Ø§Ù…', class: 'bg-blue-500/10 text-blue-400 border-blue-500/30' },
-        reviewing: { label: 'Ù‚ÙŠØ¯ Ø§Ù„Ø¯Ø±Ø§Ø³Ø© Ø§Ù„ÙÙ†ÙŠØ©', class: 'bg-amber-500/10 text-amber-400 border-amber-500/30' },
-        ready: { label: 'Ø§Ù„Ø¹Ø±Ø¶ Ø¬Ø§Ù‡Ø²', class: 'bg-purple-500/10 text-purple-400 border-purple-500/30' },
-        completed: { label: 'Ù…ÙƒØªÙ…Ù„ ÙˆÙ…Ø¹ØªÙ…Ø¯', class: 'bg-emerald-500/10 text-emerald-400 border-emerald-500/30' },
-        cancelled: { label: 'Ù…Ù„ØºÙŠ', class: 'bg-red-500/10 text-red-400 border-red-500/30' }
+        received: { label: 'تم الاستلام', class: 'bg-blue-500/10 text-blue-400 border-blue-500/30' },
+        reviewing: { label: 'قيد الدراسة الفنية', class: 'bg-amber-500/10 text-amber-400 border-amber-500/30' },
+        ready: { label: 'العرض جاهز', class: 'bg-purple-500/10 text-purple-400 border-purple-500/30' },
+        completed: { label: 'مكتمل ومعتمد', class: 'bg-emerald-500/10 text-emerald-400 border-emerald-500/30' },
+        cancelled: { label: 'ملغي', class: 'bg-red-500/10 text-red-400 border-red-500/30' }
       };
 
       tbody.innerHTML = State.rfqs.map(r => {
@@ -2598,7 +2594,7 @@
             </td>
             <td class="py-3 px-4">
               <div class="text-xs text-slate-200 font-medium">${escapeHtml(r.project_city || '-')}</div>
-              <div class="text-[10px] text-brand-gold">${escapeHtml(r.selected_material_name || 'Ø¹Ø§Ù…')}</div>
+              <div class="text-[10px] text-brand-gold">${escapeHtml(r.selected_material_name || 'عام')}</div>
             </td>
             <td class="py-3 px-4">
               <div class="text-xs text-slate-300">${escapeHtml(r.quantity || '-')}</div>
@@ -2607,17 +2603,17 @@
             <td class="py-3 px-4 text-slate-400 text-[11px]">${dateStr}</td>
             <td class="py-3 px-4 text-center">
               <select onchange="updateRfqStatus('${r.id}', this.value)" class="bg-brand-input border border-slate-700 rounded-lg px-2.5 py-1 text-[11px] text-slate-200 focus:border-brand-gold">
-                <option value="received" ${r.status === 'received' ? 'selected' : ''}>ØªÙ… Ø§Ù„Ø§Ø³ØªÙ„Ø§Ù…</option>
-                <option value="reviewing" ${r.status === 'reviewing' ? 'selected' : ''}>Ù‚ÙŠØ¯ Ø§Ù„Ø¯Ø±Ø§Ø³Ø©</option>
-                <option value="ready" ${r.status === 'ready' ? 'selected' : ''}>Ø§Ù„Ø¹Ø±Ø¶ Ø¬Ø§Ù‡Ø²</option>
-                <option value="completed" ${r.status === 'completed' ? 'selected' : ''}>Ù…ÙƒØªÙ…Ù„</option>
-                <option value="cancelled" ${r.status === 'cancelled' ? 'selected' : ''}>Ù…Ù„ØºÙŠ</option>
+                <option value="received" ${r.status === 'received' ? 'selected' : ''}>تم الاستلام</option>
+                <option value="reviewing" ${r.status === 'reviewing' ? 'selected' : ''}>قيد الدراسة</option>
+                <option value="ready" ${r.status === 'ready' ? 'selected' : ''}>العرض جاهز</option>
+                <option value="completed" ${r.status === 'completed' ? 'selected' : ''}>مكتمل</option>
+                <option value="cancelled" ${r.status === 'cancelled' ? 'selected' : ''}>ملغي</option>
               </select>
             </td>
             <td class="py-3 px-4 text-center">
               ${phoneClean ? `
-                <a href="https://wa.me/${phoneClean}?text=${encodeURIComponent('Ù…Ø±Ø­Ø¨Ø§Ù‹ ' + (r.customer_name || '') + 'ØŒ Ø¨Ø®ØµÙˆØµ Ø·Ù„Ø¨Ùƒ ÙÙŠ Prime Scope Ø±Ù‚Ù… ' + (r.rfq_ref || ''))}" 
-                  target="_blank" title="Ù…Ø±Ø§Ø³Ù„Ø© Ø¹Ø¨Ø± ÙˆØ§ØªØ³Ø§Ø¨" class="p-2 rounded-lg bg-emerald-600/20 hover:bg-emerald-600/40 text-emerald-400 inline-flex items-center justify-center transition">
+                <a href="https://wa.me/${phoneClean}?text=${encodeURIComponent('مرحباً ' + (r.customer_name || '') + '، بخصوص طلبك في Prime Scope رقم ' + (r.rfq_ref || ''))}" 
+                  target="_blank" title="مراسلة عبر واتساب" class="p-2 rounded-lg bg-emerald-600/20 hover:bg-emerald-600/40 text-emerald-400 inline-flex items-center justify-center transition">
                   <i class="fa-brands fa-whatsapp text-sm"></i>
                 </a>
               ` : '<span class="text-slate-600">-</span>'}
@@ -2637,10 +2633,10 @@
           .eq('id', rfqId);
 
         if (error) throw error;
-        showToast("ØªÙ… ØªØ­Ø¯ÙŠØ« Ø­Ø§Ù„Ø© Ø·Ù„Ø¨ Ø§Ù„ØªØ³Ø¹ÙŠØ± Ø¨Ù†Ø¬Ø§Ø­.", "success");
+        showToast("تم تحديث حالة طلب التسعير بنجاح.", "success");
       } catch (err) {
         console.error("Error updating RFQ status:", err);
-        showToast("ÙØ´Ù„ ØªØ­Ø¯ÙŠØ« Ø­Ø§Ù„Ø© Ø§Ù„Ø·Ù„Ø¨.", "error");
+        showToast("فشل تحديث حالة الطلب.", "error");
         loadRfqs();
       }
     }
@@ -2657,7 +2653,7 @@
 
       if (titleEl) titleEl.textContent = title;
       if (descEl) descEl.textContent = desc;
-      if (actionBtn) actionBtn.textContent = actionText || 'ØªØ£ÙƒÙŠØ¯ Ø§Ù„Ø­Ø°Ù';
+      if (actionBtn) actionBtn.textContent = actionText || 'تأكيد الحذف';
 
       // Replace listeners cleanly
       actionBtn.onclick = async () => {
@@ -2684,7 +2680,7 @@
         renderProjectsAdmin();
       } catch (err) {
         console.error("Error loading projects:", err);
-        showToast("ÙØ´Ù„ ØªØ­Ù…ÙŠÙ„ Ø§Ù„Ù…Ø´Ø§Ø±ÙŠØ¹.", "error");
+        showToast("فشل تحميل المشاريع.", "error");
       }
     }
 
@@ -2693,31 +2689,46 @@
       if (!tbody) return;
 
       if (!State.projects || State.projects.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="4" class="px-4 py-8 text-center text-slate-500 text-xs">Ù„Ø§ ÙŠÙˆØ¬Ø¯ Ù…Ø´Ø§Ø±ÙŠØ¹. Ø§Ù†Ù‚Ø± Ø¹Ù„Ù‰ Ø¥Ø¶Ø§ÙØ© Ù…Ø´Ø±ÙˆØ¹ Ø¬Ø¯ÙŠØ¯.</td></tr>`;
+        tbody.innerHTML = '<tr><td colspan="4" class="px-4 py-8 text-center text-slate-500 text-xs">لا يوجد مشاريع حتى الآن. انقر على إضافة مشروع جديد.</td></tr>';
         return;
       }
 
-      tbody.innerHTML = State.projects.map(p => `
-        <tr class="hover:bg-slate-800/30 transition border-b border-slate-800/50">
-          <td class="py-3 px-4 w-24">
-            <div class="w-20 h-14 rounded-lg bg-slate-800 overflow-hidden border border-slate-700">
-              <img src="${p.heroGrad || p.hero_grad || ''}" alt="ØµÙˆØ±Ø© Ø§Ù„Ù…Ø´Ø±ÙˆØ¹" class="w-full h-full object-cover">
-            </div>
-          </td>
-          <td class="py-3 px-4 font-bold text-white text-sm">${escapeHtml(p.titleAr || p.title_ar)}</td>
-          <td class="py-3 px-4 text-xs text-slate-300">${escapeHtml(p.locationAr || p.location_ar || '-')}</td>
-          <td class="py-3 px-4 text-center w-28">
-            <div class="flex items-center justify-center gap-2">
-              <button onclick="editProject('${p.id}')" class="p-2 rounded bg-slate-800 hover:bg-brand-gold hover:text-slate-900 text-slate-300 transition" title="ØªØ¹Ø¯ÙŠÙ„">
-                <i class="fa-regular fa-pen-to-square"></i>
-              </button>
-              <button onclick="confirmDeleteProject('${p.id}')" class="p-2 rounded bg-slate-800 hover:bg-red-500 hover:text-white text-slate-300 transition" title="Ø­Ø°Ù">
-                <i class="fa-solid fa-trash-can"></i>
-              </button>
-            </div>
-          </td>
-        </tr>
-      `).join('');
+      tbody.innerHTML = State.projects.map(p => {
+        const imgUrl = p.hero_grad || p.heroGrad || '';
+        return `
+          <tr class="hover:bg-slate-800/30 transition border-b border-slate-800/50">
+            <td class="py-3 px-4 w-24">
+              <div class="w-20 h-14 rounded-lg bg-slate-800 overflow-hidden border border-slate-700 flex items-center justify-center">
+                ${imgUrl ? `<img src="${imgUrl}" alt="صورة المشروع" class="w-full h-full object-cover">` : '<i class="fa-solid fa-image text-slate-600"></i>'}
+              </div>
+            </td>
+            <td class="py-3 px-4 font-bold text-white text-sm">${escapeHtml(p.title_ar || p.titleAr || '')}</td>
+            <td class="py-3 px-4 text-xs text-slate-300">${escapeHtml(p.location_ar || p.locationAr || '-')}</td>
+            <td class="py-3 px-4 text-center w-28">
+              <div class="flex items-center justify-center gap-2">
+                <button onclick="editProject('${p.id}')" class="p-2 rounded bg-slate-800 hover:bg-brand-gold hover:text-slate-900 text-slate-300 transition" title="تعديل">
+                  <i class="fa-regular fa-pen-to-square"></i>
+                </button>
+                <button onclick="confirmDeleteProject('${p.id}')" class="p-2 rounded bg-slate-800 hover:bg-red-500 hover:text-white text-slate-300 transition" title="حذف">
+                  <i class="fa-solid fa-trash-can"></i>
+                </button>
+              </div>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    function handleProjectImagePreview(input) {
+      const preview = document.getElementById('proj-image-preview');
+      if (input.files && input.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          preview.classList.remove('hidden');
+          preview.style.backgroundImage = `url('${e.target.result}')`;
+        };
+        reader.readAsDataURL(input.files[0]);
+      }
     }
 
     function openProjectModal(projectId = null) {
@@ -2732,15 +2743,15 @@
       if (projectId) {
         const p = State.projects.find(x => x.id === projectId);
         if (p) {
-          document.getElementById('project-modal-title').innerHTML = '<i class="fa-solid fa-pen text-brand-gold"></i><span>ØªØ¹Ø¯ÙŠÙ„ Ø§Ù„Ù…Ø´Ø±ÙˆØ¹</span>';
-          document.getElementById('proj-submit-text').textContent = 'ØªØ­Ø¯ÙŠØ« Ø§Ù„Ù…Ø´Ø±ÙˆØ¹';
+          document.getElementById('project-modal-title').innerHTML = '<i class="fa-solid fa-pen text-brand-gold"></i><span>تعديل بيانات المشروع</span>';
+          document.getElementById('proj-submit-text').textContent = 'تحديث المشروع';
           
           document.getElementById('proj-id').value = p.id;
-          document.getElementById('proj-title').value = p.titleAr || p.title_ar || '';
-          document.getElementById('proj-location').value = p.locationAr || p.location_ar || '';
-          document.getElementById('proj-description').value = p.scopeAr || p.scope_ar || '';
+          document.getElementById('proj-title').value = p.title_ar || p.titleAr || '';
+          document.getElementById('proj-location').value = p.location_ar || p.locationAr || '';
+          document.getElementById('proj-description').value = p.scope_ar || p.scopeAr || '';
           
-          const imgUrl = p.heroGrad || p.hero_grad || '';
+          const imgUrl = p.hero_grad || p.heroGrad || '';
           document.getElementById('proj-image-url').value = imgUrl;
           if (imgUrl) {
             preview.classList.remove('hidden');
@@ -2748,8 +2759,8 @@
           }
         }
       } else {
-        document.getElementById('project-modal-title').innerHTML = '<i class="fa-solid fa-image text-brand-gold"></i><span>Ø¥Ø¶Ø§ÙØ© Ù…Ø´Ø±ÙˆØ¹ Ø¬Ø¯ÙŠØ¯</span>';
-        document.getElementById('proj-submit-text').textContent = 'Ø­ÙØ¸ Ø§Ù„Ù…Ø´Ø±ÙˆØ¹';
+        document.getElementById('project-modal-title').innerHTML = '<i class="fa-solid fa-image text-brand-gold"></i><span>إضافة مشروع جديد</span>';
+        document.getElementById('proj-submit-text').textContent = 'حفظ المشروع';
       }
 
       document.getElementById('project-modal').classList.remove('hidden');
@@ -2764,7 +2775,7 @@
       const submitBtn = document.getElementById('proj-submit-btn');
       const originalHtml = submitBtn.innerHTML;
       submitBtn.disabled = true;
-      submitBtn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Ø¬Ø§Ø±ÙŠ Ø§Ù„Ø­ÙØ¸...';
+      submitBtn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> جاري الحفظ...';
 
       try {
         const id = document.getElementById('proj-id').value;
@@ -2780,15 +2791,18 @@
           const fileName = `${Date.now()}_${Math.random().toString(36).substring(2, 9)}.${fileExt}`;
           const filePath = `uploads/${fileName}`;
 
-          const { data: uploadData, error: uploadErr } = await State.supabase.storage.from('projects').upload(filePath, file);
+          let { data: uploadData, error: uploadErr } = await State.supabase.storage.from('projects').upload(filePath, file);
           if (uploadErr) {
-            if (uploadErr.message.includes('bucket not found')) {
-              const { error: fallbackErr } = await State.supabase.storage.from('products').upload(filePath, file);
-              if (fallbackErr) throw fallbackErr;
+            // Fallback to materials or products storage bucket if projects bucket not created yet
+            const { error: fallbackErr } = await State.supabase.storage.from('materials').upload(filePath, file);
+            if (fallbackErr) {
+              const { error: fbErr2 } = await State.supabase.storage.from('products').upload(filePath, file);
+              if (fbErr2) throw uploadErr;
               const { data: { publicUrl } } = State.supabase.storage.from('products').getPublicUrl(filePath);
               hero_grad = publicUrl;
             } else {
-              throw uploadErr;
+              const { data: { publicUrl } } = State.supabase.storage.from('materials').getPublicUrl(filePath);
+              hero_grad = publicUrl;
             }
           } else {
             const { data: { publicUrl } } = State.supabase.storage.from('projects').getPublicUrl(filePath);
@@ -2797,10 +2811,18 @@
         }
 
         if (!hero_grad && !id) {
-          throw new Error('ÙŠØ±Ø¬Ù‰ Ø±ÙØ¹ ØµÙˆØ±Ø© Ù„Ù„Ù…Ø´Ø±ÙˆØ¹.');
+          throw new Error('يرجى رفع صورة للمشروع.');
         }
 
-        const projectData = { title_ar, title_en: title_ar, location_ar, scope_ar, hero_grad, category: 'general', is_active: true };
+        const projectData = {
+          title_ar,
+          title_en: title_ar,
+          location_ar,
+          scope_ar,
+          hero_grad,
+          category: 'general',
+          is_active: true
+        };
 
         if (id) {
           const { error } = await State.supabase.from('projects').update(projectData).eq('id', id);
@@ -2810,12 +2832,12 @@
           if (error) throw error;
         }
 
-        showToast("ØªÙ… Ø§Ù„Ø­ÙØ¸ Ø¨Ù†Ø¬Ø§Ø­.", "success");
+        showToast("تم حفظ المشروع بنجاح.", "success");
         closeProjectModal();
         await loadProjects();
       } catch (err) {
         console.error(err);
-        showToast(err.message || "Ø­Ø¯Ø« Ø®Ø·Ø£ Ø£Ø«Ù†Ø§Ø¡ Ø§Ù„Ø­ÙØ¸.", "error");
+        showToast(err.message || "حدث خطأ أثناء حفظ المشروع.", "error");
       } finally {
         submitBtn.disabled = false;
         submitBtn.innerHTML = originalHtml;
@@ -2828,18 +2850,18 @@
 
     function confirmDeleteProject(id) {
       openConfirmModal({
-        title: 'Ø­Ø°Ù Ø§Ù„Ù…Ø´Ø±ÙˆØ¹',
-        desc: 'Ù‡Ù„ Ø£Ù†Øª Ù…ØªØ£ÙƒØ¯ Ù…Ù† Ø­Ø°Ù Ù‡Ø°Ø§ Ø§Ù„Ù…Ø´Ø±ÙˆØ¹ØŸ Ø³ÙŠØªÙ… Ø¥Ø²Ø§Ù„ØªÙ‡ Ù…Ù† Ø§Ù„Ù…ÙˆÙ‚Ø¹ Ø§Ù„Ø¹Ø§Ù….',
-        actionText: 'Ø­Ø°Ù Ù†Ù‡Ø§Ø¦ÙŠØ§Ù‹',
+        title: 'حذف المشروع',
+        desc: 'هل أنت متأكد من حذف هذا المشروع نهائياً؟ سيتم إزالته من الموقع العام.',
+        actionText: 'حذف نهائياً',
         onConfirm: async () => {
           try {
             const { error } = await State.supabase.from('projects').delete().eq('id', id);
             if (error) throw error;
-            showToast("ØªÙ… Ø­Ø°Ù Ø§Ù„Ù…Ø´Ø±ÙˆØ¹ Ø¨Ù†Ø¬Ø§Ø­.", "success");
+            showToast("تم حذف المشروع بنجاح.", "success");
             await loadProjects();
           } catch (err) {
             console.error(err);
-            showToast("Ø­Ø¯Ø« Ø®Ø·Ø£ Ø£Ø«Ù†Ø§Ø¡ Ø§Ù„Ø­Ø°Ù.", "error");
+            showToast("حدث خطأ أثناء الحذف.", "error");
           }
         }
       });

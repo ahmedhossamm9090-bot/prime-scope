@@ -210,8 +210,14 @@ function getProductMainImageUrl(product) {
   if (!product || !product.images) return null;
   let imgs = product.images;
   if (typeof imgs === 'string' && imgs.trim()) {
-    try { imgs = JSON.parse(imgs); } catch(e) { if (imgs.startsWith('http')) return imgs; }
+    try {
+      const parsed = JSON.parse(imgs);
+      imgs = parsed;
+    } catch(e) {
+      if (imgs.startsWith('http')) return imgs;
+    }
   }
+  if (typeof imgs === 'string' && imgs.startsWith('http')) return imgs;
   if (!Array.isArray(imgs) || imgs.length === 0) return null;
   const first = imgs[0];
   if (typeof first === 'string' && first.startsWith('http')) return first;
@@ -223,8 +229,14 @@ function getProductAllImageUrls(product) {
   if (!product || !product.images) return [];
   let imgs = product.images;
   if (typeof imgs === 'string' && imgs.trim()) {
-    try { imgs = JSON.parse(imgs); } catch(e) { if (imgs.startsWith('http')) return [imgs]; }
+    try {
+      const parsed = JSON.parse(imgs);
+      imgs = parsed;
+    } catch(e) {
+      if (imgs.startsWith('http')) return [imgs];
+    }
   }
+  if (typeof imgs === 'string' && imgs.startsWith('http')) return [imgs];
   if (!Array.isArray(imgs)) return [];
   return imgs.map(img => {
     if (typeof img === 'string' && img.startsWith('http')) return img;
