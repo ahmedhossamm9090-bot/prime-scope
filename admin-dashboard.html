@@ -1154,6 +1154,80 @@
     </div>
   </div>
 
+  <!-- ========================================================================= -->
+  <!-- MODAL: ADD / UPDATE PROJECT IMAGE (معرض المشاريع)                         -->
+  <!-- ========================================================================= -->
+  <div id="project-image-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 modal-backdrop">
+    <div class="luxury-card w-full max-w-lg flex flex-col max-h-[90vh] shadow-2xl overflow-hidden relative">
+      <div class="p-5 border-b border-brand-border bg-slate-900/80 flex items-center justify-between sticky top-0 z-10">
+        <h3 class="text-base md:text-lg font-bold font-serif text-white flex items-center gap-2">
+          <i class="fa-solid fa-camera text-brand-gold"></i>
+          <span>إضافة / تحديث صورة المشروع في المعرض</span>
+        </h3>
+        <button type="button" onclick="closeProjectImageModal()" class="text-slate-400 hover:text-white p-1 rounded-lg hover:bg-slate-800 transition">
+          <i class="fa-solid fa-xmark text-xl"></i>
+        </button>
+      </div>
+
+      <form id="project-image-form" class="p-5 overflow-y-auto flex-1 space-y-5" onsubmit="handleProjectImageSubmit(event)">
+        <input type="hidden" id="quick-proj-id">
+
+        <!-- Selected Project Header Info -->
+        <div class="bg-slate-900/70 p-3.5 rounded-xl border border-slate-800 flex items-center justify-between">
+          <div>
+            <div class="text-[10px] text-brand-gold font-bold uppercase tracking-wider">المشروع المحدد:</div>
+            <div id="quick-proj-name" class="text-sm font-bold text-white mt-0.5">اسم المشروع</div>
+            <div id="quick-proj-location" class="text-xs text-slate-400 mt-0.5">الموقع</div>
+          </div>
+          <span class="text-xs text-brand-gold bg-brand-gold/10 px-2.5 py-1 rounded-lg border border-brand-gold/20 font-semibold">معرض المشاريع</span>
+        </div>
+
+        <!-- Live Preview Box -->
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 mb-2">معاينة الصورة الحالية / المحددة:</label>
+          <div id="quick-proj-preview-box" class="w-full h-48 rounded-xl border-2 border-dashed border-slate-700 bg-slate-950 flex flex-col items-center justify-center overflow-hidden relative shadow-inner">
+            <img id="quick-proj-preview-img" src="" alt="معاينة الصورة" class="w-full h-full object-cover hidden">
+            <div id="quick-proj-preview-placeholder" class="text-center p-4 text-slate-500">
+              <i class="fa-solid fa-cloud-arrow-up text-3xl mb-2 text-slate-600"></i>
+              <p class="text-xs font-semibold">لم يتم تحديد صورة بعد.</p>
+              <p class="text-[11px] text-slate-500 mt-1">اختر ملف صورة من جهازك أو الصق رابطاً مباشراً أدناه.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Method 1: File Upload -->
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 mb-1.5 flex items-center gap-1.5">
+            <i class="fa-solid fa-upload text-brand-gold"></i>
+            <span>الخيار 1: رفع ملف صورة من جهازك (JPG, PNG, WebP)</span>
+          </label>
+          <input type="file" id="quick-proj-file" accept="image/jpeg,image/png,image/webp,image/jpg" onchange="handleQuickProjectFileSelect(this)" class="w-full text-xs text-slate-400 file:mr-4 file:py-2.5 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-slate-800 file:text-brand-gold hover:file:bg-slate-700 cursor-pointer bg-slate-900/50 p-2 rounded-xl border border-slate-800">
+        </div>
+
+        <!-- Method 2: Direct URL Input -->
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 mb-1.5 flex items-center gap-1.5">
+            <i class="fa-solid fa-link text-brand-gold"></i>
+            <span>الخيار 2: أو لصق رابط صورة مباشر (Image URL)</span>
+          </label>
+          <div class="flex items-center gap-2">
+            <input type="url" id="quick-proj-url" placeholder="https://example.com/project-photo.jpg" oninput="handleQuickProjectUrlInput(this.value)" class="flex-1 bg-brand-input border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-brand-gold transition" dir="ltr">
+            <button type="button" onclick="handleQuickProjectUrlInput(document.getElementById('quick-proj-url').value)" class="px-3 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs text-slate-300 font-semibold border border-slate-700 transition">معاينة</button>
+          </div>
+        </div>
+
+        <!-- Submit Actions -->
+        <div class="flex items-center justify-end gap-3 pt-3 border-t border-brand-border">
+          <button type="button" onclick="closeProjectImageModal()" class="px-4 py-2.5 rounded-xl border border-slate-700 text-slate-300 hover:bg-slate-800 text-xs font-semibold transition">إلغاء</button>
+          <button type="submit" id="quick-proj-submit-btn" class="px-5 py-2.5 rounded-xl gold-gradient-bg text-slate-950 font-bold text-xs shadow hover:opacity-90 transition flex items-center gap-2">
+            <i class="fa-solid fa-save"></i>
+            <span id="quick-proj-submit-text">حفظ وتحديث الصورة في المعرض</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
   <div id="confirm-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 modal-backdrop">
     <div class="luxury-card w-full max-w-sm p-6 text-center space-y-4 shadow-2xl border border-red-500/30">
       <div class="w-14 h-14 mx-auto rounded-full bg-red-500/10 text-red-400 flex items-center justify-center text-2xl">
@@ -2695,21 +2769,46 @@
 
       tbody.innerHTML = State.projects.map(p => {
         const imgUrl = p.hero_grad || p.heroGrad || '';
+        const hasValidImg = imgUrl && (imgUrl.startsWith('http://') || imgUrl.startsWith('https://') || imgUrl.startsWith('data:image/'));
         return `
           <tr class="hover:bg-slate-800/30 transition border-b border-slate-800/50">
-            <td class="py-3 px-4 w-24">
-              <div class="w-20 h-14 rounded-lg bg-slate-800 overflow-hidden border border-slate-700 flex items-center justify-center">
-                ${imgUrl ? `<img src="${imgUrl}" alt="صورة المشروع" class="w-full h-full object-cover">` : '<i class="fa-solid fa-image text-slate-600"></i>'}
+            <td class="py-3 px-4 w-28">
+              <div onclick="openProjectImageModal('${p.id}')" class="w-24 h-16 rounded-xl bg-slate-800 overflow-hidden border border-slate-700 flex items-center justify-center cursor-pointer relative group shadow-sm" title="انقر لإضافة أو تغيير صورة هذا المشروع">
+                ${hasValidImg ? `
+                  <img src="${imgUrl}" alt="صورة المشروع" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                  <div class="absolute inset-0 bg-slate-950/60 opacity-0 group-hover:opacity-100 flex items-center justify-center transition text-brand-gold text-xs font-bold gap-1">
+                    <i class="fa-solid fa-camera"></i>
+                    <span>تعديل</span>
+                  </div>
+                ` : `
+                  <div class="w-full h-full flex flex-col items-center justify-center bg-slate-900 group-hover:bg-slate-850 p-1 text-center transition">
+                    <i class="fa-solid fa-camera text-brand-gold text-base group-hover:scale-110 transition mb-0.5"></i>
+                    <span class="text-[10px] font-bold text-slate-400 group-hover:text-brand-gold">أضف صورة</span>
+                  </div>
+                `}
               </div>
             </td>
-            <td class="py-3 px-4 font-bold text-white text-sm">${escapeHtml(p.title_ar || p.titleAr || '')}</td>
-            <td class="py-3 px-4 text-xs text-slate-300">${escapeHtml(p.location_ar || p.locationAr || '-')}</td>
-            <td class="py-3 px-4 text-center w-28">
-              <div class="flex items-center justify-center gap-2">
-                <button onclick="editProject('${p.id}')" class="p-2 rounded bg-slate-800 hover:bg-brand-gold hover:text-slate-900 text-slate-300 transition" title="تعديل">
+            <td class="py-3 px-4">
+              <div class="font-bold text-white text-sm">${escapeHtml(p.title_ar || p.titleAr || '')}</div>
+              <div class="flex items-center gap-2 mt-1">
+                <span class="text-[10px] text-brand-gold bg-brand-gold/10 px-2 py-0.5 rounded border border-brand-gold/20 font-semibold">${escapeHtml(p.category_ar || p.categoryAr || p.category || 'مشروع')}</span>
+                ${hasValidImg ? '<span class="text-[10px] text-emerald-400 flex items-center gap-1"><i class="fa-solid fa-check"></i> صورة مرفوعة</span>' : '<span class="text-[10px] text-amber-400 flex items-center gap-1"><i class="fa-solid fa-triangle-exclamation"></i> بدون صورة</span>'}
+              </div>
+            </td>
+            <td class="py-3 px-4 text-xs text-slate-300">
+              <div>📍 ${escapeHtml(p.location_ar || p.locationAr || '-')}</div>
+              ${p.area ? `<div class="text-[11px] text-slate-400 mt-0.5">📐 ${escapeHtml(p.area)}</div>` : ''}
+            </td>
+            <td class="py-3 px-4 text-center w-36">
+              <div class="flex items-center justify-center gap-1.5">
+                <button onclick="openProjectImageModal('${p.id}')" class="px-2.5 py-1.5 rounded-lg bg-emerald-500/10 hover:bg-emerald-500 hover:text-white text-emerald-400 border border-emerald-500/30 transition text-xs font-bold flex items-center gap-1" title="إضافة أو تغيير صورة المشروع">
+                  <i class="fa-solid fa-camera"></i>
+                  <span class="hidden sm:inline">الصورة</span>
+                </button>
+                <button onclick="editProject('${p.id}')" class="p-1.5 rounded-lg bg-slate-800 hover:bg-brand-gold hover:text-slate-900 text-slate-300 transition" title="تعديل كافة بيانات المشروع">
                   <i class="fa-regular fa-pen-to-square"></i>
                 </button>
-                <button onclick="confirmDeleteProject('${p.id}')" class="p-2 rounded bg-slate-800 hover:bg-red-500 hover:text-white text-slate-300 transition" title="حذف">
+                <button onclick="confirmDeleteProject('${p.id}')" class="p-1.5 rounded-lg bg-slate-800 hover:bg-red-500 hover:text-white text-slate-300 transition" title="حذف المشروع">
                   <i class="fa-solid fa-trash-can"></i>
                 </button>
               </div>
@@ -2717,6 +2816,145 @@
           </tr>
         `;
       }).join('');
+    }
+
+    // ==========================================================================
+    // Quick Project Image Management Modal
+    // ==========================================================================
+    let currentQuickProjectId = null;
+    let quickProjectStagedFile = null;
+
+    function openProjectImageModal(projectId) {
+      const p = State.projects.find(x => x.id === projectId);
+      if (!p) return;
+
+      currentQuickProjectId = projectId;
+      quickProjectStagedFile = null;
+
+      document.getElementById('quick-proj-id').value = projectId;
+      document.getElementById('quick-proj-name').textContent = p.title_ar || p.titleAr || 'مشروع';
+      document.getElementById('quick-proj-location').textContent = p.location_ar || p.locationAr || 'الموقع غير محدد';
+      document.getElementById('quick-proj-file').value = '';
+      
+      const imgUrl = p.hero_grad || p.heroGrad || '';
+      const hasValidImg = imgUrl && (imgUrl.startsWith('http://') || imgUrl.startsWith('https://') || imgUrl.startsWith('data:image/'));
+
+      const previewImg = document.getElementById('quick-proj-preview-img');
+      const placeholder = document.getElementById('quick-proj-preview-placeholder');
+      const urlInput = document.getElementById('quick-proj-url');
+
+      if (hasValidImg) {
+        urlInput.value = imgUrl;
+        previewImg.src = imgUrl;
+        previewImg.classList.remove('hidden');
+        placeholder.classList.add('hidden');
+      } else {
+        urlInput.value = '';
+        previewImg.src = '';
+        previewImg.classList.add('hidden');
+        placeholder.classList.remove('hidden');
+      }
+
+      document.getElementById('project-image-modal').classList.remove('hidden');
+    }
+
+    function closeProjectImageModal() {
+      document.getElementById('project-image-modal').classList.add('hidden');
+      currentQuickProjectId = null;
+      quickProjectStagedFile = null;
+    }
+
+    function handleQuickProjectFileSelect(input) {
+      if (input.files && input.files[0]) {
+        quickProjectStagedFile = input.files[0];
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          const previewImg = document.getElementById('quick-proj-preview-img');
+          const placeholder = document.getElementById('quick-proj-preview-placeholder');
+          previewImg.src = e.target.result;
+          previewImg.classList.remove('hidden');
+          placeholder.classList.add('hidden');
+        };
+        reader.readAsDataURL(quickProjectStagedFile);
+      }
+    }
+
+    function handleQuickProjectUrlInput(val) {
+      const trimmed = val ? val.trim() : '';
+      const previewImg = document.getElementById('quick-proj-preview-img');
+      const placeholder = document.getElementById('quick-proj-preview-placeholder');
+      if (trimmed && (trimmed.startsWith('http://') || trimmed.startsWith('https://'))) {
+        previewImg.src = trimmed;
+        previewImg.classList.remove('hidden');
+        placeholder.classList.add('hidden');
+      } else if (!quickProjectStagedFile) {
+        previewImg.classList.add('hidden');
+        placeholder.classList.remove('hidden');
+      }
+    }
+
+    async function handleProjectImageSubmit(e) {
+      e.preventDefault();
+      const projectId = document.getElementById('quick-proj-id').value;
+      if (!projectId) return;
+
+      const submitBtn = document.getElementById('quick-proj-submit-btn');
+      const submitText = document.getElementById('quick-proj-submit-text');
+      const originalText = submitText.textContent;
+      submitBtn.disabled = true;
+      submitText.textContent = "جاري رفع وحفظ الصورة...";
+
+      try {
+        let finalImageUrl = document.getElementById('quick-proj-url').value.trim();
+
+        if (quickProjectStagedFile) {
+          const file = quickProjectStagedFile;
+          const fileExt = file.name.split('.').pop();
+          const fileName = `proj_${projectId}_${Date.now()}.${fileExt}`;
+          const filePath = `uploads/${fileName}`;
+
+          let uploadRes = await State.supabase.storage.from('projects').upload(filePath, file, { upsert: true });
+          if (uploadRes.error) {
+            // Fallback to materials bucket
+            uploadRes = await State.supabase.storage.from('materials').upload(filePath, file, { upsert: true });
+            if (uploadRes.error) throw uploadRes.error;
+            const { data: { publicUrl } } = State.supabase.storage.from('materials').getPublicUrl(filePath);
+            finalImageUrl = publicUrl;
+          } else {
+            const { data: { publicUrl } } = State.supabase.storage.from('projects').getPublicUrl(filePath);
+            finalImageUrl = publicUrl;
+          }
+        }
+
+        if (!finalImageUrl) {
+          throw new Error("يرجى اختيار ملف صورة أو إدخال رابط صورة صالح.");
+        }
+
+        // Update database table
+        const { error } = await State.supabase
+          .from('projects')
+          .update({ hero_grad: finalImageUrl, updated_at: new Date().toISOString() })
+          .eq('id', projectId);
+
+        if (error) throw error;
+
+        // Update local State
+        const proj = State.projects.find(x => x.id === projectId);
+        if (proj) {
+          proj.hero_grad = finalImageUrl;
+          proj.heroGrad = finalImageUrl;
+        }
+
+        showToast("تم تحديث صورة المشروع بنجاح وربطها بالمعرض!", "success");
+        closeProjectImageModal();
+        renderProjectsAdmin();
+      } catch (err) {
+        console.error("Error updating project image:", err);
+        showToast(err.message || "فشل تحديث صورة المشروع.", "error");
+      } finally {
+        submitBtn.disabled = false;
+        submitText.textContent = originalText;
+      }
     }
 
     function handleProjectImagePreview(input) {
