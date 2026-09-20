@@ -1390,6 +1390,7 @@
           State.currentUser = session.user;
           showAppView();
           await loadAllData();
+          setupRealtimeRFQListener();
         } else {
           await State.supabase.auth.signOut();
           showLoginView("هذا الحساب لا يمتلك صلاحية الدخول إلى لوحة الإدارة (يتطلب صلاحية Admin).");
@@ -1487,6 +1488,7 @@
         showToast("تم تسجيل الدخول بنجاح. مرحباً بك في لوحة الإدارة.", "success");
         showAppView();
         await loadAllData();
+        setupRealtimeRFQListener();
 
       } catch (err) {
         console.error("Login failed:", err);
@@ -1574,7 +1576,7 @@
       toggleSidebar(false);
 
       // Lazy load tab specific data if empty
-      if (tabId === 'rfqs' && State.rfqs.length === 0) {
+      if (tabId === 'rfqs') {
         loadRfqs();
       }
       if (tabId === 'projects') {
@@ -1611,6 +1613,7 @@
         loadCategories(),
         loadMaterials(),
         loadProjects(),
+        loadRfqs(),
         loadDashboardStats()
       ]);
     }
@@ -2610,17 +2613,22 @@
     // ==========================================================================
     async function loadRfqs() {
       if (!State.supabase) return;
-
       const tbody = document.getElementById('rfqs-table-body');
       const badge = document.getElementById('rfqs-count-badge');
 
       try {
-        const { data, error } = await State.supabase
+        let { data, error } = await State.supabase
           .from('rfqs')
           .select('*')
           .order('created_at', { ascending: false });
 
-        if (error) throw error;
+        if (error) {
+          console.warn("Retrying fetch rfqs without order:", error);
+          const fallbackRes = await State.supabase.from('rfqs').select('*');
+          if (fallbackRes.error) throw fallbackRes.error;
+          data = fallbackRes.data;
+        }
+
         State.rfqs = data || [];
         if (badge) badge.textContent = State.rfqs.length;
         renderRfqs();
@@ -2631,7 +2639,7 @@
             <tr>
               <td colspan="7" class="py-12 text-center text-slate-500">
                 <i class="fa-solid fa-file-excel text-3xl mb-2"></i>
-                <p>لا توجد طلبات عروض أسعار حتى الآن أو تعذر تحميلها.</p>
+                <p>لا توجد طلبات عروض أسعار حتى الآن أو تعذر تحميلها من السيرفر.</p>
               </td>
             </tr>
           `;
@@ -2669,7 +2677,7 @@
         const phoneClean = (r.customer_phone || '').replace(/[^0-9]/g, '');
 
         return `
-          <tr class="hover:bg-slate-800/40 transition">
+          <tr class="hover:bg-slate-800/40 transition border-b border-slate-800/50">
             <td class="py-3 px-4 font-mono font-bold text-brand-gold text-[11px]">${escapeHtml(r.rfq_ref || '-')}</td>
             <td class="py-3 px-4">
               <div class="font-bold text-white text-xs">${escapeHtml(r.customer_name || '-')}</div>
@@ -2677,7 +2685,8 @@
             </td>
             <td class="py-3 px-4">
               <div class="text-xs text-slate-200 font-medium">${escapeHtml(r.project_city || '-')}</div>
-              <div class="text-[10px] text-brand-gold">${escapeHtml(r.selected_material_name || 'عام')}</div>
+              <div class="text-[10px] text-brand-gold font-semibold">${escapeHtml(r.selected_material_name || 'عام')}</div>
+              ${r.notes ? `<div class="text-[10px] text-amber-300/80 mt-0.5 truncate max-w-[180px]" title="${escapeHtml(r.notes)}">📝 ${escapeHtml(r.notes)}</div>` : ''}
             </td>
             <td class="py-3 px-4">
               <div class="text-xs text-slate-300">${escapeHtml(r.quantity || '-')}</div>
@@ -2694,16 +2703,58 @@
               </select>
             </td>
             <td class="py-3 px-4 text-center">
-              ${phoneClean ? `
-                <a href="https://wa.me/${phoneClean}?text=${encodeURIComponent('مرحباً ' + (r.customer_name || '') + '، بخصوص طلبك في Prime Scope رقم ' + (r.rfq_ref || ''))}" 
-                  target="_blank" title="مراسلة عبر واتساب" class="p-2 rounded-lg bg-emerald-600/20 hover:bg-emerald-600/40 text-emerald-400 inline-flex items-center justify-center transition">
-                  <i class="fa-brands fa-whatsapp text-sm"></i>
-                </a>
-              ` : '<span class="text-slate-600">-</span>'}
+              <div class="flex items-center justify-center gap-1.5">
+                ${phoneClean ? `
+                  <a href="https://wa.me/${phoneClean}?text=${encodeURIComponent('مرحباً ' + (r.customer_name || '') + '، بخصوص طلبك في Prime Scope رقم ' + (r.rfq_ref || ''))}" 
+                    target="_blank" title="مراسلة عبر واتساب" class="p-1.5 rounded-lg bg-emerald-600/20 hover:bg-emerald-600/40 text-emerald-400 inline-flex items-center justify-center transition">
+                    <i class="fa-brands fa-whatsapp text-sm"></i>
+                  </a>
+                ` : ''}
+                <button onclick="confirmDeleteRfq('${r.id}')" title="حذف الطلب" class="p-1.5 rounded-lg bg-slate-800 hover:bg-red-500 hover:text-white text-slate-400 transition">
+                  <i class="fa-solid fa-trash-can text-xs"></i>
+                </button>
+              </div>
             </td>
           </tr>
         `;
       }).join('');
+    }
+
+    function confirmDeleteRfq(id) {
+      openConfirmModal({
+        title: 'حذف طلب عرض السعر',
+        desc: 'هل أنت متأكد من حذف هذا الطلب من النظام؟ لا يمكن التراجع عن هذه الخطوة.',
+        actionText: 'حذف الطلب',
+        onConfirm: async () => {
+          try {
+            const { error } = await State.supabase.from('rfqs').delete().eq('id', id);
+            if (error) throw error;
+            showToast("تم حذف طلب عرض السعر بنجاح.", "success");
+            await loadRfqs();
+            await loadDashboardStats();
+          } catch (err) {
+            console.error(err);
+            showToast("حدث خطأ أثناء حذف الطلب.", "error");
+          }
+        }
+      });
+    }
+
+    let realtimeRfqSubscription = null;
+    function setupRealtimeRFQListener() {
+      if (!State.supabase || realtimeRfqSubscription) return;
+      try {
+        realtimeRfqSubscription = State.supabase
+          .channel('public:rfqs')
+          .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'rfqs' }, (payload) => {
+            showToast(`🔔 وصل طلب عرض سعر جديد من العميل (${payload.new?.customer_name || 'عميل'})!`, "info", 6000);
+            loadRfqs();
+            loadDashboardStats();
+          })
+          .subscribe();
+      } catch (e) {
+        console.warn("Realtime listener error:", e);
+      }
     }
 
     async function updateRfqStatus(rfqId, newStatus) {

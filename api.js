@@ -154,32 +154,40 @@
 
       if (window.PrimeSupabase?.isReady()) {
         try {
-          // A. Insert into rfqs table
-          const { data: rfqRow, error: rfqErr } = await client
+          // A. Generate UUID v4 for the new RFQ row
+          const rfqId = (typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function')
+            ? crypto.randomUUID()
+            : 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+                const r = Math.random() * 16 | 0;
+                const v = c === 'x' ? r : (r & 0x3 | 0x8);
+                return v.toString(16);
+              });
+
+          // Insert into rfqs table (WITHOUT .select() to avoid RLS 42501 permission error for guest visitors)
+          const { error: rfqErr } = await client
             .from('rfqs')
             .insert([{
+              id: rfqId,
               rfq_ref: rfqRef,
               customer_name: rfqData.customerName,
               customer_phone: rfqData.customerPhone,
               project_city: rfqData.projectCity,
-              quantity: rfqData.quantity,
-              application: rfqData.application,
-              thickness: rfqData.thickness,
-              waterjet: rfqData.waterjet,
-              notes: rfqData.notes,
+              quantity: rfqData.quantity || null,
+              application: rfqData.application || null,
+              thickness: rfqData.thickness || null,
+              waterjet: rfqData.waterjet || null,
+              notes: rfqData.notes || null,
               selected_material_id: rfqData.selectedMaterialId || null,
               selected_material_name: rfqData.selectedMaterialName || null,
               status: 'received'
-            }])
-            .select()
-            .single();
+            }]);
 
-          if (!rfqErr && rfqRow) {
+          if (!rfqErr) {
             savedToDb = true;
 
             // B. Upload file to Private Storage bucket if present
             if (fileBlob && fileBlob.name) {
-              const fileExt = fileBlob.name.split('.').pop();
+              const fileExt = fileBlob.name.split('.').pop() || 'dat';
               const sanitizedName = fileBlob.name.replace(/[^a-zA-Z0-9._-]/g, '_');
               const storagePath = `rfqs/${rfqRef}/${Date.now()}_${sanitizedName}`;
 
@@ -192,9 +200,9 @@
 
               if (!uploadErr && uploadData) {
                 fileUploaded = true;
-                // Insert into rfq_files metadata table
+                // Insert into rfq_files metadata table (WITHOUT .select())
                 await client.from('rfq_files').insert([{
-                  rfq_id: rfqRow.id,
+                  rfq_id: rfqId,
                   file_name: fileBlob.name,
                   file_size: fileBlob.size,
                   file_type: fileBlob.type || fileExt,
@@ -225,6 +233,15 @@
       const client = window.PrimeSupabase?.getClient();
       if (window.PrimeSupabase?.isReady()) {
         try {
+          // Attempt RPC tracking first (safe for guest visitors under RLS)
+          const { data: rpcData, error: rpcErr } = await client.rpc('track_rfq_by_ref', { p_ref: rfqRef.trim() });
+          if (!rpcErr && rpcData && rpcData.length > 0) {
+            return {
+              found: true,
+              data: rpcData[0]
+            };
+          }
+
           const { data, error } = await client
             .from('rfqs')
             .select('rfq_ref, status, created_at, customer_name, project_city, selected_material_name')
