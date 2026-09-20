@@ -995,8 +995,8 @@ function openQuoteModal(productId = null) {
     selectedProductForQuote = appMaterials[0];
   }
 
-  // Generate RFQ Reference ID
-  const rfqRef = `PS-RFQ-${new Date().getFullYear()}-${Math.floor(1000 + Math.random() * 9000)}`;
+  // Generate High-Entropy Unique RFQ Reference ID
+  const rfqRef = `PS-RFQ-${new Date().getFullYear()}-${Math.floor(100000 + Math.random() * 900000)}`;
   const refDisplay = document.getElementById('rfqRefDisplay');
   if (refDisplay) refDisplay.textContent = rfqRef;
 
