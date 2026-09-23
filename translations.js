@@ -10,7 +10,7 @@ const TRANSLATIONS = {
     bannerPatriot: 'دام عزك يا وطن 🇸🇦',
 
     // Brand & Navigation
-    brandName: 'برايم سكوب - PRIME SCOPE',
+    brandName: 'برايم سكوب',
     brandTagline: 'منصة برايم سكوب للرخام والحجر الطبيعي المعمارية الفاخرة',
     navHome: 'الرئيسية',
     navCatalog: 'كتالوج الخامات',

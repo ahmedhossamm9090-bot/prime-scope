@@ -46,7 +46,7 @@
   </noscript>
 
   <!-- Core Styles -->
-  <link rel="stylesheet" href="styles.css?v=5.2">
+  <link rel="stylesheet" href="styles.css?v=5.5">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏛️</text></svg>">
 
   <!-- JSON-LD SEO Structured Data -->
@@ -94,7 +94,6 @@
       </div>
     </div>
   </div>
-  </div>
 
   <!-- ==========================================
        1. Sticky Header & Navigation
@@ -103,10 +102,10 @@
     <div class="container header-inner">
       
       <!-- Brand Logo -->
-      <a href="index.html" class="brand-logo" style="display: flex; align-items: center; gap: 0.5rem; text-decoration: none;">
-        <img src="logo.png" alt="Prime Scope Logo" class="brand-logo-img" style="height: 30px; width: auto; object-fit: contain;">
+      <a href="index.html" class="brand-logo">
+        <img src="logo.png" alt="Prime Scope Logo" class="brand-logo-img">
         <div class="logo-text">
-          <h1 data-i18n="brandName" style="font-size: 1.1rem; font-weight: 800; background: var(--gold-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin: 0; white-space: nowrap;">برايم سكوب - Prime Scope</h1>
+          <h1 data-i18n="brandName">برايم سكوب</h1>
         </div>
       </a>
 
@@ -373,9 +372,9 @@
   <!-- 4. API Service Layer -->
   <script src="api.js?v=5.3"></script>
   <!-- 5. Translations -->
-  <script src="translations.js?v=4.0"></script>
+  <script src="translations.js?v=4.5"></script>
   <!-- 6. Main Application Controller -->
-  <script src="app.js?v=5.3"></script>
+  <script src="app.js?v=5.5"></script>
 
 <script>
   
@@ -388,7 +387,7 @@
       btn.innerHTML = isLight ? '☀️' : '🌙';
     }
   }
-\n  function toggleMobileMenu(forceState) {
+  function toggleMobileMenu(forceState) {
     const nav = document.querySelector('.nav-links');
     if (!nav) return;
     if (forceState === false) {

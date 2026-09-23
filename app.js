@@ -534,6 +534,7 @@ function renderComparisonDock() {
 
   if (comparisonList.length > 0) {
     dock.classList.add('active');
+    document.body.classList.add('has-active-dock');
     if (countEl) countEl.textContent = comparisonList.length;
     if (listEl) {
       listEl.innerHTML = comparisonList.map(item => `
@@ -542,6 +543,7 @@ function renderComparisonDock() {
     }
   } else {
     dock.classList.remove('active');
+    document.body.classList.remove('has-active-dock');
   }
 }
 
