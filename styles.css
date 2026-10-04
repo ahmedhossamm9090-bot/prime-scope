@@ -1836,87 +1836,36 @@ body.lang-en .card-badges-top {
   flex-shrink: 0;
 }
 
-/* Card Pricing & Discount Block */
-.card-pricing-block {
-  background: rgba(0, 0, 0, 0.24);
-  border: 1px solid rgba(212, 175, 55, 0.18);
-  border-radius: 8px;
-  padding: 0.55rem 0.75rem;
+/* Card Stock Status Row (In Card Body - Clean & Prominent) */
+.card-stock-row {
+  display: flex;
+  align-items: center;
   margin-bottom: 0.85rem;
-  transition: all 0.25s ease;
+  width: 100%;
 }
 
-[data-theme="light"] .card-pricing-block {
-  background: #f8fafc;
-  border-color: rgba(212, 175, 55, 0.3);
-}
-
-.card-pricing-block.has-discount {
-  background: linear-gradient(135deg, rgba(239, 68, 68, 0.08) 0%, rgba(212, 175, 55, 0.08) 100%);
-  border-color: rgba(212, 175, 55, 0.4);
-}
-
-.price-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.45rem;
-}
-
-.price-val-wrap {
-  display: flex;
-  align-items: baseline;
-  gap: 0.45rem;
-  flex-wrap: wrap;
-}
-
-.price-current {
-  font-size: 1.15rem;
-  font-weight: 800;
-  color: var(--gold-primary);
-  letter-spacing: -0.01em;
-}
-
-.price-old {
+.card-stock-row .badge-stock {
   font-size: 0.78rem;
-  font-weight: 600;
-  color: var(--text-muted);
-  text-decoration: line-through;
-  opacity: 0.75;
+  padding: 0.28rem 0.7rem;
+  border-radius: 20px;
 }
 
-.currency-unit {
-  font-size: 0.65rem;
-  font-weight: 600;
-  opacity: 0.85;
-  margin-inline-start: 2px;
+/* Card Pricing & Detail Price (Completely hidden per user request) */
+.card-pricing-block,
+.detail-price-box {
+  display: none !important;
 }
 
-.price-discount-tag {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.25rem;
-  font-size: 0.72rem;
-  font-weight: 800;
-  color: #ffffff;
-  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
-  padding: 0.2rem 0.5rem;
-  border-radius: 6px;
-  box-shadow: 0 2px 6px rgba(220, 38, 38, 0.35);
-  white-space: nowrap;
-}
-
-/* Modal Stone Detail: Stock & Price Strip */
+/* Modal Stone Detail: Stock Strip */
 .detail-stock-price-strip {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   gap: 0.75rem;
-  flex-wrap: wrap;
   background: rgba(0, 0, 0, 0.28);
   border: 1px solid rgba(212, 175, 55, 0.25);
   border-radius: 12px;
-  padding: 0.85rem 1rem;
+  padding: 0.75rem 1rem;
   margin-bottom: 1.25rem;
 }
 
@@ -1931,57 +1880,40 @@ body.lang-en .card-badges-top {
 }
 
 .detail-stock-indicator .badge-stock {
-  font-size: 0.82rem;
-  padding: 0.35rem 0.8rem;
+  font-size: 0.85rem;
+  padding: 0.35rem 0.85rem;
   border-radius: 20px;
 }
 
-.detail-price-box {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  flex-wrap: wrap;
+/* Mobile Optimization for Inventory Badges */
+@media (max-width: 768px) {
+  .card-badges-top {
+    max-width: calc(100% - 3.2rem);
+    gap: 0.25rem;
+  }
+  .card-badges-top .badge-stock {
+    display: none !important; /* Prominently shown in .card-stock-row inside card-body instead */
+  }
+  .card-stock-row {
+    margin-bottom: 0.65rem;
+    display: flex !important;
+    visibility: visible !important;
+  }
+  .card-stock-row .badge-stock {
+    display: inline-flex !important;
+    font-size: 0.76rem !important;
+    padding: 0.26rem 0.65rem !important;
+    font-weight: 800 !important;
+  }
+  .detail-stock-price-strip {
+    padding: 0.65rem 0.85rem !important;
+  }
 }
 
-.detail-discount-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.3rem;
-  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
-  color: #ffffff;
-  font-size: 0.78rem;
-  font-weight: 800;
-  padding: 0.25rem 0.65rem;
-  border-radius: 20px;
-  box-shadow: 0 2px 8px rgba(220, 38, 38, 0.35);
-}
-
-.detail-price-vals {
-  display: flex;
-  align-items: baseline;
-  gap: 0.55rem;
-  flex-wrap: wrap;
-}
-
-.detail-price-final {
-  font-size: 1.4rem;
-  font-weight: 900;
-  color: var(--gold-primary);
-}
-
-.detail-price-final small {
-  font-size: 0.8rem;
-  font-weight: 600;
-  opacity: 0.85;
-  margin-inline-start: 3px;
-}
-
-.detail-price-old {
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: var(--text-muted);
-  text-decoration: line-through;
-  opacity: 0.75;
+@media (max-width: 480px) {
+  .card-body {
+    padding: 0.85rem !important;
+  }
 }
 
 /* ==========================================================================

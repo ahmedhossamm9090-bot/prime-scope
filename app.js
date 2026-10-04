@@ -357,21 +357,9 @@ function renderProducts() {
           <div class="card-subtitle">${subName} • ${type || 'رخام فاخر'}</div>
           <div class="card-color-desc">${product.color || ''}</div>
 
-          <!-- Price & Discount Section -->
-          <div class="card-pricing-block ${hasDiscount ? 'has-discount' : ''}">
-            ${hasDiscount ? `
-              <div class="price-discount-tag">
-                <span>🏷️ ${t.discountSave || 'وفر'} ${discountPercent}%</span>
-              </div>
-              <div class="price-row">
-                <span class="price-current">${finalPrice} <small>${t.sarPerMeter || 'ر.س / م²'}</small></span>
-                <del class="price-old">${basePrice} ${t.sarUnit || 'ر.س'}</del>
-              </div>
-            ` : `
-              <div class="price-row">
-                <span class="price-current">${basePrice} <small>${t.sarPerMeter || 'ر.س / م²'}</small></span>
-              </div>
-            `}
+          <!-- Direct Stock Status Row (Mobile & Desktop Prominent) -->
+          <div class="card-stock-row">
+            ${stockBadgeHtml}
           </div>
           
           <div class="card-specs">
@@ -498,7 +486,7 @@ function openStoneDetail(productId) {
           <p style="font-size: 0.85rem; color: var(--text-muted);">${subName} • ${type || 'رخام طبيعي'} • 📍 ${product.origin}</p>
           <p style="font-size: 0.85rem; color: var(--text-main); margin-top: 0.4rem;">${product.color || ''}</p>
 
-          <!-- Stock & Price Strip -->
+          <!-- Stock Status Strip -->
           <div class="detail-stock-price-strip">
             <div class="detail-stock-indicator">
               ${isUnavailable 
@@ -508,19 +496,6 @@ function openStoneDetail(productId) {
                   : `<span class="badge-stock badge-stock-available"><span class="stock-dot"></span> ${t.stockStatusAvailable || 'متوفر'} (${safeQty} ${t.squareMeters || 'م²'})</span>`
                 )
               }
-            </div>
-            <div class="detail-price-box">
-              ${hasDiscount ? `
-                <div class="detail-discount-badge">🏷️ ${t.discountTag || 'خصم'} ${discountPercent}%</div>
-                <div class="detail-price-vals">
-                  <span class="detail-price-final">${finalPrice} <small>${t.sarPerMeter || 'ر.س / م²'}</small></span>
-                  <del class="detail-price-old">${basePrice} ${t.sarUnit || 'ر.س'}</del>
-                </div>
-              ` : `
-                <div class="detail-price-vals">
-                  <span class="detail-price-final">${basePrice} <small>${t.sarPerMeter || 'ر.س / م²'}</small></span>
-                </div>
-              `}
             </div>
           </div>
         </div>
