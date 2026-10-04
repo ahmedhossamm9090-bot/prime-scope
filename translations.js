@@ -61,6 +61,23 @@ const TRANSLATIONS = {
     btnCompareAdd: 'مقارنة',
     btnCompareAdded: 'تمت الإضافة ✓',
 
+    // Stock & Inventory
+    stockStatusAvailable: 'متوفر',
+    stockStatusUnavailable: 'غير متوفر',
+    stockStatusOutOfStock: 'نفذت الكمية',
+    remainingQty: 'الكمية المتبقية:',
+    squareMeters: 'م²',
+
+    // Pricing & Discounts
+    priceLabel: 'السعر:',
+    sarUnit: 'ر.س',
+    sarPerMeter: 'ر.س / م²',
+    discountTag: 'خصم',
+    discountSave: 'وفر',
+    priceBeforeDiscount: 'السعر قبل الخصم:',
+    priceAfterDiscount: 'السعر بعد الخصم:',
+    noDiscount: 'بدون خصم',
+
     // Stone Detail Modal (New in v2.0)
     stoneDetailTitle: 'بطاقة المواصفات الفنية والهندسية',
     stoneTechSpecs: 'المواصفات الفيزيائية والميكانيكية',
@@ -241,6 +258,23 @@ const TRANSLATIONS = {
     btnCompareAdd: 'Compare',
     btnCompareAdded: 'Added ✓',
 
+    // Stock & Inventory
+    stockStatusAvailable: 'In Stock',
+    stockStatusUnavailable: 'Unavailable',
+    stockStatusOutOfStock: 'Out of Stock',
+    remainingQty: 'Remaining:',
+    squareMeters: 'm²',
+
+    // Pricing & Discounts
+    priceLabel: 'Price:',
+    sarUnit: 'SAR',
+    sarPerMeter: 'SAR / m²',
+    discountTag: 'OFF',
+    discountSave: 'Save',
+    priceBeforeDiscount: 'Original Price:',
+    priceAfterDiscount: 'Discounted Price:',
+    noDiscount: 'No Discount',
+
     // Stone Detail Modal
     stoneDetailTitle: 'Technical & Engineering Specification Sheet',
     stoneTechSpecs: 'Physical & Mechanical Properties',
@@ -361,3 +395,7 @@ const TRANSLATIONS = {
     locationText: 'Kingdom of Saudi Arabia — Riyadh — Country-wide supply'
   }
 };
+
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = TRANSLATIONS;
+}

@@ -142,36 +142,59 @@ const RAW_PRODUCTS = [
   ['om-2', 'ديليكات كريم فاخر', 'Delicate Cream Omani', 'omani', 'كريمي ناعم كالحرير فائق التجانس والصفاء اللوني', 'عمان / عالمي', 'رخام ديليكات كريم الفاخر', 'Delicate Cream Premium', 'لامع / هوند', 'أرضيات فلل، غرف نوم ماستر، صالات معيشة', 'Full villa floors, master bedrooms, salons', 'مميز', '#fffbeb', 'marble', 'beige', '2700 kg/m³', '0.17%', '134 MPa', 4.6, 'سهلة']
 ];
 
+// Helper for default base prices by tier
+function getStaticEstimatedPrice(tier) {
+  if (!tier) return 290;
+  const t = String(tier).toLowerCase();
+  if (t.includes('ultra')) return 850;
+  if (t.includes('vip')) return 550;
+  if (t.includes('مميز') || t.includes('premium')) return 380;
+  if (t.includes('طلب') || t.includes('popular')) return 260;
+  if (t.includes('اقتصادي') || t.includes('economic')) return 180;
+  return 290;
+}
+
 // Map compact array to rich structured stone objects
-const PRODUCTS = RAW_PRODUCTS.map(p => ({
-  id: p[0],
-  nameAr: p[1],
-  nameEn: p[2],
-  category: p[3],
-  color: p[4],
-  origin: p[5],
-  typeAr: p[6],
-  typeEn: p[7],
-  finish: p[8],
-  usage: p[9],
-  usageEn: p[10],
-  priceCategory: p[11],
-  colorCode: p[12],
-  stoneType: p[13],
-  colorGroup: p[14],
-  density: p[15],
-  waterAbsorption: p[16],
-  compressiveStrength: p[17],
-  durabilityScore: p[18],
-  maintenanceTier: p[19],
-  textureGrad: getStoneGrad(p[3], p[12]),
-  // High-Resolution simulated architectural showcase renders
-  images: [
-    { titleAr: 'لوح كامل معالج (Slab View)', titleEn: 'Full Sawn Slab', grad: getStoneGrad(p[3], p[12]) },
-    { titleAr: 'عروق مقربة (Macro Veins)', titleEn: 'Close-Up Veining Texture', grad: `radial-gradient(circle at 30% 30%, ${p[12]} 0%, #1e293b 80%)` },
-    { titleAr: 'محاكاة في مساحة معمارية (Room Mockup)', titleEn: 'Installed Architecture View', grad: `linear-gradient(to right, #0f172a 0%, ${p[12]} 50%, #0f172a 100%)` }
-  ]
-}));
+const PRODUCTS = RAW_PRODUCTS.map(p => {
+  const basePrice = getStaticEstimatedPrice(p[11]);
+  return {
+    id: p[0],
+    nameAr: p[1],
+    nameEn: p[2],
+    category: p[3],
+    color: p[4],
+    origin: p[5],
+    typeAr: p[6],
+    typeEn: p[7],
+    finish: p[8],
+    usage: p[9],
+    usageEn: p[10],
+    priceCategory: p[11],
+    colorCode: p[12],
+    stoneType: p[13],
+    colorGroup: p[14],
+    density: p[15],
+    waterAbsorption: p[16],
+    compressiveStrength: p[17],
+    durabilityScore: p[18],
+    maintenanceTier: p[19],
+    textureGrad: getStoneGrad(p[3], p[12]),
+    // Inventory & Discount System defaults
+    stockStatus: 'available',
+    stockQuantity: 120,
+    price: basePrice,
+    discountType: 'none',
+    discountPercent: 0,
+    discountedPrice: basePrice,
+    hasDiscount: false,
+    // High-Resolution simulated architectural showcase renders
+    images: [
+      { titleAr: 'لوح كامل معالج (Slab View)', titleEn: 'Full Sawn Slab', grad: getStoneGrad(p[3], p[12]) },
+      { titleAr: 'عروق مقربة (Macro Veins)', titleEn: 'Close-Up Veining Texture', grad: `radial-gradient(circle at 30% 30%, ${p[12]} 0%, #1e293b 80%)` },
+      { titleAr: 'محاكاة في مساحة معمارية (Room Mockup)', titleEn: 'Installed Architecture View', grad: `linear-gradient(to right, #0f172a 0%, ${p[12]} 50%, #0f172a 100%)` }
+    ]
+  };
+});
 
 // 3. Real High-Profile Architectural Projects Showcase (Project Gallery)
 const PRIME_PROJECTS = [
@@ -256,3 +279,7 @@ const PRIME_PROJECTS = [
     tags: ['Commercial Plaza', 'Najran Brown Granite', 'Heavy Traffic']
   }
 ];
+
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = { PRODUCTS, PRIME_PROJECTS, CATEGORIES, RAW_PRODUCTS };
+}

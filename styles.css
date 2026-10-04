@@ -121,43 +121,14 @@ button, input, select, textarea {
   font-size: 0.92rem;
 }
 
-/* National Day Banner */
+/* Top Banner Removed */
 .national-day-banner {
-  background: linear-gradient(90deg, #106634 0%, #178344 50%, #106634 100%);
-  color: #fff;
-  text-align: center;
-  padding: 0.5rem 0;
-  font-size: 0.85rem;
-  font-weight: 700;
-  position: relative;
-  z-index: 101;
-}
-
-.banner-inner {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.25rem;
-}
-
-.banner-badge {
-  color: #fef08a;
-  font-weight: 900;
-}
-
-.banner-action a {
-  text-decoration: underline;
-}
-
-@media (min-width: 768px) {
-  .banner-inner {
-    flex-direction: row;
-    justify-content: center;
-    gap: 1.5rem;
-  }
-  .national-day-banner {
-    font-size: 0.95rem;
-  }
+  display: none !important;
+  height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  overflow: hidden !important;
 }
 
 /* Site Header */
@@ -1758,113 +1729,259 @@ body.lang-en .floating-whatsapp {
 
 
 /* ==========================================================================
-   Saudi National Day 96: Tuned Static Banner (Clean & Responsive)
+   National Day Banner - Removed Completely (Zero Height / Hidden)
    ========================================================================== */
 .national-day-banner {
-  background: linear-gradient(90deg, #004521 0%, #006C35 45%, #007a3d 55%, #004521 100%);
-  border-bottom: 1px solid rgba(212, 175, 55, 0.4);
-  color: #ffffff;
-  padding: 0.35rem 0;
-  position: relative;
-  z-index: 101;
-  font-size: 0.82rem;
-  line-height: 1.3;
+  display: none !important;
+  height: 0 !important;
+  min-height: 0 !important;
+  max-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: none !important;
+  visibility: hidden !important;
+  overflow: hidden !important;
+  pointer-events: none !important;
 }
 
-.banner-static-wrap {
+/* ==========================================================================
+   Inventory & Discount System - Luxury Cards & Modals (AR/EN Responsive)
+   ========================================================================== */
+.card-badges-top {
+  position: absolute;
+  top: 0.6rem;
+  right: 0.6rem;
+  max-width: calc(100% - 3.8rem);
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  flex-wrap: wrap;
+  z-index: 2;
+  pointer-events: none;
+}
+
+body.lang-en .card-badges-top {
+  right: auto;
+  left: 0.6rem;
+}
+
+.card-badges-top .sample-badge {
+  position: static !important;
+  pointer-events: auto;
+}
+
+/* Stock Status Badges */
+.badge-stock {
+  position: static !important;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.22rem 0.55rem;
+  border-radius: 12px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  pointer-events: auto;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  line-height: 1.2;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.badge-stock-available {
+  background: rgba(16, 185, 129, 0.18);
+  color: #34d399;
+  border: 1px solid rgba(52, 211, 153, 0.5);
+}
+
+.badge-stock-available .stock-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #10b981;
+  box-shadow: 0 0 6px #10b981;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.badge-stock-out {
+  background: rgba(239, 68, 68, 0.18);
+  color: #f87171;
+  border: 1px solid rgba(239, 68, 68, 0.5);
+}
+
+.badge-stock-out .stock-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #ef4444;
+  box-shadow: 0 0 4px #ef4444;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.badge-stock-unavailable {
+  background: rgba(100, 116, 139, 0.22);
+  color: #94a3b8;
+  border: 1px solid rgba(148, 163, 184, 0.4);
+}
+
+.badge-stock-unavailable .stock-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #94a3b8;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+/* Card Pricing & Discount Block */
+.card-pricing-block {
+  background: rgba(0, 0, 0, 0.24);
+  border: 1px solid rgba(212, 175, 55, 0.18);
+  border-radius: 8px;
+  padding: 0.55rem 0.75rem;
+  margin-bottom: 0.85rem;
+  transition: all 0.25s ease;
+}
+
+[data-theme="light"] .card-pricing-block {
+  background: #f8fafc;
+  border-color: rgba(212, 175, 55, 0.3);
+}
+
+.card-pricing-block.has-discount {
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.08) 0%, rgba(212, 175, 55, 0.08) 100%);
+  border-color: rgba(212, 175, 55, 0.4);
+}
+
+.price-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 0.5rem;
+  gap: 0.45rem;
 }
 
-.banner-main-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  font-weight: 700;
+.price-val-wrap {
+  display: flex;
+  align-items: baseline;
+  gap: 0.45rem;
+  flex-wrap: wrap;
 }
 
-.badge-discount {
-  background: #facc15;
-  color: #052e16;
-  font-weight: 900;
-  padding: 0.12rem 0.5rem;
-  border-radius: 12px;
-  font-size: 0.78rem;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.25);
-  white-space: nowrap;
-}
-
-.banner-sub-info {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-weight: 600;
-}
-
-.banner-divider {
-  color: rgba(255, 255, 255, 0.4);
-}
-
-.banner-phone-link {
-  color: #ffffff;
-  text-decoration: none;
+.price-current {
+  font-size: 1.15rem;
   font-weight: 800;
-  font-size: 0.8rem;
-  background: rgba(255, 255, 255, 0.12);
-  padding: 0.18rem 0.55rem;
-  border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: var(--gold-primary);
+  letter-spacing: -0.01em;
+}
+
+.price-old {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-decoration: line-through;
+  opacity: 0.75;
+}
+
+.currency-unit {
+  font-size: 0.65rem;
+  font-weight: 600;
+  opacity: 0.85;
+  margin-inline-start: 2px;
+}
+
+.price-discount-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: #ffffff;
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  padding: 0.2rem 0.5rem;
+  border-radius: 6px;
+  box-shadow: 0 2px 6px rgba(220, 38, 38, 0.35);
   white-space: nowrap;
-  transition: all 0.2s;
 }
 
-.banner-phone-link:hover {
-  background: rgba(255, 255, 255, 0.25);
-  color: #fef08a;
+/* Modal Stone Detail: Stock & Price Strip */
+.detail-stock-price-strip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  background: rgba(0, 0, 0, 0.28);
+  border: 1px solid rgba(212, 175, 55, 0.25);
+  border-radius: 12px;
+  padding: 0.85rem 1rem;
+  margin-bottom: 1.25rem;
 }
 
-@media (max-width: 768px) {
-  .national-day-banner {
-    padding: 0.3rem 0;
-  }
-  .banner-static-wrap {
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 0.35rem 0.75rem;
-    text-align: center;
-  }
-  .banner-main-badge {
-    font-size: 0.78rem;
-    gap: 0.3rem;
-  }
-  .badge-discount {
-    font-size: 0.72rem;
-    padding: 0.08rem 0.45rem;
-  }
-  .banner-sub-info {
-    font-size: 0.75rem;
-    gap: 0.35rem;
-  }
-  .banner-phone-link {
-    font-size: 0.75rem;
-    padding: 0.12rem 0.45rem;
-  }
+[data-theme="light"] .detail-stock-price-strip {
+  background: #f1f5f9;
+  border-color: rgba(212, 175, 55, 0.35);
 }
 
-@media (max-width: 480px) {
-  .banner-static-wrap {
-    gap: 0.25rem 0.5rem;
-  }
-  .slogan-text {
-    display: none;
-  }
-  .banner-divider {
-    display: none;
-  }
+.detail-stock-indicator {
+  display: flex;
+  align-items: center;
+}
+
+.detail-stock-indicator .badge-stock {
+  font-size: 0.82rem;
+  padding: 0.35rem 0.8rem;
+  border-radius: 20px;
+}
+
+.detail-price-box {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.detail-discount-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  color: #ffffff;
+  font-size: 0.78rem;
+  font-weight: 800;
+  padding: 0.25rem 0.65rem;
+  border-radius: 20px;
+  box-shadow: 0 2px 8px rgba(220, 38, 38, 0.35);
+}
+
+.detail-price-vals {
+  display: flex;
+  align-items: baseline;
+  gap: 0.55rem;
+  flex-wrap: wrap;
+}
+
+.detail-price-final {
+  font-size: 1.4rem;
+  font-weight: 900;
+  color: var(--gold-primary);
+}
+
+.detail-price-final small {
+  font-size: 0.8rem;
+  font-weight: 600;
+  opacity: 0.85;
+  margin-inline-start: 3px;
+}
+
+.detail-price-old {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-decoration: line-through;
+  opacity: 0.75;
 }
 
 /* ==========================================================================

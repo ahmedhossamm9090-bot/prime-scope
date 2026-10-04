@@ -296,11 +296,52 @@ function renderProducts() {
     const isCompared = comparisonList.some(item => item.id === product.id);
     const mainImg = getProductMainImageUrl(product);
 
+    // Stock Status Logic (prevent negative display)
+    const safeQty = Math.max(0, parseInt(product.stockQuantity) || 0);
+    const isUnavailable = product.stockStatus === 'unavailable';
+    const isOutOfStock = product.stockStatus === 'out_of_stock' || (!isUnavailable && safeQty === 0);
+
+    let stockBadgeHtml = '';
+    if (isUnavailable) {
+      stockBadgeHtml = `
+        <span class="badge-stock badge-stock-unavailable" title="${t.stockStatusUnavailable || 'غير متوفر'}">
+          <span class="stock-dot"></span>
+          <span>${t.stockStatusUnavailable || 'غير متوفر'}</span>
+        </span>
+      `;
+    } else if (isOutOfStock) {
+      stockBadgeHtml = `
+        <span class="badge-stock badge-stock-out" title="${t.stockStatusOutOfStock || 'نفذت الكمية'}">
+          <span class="stock-dot"></span>
+          <span>${t.stockStatusOutOfStock || 'نفذت الكمية'}</span>
+        </span>
+      `;
+    } else {
+      stockBadgeHtml = `
+        <span class="badge-stock badge-stock-available" title="${t.stockStatusAvailable || 'متوفر'}">
+          <span class="stock-dot"></span>
+          <span>${t.stockStatusAvailable || 'متوفر'}</span>
+          <span class="stock-qty-text">(${safeQty} ${t.squareMeters || 'م²'})</span>
+        </span>
+      `;
+    }
+
+    // Pricing & Discounts
+    const basePrice = Math.max(0, parseFloat(product.price) || 0);
+    const discountPercent = Math.min(100, Math.max(0, parseFloat(product.discountPercent) || 0));
+    const hasDiscount = product.discountType === 'percentage' && discountPercent > 0;
+    const finalPrice = hasDiscount 
+      ? Math.round(basePrice * (1 - discountPercent / 100) * 100) / 100 
+      : basePrice;
+
     return `
       <div class="product-card">
         <div class="card-sample" style="background: ${product.textureGrad};" onclick="openStoneDetail('${product.id}')">
           ${mainImg ? `<img src="${mainImg}" alt="${name}" class="card-sample-img"  >` : ''}
-          <span class="sample-badge">${product.priceCategory || 'مميز'}</span>
+          <div class="card-badges-top">
+            <span class="sample-badge">${product.priceCategory || 'مميز'}</span>
+            ${stockBadgeHtml}
+          </div>
           <button class="btn-compare-card ${isCompared ? 'active' : ''}" onclick="event.stopPropagation(); toggleCompareStone('${product.id}')">
             ${isCompared ? t.btnCompareAdded : '+ ' + t.btnCompareAdd}
           </button>
@@ -315,6 +356,23 @@ function renderProducts() {
           </div>
           <div class="card-subtitle">${subName} • ${type || 'رخام فاخر'}</div>
           <div class="card-color-desc">${product.color || ''}</div>
+
+          <!-- Price & Discount Section -->
+          <div class="card-pricing-block ${hasDiscount ? 'has-discount' : ''}">
+            ${hasDiscount ? `
+              <div class="price-discount-tag">
+                <span>🏷️ ${t.discountSave || 'وفر'} ${discountPercent}%</span>
+              </div>
+              <div class="price-row">
+                <span class="price-current">${finalPrice} <small>${t.sarPerMeter || 'ر.س / م²'}</small></span>
+                <del class="price-old">${basePrice} ${t.sarUnit || 'ر.س'}</del>
+              </div>
+            ` : `
+              <div class="price-row">
+                <span class="price-current">${basePrice} <small>${t.sarPerMeter || 'ر.س / م²'}</small></span>
+              </div>
+            `}
+          </div>
           
           <div class="card-specs">
             <div class="spec-row">
@@ -390,6 +448,17 @@ function openStoneDetail(productId) {
   const imageUrls = getProductAllImageUrls(product);
   const hasUploadedImages = imageUrls.length > 0;
 
+  const safeQty = Math.max(0, parseInt(product.stockQuantity) || 0);
+  const isUnavailable = product.stockStatus === 'unavailable';
+  const isOutOfStock = product.stockStatus === 'out_of_stock' || (!isUnavailable && safeQty === 0);
+
+  const basePrice = Math.max(0, parseFloat(product.price) || 0);
+  const discountPercent = Math.min(100, Math.max(0, parseFloat(product.discountPercent) || 0));
+  const hasDiscount = product.discountType === 'percentage' && discountPercent > 0;
+  const finalPrice = hasDiscount 
+    ? Math.round(basePrice * (1 - discountPercent / 100) * 100) / 100 
+    : basePrice;
+
   body.innerHTML = `
     <div class="stone-detail-grid">
       <div>
@@ -428,6 +497,32 @@ function openStoneDetail(productId) {
           <h2 style="font-size: 1.5rem; font-weight: 900; color: var(--gold-primary);">${name}</h2>
           <p style="font-size: 0.85rem; color: var(--text-muted);">${subName} • ${type || 'رخام طبيعي'} • 📍 ${product.origin}</p>
           <p style="font-size: 0.85rem; color: var(--text-main); margin-top: 0.4rem;">${product.color || ''}</p>
+
+          <!-- Stock & Price Strip -->
+          <div class="detail-stock-price-strip">
+            <div class="detail-stock-indicator">
+              ${isUnavailable 
+                ? `<span class="badge-stock badge-stock-unavailable"><span class="stock-dot"></span> ${t.stockStatusUnavailable || 'غير متوفر'}</span>`
+                : (isOutOfStock
+                  ? `<span class="badge-stock badge-stock-out"><span class="stock-dot"></span> ${t.stockStatusOutOfStock || 'نفذت الكمية'}</span>`
+                  : `<span class="badge-stock badge-stock-available"><span class="stock-dot"></span> ${t.stockStatusAvailable || 'متوفر'} (${safeQty} ${t.squareMeters || 'م²'})</span>`
+                )
+              }
+            </div>
+            <div class="detail-price-box">
+              ${hasDiscount ? `
+                <div class="detail-discount-badge">🏷️ ${t.discountTag || 'خصم'} ${discountPercent}%</div>
+                <div class="detail-price-vals">
+                  <span class="detail-price-final">${finalPrice} <small>${t.sarPerMeter || 'ر.س / م²'}</small></span>
+                  <del class="detail-price-old">${basePrice} ${t.sarUnit || 'ر.س'}</del>
+                </div>
+              ` : `
+                <div class="detail-price-vals">
+                  <span class="detail-price-final">${basePrice} <small>${t.sarPerMeter || 'ر.س / م²'}</small></span>
+                </div>
+              `}
+            </div>
+          </div>
         </div>
 
         <h4 style="font-size: 0.95rem; font-weight: 800; color: var(--gold-primary);">${t.stoneTechSpecs}</h4>
@@ -1213,6 +1308,27 @@ function setupEventListeners() {
       renderProducts();
     });
   }
+
+  // Live real-time sync with Admin updates
+  window.addEventListener('ps_inventory_updated', async () => {
+    if (window.PrimeAPI?.getMaterials) {
+      try {
+        appMaterials = await window.PrimeAPI.getMaterials();
+        renderProducts();
+      } catch(e) {}
+    }
+  });
+
+  window.addEventListener('storage', async (e) => {
+    if (e.key === 'ps_materials_overrides') {
+      if (window.PrimeAPI?.getMaterials) {
+        try {
+          appMaterials = await window.PrimeAPI.getMaterials();
+          renderProducts();
+        } catch(e) {}
+      }
+    }
+  });
 }
 function toggleMobileMenu(forceState) { const nav = document.querySelector('.nav-links'); if (!nav) return; if (forceState === false) { nav.classList.remove('active'); } else { nav.classList.toggle('active'); } }
 function toggleTheme() { const isLight = document.documentElement.getAttribute('data-theme') === 'light'; document.documentElement.setAttribute('data-theme', isLight ? 'dark' : 'light'); localStorage.setItem('primeTheme', isLight ? 'dark' : 'light'); const btn = document.getElementById('themeToggleBtn'); if (btn) { btn.innerHTML = isLight ? '??' : '??'; } } document.addEventListener('DOMContentLoaded', () => { const savedTheme = localStorage.getItem('primeTheme'); if (savedTheme === 'light') { document.documentElement.setAttribute('data-theme', 'light'); const btn = document.getElementById('themeToggleBtn'); if (btn) btn.innerHTML = '??'; } });

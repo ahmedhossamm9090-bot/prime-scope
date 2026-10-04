@@ -3,6 +3,7 @@
 // Features: Dynamic Supabase CRUD + Seamless Offline/Static Data Fallback
 // ==============================================================================
 
+const root = typeof window !== 'undefined' ? window : (typeof global !== 'undefined' ? global : this);
 (function(window) {
   const ApiService = {
     // 1. Fetch Categories
@@ -36,11 +37,34 @@
       return typeof CATEGORIES !== 'undefined' ? CATEGORIES : [];
     },
 
-    // 2. Fetch Materials (Stone Catalog)
+    // 2. Fetch Materials (Stone Catalog with Inventory & Discounts)
     getMaterials: async function() {
       if (window.PrimeSupabase?.waitForClient) {
         await window.PrimeSupabase.waitForClient(3000);
       }
+
+      function getEstimatedPrice(tier) {
+        if (!tier) return 290;
+        const t = String(tier).toLowerCase();
+        if (t.includes('ultra')) return 850;
+        if (t.includes('vip')) return 550;
+        if (t.includes('مميز') || t.includes('premium')) return 380;
+        if (t.includes('طلب') || t.includes('popular')) return 260;
+        if (t.includes('اقتصادي') || t.includes('economic')) return 180;
+        return 290;
+      }
+
+      function getOverrides() {
+        try {
+          const stored = localStorage.getItem('ps_materials_overrides');
+          return stored ? JSON.parse(stored) : {};
+        } catch(e) {
+          return {};
+        }
+      }
+
+      const overrides = getOverrides();
+
       const client = window.PrimeSupabase?.getClient();
       if (window.PrimeSupabase?.isReady()) {
         try {
@@ -64,6 +88,27 @@
                 }
               }
 
+              const ov = overrides[m.id] || {};
+
+              // Stock Status & Quantity
+              let stockStatus = ov.stock_status || m.stock_status || 'available';
+              let stockQuantity = ov.stock_quantity != null ? ov.stock_quantity : (m.stock_quantity != null ? m.stock_quantity : 100);
+              stockQuantity = Math.max(0, parseInt(stockQuantity) || 0);
+
+              // Auto-derive out of stock if quantity is 0
+              if (stockStatus === 'available' && stockQuantity === 0) {
+                stockStatus = 'out_of_stock';
+              }
+
+              // Pricing & Discounts
+              const basePrice = ov.price != null ? parseFloat(ov.price) : (m.price != null ? parseFloat(m.price) : getEstimatedPrice(m.price_tier));
+              const discountType = ov.discount_type || m.discount_type || 'none';
+              const discountPercent = Math.min(100, Math.max(0, parseFloat(ov.discount_percent != null ? ov.discount_percent : (m.discount_percent || 0))));
+              const hasDiscount = discountType === 'percentage' && discountPercent > 0;
+              const discountedPrice = hasDiscount 
+                ? Math.round(basePrice * (1 - discountPercent / 100) * 100) / 100 
+                : basePrice;
+
               return {
                 id: m.id,
                 nameAr: m.name_ar,
@@ -85,8 +130,16 @@
                 compressiveStrength: m.compressive_strength,
                 durabilityScore: parseFloat(m.durability_score) || 4.5,
                 maintenanceTier: m.maintenance_tier,
-                textureGrad: m.texture_grad || getStoneGrad(m.category_id, m.color_hex),
-                images: imgs
+                textureGrad: m.texture_grad || (typeof getStoneGrad === 'function' ? getStoneGrad(m.category_id, m.color_hex) : ''),
+                images: imgs,
+                // Inventory & Discount System
+                stockStatus: stockStatus,
+                stockQuantity: stockQuantity,
+                price: basePrice,
+                discountType: discountType,
+                discountPercent: discountPercent,
+                discountedPrice: discountedPrice,
+                hasDiscount: hasDiscount
               };
             });
           }
@@ -94,8 +147,40 @@
           console.warn("⚠️ [API] Failed to fetch materials from Supabase, using fallback data:", err);
         }
       }
+
       // Fallback
-      return typeof PRODUCTS !== 'undefined' ? PRODUCTS : [];
+      if (typeof PRODUCTS !== 'undefined') {
+        return PRODUCTS.map(p => {
+          const ov = overrides[p.id] || {};
+          let stockStatus = ov.stock_status || p.stockStatus || 'available';
+          let stockQuantity = ov.stock_quantity != null ? ov.stock_quantity : (p.stockQuantity != null ? p.stockQuantity : 100);
+          stockQuantity = Math.max(0, parseInt(stockQuantity) || 0);
+
+          if (stockStatus === 'available' && stockQuantity === 0) {
+            stockStatus = 'out_of_stock';
+          }
+
+          const basePrice = ov.price != null ? parseFloat(ov.price) : (p.price != null ? parseFloat(p.price) : getEstimatedPrice(p.priceCategory));
+          const discountType = ov.discount_type || p.discountType || 'none';
+          const discountPercent = Math.min(100, Math.max(0, parseFloat(ov.discount_percent != null ? ov.discount_percent : (p.discountPercent || 0))));
+          const hasDiscount = discountType === 'percentage' && discountPercent > 0;
+          const discountedPrice = hasDiscount 
+            ? Math.round(basePrice * (1 - discountPercent / 100) * 100) / 100 
+            : basePrice;
+
+          return {
+            ...p,
+            stockStatus,
+            stockQuantity,
+            price: basePrice,
+            discountType,
+            discountPercent,
+            discountedPrice,
+            hasDiscount
+          };
+        });
+      }
+      return [];
     },
 
     // 3. Fetch Showcase Projects
@@ -350,8 +435,35 @@
 
       const { error } = await client.from('projects').delete().eq('id', id);
       return { error };
+    },
+
+    // 11. Overrides Cache Helpers (Instant sync between Admin & Storefront)
+    getMaterialOverrides: function() {
+      try {
+        const stored = localStorage.getItem('ps_materials_overrides');
+        return stored ? JSON.parse(stored) : {};
+      } catch(e) {
+        return {};
+      }
+    },
+
+    saveMaterialOverride: function(id, data) {
+      try {
+        const overrides = this.getMaterialOverrides();
+        overrides[id] = Object.assign({}, overrides[id] || {}, data);
+        localStorage.setItem('ps_materials_overrides', JSON.stringify(overrides));
+        window.dispatchEvent(new CustomEvent('ps_inventory_updated', { detail: { id, data } }));
+        return true;
+      } catch(e) {
+        console.warn("Could not save material override:", e);
+        return false;
+      }
     }
   };
 
   window.PrimeAPI = ApiService;
-})(window);
+})(root);
+
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = root.PrimeAPI;
+}

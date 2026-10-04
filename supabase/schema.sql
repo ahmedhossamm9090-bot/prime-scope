@@ -62,6 +62,11 @@ CREATE TABLE IF NOT EXISTS public.materials (
     images JSONB DEFAULT '[]'::JSONB,
     is_featured BOOLEAN DEFAULT false,
     is_active BOOLEAN DEFAULT true,
+    stock_status TEXT NOT NULL DEFAULT 'available' CHECK (stock_status IN ('available', 'unavailable', 'out_of_stock')),
+    stock_quantity INTEGER NOT NULL DEFAULT 100 CHECK (stock_quantity >= 0),
+    price NUMERIC(10, 2) DEFAULT NULL CHECK (price IS NULL OR price >= 0),
+    discount_type TEXT NOT NULL DEFAULT 'none' CHECK (discount_type IN ('none', 'percentage')),
+    discount_percent NUMERIC(5, 2) NOT NULL DEFAULT 0 CHECK (discount_percent >= 0 AND discount_percent <= 100),
     created_at TIMESTAMPTZ DEFAULT NOW(),
     updated_at TIMESTAMPTZ DEFAULT NOW()
 );

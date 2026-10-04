@@ -581,6 +581,17 @@
                 </select>
               </div>
 
+              <!-- Filter: Stock Status -->
+              <div>
+                <select id="mat-filter-stock" onchange="filterMaterials()" class="w-full bg-brand-input border border-slate-700 rounded-xl px-3 py-2.5 text-xs text-slate-300 focus:outline-none focus:border-brand-gold">
+                  <option value="all">المخزون (الكل)</option>
+                  <option value="available">متوفر (In Stock)</option>
+                  <option value="unavailable">غير متوفر (Unavailable)</option>
+                  <option value="out_of_stock">نفذت الكمية (Sold Out)</option>
+                  <option value="discounted">عليها خصم %</option>
+                </select>
+              </div>
+
               <!-- Filter: Status & Reset -->
               <div class="flex items-center gap-2">
                 <select id="mat-filter-status" onchange="filterMaterials()" class="w-full bg-brand-input border border-slate-700 rounded-xl px-3 py-2.5 text-xs text-slate-300 focus:outline-none focus:border-brand-gold">
@@ -606,7 +617,8 @@
                     <th class="py-3.5 px-4">الصورة والخامة</th>
                     <th class="py-3.5 px-4">التصنيف والمنشأ</th>
                     <th class="py-3.5 px-4">نوع الحجر واللون</th>
-                    <th class="py-3.5 px-4">فئة السعر والتشطيب</th>
+                    <th class="py-3.5 px-4">حالة المخزون والكمية</th>
+                    <th class="py-3.5 px-4">السعر ونظام الخصم</th>
                     <th class="py-3.5 px-4 text-center">مميز</th>
                     <th class="py-3.5 px-4 text-center">الحالة</th>
                     <th class="py-3.5 px-4 text-center">الإجراءات</th>
@@ -614,7 +626,7 @@
                 </thead>
                 <tbody id="materials-table-body" class="divide-y divide-slate-800/60 text-slate-300">
                   <tr>
-                    <td colspan="7" class="py-12 text-center text-slate-500">
+                    <td colspan="8" class="py-12 text-center text-slate-500">
                       <i class="fa-solid fa-circle-notch fa-spin text-2xl text-brand-gold mb-3"></i>
                       <p>جاري تحميل قائمة الخامات والمنتجات من قاعدة البيانات...</p>
                     </td>
@@ -921,11 +933,11 @@
           </div>
         </div>
 
-        <!-- Section 4: Finish & Pricing -->
+        <!-- Section 4: Finish & Price Tier -->
         <div class="space-y-4 pt-4 border-t border-brand-border">
           <div class="flex items-center gap-2 text-xs font-bold text-brand-gold uppercase tracking-wider">
             <i class="fa-solid fa-tag"></i>
-            <span>4. التشطيب والسعر</span>
+            <span>4. التشطيب وفئة الفخامة</span>
           </div>
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
@@ -934,7 +946,7 @@
                 class="w-full bg-brand-input border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-brand-gold transition">
             </div>
             <div>
-              <label class="block text-xs font-semibold text-slate-300 mb-1.5">فئة السعر (Price Tier) *</label>
+              <label class="block text-xs font-semibold text-slate-300 mb-1.5">فئة الفخامة (Price Tier) *</label>
               <select id="mat-price-tier" required 
                 class="w-full bg-brand-input border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-brand-gold transition">
                 <option value="VIP">VIP (فاخر جداً)</option>
@@ -943,6 +955,108 @@
                 <option value="الأكثر طلباً">الأكثر طلباً (Popular)</option>
                 <option value="اقتصادي راقي">اقتصادي راقي (Economic Luxury)</option>
               </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 4B: Stock & Inventory Management -->
+        <div class="space-y-4 pt-4 border-t border-brand-border">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2 text-xs font-bold text-brand-gold uppercase tracking-wider">
+              <i class="fa-solid fa-boxes-stacked"></i>
+              <span>إدارة المخزون والكميات</span>
+            </div>
+            <span class="text-[11px] text-slate-400">تحديث فوري يظهر على الموقع مباشرة</span>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 mb-1.5">حالة المخزون *</label>
+              <select id="mat-stock-status" onchange="onStockStatusChanged(this.value)" required 
+                class="w-full bg-brand-input border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-brand-gold transition">
+                <option value="available">متوفر (In Stock)</option>
+                <option value="unavailable">غير متوفر (Unavailable)</option>
+                <option value="out_of_stock">نفذت الكمية (Sold Out)</option>
+              </select>
+              <p class="text-[10px] text-slate-400 mt-1">عند اختيار "متوفر" يمكنك إدخال الكمية المتبقية.</p>
+            </div>
+
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 mb-1.5">الكمية المتبقية (م²) *</label>
+              <div class="relative">
+                <input type="number" id="mat-stock-quantity" min="0" step="1" value="100" oninput="onStockQuantityChanged(this.value)" required
+                  class="w-full bg-brand-input border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-brand-gold transition"
+                  placeholder="أدخل الكمية (مثال: 120)">
+                <span class="absolute left-3 top-2.5 text-xs text-slate-400 font-bold pointer-events-none">م²</span>
+              </div>
+              <p id="mat-stock-hint" class="text-[10px] text-emerald-400 mt-1">الكمية متاحة وتظهر مباشرة داخل بطاقة المنتج بالموقع.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 4C: Pricing & Discount Control -->
+        <div class="space-y-4 pt-4 border-t border-brand-border">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2 text-xs font-bold text-brand-gold uppercase tracking-wider">
+              <i class="fa-solid fa-percent"></i>
+              <span>التحكم في الأسعار والخصومات</span>
+            </div>
+            <span class="text-[11px] text-slate-400">إظهار السعر قبل وبعد الخصم ونسبة الخصم</span>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 mb-1.5">السعر الأساسي (ر.س / م²) *</label>
+              <div class="relative">
+                <input type="number" id="mat-price" min="0" step="0.5" value="380" oninput="calculateDiscountPreview()" required
+                  class="w-full bg-brand-input border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-brand-gold transition"
+                  placeholder="380">
+                <span class="absolute left-3 top-2.5 text-[11px] text-slate-400 pointer-events-none">ر.س</span>
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 mb-1.5">نظام الخصم *</label>
+              <select id="mat-discount-type" onchange="onDiscountTypeChanged(this.value)" required 
+                class="w-full bg-brand-input border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-brand-gold transition">
+                <option value="none">بدون خصم (No Discount)</option>
+                <option value="percentage">خصم بنسبة مئوية (%)</option>
+              </select>
+            </div>
+
+            <div id="mat-discount-percent-wrap" class="hidden">
+              <label class="block text-xs font-semibold text-slate-300 mb-1.5">نسبة الخصم (%) *</label>
+              <div class="relative">
+                <input type="number" id="mat-discount-percent" min="0" max="100" step="1" value="10" oninput="calculateDiscountPreview()"
+                  class="w-full bg-brand-input border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-brand-gold transition"
+                  placeholder="مثال: 15">
+                <span class="absolute left-3 top-2.5 text-xs text-slate-400 font-bold pointer-events-none">%</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Dynamic Live Calculation Card -->
+          <div id="mat-discount-calc-card" class="p-3.5 rounded-xl bg-slate-900/90 border border-slate-700 text-xs">
+            <div class="flex items-center justify-between text-slate-300 mb-2">
+              <span class="font-bold flex items-center gap-1.5 text-brand-gold">
+                <i class="fa-solid fa-calculator"></i>
+                معاينة السعر النهائي المعروض للعملاء:
+              </span>
+              <span id="mat-calc-badge" class="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-800 text-slate-400">بدون خصم</span>
+            </div>
+            <div class="grid grid-cols-3 gap-2 text-center pt-2 border-t border-slate-800">
+              <div class="bg-slate-950/40 p-2 rounded-lg">
+                <div class="text-[10px] text-slate-400">السعر قبل الخصم</div>
+                <div id="mat-calc-original" class="font-bold text-slate-200 mt-0.5">380.00 ر.س</div>
+              </div>
+              <div class="bg-slate-950/40 p-2 rounded-lg">
+                <div class="text-[10px] text-slate-400">قيمة التوفير</div>
+                <div id="mat-calc-saved" class="font-bold text-amber-400 mt-0.5">0.00 ر.س (0%)</div>
+              </div>
+              <div class="bg-emerald-950/30 border border-emerald-500/20 p-2 rounded-lg">
+                <div class="text-[10px] text-emerald-400 font-semibold">السعر بعد الخصم</div>
+                <div id="mat-calc-final" class="font-black text-emerald-300 mt-0.5 text-sm">380.00 ر.س</div>
+              </div>
             </div>
           </div>
         </div>
@@ -2083,6 +2197,13 @@
           .order('created_at', { ascending: false });
 
         if (error) throw error;
+        // Read local overrides for instant sync
+        let overrides = {};
+        try {
+          const stored = localStorage.getItem('ps_materials_overrides');
+          if (stored) overrides = JSON.parse(stored);
+        } catch(e) {}
+
         State.materials = (data || []).map(m => {
           let imgs = [];
           if (Array.isArray(m.images)) {
@@ -2096,8 +2217,27 @@
               if (m.images.startsWith('http')) imgs = [m.images];
             }
           }
+
+          const ov = overrides[m.id] || {};
+          let stockStatus = ov.stock_status || m.stock_status || 'available';
+          let stockQuantity = ov.stock_quantity != null ? ov.stock_quantity : (m.stock_quantity != null ? m.stock_quantity : 100);
+          stockQuantity = Math.max(0, parseInt(stockQuantity) || 0);
+
+          if (stockStatus === 'available' && stockQuantity === 0) {
+            stockStatus = 'out_of_stock';
+          }
+
+          const basePrice = ov.price != null ? parseFloat(ov.price) : (m.price != null ? parseFloat(m.price) : getEstimatedPrice(m.price_tier));
+          const discountType = ov.discount_type || m.discount_type || 'none';
+          const discountPercent = Math.min(100, Math.max(0, parseFloat(ov.discount_percent != null ? ov.discount_percent : (m.discount_percent || 0))));
+
           return {
             ...m,
+            stock_status: stockStatus,
+            stock_quantity: stockQuantity,
+            price: basePrice,
+            discount_type: discountType,
+            discount_percent: discountPercent,
             images: imgs.map(img => typeof img === 'string' ? img : (img?.url || '')).filter(Boolean)
           };
         });
@@ -2108,7 +2248,7 @@
         if (tbody) {
           tbody.innerHTML = `
             <tr>
-              <td colspan="7" class="py-12 text-center text-red-400">
+              <td colspan="8" class="py-12 text-center text-red-400">
                 <i class="fa-solid fa-triangle-exclamation text-2xl mb-2"></i>
                 <p>فشل تحميل المنتجات من قاعدة البيانات: ${escapeHtml(err.message || '')}</p>
               </td>
@@ -2171,6 +2311,7 @@
       const origin = document.getElementById('mat-filter-origin')?.value || 'all';
       const category = document.getElementById('mat-filter-category')?.value || 'all';
       const stoneType = document.getElementById('mat-filter-stone-type')?.value || 'all';
+      const stock = document.getElementById('mat-filter-stock')?.value || 'all';
       const status = document.getElementById('mat-filter-status')?.value || 'all';
 
       State.filteredMaterials = State.materials.filter(m => {
@@ -2197,6 +2338,12 @@
         // Stone Type Filter
         if (stoneType !== 'all' && m.stone_type !== stoneType) return false;
 
+        // Stock Filter
+        if (stock === 'available' && (m.stock_status !== 'available' || m.stock_quantity <= 0)) return false;
+        if (stock === 'unavailable' && m.stock_status !== 'unavailable') return false;
+        if (stock === 'out_of_stock' && (m.stock_status !== 'out_of_stock' && m.stock_quantity > 0)) return false;
+        if (stock === 'discounted' && (m.discount_type !== 'percentage' || m.discount_percent <= 0)) return false;
+
         // Status Filter
         if (status === 'active' && !m.is_active) return false;
         if (status === 'inactive' && m.is_active) return false;
@@ -2212,6 +2359,7 @@
       if (document.getElementById('mat-filter-origin')) document.getElementById('mat-filter-origin').value = 'all';
       if (document.getElementById('mat-filter-category')) document.getElementById('mat-filter-category').value = 'all';
       if (document.getElementById('mat-filter-stone-type')) document.getElementById('mat-filter-stone-type').value = 'all';
+      if (document.getElementById('mat-filter-stock')) document.getElementById('mat-filter-stock').value = 'all';
       if (document.getElementById('mat-filter-status')) document.getElementById('mat-filter-status').value = 'all';
       filterMaterials();
     }
@@ -2229,7 +2377,7 @@
       if (State.filteredMaterials.length === 0) {
         tbody.innerHTML = `
           <tr>
-            <td colspan="7" class="py-12 text-center text-slate-500">
+            <td colspan="8" class="py-12 text-center text-slate-500">
               <i class="fa-solid fa-filter-circle-xmark text-3xl mb-2"></i>
               <p>لا توجد نتائج تطابق خيارات البحث والفلترة المحددة.</p>
             </td>
@@ -2251,6 +2399,11 @@
         const cat = State.categories.find(c => c.id === m.category_id);
         const hasImages = Array.isArray(m.images) && m.images.length > 0;
         const mainImage = hasImages ? m.images[0] : null;
+
+        const isDiscounted = m.discount_type === 'percentage' && m.discount_percent > 0;
+        const finalPrice = isDiscounted 
+          ? Math.round((m.price || 0) * (1 - m.discount_percent / 100) * 100) / 100 
+          : (m.price || 0);
 
         return `
           <tr class="hover:bg-slate-800/40 transition">
@@ -2291,12 +2444,43 @@
               <div class="text-[10px] text-slate-400 mt-0.5 truncate max-w-[160px]">${escapeHtml(m.color_desc || '-')}</div>
             </td>
 
-            <!-- 4. Price Tier & Finish -->
+            <!-- 4. Stock Status & Quantity -->
             <td class="py-3 px-4">
-              <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-amber-500/10 text-amber-400 border border-amber-500/20">
-                ${escapeHtml(m.price_tier || 'مميز')}
-              </span>
-              <div class="text-[10px] text-slate-400 mt-1 truncate max-w-[130px]">${escapeHtml(m.finish || '-')}</div>
+              ${m.stock_status === 'available' && m.stock_quantity > 0
+                ? `<div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[11px] font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/25">
+                     <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                     <span>متوفر (${m.stock_quantity} م²)</span>
+                   </div>`
+                : (m.stock_status === 'out_of_stock' || m.stock_quantity === 0
+                  ? `<div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[11px] font-bold bg-rose-500/10 text-rose-400 border border-rose-500/25">
+                       <span class="w-1.5 h-1.5 rounded-full bg-rose-400"></span>
+                       <span>نفذت الكمية</span>
+                     </div>`
+                  : `<div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[11px] font-bold bg-slate-500/20 text-slate-300 border border-slate-600/30">
+                       <span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span>
+                       <span>غير متوفر</span>
+                     </div>`
+                  )
+              }
+            </td>
+
+            <!-- 5. Price & Discount -->
+            <td class="py-3 px-4">
+              ${isDiscounted
+                ? `<div class="space-y-0.5">
+                     <div class="flex items-center gap-1.5">
+                       <span class="text-[10px] text-slate-400 line-through">${m.price || 0} ر.س</span>
+                       <span class="text-xs font-bold text-emerald-400">${finalPrice} ر.س</span>
+                     </div>
+                     <span class="inline-block px-1.5 py-0.5 rounded text-[9px] font-bold bg-amber-500/15 text-amber-300 border border-amber-500/30">
+                       خصم ${m.discount_percent}%
+                     </span>
+                   </div>`
+                : `<div>
+                     <div class="text-xs font-bold text-slate-200">${m.price || 0} ر.س <span class="text-[10px] text-slate-400 font-normal">/ م²</span></div>
+                     <span class="text-[10px] text-slate-500">بدون خصم</span>
+                   </div>`
+              }
             </td>
 
             <!-- 5. Featured Toggle -->
@@ -2394,6 +2578,20 @@
         document.getElementById('mat-is-featured').checked = !!material.is_featured;
         document.getElementById('mat-is-active').checked = material.is_active !== false;
 
+        // Stock & Inventory
+        const stockStatus = material.stock_status || (material.stock_quantity === 0 ? 'out_of_stock' : 'available');
+        const stockQty = material.stock_quantity != null ? Math.max(0, parseInt(material.stock_quantity)) : 100;
+        document.getElementById('mat-stock-status').value = stockStatus;
+        document.getElementById('mat-stock-quantity').value = stockQty;
+
+        // Pricing & Discounts
+        const basePrice = material.price != null ? material.price : getEstimatedPrice(material.price_tier);
+        const discountType = material.discount_type || 'none';
+        const discountPercent = material.discount_percent != null ? material.discount_percent : 10;
+        document.getElementById('mat-price').value = basePrice;
+        document.getElementById('mat-discount-type').value = discountType;
+        document.getElementById('mat-discount-percent').value = discountPercent;
+
       } else {
         State.editingMaterialId = null;
         State.materialImages = [];
@@ -2408,10 +2606,142 @@
         document.getElementById('mat-durability-score').value = 4.5;
         document.getElementById('mat-is-active').checked = true;
         document.getElementById('mat-is-featured').checked = false;
+
+        // Stock & Inventory defaults
+        document.getElementById('mat-stock-status').value = 'available';
+        document.getElementById('mat-stock-quantity').value = 100;
+
+        // Pricing & Discount defaults
+        document.getElementById('mat-price').value = 350;
+        document.getElementById('mat-discount-type').value = 'none';
+        document.getElementById('mat-discount-percent').value = 10;
       }
+
+      onStockStatusChanged(document.getElementById('mat-stock-status').value);
+      onDiscountTypeChanged(document.getElementById('mat-discount-type').value);
+      calculateDiscountPreview();
 
       renderExistingImagesInModal();
       modal.classList.remove('hidden');
+    }
+
+    function onStockStatusChanged(val) {
+      const qtyInput = document.getElementById('mat-stock-quantity');
+      const hint = document.getElementById('mat-stock-hint');
+      if (!qtyInput) return;
+
+      if (val === 'available') {
+        qtyInput.disabled = false;
+        if (parseInt(qtyInput.value) <= 0) {
+          qtyInput.value = 100;
+        }
+        if (hint) {
+          hint.textContent = "الكمية متاحة وتظهر مباشرة داخل بطاقة المنتج بالموقع.";
+          hint.className = "text-[10px] text-emerald-400 mt-1";
+        }
+      } else if (val === 'out_of_stock') {
+        qtyInput.value = 0;
+        qtyInput.disabled = false;
+        if (hint) {
+          hint.textContent = "ستظهر حالة المنتج على الموقع كـ 'نفذت الكمية'.";
+          hint.className = "text-[10px] text-rose-400 mt-1";
+        }
+      } else if (val === 'unavailable') {
+        qtyInput.disabled = true;
+        if (hint) {
+          hint.textContent = "ستظهر حالة المنتج على الموقع كـ 'غير متوفر' بغض النظر عن الكمية.";
+          hint.className = "text-[10px] text-amber-400 mt-1";
+        }
+      }
+    }
+
+    function onStockQuantityChanged(val) {
+      const statusSelect = document.getElementById('mat-stock-status');
+      const hint = document.getElementById('mat-stock-hint');
+      const qty = parseInt(val);
+
+      if (isNaN(qty) || qty < 0) {
+        document.getElementById('mat-stock-quantity').value = 0;
+        return;
+      }
+
+      if (qty === 0) {
+        if (statusSelect && statusSelect.value === 'available') {
+          statusSelect.value = 'out_of_stock';
+          if (hint) {
+            hint.textContent = "تم تحويل الحالة تلقائياً إلى 'نفذت الكمية' لأن الرصيد 0.";
+            hint.className = "text-[10px] text-rose-400 mt-1";
+          }
+        }
+      } else if (qty > 0 && statusSelect && statusSelect.value === 'out_of_stock') {
+        statusSelect.value = 'available';
+        if (hint) {
+          hint.textContent = "تم تحويل الحالة تلقائياً إلى 'متوفر' لوجود كمية متبقية.";
+          hint.className = "text-[10px] text-emerald-400 mt-1";
+        }
+      }
+    }
+
+    function onDiscountTypeChanged(val) {
+      const percentWrap = document.getElementById('mat-discount-percent-wrap');
+      if (percentWrap) {
+        if (val === 'percentage') {
+          percentWrap.classList.remove('hidden');
+        } else {
+          percentWrap.classList.add('hidden');
+        }
+      }
+      calculateDiscountPreview();
+    }
+
+    function calculateDiscountPreview() {
+      const priceInput = document.getElementById('mat-price');
+      const discountTypeSelect = document.getElementById('mat-discount-type');
+      const discountPercentInput = document.getElementById('mat-discount-percent');
+      
+      const originalEl = document.getElementById('mat-calc-original');
+      const savedEl = document.getElementById('mat-calc-saved');
+      const finalEl = document.getElementById('mat-calc-final');
+      const badgeEl = document.getElementById('mat-calc-badge');
+
+      if (!priceInput || !discountTypeSelect) return;
+
+      let price = parseFloat(priceInput.value);
+      if (isNaN(price) || price < 0) price = 0;
+
+      const type = discountTypeSelect.value;
+      let percent = parseFloat(discountPercentInput?.value || 0);
+      if (isNaN(percent) || percent < 0) percent = 0;
+      if (percent > 100) percent = 100;
+
+      const isDiscounted = type === 'percentage' && percent > 0;
+      const discountAmount = isDiscounted ? (price * (percent / 100)) : 0;
+      const finalPrice = Math.max(0, price - discountAmount);
+
+      if (originalEl) originalEl.textContent = `${price.toFixed(2)} ر.س`;
+      if (savedEl) savedEl.textContent = isDiscounted ? `${discountAmount.toFixed(2)} ر.س (${percent}%)` : `0.00 ر.س (0%)`;
+      if (finalEl) finalEl.textContent = `${finalPrice.toFixed(2)} ر.س`;
+
+      if (badgeEl) {
+        if (isDiscounted) {
+          badgeEl.textContent = `خصم نشط ${percent}%`;
+          badgeEl.className = "px-2 py-0.5 rounded text-[10px] font-bold bg-amber-500/20 text-amber-300 border border-amber-500/30";
+        } else {
+          badgeEl.textContent = "بدون خصم";
+          badgeEl.className = "px-2 py-0.5 rounded text-[10px] font-bold bg-slate-800 text-slate-400";
+        }
+      }
+    }
+
+    function getEstimatedPrice(tier) {
+      if (!tier) return 290;
+      const t = String(tier).toLowerCase();
+      if (t.includes('ultra')) return 850;
+      if (t.includes('vip')) return 550;
+      if (t.includes('مميز') || t.includes('premium')) return 380;
+      if (t.includes('طلب') || t.includes('popular')) return 260;
+      if (t.includes('اقتصادي') || t.includes('economic')) return 180;
+      return 290;
     }
 
     function closeMaterialModal() {
@@ -2604,6 +2934,20 @@
       const is_featured = document.getElementById('mat-is-featured').checked;
       const is_active = document.getElementById('mat-is-active').checked;
 
+      // Stock & Inventory
+      let stock_status = document.getElementById('mat-stock-status').value;
+      let stock_quantity = Math.max(0, parseInt(document.getElementById('mat-stock-quantity').value) || 0);
+      if (stock_status === 'available' && stock_quantity === 0) {
+        stock_status = 'out_of_stock';
+      }
+
+      // Pricing & Discounts
+      const price = Math.max(0, parseFloat(document.getElementById('mat-price').value) || 0);
+      const discount_type = document.getElementById('mat-discount-type').value;
+      const discount_percent = discount_type === 'percentage'
+        ? Math.min(100, Math.max(0, parseFloat(document.getElementById('mat-discount-percent').value) || 0))
+        : 0;
+
       if (!id || !name_ar || !name_en || !origin || !category_id) {
         showToast("يرجى ملء الحقول الإلزامية المطلوبة (المعرف، التصنيف، الأسماء، والمنشأ).", "warning");
         return;
@@ -2650,16 +2994,45 @@
           usage_en,
           is_featured,
           is_active,
-          images: finalImages
+          images: finalImages,
+          stock_status,
+          stock_quantity,
+          price,
+          discount_type,
+          discount_percent
         };
 
-        const { error } = await State.supabase
+        // Instant local sync
+        if (window.PrimeAPI?.saveMaterialOverride) {
+          window.PrimeAPI.saveMaterialOverride(id, {
+            stock_status,
+            stock_quantity,
+            price,
+            discount_type,
+            discount_percent
+          });
+        }
+
+        let { error } = await State.supabase
           .from('materials')
           .upsert(payload, { onConflict: 'id' });
 
-        if (error) throw error;
+        if (error && (error.code === '42703' || String(error.message).includes('does not exist'))) {
+          console.warn("Supabase PostgreSQL materials table does not have new columns yet. Saving standard columns and storing inventory/discount overrides.");
+          const standardPayload = { ...payload };
+          delete standardPayload.stock_status;
+          delete standardPayload.stock_quantity;
+          delete standardPayload.price;
+          delete standardPayload.discount_type;
+          delete standardPayload.discount_percent;
 
-        showToast(State.editingMaterialId ? "تم تعديل الخامة وحفظ الصور بنجاح." : "تم إضافة الخامة وحفظ الصور بنجاح.", "success");
+          const res2 = await State.supabase.from('materials').upsert(standardPayload, { onConflict: 'id' });
+          if (res2.error) throw res2.error;
+        } else if (error) {
+          throw error;
+        }
+
+        showToast(State.editingMaterialId ? "تم تعديل بيانات الخامة والمخزون والخصم بنجاح." : "تم إضافة الخامة والمخزون والخصم بنجاح.", "success");
         closeMaterialModal();
         await loadMaterials();
         await loadDashboardStats();
