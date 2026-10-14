@@ -1,0 +1,1152 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+
+  <title>Prime Scope Curtains | برايم سكوب للستائر وهندسة الأنسجة الفاخرة</title>
+  <meta name="description" content="العلامة الرائدة في تصميم وتفصيل الستائر المعمارية الفاخرة وأنظمة التموج Wave الحديثة، ستائر الرول الذكية بمحركات Somfy، والبلاك آوت الفندقي العازل للصوت والحرارة.">
+  <meta name="keywords" content="برايم سكوب للستائر, Prime Scope Curtains, ستائر ويف, ستائر ذكية الرياض, ستائر رول صومفي, ستائر بلاك اوت, ستائر فنادق وقصور">
+
+  <link rel="canonical" href="https://primescope.io/curtains.html">
+
+  <!-- Fonts: Tajawal & Playfair Display -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Tajawal:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            textile: {
+              50: '#FDFCF9',
+              100: '#F7F4EE',
+              200: '#EBE5D9',
+              300: '#D9D0C1',
+              400: '#BFB3A0',
+              500: '#9E917D',
+              600: '#7D705C',
+              700: '#5C5140',
+              800: '#3D3528',
+              900: '#211C15'
+            },
+            champagne: '#B89659',
+            champagneDark: '#8F7138',
+            stoneWarm: '#78736B',
+            charcoalDrape: '#1C1A17'
+          },
+          fontFamily: {
+            tajawal: ['Tajawal', 'sans-serif'],
+            serif: ['Playfair Display', 'serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Supabase & API Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="config.js?v=4.0"></script>
+  <script src="supabaseClient.js?v=4.0"></script>
+  <script src="api.js?v=4.0"></script>
+
+  <style>
+    * {
+      font-family: 'Tajawal', sans-serif;
+      box-sizing: border-box;
+    }
+    
+    body {
+      background-color: #FDFCF9;
+      color: #211C15;
+      overflow-x: hidden;
+    }
+
+    .font-editorial {
+      font-family: 'Playfair Display', 'Tajawal', serif;
+    }
+
+    .champagne-gradient-text {
+      background: linear-gradient(135deg, #7D705C 0%, #B89659 50%, #5C5140 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .drape-card {
+      transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .drape-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 25px 45px -15px rgba(33, 28, 21, 0.08);
+    }
+
+    /* English LTR styling */
+    body.lang-en {
+      direction: ltr;
+      text-align: left;
+    }
+    body.lang-en * {
+      font-family: 'Tajawal', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+    body.lang-en .font-editorial {
+      font-family: 'Playfair Display', Georgia, serif;
+    }
+  </style>
+</head>
+<body class="lang-ar antialiased min-h-screen">
+
+  <!-- =========================================================================
+       1. Top Header
+       ========================================================================= -->
+  <header class="sticky top-0 z-40 bg-[#FDFCF9]/90 backdrop-blur-md border-b border-textile-200/60 transition-all">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      
+      <!-- Brand Logo -->
+      <a href="curtains.html" class="flex items-center gap-3 group">
+        <div class="w-10 h-10 rounded-lg bg-textile-900 text-textile-100 flex items-center justify-center font-editorial font-bold text-lg shadow-sm border border-champagne/40">
+          PC
+        </div>
+        <div>
+          <span class="text-xl font-bold tracking-wider text-textile-900 font-editorial flex items-center gap-1.5">
+            PRIME SCOPE <span class="text-xs px-2 py-0.5 rounded bg-champagne/15 text-champagneDark font-sans tracking-normal border border-champagne/30">CURTAINS</span>
+          </span>
+          <p class="text-[11px] text-stoneWarm tracking-wide" data-curt-i18n="brandSub">هندسة الأنسجة الديكورية والستائر الفاخرة</p>
+        </div>
+      </a>
+
+      <!-- Navigation Links -->
+      <nav class="hidden lg:flex items-center gap-7 text-xs font-semibold tracking-wide text-textile-800">
+        <a href="index.html" class="text-stoneWarm hover:text-textile-900 flex items-center gap-1 transition" data-curt-i18n="navPortal">🏛️ البوابة الرئيسية</a>
+        <a href="#about" class="hover:text-textile-900 transition" data-curt-i18n="navAbout">عن الاستوديو</a>
+        <a href="#leadership" class="hover:text-textile-900 transition" data-curt-i18n="navLeadership">كلمة الإدارة</a>
+        <a href="#methodology" class="hover:text-textile-900 transition" data-curt-i18n="navMethodology">المنهج والقياس</a>
+        <a href="#types" class="hover:text-textile-900 transition" data-curt-i18n="navTypes">أنواع الستائر</a>
+        <a href="#fabrics" class="hover:text-textile-900 transition" data-curt-i18n="navFabrics">الخامات والأقمشة</a>
+        <a href="#projects" class="hover:text-textile-900 transition" data-curt-i18n="navProjects">معرض المشاريع</a>
+        <a href="#contact" class="hover:text-textile-900 transition" data-curt-i18n="navContact">تواصل معنا</a>
+      </nav>
+
+      <!-- Action Buttons -->
+      <div class="flex items-center gap-3">
+        <!-- Language Switcher -->
+        <button onclick="toggleCurtLanguage()" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-textile-100 hover:bg-textile-200 text-textile-800 border border-textile-200 transition">
+          <span id="curtLangLabel">English 🇬🇧</span>
+        </button>
+
+        <!-- Measurement CTA -->
+        <a href="#measurement" class="px-5 py-2.5 rounded-xl bg-textile-900 hover:bg-textile-800 text-white text-xs font-bold tracking-wider transition shadow-sm border border-champagne/40" data-curt-i18n="ctaMeasurement">
+          طلب معاينة وقياس
+        </a>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- =========================================================================
+       2. Hero Section (Panoramic Architectural Textiles)
+       ========================================================================= -->
+  <section class="relative pt-12 pb-24 md:pt-20 md:pb-32 overflow-hidden bg-textile-100/70">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        
+        <!-- Left Hero Content -->
+        <div class="lg:col-span-6 space-y-6">
+          <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-champagne/15 border border-champagne/30 text-champagneDark text-xs font-semibold tracking-wide">
+            <span>🪟</span>
+            <span data-curt-i18n="heroBadge">استوديو الأنسجة المعمارية الفاخرة بالمملكة</span>
+          </div>
+
+          <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold text-textile-900 leading-[1.2] font-editorial">
+            <span data-curt-i18n="heroTitle1">هندسة الضوء و</span>
+            <span class="italic text-champagne block sm:inline" data-curt-i18n="heroTitle2">رفاهية الأنسجة</span>
+            <span data-curt-i18n="heroTitle3">المعمارية</span>
+          </h1>
+
+          <p class="text-base sm:text-lg text-stoneWarm leading-relaxed max-w-xl" data-curt-i18n="heroSub">
+            نبتكر ستائر معمارية متدفقة تحول ضوء النهار القاسي إلى هالة دافئة هادئة، ونضمن عتمة فندقية 100% لنوم هانئ، مع أنظمة تموج سويسرية ومحركات Somfy الذكية المدمجة مع أنظمة المنازل الذكية.
+          </p>
+
+          <div class="flex flex-wrap items-center gap-4 pt-4">
+            <a href="#measurement" class="px-7 py-3.5 rounded-xl bg-textile-900 hover:bg-textile-800 text-white font-bold text-sm tracking-wide transition shadow-lg shadow-textile-900/10 flex items-center gap-2" data-curt-i18n="btnMeasurement">
+              <span>طلب معاينة وقياس مجاني بالموقع</span>
+              <svg class="w-4 h-4 rtl:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+            </a>
+
+            <a href="https://wa.me/966534248861?text=مرحباً%20برايم%20سكوب%20للستائر%20-%20أود%20الاستفسار%20عن%20تفصيل%20ستائر%20لمشروعي" target="_blank" rel="noopener noreferrer" class="px-6 py-3.5 rounded-xl bg-white hover:bg-textile-50 text-textile-900 border border-textile-300 font-bold text-sm flex items-center gap-2 transition" data-curt-i18n="btnWhatsapp">
+              <span>💬</span>
+              <span>محادثة استشارية فورية</span>
+            </a>
+          </div>
+
+          <!-- Quick Metrics -->
+          <div class="grid grid-cols-3 gap-6 pt-8 border-t border-textile-200">
+            <div>
+              <p class="text-2xl sm:text-3xl font-bold text-textile-900 font-editorial">100%</p>
+              <p class="text-xs text-stoneWarm mt-0.5" data-curt-i18n="stat1">بلاك آوت عازل للضوء</p>
+            </div>
+            <div>
+              <p class="text-2xl sm:text-3xl font-bold text-textile-900 font-editorial">Somfy</p>
+              <p class="text-xs text-stoneWarm mt-0.5" data-curt-i18n="stat2">محركات فرنسية فائقة الهدوء</p>
+            </div>
+            <div>
+              <p class="text-2xl sm:text-3xl font-bold text-textile-900 font-editorial">S-Fold</p>
+              <p class="text-xs text-stoneWarm mt-0.5" data-curt-i18n="stat3">أنظمة تموج منتظم دقيق</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Visual (Full Height Flowing Drape) -->
+        <div class="lg:col-span-6 relative">
+          <div class="relative rounded-3xl overflow-hidden shadow-2xl border border-textile-200/80 bg-white">
+            <img src="https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1200&q=80" alt="Architectural Flowing Wave Curtains" class="w-full h-[520px] object-cover">
+            
+            <!-- Floating Feature Banner -->
+            <div class="absolute bottom-6 right-6 left-6 sm:left-auto bg-white/95 backdrop-blur-md p-5 rounded-2xl shadow-xl border border-textile-200 max-w-sm">
+              <span class="text-[10px] tracking-widest text-champagneDark font-bold uppercase">Signature Textile</span>
+              <h3 class="text-base font-bold text-textile-900 mt-0.5">ستائر الكتان الطبيعي بنظام التموج السويسري</h3>
+              <p class="text-xs text-stoneWarm mt-1">سقوط قماش ناعم بوزن 380 جم/م² مع مسارات ألومنيوم مخفية صامتة</p>
+              <div class="mt-3 pt-3 border-t border-textile-100 flex items-center justify-between text-xs">
+                <span class="font-bold text-textile-950">480 ر.س / م.ط</span>
+                <button onclick="openCurtModal('curt-wave-linen')" class="text-champagneDark font-bold hover:underline">عرض الخصائص &larr;</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       3. About Curtains Division (نبذة عن الشركة)
+       ========================================================================= -->
+  <section id="about" class="py-24 bg-white border-b border-textile-200/60">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        
+        <div class="lg:col-span-5 relative">
+          <div class="rounded-3xl overflow-hidden shadow-xl border border-textile-200">
+            <img src="https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=1000&q=80" alt="Prime Scope Textile Studio" class="w-full h-[460px] object-cover">
+          </div>
+          <div class="absolute -bottom-6 -left-6 bg-textile-900 text-textile-100 p-6 rounded-2xl shadow-2xl max-w-xs hidden sm:block border border-champagne/30">
+            <p class="font-editorial italic text-lg leading-snug">"الستارة هي الإطار المعماري الذي يحدد علاقة المكان مع الضوء والخصوصية."</p>
+          </div>
+        </div>
+
+        <div class="lg:col-span-7 space-y-6">
+          <div class="text-xs font-bold tracking-widest text-champagneDark uppercase" data-curt-i18n="aboutLabel">TEXTILE COUTURE & ENGINEERING</div>
+          <h2 class="text-3xl sm:text-4xl font-bold text-textile-900 font-editorial leading-tight" data-curt-i18n="aboutTitle">
+            نبذة عن Prime Scope لهندسة الستائر والأنسجة
+          </h2>
+          <p class="text-base text-textile-800 leading-relaxed" data-curt-i18n="aboutP1">
+            نحن استوديو متخصص في تقديم الحلول المتكاملة للستائر المعمارية الفاخرة؛ نجمع بين دقة الخياطة الحرفية والهندسة الميكانيكية للمسارات الذكية. لا نتعامل مع الستارة كقطعة قماش عادية، بل كعنصر تحكم مناخي وصوتي وبصري يضفي لمسة من الوقار الهادئ على القصور والمشاريع الفندقية.
+          </p>
+          <p class="text-sm text-stoneWarm leading-relaxed" data-curt-i18n="aboutP2">
+            نوفر تشكيلات حصرية من الكتان البلجيكي، المخمل الإيطالي الثقيل، وأقمشة Trevira CS الألمانية المقاومة للحريق والمعتمدة للمشاريع الفندقية الكبرى، مع أحدث أنظمة المحركات الفرنسية المتوافقة مع أجهزة التحكم الذكية مثل Control4، KNX، وApple HomeKit.
+          </p>
+          
+          <div class="grid grid-cols-2 gap-4 pt-4 text-xs font-semibold text-textile-800">
+            <div class="flex items-center gap-2 p-3 rounded-xl bg-textile-50 border border-textile-200">
+              <span class="text-champagneDark text-base">✓</span>
+              <span>خياطة دقيقة بأحدث ماكينات التموج السويسرية</span>
+            </div>
+            <div class="flex items-center gap-2 p-3 rounded-xl bg-textile-50 border border-textile-200">
+              <span class="text-champagneDark text-base">✓</span>
+              <span>أقمشة مقاومة للاشتعال وعازلة للصوت</span>
+            </div>
+            <div class="flex items-center gap-2 p-3 rounded-xl bg-textile-50 border border-textile-200">
+              <span class="text-champagneDark text-base">✓</span>
+              <span>إغلاق محكم يمنع أي تسريب ضوئي من الجوانب</span>
+            </div>
+            <div class="flex items-center gap-2 p-3 rounded-xl bg-textile-50 border border-textile-200">
+              <span class="text-champagneDark text-base">✓</span>
+              <span>محركات هادئة جداً أقل من 38 ديسيبل</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       4. Leadership Statement (كلمة الإدارة)
+       ========================================================================= -->
+  <section id="leadership" class="py-20 bg-textile-900 text-textile-100 relative overflow-hidden">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+      
+      <div class="w-14 h-14 rounded-full bg-textile-800 border border-champagne/40 flex items-center justify-center mx-auto mb-6 text-2xl font-editorial text-champagne">
+        ❝
+      </div>
+
+      <div class="text-xs font-bold tracking-widest text-champagne uppercase mb-3" data-curt-i18n="leaderLabel">EXECUTIVE STATEMENT</div>
+      <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold font-editorial text-white mb-8" data-curt-i18n="leaderTitle">
+        كلمة إدارة قطاع الستائر والأنسجة
+      </h2>
+
+      <blockquote class="text-lg sm:text-xl text-textile-200 leading-relaxed font-light italic max-w-4xl mx-auto mb-8 font-editorial" data-curt-i18n="leaderQuote">
+        "الستارة الناجحة هي التي تعمل بهدوء تام دون أن يشعر بها أحد، وتتحرك بنعومة لتغمر المكان بالسكينة والخصوصية. في برايم سكوب للستائر، كرسنا أحدث تقنيات القياس الليزري وأرفع أنسجة العالم لنمنحكم تجربة راحة استثنائية كل يوم."
+      </blockquote>
+
+      <div>
+        <p class="font-bold text-white text-base font-sans" data-curt-i18n="leaderName">إدارة قطاع الستائر والأنسجة الديكورية</p>
+        <p class="text-xs text-textile-400 mt-0.5" data-curt-i18n="leaderRole">مجموعة برايم سكوب — الرياض</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       5. Vision, Mission & Methodology (الرؤية، الرسالة، والمنهج)
+       ========================================================================= -->
+  <section id="methodology" class="py-24 bg-textile-100/50 border-b border-textile-200/60">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <div class="text-xs font-bold tracking-widest text-champagneDark uppercase mb-2" data-curt-i18n="methBadge">ENGINEERING & CRAFT</div>
+        <h2 class="text-3xl sm:text-4xl font-bold text-textile-900 font-editorial" data-curt-i18n="methTitle">منهجيتنا في أخذ القياسات والتنفيذ</h2>
+        <p class="text-stoneWarm text-sm mt-3" data-curt-i18n="methSub">مراحل هندسية دقيقة تضمن عدم وجود فراغات أو ثغرات ضوئية بعد التركيب.</p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        
+        <div class="p-6 rounded-2xl bg-white border border-textile-200 shadow-sm">
+          <span class="text-3xl font-editorial font-bold text-champagne block mb-3">01</span>
+          <h4 class="text-lg font-bold text-textile-900 mb-2" data-curt-i18n="m1Title">المعاينة والرفع الليزري</h4>
+          <p class="text-xs text-stoneWarm leading-relaxed" data-curt-i18n="m1Desc">
+            زيارة مهندس مختص لرفع المقاسات بالليزر ثلاثي الأبعاد وفحص تأسيس الجبس وتجهيزات الكهرباء للمحركات.
+          </p>
+        </div>
+
+        <div class="p-6 rounded-2xl bg-white border border-textile-200 shadow-sm">
+          <span class="text-3xl font-editorial font-bold text-champagne block mb-3">02</span>
+          <h4 class="text-lg font-bold text-textile-900 mb-2" data-curt-i18n="m2Title">تنسيق الخامات والألوان</h4>
+          <p class="text-xs text-stoneWarm leading-relaxed" data-curt-i18n="m2Desc">
+            عرض عينات الأقمشة الفعلية داخل الموقع لاختبار درجة سقوط الضوء وانسجامها مع ألوان الجدران والأرضيات.
+          </p>
+        </div>
+
+        <div class="p-6 rounded-2xl bg-white border border-textile-200 shadow-sm">
+          <span class="text-3xl font-editorial font-bold text-champagne block mb-3">03</span>
+          <h4 class="text-lg font-bold text-textile-900 mb-2" data-curt-i18n="m3Title">التفصيل بالمصنع الخاص</h4>
+          <p class="text-xs text-stoneWarm leading-relaxed" data-curt-i18n="m3Desc">
+            قص أوتوماتيكي دقيق بالليزر وخياطة تموج منتظمة مع وضع أثقال رصاصية سفلية لضمان استقامة تدلي الستارة.
+          </p>
+        </div>
+
+        <div class="p-6 rounded-2xl bg-white border border-textile-200 shadow-sm">
+          <span class="text-3xl font-editorial font-bold text-champagne block mb-3">04</span>
+          <h4 class="text-lg font-bold text-textile-900 mb-2" data-curt-i18n="m4Title">التركيب والبرمجة الذكية</h4>
+          <p class="text-xs text-stoneWarm leading-relaxed" data-curt-i18n="m4Desc">
+            تثبيت المسارات الخفية وضبط المحركات وربطها بجوال العميل أو نظام الأتمتة المنزلي مع الكي والتعقيم بالبخار.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       6. Types of Curtains (أنواع الستائر وتصنيفاتها)
+       ========================================================================= -->
+  <section id="types" class="py-24 bg-white border-b border-textile-200/60">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+        <div>
+          <div class="text-xs font-bold tracking-widest text-champagneDark uppercase mb-2" data-curt-i18n="typesBadge">ARCHITECTURAL CLASSIFICATIONS</div>
+          <h2 class="text-3xl sm:text-4xl font-bold text-textile-900 font-editorial" data-curt-i18n="typesTitle">أنواع وتصنيفات الستائر المعمارية</h2>
+          <p class="text-stoneWarm text-sm mt-2" data-curt-i18n="typesSub">أنظمة متعددة تناسب غرف النوم الرئيسية، الصالونات الرسمية، والأبراج الإدارية.</p>
+        </div>
+
+        <!-- Filter tabs -->
+        <div id="curtCategoryTabs" class="flex flex-wrap gap-2">
+          <button onclick="filterCurtCategory('all')" id="tab-curt-all" class="px-4 py-2 rounded-xl text-xs font-bold bg-textile-900 text-white transition">الكل</button>
+          <button onclick="filterCurtCategory('wave')" id="tab-curt-wave" class="px-4 py-2 rounded-xl text-xs font-bold bg-textile-100 text-textile-900 border border-textile-200 hover:bg-textile-200 transition">تموج Wave</button>
+          <button onclick="filterCurtCategory('motorized')" id="tab-curt-motorized" class="px-4 py-2 rounded-xl text-xs font-bold bg-textile-100 text-textile-900 border border-textile-200 hover:bg-textile-200 transition">رول ذكية (Somfy)</button>
+          <button onclick="filterCurtCategory('blackout')" id="tab-curt-blackout" class="px-4 py-2 rounded-xl text-xs font-bold bg-textile-100 text-textile-900 border border-textile-200 hover:bg-textile-200 transition">بلاك آوت فندقي</button>
+          <button onclick="filterCurtCategory('sheer')" id="tab-curt-sheer" class="px-4 py-2 rounded-xl text-xs font-bold bg-textile-100 text-textile-900 border border-textile-200 hover:bg-textile-200 transition">شير وكتان ناعم</button>
+        </div>
+      </div>
+
+      <!-- Curtains Grid -->
+      <div id="curtProductsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Injected dynamically via PrimeAPI -->
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       7. Fabrics, Materials & Palette (الخامات والأقمشة والألوان والتصميمات)
+       ========================================================================= -->
+  <section id="fabrics" class="py-24 bg-textile-100/60 border-b border-textile-200/60">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <div class="text-xs font-bold tracking-widest text-champagneDark uppercase mb-2" data-curt-i18n="fabBadge">TEXTILE ANATOMY</div>
+        <h2 class="text-3xl sm:text-4xl font-bold text-textile-900 font-editorial" data-curt-i18n="fabTitle">أفخر خامات الأقمشة والأنظمة الأوروبية</h2>
+        <p class="text-stoneWarm text-sm mt-3" data-curt-i18n="fabSub">كتان بلجيكي، مخمل إيطالي، ألياف فرنسية عازلة، وبطانة فندقية ثلاثية العزل.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        
+        <!-- Fabric 1: Belgian Linen -->
+        <div class="bg-white rounded-3xl overflow-hidden border border-textile-200 shadow-sm p-6 space-y-4">
+          <div class="h-48 rounded-2xl overflow-hidden bg-textile-100">
+            <img src="https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=800&q=80" alt="Belgian Pure Linen" class="w-full h-full object-cover">
+          </div>
+          <div>
+            <span class="text-[10px] font-bold text-champagneDark uppercase tracking-wider">Natural Fibers</span>
+            <h3 class="text-lg font-bold text-textile-950 font-editorial mt-1">الكتان البلجيكي النقي (Pure Linen)</h3>
+            <p class="text-xs text-stoneWarm mt-2 leading-relaxed">
+              نسيج طبيعي 100% مغسول بالأحجار لمنحه انسيابية فاخرة وملمساً ناعماً، يسمح بتدفق الهواء والضوء بنعومة دون أي توهج مزعج.
+            </p>
+            <div class="mt-4 pt-3 border-t border-textile-100 text-[11px] text-textile-700 flex justify-between">
+              <span>الكثافة: 380 GSM</span>
+              <span>المنشأ: بلجيكا</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Fabric 2: Italian Velvet -->
+        <div class="bg-white rounded-3xl overflow-hidden border border-textile-200 shadow-sm p-6 space-y-4">
+          <div class="h-48 rounded-2xl overflow-hidden bg-textile-100">
+            <img src="https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?auto=format&fit=crop&w=800&q=80" alt="Italian Acoustic Velvet" class="w-full h-full object-cover">
+          </div>
+          <div>
+            <span class="text-[10px] font-bold text-champagneDark uppercase tracking-wider">Acoustic Luxury</span>
+            <h3 class="text-lg font-bold text-textile-950 font-editorial mt-1">المخمل الإيطالي الثقيل (Heavy Velvet)</h3>
+            <p class="text-xs text-stoneWarm mt-2 leading-relaxed">
+              مخمل قطني منسوج في فلورنسا بكثافة تدلي عميقة تمتص الصدى وتوفر عزلاً صوتياً ممتازاً للمجالس الرسمية والصالونات الملكية.
+            </p>
+            <div class="mt-4 pt-3 border-t border-textile-100 text-[11px] text-textile-700 flex justify-between">
+              <span>الكثافة: 620 GSM</span>
+              <span>عزل صوتي: NRC 0.65</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Fabric 3: Smart Somfy Motorization -->
+        <div class="bg-white rounded-3xl overflow-hidden border border-textile-200 shadow-sm p-6 space-y-4">
+          <div class="h-48 rounded-2xl overflow-hidden bg-textile-100">
+            <img src="https://images.unsplash.com/photo-1520038410233-7141be7e6f97?auto=format&fit=crop&w=800&q=80" alt="Somfy Smart Motors" class="w-full h-full object-cover">
+          </div>
+          <div>
+            <span class="text-[10px] font-bold text-champagneDark uppercase tracking-wider">Smart Automation</span>
+            <h3 class="text-lg font-bold text-textile-950 font-editorial mt-1">محركات Somfy الذكية الفرنسية</h3>
+            <p class="text-xs text-stoneWarm mt-2 leading-relaxed">
+              أنظمة محركات فرنسية فائقة الهدوء تدعم التحكم باللمس والريموت وتطبيقات الجوال، وتتوافق بسلاسة مع أنظمة المنازل الذكية.
+            </p>
+            <div class="mt-4 pt-3 border-t border-textile-100 text-[11px] text-textile-700 flex justify-between">
+              <span>مستوى الصوت: &lt;38 dB</span>
+              <span>الضمان: 5 سنوات</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       8. Portfolio / Projects (معرض أعمال الستائر المنفذة)
+       ========================================================================= -->
+  <section id="projects" class="py-24 bg-white border-b border-textile-200/60">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <div class="text-xs font-bold tracking-widest text-champagneDark uppercase mb-2" data-curt-i18n="portBadge">REALIZED CASE STUDIES</div>
+        <h2 class="text-3xl sm:text-4xl font-bold text-textile-900 font-editorial" data-curt-i18n="portTitle">مشاريع المنازل، الفنادق، والمكاتب</h2>
+        <p class="text-stoneWarm text-sm mt-3" data-curt-i18n="portSub">أعمال نفذناها في القصور الملكية، فنادق الـ 5 نجوم، والمقرات التنفيذية الكبرى بالمملكة.</p>
+      </div>
+
+      <div id="curtProjectsGrid" class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- Injected dynamically via PrimeAPI -->
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       9. Request Site Measurement & Quote (طلب معاينة أو عرض سعر)
+       ========================================================================= -->
+  <section id="measurement" class="py-24 bg-textile-100/70 border-b border-textile-200/60">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center mb-12">
+        <div class="text-xs font-bold tracking-widest text-champagneDark uppercase mb-2" data-curt-i18n="formBadge">COMPLIMENTARY SITE CONSULTATION</div>
+        <h2 class="text-3xl sm:text-4xl font-bold text-textile-900 font-editorial" data-curt-i18n="formTitle">طلب معاينة وقياس مجاني بالموقع أو عرض سعر</h2>
+        <p class="text-stoneWarm text-sm mt-3" data-curt-i18n="formSub">سيتواصل معك مهندس الستائر لترتيب موعد الزيارة وعرض عينات الأقمشة على أرض الواقع.</p>
+      </div>
+
+      <div class="bg-white p-8 sm:p-10 rounded-3xl border border-textile-200 shadow-sm">
+        <form id="curtQuoteForm" onsubmit="handleCurtQuoteSubmit(event)" class="space-y-6">
+          
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div>
+              <label class="block text-xs font-bold text-textile-800 uppercase tracking-wider mb-2" data-curt-i18n="formName">الاسم الكريم *</label>
+              <input type="text" id="curtName" required placeholder="مثال: المهندس سلطان" class="w-full px-4 py-3 rounded-xl bg-textile-50 border border-textile-300 text-textile-900 focus:outline-none focus:border-champagne text-sm">
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-textile-800 uppercase tracking-wider mb-2" data-curt-i18n="formPhone">رقم الجوال (WhatsApp) *</label>
+              <input type="tel" id="curtPhone" required placeholder="05xxxxxxxx" class="w-full px-4 py-3 rounded-xl bg-textile-50 border border-textile-300 text-textile-900 focus:outline-none focus:border-champagne text-sm">
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div>
+              <label class="block text-xs font-bold text-textile-800 uppercase tracking-wider mb-2" data-curt-i18n="formCity">المدينة / الحي *</label>
+              <select id="curtCity" class="w-full px-4 py-3 rounded-xl bg-textile-50 border border-textile-300 text-textile-900 focus:outline-none focus:border-champagne text-sm">
+                <option value="الرياض">الرياض</option>
+                <option value="جدة">جدة</option>
+                <option value="الخبر والدمام">الخبر والدمام</option>
+                <option value="مكة المكرمة">مكة المكرمة</option>
+                <option value="المدينة المنورة">المدينة المنورة</option>
+                <option value="أخرى">مدينة أخرى</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-textile-800 uppercase tracking-wider mb-2" data-curt-i18n="formWindows">العدد التقريبي للنوافذ أو الواجهات</label>
+              <select id="curtWindows" class="w-full px-4 py-3 rounded-xl bg-textile-50 border border-textile-300 text-textile-900 focus:outline-none focus:border-champagne text-sm">
+                <option value="1 إلى 3 نوافذ">1 إلى 3 نوافذ</option>
+                <option value="4 إلى 8 نوافذ (فيلا جزئية)">4 إلى 8 نوافذ (فيلا جزئية)</option>
+                <option value="9 إلى 20 نافذة (فيلا كاملة)">9 إلى 20 نافذة (فيلا كاملة)</option>
+                <option value="قصر أو مشروع فندقي كامل">+20 نافذة (قصر أو مشروع تجاري)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div>
+              <label class="block text-xs font-bold text-textile-800 uppercase tracking-wider mb-2" data-curt-i18n="formPref">نوع الستائر المفضل</label>
+              <select id="curtPref" class="w-full px-4 py-3 rounded-xl bg-textile-50 border border-textile-300 text-textile-900 focus:outline-none focus:border-champagne text-sm">
+                <option value="ستائر تموج Wave مزدوجة (بلاك آوت وشير)">ستائر تموج Wave مزدوجة (بلاك آوت + شير)</option>
+                <option value="ستائر رول ذكية بمحركات Somfy">ستائر رول ذكية بمحركات Somfy</option>
+                <option value="ستائر كتان طبيعي شير">ستائر كتان طبيعي ناعم</option>
+                <option value="ستائر كلاسيكية وبيلتات للمجالس">ستائر كلاسيكية ومخمل للمجالس</option>
+                <option value="استشارة شاملة مع المهندس">أرغب في استشارة المهندس بالموقع لاقتراح الأنسب</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-textile-800 uppercase tracking-wider mb-2" data-curt-i18n="formMotor">نوع التحكم المطلوب</label>
+              <select id="curtMotor" class="w-full px-4 py-3 rounded-xl bg-textile-50 border border-textile-300 text-textile-900 focus:outline-none focus:border-champagne text-sm">
+                <option value="محركات ذكية لاسلكية Somfy">محركات ذكية لاسلكية Somfy (ريموت وتطبيق)</option>
+                <option value="ربط مع نظام المنزل الذكي KNX/Control4">ربط مع نظام المنزل الذكي (KNX / Control4)</option>
+                <option value="سحب يدوي سلس بنظام السلسلة أو العصا">سحب يدوي سلس بنظام السلسلة أو العصا</option>
+                <option value="مزيج حسب الغرفة">مزيج حسب الغرفة</option>
+              </select>
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-textile-800 uppercase tracking-wider mb-2" data-curt-i18n="formNotes">ملاحظات إضافية (الموعد المفضل للمعاينة، ارتفاع الأسقف)</label>
+            <textarea id="curtNotes" rows="3" placeholder="مثال: الواجهات بارتفاع 6 أمتار، التأسيس الكهربائي جاهز..." class="w-full px-4 py-3 rounded-xl bg-textile-50 border border-textile-300 text-textile-900 focus:outline-none focus:border-champagne text-sm"></textarea>
+          </div>
+
+          <!-- Selected Product Indicator (Hidden unless prefilled) -->
+          <div id="curtSelectedProductBadge" class="hidden p-3 rounded-xl bg-textile-100 border border-textile-300 text-xs text-textile-900 font-semibold flex items-center justify-between">
+            <span>الستارة المحددة: <strong id="curtSelectedProductName"></strong></span>
+            <button type="button" onclick="clearSelectedCurtProduct()" class="text-stoneWarm hover:text-textile-900 font-bold">إلغاء ✕</button>
+          </div>
+
+          <div class="flex flex-col sm:flex-row items-center gap-4 pt-2">
+            <button type="submit" id="curtSubmitBtn" class="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-textile-900 hover:bg-textile-800 text-white font-bold text-sm tracking-wide transition shadow-lg shadow-textile-900/10 border border-champagne/40">
+              تأكيد طلب المعاينة والقياس
+            </button>
+
+            <button type="button" onclick="sendCurtWhatsAppDirect()" class="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-emerald-700 hover:bg-emerald-600 text-white font-bold text-sm flex items-center justify-center gap-2 transition">
+              <span>💬</span>
+              <span>طلب مباشر عبر WhatsApp</span>
+            </button>
+          </div>
+
+          <div id="curtFormSuccess" class="hidden p-4 rounded-xl bg-emerald-50 border border-emerald-300 text-emerald-800 text-xs font-semibold text-center">
+            تم استلام طلبكم بنجاح! رقم المرجع: <span id="curtRefText"></span>. سيتواصل معكم مهندس الستائر لترتيب المعاينة.
+          </div>
+
+        </form>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       10. Contact & Coordinates (تواصل معنا وبيانات الشركة)
+       ========================================================================= -->
+  <section id="contact" class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        
+        <div class="p-8 rounded-3xl bg-textile-50 border border-textile-200">
+          <div class="w-10 h-10 rounded-xl bg-white border border-textile-200 flex items-center justify-center text-lg mb-4">📍</div>
+          <h4 class="font-bold text-textile-950 text-base mb-1" data-curt-i18n="coord1Title">استوديو ومعرض الأقمشة</h4>
+          <p class="text-xs text-stoneWarm leading-relaxed" data-curt-i18n="coord1Desc">المملكة العربية السعودية — الرياض — خدمة المعاينة والتركيب في كافة مدن المملكة.</p>
+        </div>
+
+        <div class="p-8 rounded-3xl bg-textile-50 border border-textile-200">
+          <div class="w-10 h-10 rounded-xl bg-white border border-textile-200 flex items-center justify-center text-lg mb-4">⏰</div>
+          <h4 class="font-bold text-textile-950 text-base mb-1" data-curt-i18n="coord2Title">أوقات العمل والمعاينات</h4>
+          <p class="text-xs text-stoneWarm leading-relaxed" data-curt-i18n="coord2Desc">السبت إلى الخميس: 9:00 صباحاً – 10:00 مساءً<br>فريق المعاينة الميدانية متاح بمواعيد مرنة تناسبكم.</p>
+        </div>
+
+        <div class="p-8 rounded-3xl bg-textile-50 border border-textile-200">
+          <div class="w-10 h-10 rounded-xl bg-white border border-textile-200 flex items-center justify-center text-lg mb-4">📞</div>
+          <h4 class="font-bold text-textile-950 text-base mb-1" data-curt-i18n="coord3Title">الاستشارات والطلبات المباشرة</h4>
+          <p class="text-xs text-stoneWarm leading-relaxed mb-3">هاتف وواتساب المهندس المختص:</p>
+          <a href="tel:+966534248861" class="text-textile-950 font-bold hover:underline block text-sm">+966 53 424 8861</a>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       11. Product & Fabric Details Modal
+       ========================================================================= -->
+  <div id="curtProductModal" class="fixed inset-0 z-50 hidden bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-4xl w-full max-h-[92vh] overflow-y-auto shadow-2xl border border-textile-200 relative p-6 sm:p-10">
+      
+      <button onclick="closeCurtModal()" class="absolute top-6 left-6 rtl:left-auto rtl:right-6 w-10 h-10 rounded-full bg-textile-100 hover:bg-textile-200 text-textile-900 font-bold flex items-center justify-center transition">
+        ✕
+      </button>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start mt-4">
+        
+        <div>
+          <div class="rounded-2xl overflow-hidden border border-textile-200 bg-textile-50 mb-4 h-72 sm:h-96">
+            <img id="curtModalMainImg" src="" alt="Curtain Detail" class="w-full h-full object-cover">
+          </div>
+          <div id="curtModalThumbnails" class="flex gap-3 overflow-x-auto pb-2">
+            <!-- Injected thumbnails -->
+          </div>
+        </div>
+
+        <div class="space-y-5">
+          <div>
+            <div class="flex items-center gap-2 mb-1">
+              <span id="curtModalStock" class="px-2.5 py-0.5 rounded text-[11px] font-bold bg-emerald-100 text-emerald-800">جاهز للتفصيل</span>
+              <span id="curtModalTier" class="px-2.5 py-0.5 rounded text-[11px] font-bold bg-champagne/15 text-champagneDark">Ultra Luxury</span>
+            </div>
+            <h2 id="curtModalTitle" class="text-2xl sm:text-3xl font-bold text-textile-900 font-editorial"></h2>
+            <p id="curtModalSubTitle" class="text-xs text-stoneWarm mt-1"></p>
+          </div>
+
+          <p id="curtModalDesc" class="text-sm text-textile-800 leading-relaxed"></p>
+
+          <!-- Specifications Table -->
+          <div class="p-4 rounded-2xl bg-textile-50 border border-textile-200/80 space-y-2 text-xs">
+            <div class="flex justify-between py-1 border-b border-textile-200/60">
+              <span class="text-stoneWarm">بلد منشأ النسيج (Origin):</span>
+              <span id="curtModalOrigin" class="font-bold text-textile-950"></span>
+            </div>
+            <div class="flex justify-between py-1 border-b border-textile-200/60">
+              <span class="text-stoneWarm">وزن وكثافة القماش (Weight):</span>
+              <span id="curtModalWeight" class="font-bold text-textile-950"></span>
+            </div>
+            <div class="flex justify-between py-1 border-b border-textile-200/60">
+              <span class="text-stoneWarm">نسبة حجب الضوء (Opacity):</span>
+              <span id="curtModalOpacity" class="font-bold text-textile-950"></span>
+            </div>
+            <div class="flex justify-between py-1 border-b border-textile-200/60">
+              <span class="text-stoneWarm">نظام المسار (Track System):</span>
+              <span id="curtModalTrack" class="font-bold text-textile-950"></span>
+            </div>
+            <div class="flex justify-between py-1 border-b border-textile-200/60">
+              <span class="text-stoneWarm">الأتمتة والمحركات (Motor):</span>
+              <span id="curtModalMotor" class="font-bold text-textile-950"></span>
+            </div>
+            <div class="flex justify-between py-1">
+              <span class="text-stoneWarm">الضمان المعتمد (Warranty):</span>
+              <span id="curtModalWarranty" class="font-bold text-textile-950"></span>
+            </div>
+          </div>
+
+          <div class="pt-4 border-t border-textile-200 flex flex-col gap-3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs text-stoneWarm font-semibold">السعر التقريبي للمتر الطولي:</span>
+              <span id="curtModalPrice" class="text-xl font-bold text-textile-950 font-editorial"></span>
+            </div>
+
+            <div class="grid grid-cols-2 gap-3 pt-2">
+              <button onclick="requestThisCurtQuote()" class="py-3 rounded-xl bg-textile-900 hover:bg-textile-800 text-white text-xs font-bold transition">
+                طلب معاينة لهذه الستارة
+              </button>
+              <button onclick="chatWhatsAppForThisCurt()" class="py-3 rounded-xl bg-emerald-700 hover:bg-emerald-600 text-white text-xs font-bold flex items-center justify-center gap-1.5 transition">
+                <span>💬</span>
+                <span>استفسار واتساب</span>
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       12. Footer
+       ========================================================================= -->
+  <footer class="bg-textile-900 text-textile-300 py-12 border-t border-textile-800 text-xs">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-6">
+      <div class="flex items-center gap-3">
+        <span class="font-editorial text-lg text-white font-bold">PRIME SCOPE CURTAINS</span>
+        <span class="text-textile-600">|</span>
+        <span class="text-stoneWarm">إحدى قطاعات مجموعة برايم سكوب التجارية</span>
+      </div>
+      <div class="flex items-center gap-6">
+        <a href="index.html" class="hover:text-white transition">🏛️ البوابة الرئيسية</a>
+        <a href="marble.html" class="hover:text-white transition">الرخام والأحجار</a>
+        <a href="furniture.html" class="hover:text-white transition">الأثاث المعاصر</a>
+        <a href="admin.html" class="hover:text-white transition">لوحة الإدارة</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- =========================================================================
+       13. Interactive Application Script
+       ========================================================================= -->
+  <script>
+    let activeCurtProducts = [];
+    let currentCurtModalProduct = null;
+    let selectedCurtIdForForm = null;
+
+    const CURT_I18N = {
+      ar: {
+        brandSub: 'هندسة الأنسجة الديكورية والستائر الفاخرة',
+        navPortal: '🏛️ البوابة الرئيسية',
+        navAbout: 'عن الاستوديو',
+        navLeadership: 'كلمة الإدارة',
+        navMethodology: 'المنهج والقياس',
+        navTypes: 'أنواع الستائر',
+        navFabrics: 'الخامات والأقمشة',
+        navProjects: 'معرض المشاريع',
+        navContact: 'تواصل معنا',
+        ctaMeasurement: 'طلب معاينة وقياس',
+        heroBadge: 'استوديو الأنسجة المعمارية الفاخرة بالمملكة',
+        heroTitle1: 'هندسة الضوء و',
+        heroTitle2: 'رفاهية الأنسجة',
+        heroTitle3: 'المعمارية',
+        heroSub: 'نبتكر ستائر معمارية متدفقة تحول ضوء النهار القاسي إلى هالة دافئة هادئة، ونضمن عتمة فندقية 100% لنوم هانئ، مع أنظمة تموج سويسرية ومحركات Somfy الذكية المدمجة مع أنظمة المنازل الذكية.',
+        btnMeasurement: 'طلب معاينة وقياس مجاني بالموقع',
+        btnWhatsapp: 'محادثة استشارية فورية',
+        stat1: 'بلاك آوت عازل للضوء',
+        stat2: 'محركات فرنسية فائقة الهدوء',
+        stat3: 'أنظمة تموج منتظم دقيق',
+        aboutLabel: 'TEXTILE COUTURE & ENGINEERING',
+        aboutTitle: 'نبذة عن Prime Scope لهندسة الستائر والأنسجة',
+        aboutP1: 'نحن استوديو متخصص في تقديم الحلول المتكاملة للستائر المعمارية الفاخرة؛ نجمع بين دقة الخياطة الحرفية والهندسة الميكانيكية للمسارات الذكية. لا نتعامل مع الستارة كقطعة قماش عادية، بل كعنصر تحكم مناخي وصوتي وبصري يضفي لمسة من الوقار الهادئ على القصور والمشاريع الفندقية.',
+        aboutP2: 'نوفر تشكيلات حصرية من الكتان البلجيكي، المخمل الإيطالي الثقيل، وأقمشة Trevira CS الألمانية المقاومة للحريق والمعتمدة للمشاريع الفندقية الكبرى، مع أحدث أنظمة المحركات الفرنسية المتوافقة مع أجهزة التحكم الذكية مثل Control4، KNX، وApple HomeKit.',
+        leaderLabel: 'EXECUTIVE STATEMENT',
+        leaderTitle: 'كلمة إدارة قطاع الستائر والأنسجة',
+        leaderQuote: '\"الستارة الناجحة هي التي تعمل بهدوء تام دون أن يشعر بها أحد، وتتحرك بنعومة لتغمر المكان بالسكينة والخصوصية. في برايم سكوب للستائر، كرسنا أحدث تقنيات القياس الليزري وأرفع أنسجة العالم لنمنحكم تجربة راحة استثنائية كل يوم.\"',
+        leaderName: 'إدارة قطاع الستائر والأنسجة الديكورية',
+        leaderRole: 'مجموعة برايم سكوب — الرياض',
+        methBadge: 'ENGINEERING & CRAFT',
+        methTitle: 'منهجيتنا في أخذ القياسات والتنفيذ',
+        methSub: 'مراحل هندسية دقيقة تضمن عدم وجود فراغات أو ثغرات ضوئية بعد التركيب.',
+        m1Title: 'المعاينة والرفع الليزري',
+        m1Desc: 'زيارة مهندس مختص لرفع المقاسات بالليزر ثلاثي الأبعاد وفحص تأسيس الجبس وتجهيزات الكهرباء للمحركات.',
+        m2Title: 'تنسيق الخامات والألوان',
+        m2Desc: 'عرض عينات الأقمشة الفعلية داخل الموقع لاختبار درجة سقوط الضوء وانسجامها مع ألوان الجدران والأرضيات.',
+        m3Title: 'التفصيل بالمصنع الخاص',
+        m3Desc: 'قص أوتوماتيكي دقيق بالليزر وخياطة تموج منتظمة مع وضع أثقال رصاصية سفلية لضمان استقامة تدلي الستارة.',
+        m4Title: 'التركيب والبرمجة الذكية',
+        m4Desc: 'تثبيت المسارات الخفية وضبط المحركات وربطها بجوال العميل أو نظام الأتمتة المنزلي مع الكي والتعقيم بالبخار.',
+        typesBadge: 'ARCHITECTURAL CLASSIFICATIONS',
+        typesTitle: 'أنواع وتصنيفات الستائر المعمارية',
+        typesSub: 'أنظمة متعددة تناسب غرف النوم الرئيسية، الصالونات الرسمية، والأبراج الإدارية.',
+        fabBadge: 'TEXTILE ANATOMY',
+        fabTitle: 'أفخر خامات الأقمشة والأنظمة الأوروبية',
+        fabSub: 'كتان بلجيكي، مخمل إيطالي، ألياف فرنسية عازلة، وبطانة فندقية ثلاثية العزل.',
+        portBadge: 'REALIZED CASE STUDIES',
+        portTitle: 'مشاريع المنازل، الفنادق، والمكاتب',
+        portSub: 'أعمال نفذناها في القصور الملكية، فنادق الـ 5 نجوم، والمقرات التنفيذية الكبرى بالمملكة.',
+        formBadge: 'COMPLIMENTARY SITE CONSULTATION',
+        formTitle: 'طلب معاينة وقياس مجاني بالموقع أو عرض سعر',
+        formSub: 'سيتواصل معك مهندس الستائر لترتيب موعد الزيارة وعرض عينات الأقمشة على أرض الواقع.',
+        formName: 'الاسم الكريم *',
+        formPhone: 'رقم الجوال (WhatsApp) *',
+        formCity: 'المدينة / الحي *',
+        formWindows: 'العدد التقريبي للنوافذ أو الواجهات',
+        formPref: 'نوع الستائر المفضل',
+        formMotor: 'نوع التحكم المطلوب',
+        formNotes: 'ملاحظات إضافية (الموعد المفضل للمعاينة، ارتفاع الأسقف)',
+        coord1Title: 'استوديو ومعرض الأقمشة',
+        coord1Desc: 'المملكة العربية السعودية — الرياض — خدمة المعاينة والتركيب في كافة مدن المملكة.',
+        coord2Title: 'أوقات العمل والمعاينات',
+        coord2Desc: 'السبت إلى الخميس: 9:00 صباحاً – 10:00 مساءً<br>فريق المعاينة الميدانية متاح بمواعيد مرنة تناسبكم.',
+        coord3Title: 'الاستشارات والطلبات المباشرة'
+      },
+      en: {
+        brandSub: 'Architectural Drapery & Luxury Haute Textiles',
+        navPortal: '🏛️ Main Portal',
+        navAbout: 'Studio',
+        navLeadership: 'Leadership',
+        navMethodology: 'Methodology',
+        navTypes: 'Drapery Types',
+        navFabrics: 'Fabrics & Motors',
+        navProjects: 'Portfolio',
+        navContact: 'Contact',
+        ctaMeasurement: 'Site Measurement',
+        heroBadge: 'Premier Architectural Textile Atelier in Saudi Arabia',
+        heroTitle1: 'The Art of Light &',
+        heroTitle2: 'Haute Drapery',
+        heroTitle3: 'Engineering',
+        heroSub: 'We craft continuous architectural drapery that softens harsh daylight into an ambient halo, alongside 100% hotel blackout acoustic drapes, Swiss S-Fold wave systems, and whisper-silent Somfy automation.',
+        btnMeasurement: 'Complimentary Site Measurement',
+        btnWhatsapp: 'Direct WhatsApp Concierge',
+        stat1: 'Total Blackout Sealing',
+        stat2: 'Somfy Whisper-Quiet Motors',
+        stat3: 'Precision S-Fold Wave Flow',
+        aboutLabel: 'TEXTILE COUTURE & ENGINEERING',
+        aboutTitle: 'About Prime Scope Curtains & Haute Textiles',
+        aboutP1: 'We are an atelier dedicated to complete architectural drapery solutions, uniting bespoke couture sewing with precision motorized track engineering. To us, a curtain is a climatic and acoustic diaphragm that elevates palaces and luxury hotels with calm gravitas.',
+        aboutP2: 'We curate exclusive natural Belgian linens, Florence cotton velvets, and Trevira CS flame-retardant contract fabrics, integrated with Somfy automation compatible with Control4, KNX, and smart home standards.',
+        leaderLabel: 'EXECUTIVE STATEMENT',
+        leaderTitle: 'Word from Drapery Division Leadership',
+        leaderQuote: '\"A truly exceptional curtain operates in silent poetry, floating effortlessly to cocoon the space in privacy. At Prime Scope Curtains, we bring laser spatial surveying and the finest European textiles to deliver an unmatched standard of tranquility.\"',
+        leaderName: 'Drapery & Textile Executive Management',
+        leaderRole: 'Prime Scope Group — Riyadh',
+        methBadge: 'ENGINEERING & CRAFT',
+        methTitle: 'Our Spatial Surveying & Installation Methodology',
+        methSub: 'Disciplined architectural stages ensuring zero perimeter light leakage.',
+        m1Title: '3D Laser Spatial Survey',
+        m1Desc: 'On-site engineer site visit to measure ceiling heights, inspect ceiling coves, and verify electrical motorized drops.',
+        m2Title: 'In-Situ Fabric Curation',
+        m2Desc: 'Reviewing physical textile swatches inside your space to test natural daylight filtration and paint harmonies.',
+        m3Title: 'In-House Precision Tailoring',
+        m3Desc: 'Automated laser cutting and flawless S-Fold wave stitching with continuous leaded bottom hem weights.',
+        m4Title: 'Silent Assembly & Smart Sync',
+        m4Desc: 'Recessed track installation, motor limit programming, smart home linking, and complete vertical steaming.',
+        typesBadge: 'ARCHITECTURAL CLASSIFICATIONS',
+        typesTitle: 'Architectural Drapery Classifications',
+        typesSub: 'Engineered systems for master suites, grand reception salons, and corporate towers.',
+        fabBadge: 'TEXTILE ANATOMY',
+        fabTitle: 'Noble Textiles & European Motorization',
+        fabSub: 'Belgian pure linen, acoustic velvet, solar screen fiberglass, and triple-weave hotel blackout.',
+        portBadge: 'REALIZED CASE STUDIES',
+        portTitle: 'Residential, Hotel & Corporate Portfolio',
+        portSub: 'Completed drapery commissions for royal palaces, 5-star hospitality, and luxury estates in KSA.',
+        formBadge: 'COMPLIMENTARY SITE CONSULTATION',
+        formTitle: 'Request a Complimentary Site Survey & Proposal',
+        formSub: 'Our drapery engineer will contact you to schedule an on-site visit with textile sample books.',
+        formName: 'Full Name *',
+        formPhone: 'Mobile (WhatsApp) *',
+        formCity: 'City / District *',
+        formWindows: 'Approximate Number of Windows / Facades',
+        formPref: 'Preferred Drapery Style',
+        formMotor: 'Motorization & Automation Preference',
+        formNotes: 'Additional Notes (Preferred Visit Time, Ceiling Heights)',
+        coord1Title: 'Textile Atelier & Showroom',
+        coord1Desc: 'Kingdom of Saudi Arabia — Riyadh — On-site survey and installation across the Kingdom.',
+        coord2Title: 'Operating & Survey Hours',
+        coord2Desc: 'Saturday to Thursday: 9:00 AM – 10:00 PM<br>Flexible on-site engineering appointments available.',
+        coord3Title: 'Direct Inquiries & Sales'
+      }
+    };
+
+    let currentCurtLang = localStorage.getItem('primeLang') || 'ar';
+
+    function applyCurtLanguage() {
+      const isAr = currentCurtLang === 'ar';
+      document.body.className = `lang-${currentCurtLang} antialiased min-h-screen`;
+      document.documentElement.lang = currentCurtLang;
+      document.documentElement.dir = isAr ? 'rtl' : 'ltr';
+
+      const label = document.getElementById('curtLangLabel');
+      if (label) label.textContent = isAr ? 'English 🇬🇧' : 'عربي 🇸🇦';
+
+      document.querySelectorAll('[data-curt-i18n]').forEach(el => {
+        const key = el.getAttribute('data-curt-i18n');
+        if (CURT_I18N[currentCurtLang][key]) {
+          el.innerHTML = CURT_I18N[currentCurtLang][key];
+        }
+      });
+
+      renderCurtProducts();
+      renderCurtProjects();
+    }
+
+    function toggleCurtLanguage() {
+      currentCurtLang = currentCurtLang === 'ar' ? 'en' : 'ar';
+      localStorage.setItem('primeLang', currentCurtLang);
+      applyCurtLanguage();
+    }
+
+    async function loadCurtData() {
+      try {
+        activeCurtProducts = await window.PrimeAPI.getDivisionProducts('curtains', 'all');
+        renderCurtProducts();
+
+        const projects = await window.PrimeAPI.getDivisionProjects('curtains', 'all');
+        renderCurtProjects(projects);
+      } catch(e) {
+        console.error("Error loading curtains data:", e);
+      }
+    }
+
+    function filterCurtCategory(catId) {
+      document.querySelectorAll('#curtCategoryTabs button').forEach(btn => {
+        btn.className = "px-4 py-2 rounded-xl text-xs font-bold bg-textile-100 text-textile-900 border border-textile-200 hover:bg-textile-200 transition";
+      });
+      const activeBtn = document.getElementById(`tab-curt-${catId}`);
+      if (activeBtn) {
+        activeBtn.className = "px-4 py-2 rounded-xl text-xs font-bold bg-textile-900 text-white transition";
+      }
+
+      renderCurtProducts(catId);
+    }
+
+    function renderCurtProducts(catFilter = 'all') {
+      const grid = document.getElementById('curtProductsGrid');
+      if (!grid) return;
+
+      const items = catFilter === 'all'
+        ? activeCurtProducts
+        : activeCurtProducts.filter(p => p.categoryId === catFilter);
+
+      const isAr = currentCurtLang === 'ar';
+
+      if (items.length === 0) {
+        grid.innerHTML = `<div class="col-span-full py-12 text-center text-stoneWarm">لا توجد منتجات حالياً في هذا القسم.</div>`;
+        return;
+      }
+
+      grid.innerHTML = items.map(p => {
+        const title = isAr ? p.nameAr : p.nameEn;
+        const desc = isAr ? p.descriptionAr : p.descriptionEn;
+        const img = (p.images && p.images[0]) || 'https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=800&q=80';
+        const priceFormatted = p.price ? `${Number(p.price).toLocaleString()} ر.س / م.ط` : 'حسب الارتفاع والخامة';
+
+        return `
+          <div class="drape-card bg-white rounded-3xl overflow-hidden border border-textile-200/80 flex flex-col justify-between group">
+            <div>
+              <div class="relative h-64 overflow-hidden bg-textile-50">
+                <img src="${img}" alt="${title}" class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
+                <div class="absolute top-4 right-4 rtl:right-auto rtl:left-4">
+                  <span class="px-2.5 py-1 rounded-md text-[11px] font-bold bg-white/90 text-textile-900 shadow-sm backdrop-blur-sm">
+                    ${p.specs?.opacity || 'فاخر'}
+                  </span>
+                </div>
+              </div>
+              <div class="p-6">
+                <span class="text-[10px] tracking-widest text-champagneDark font-bold uppercase">${p.priceTier || 'Ultra Luxury'}</span>
+                <h3 class="text-lg font-bold text-textile-950 font-editorial mt-1 line-clamp-1">${title}</h3>
+                <p class="text-xs text-stoneWarm mt-2 line-clamp-2 leading-relaxed">${desc}</p>
+                
+                <div class="mt-4 pt-3 border-t border-textile-100 flex items-center justify-between text-xs">
+                  <span class="font-bold text-textile-950">${priceFormatted}</span>
+                  <span class="text-stoneWarm text-[11px]">${p.specs?.fabricOrigin || 'أوروبا'}</span>
+                </div>
+              </div>
+            </div>
+            
+            <div class="p-6 pt-0 grid grid-cols-2 gap-2">
+              <button onclick="openCurtModal('${p.id}')" class="py-2.5 rounded-xl bg-textile-100 hover:bg-textile-200 text-textile-900 text-xs font-bold transition text-center">
+                المواصفات والأنسجة
+              </button>
+              <button onclick="selectCurtForQuote('${p.id}', '${title}')" class="py-2.5 rounded-xl bg-textile-900 hover:bg-textile-800 text-white text-xs font-bold transition text-center">
+                طلب معاينة
+              </button>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function renderCurtProjects(projects) {
+      const grid = document.getElementById('curtProjectsGrid');
+      if (!grid) return;
+
+      const pList = projects || [
+        {
+          titleAr: 'قصر الضيافة الدبلوماسي — حي السفارات، الرياض',
+          titleEn: 'Diplomatic Reception Palace — Diplomatic Quarter, Riyadh',
+          scopeAr: 'ستائر تموج مزدوجة بارتفاع 7 أمتار مع نظام تحكم أوتوماتيكي KNX ومخمل إيطالي.',
+          heroImage: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=800&q=80',
+          locationAr: 'حي السفارات، الرياض'
+        },
+        {
+          titleAr: 'فندق بوتيك فاخر — الكورنيش، الخبر',
+          titleEn: 'Luxury Boutique Waterfront Hotel — Corniche, Al-Khobar',
+          scopeAr: 'تجهيز 84 جناحاً فندقياً بستائر بلاك آوت عازلة للصوت والحرارة 100%.',
+          heroImage: 'https://images.unsplash.com/photo-1507089947368-19c1da9775ae?auto=format&fit=crop&w=800&q=80',
+          locationAr: 'كورنيش الخبر'
+        },
+        {
+          titleAr: 'أبراج تنفيذية ذكية — طريق الملك فهد',
+          titleEn: 'Smart Executive Tower Suites — King Fahd Road, Riyadh',
+          scopeAr: 'تركيب 320 ستارة رول ذكية متصلة بنظام إدارة المبنى (BMS) للتحكم بالتوهج الشمسي.',
+          heroImage: 'https://images.unsplash.com/photo-1520038410233-7141be7e6f97?auto=format&fit=crop&w=800&q=80',
+          locationAr: 'طريق الملك فهد، الرياض'
+        }
+      ];
+
+      const isAr = currentCurtLang === 'ar';
+      grid.innerHTML = pList.map(proj => `
+        <div class="rounded-3xl overflow-hidden border border-textile-200/80 bg-white group shadow-sm">
+          <div class="relative h-64 overflow-hidden">
+            <img src="${proj.heroImage}" alt="${isAr ? proj.titleAr : proj.titleEn}" class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
+            <div class="absolute bottom-4 right-4 rtl:right-auto rtl:left-4 text-white text-xs font-semibold">
+              📍 ${isAr ? (proj.locationAr || 'الرياض') : (proj.locationEn || 'Riyadh')}
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-base font-bold text-textile-950 font-editorial mb-2">${isAr ? proj.titleAr : proj.titleEn}</h3>
+            <p class="text-xs text-stoneWarm leading-relaxed">${isAr ? proj.scopeAr : proj.scopeEn}</p>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // Modal
+    function openCurtModal(id) {
+      const p = activeCurtProducts.find(item => item.id === id);
+      if (!p) return;
+      currentCurtModalProduct = p;
+
+      const isAr = currentCurtLang === 'ar';
+      document.getElementById('curtModalTitle').textContent = isAr ? p.nameAr : p.nameEn;
+      document.getElementById('curtModalSubTitle').textContent = isAr ? (p.nameEn || '') : (p.nameAr || '');
+      document.getElementById('curtModalDesc').textContent = isAr ? p.descriptionAr : p.descriptionEn;
+      
+      const priceText = p.price ? `${Number(p.price).toLocaleString()} ر.س / م.ط` : 'حسب المواصفات والارتفاع';
+      document.getElementById('curtModalPrice').textContent = priceText;
+      document.getElementById('curtModalTier').textContent = p.priceTier || 'Ultra Luxury';
+
+      const s = p.specs || {};
+      document.getElementById('curtModalOrigin').textContent = s.fabricOrigin || 'أوروبا';
+      document.getElementById('curtModalWeight').textContent = s.weight || '380 GSM';
+      document.getElementById('curtModalOpacity').textContent = s.opacity || s.blackoutRating || 'حجب ضوئي عالي';
+      document.getElementById('curtModalTrack').textContent = s.trackSystem || 'مسار ألومنيوم صامت مدمج';
+      document.getElementById('curtModalMotor').textContent = s.motorization || s.motor || 'متوافق مع محركات Somfy وTuya';
+      document.getElementById('curtModalWarranty').textContent = s.warranty || '7 سنوات ضمان على المسارات وثبات اللون';
+
+      const imgs = p.images && p.images.length > 0 ? p.images : ['https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1000&q=80'];
+      document.getElementById('curtModalMainImg').src = imgs[0];
+
+      const thumbBox = document.getElementById('curtModalThumbnails');
+      thumbBox.innerHTML = imgs.map((imgSrc, idx) => `
+        <button type="button" onclick="setCurtModalMainImg('${imgSrc}')" class="w-16 h-16 rounded-xl overflow-hidden border-2 ${idx === 0 ? 'border-textile-900' : 'border-transparent'} shrink-0">
+          <img src="${imgSrc}" class="w-full h-full object-cover">
+        </button>
+      `).join('');
+
+      document.getElementById('curtProductModal').classList.remove('hidden');
+    }
+
+    function setCurtModalMainImg(src) {
+      document.getElementById('curtModalMainImg').src = src;
+    }
+
+    function closeCurtModal() {
+      document.getElementById('curtProductModal').classList.add('hidden');
+      currentCurtModalProduct = null;
+    }
+
+    function requestThisCurtQuote() {
+      if (!currentCurtModalProduct) return;
+      selectCurtForQuote(currentCurtModalProduct.id, currentCurtModalProduct.nameAr);
+      closeCurtModal();
+    }
+
+    function selectCurtForQuote(id, name) {
+      selectedCurtIdForForm = id;
+      const badge = document.getElementById('curtSelectedProductBadge');
+      const nameEl = document.getElementById('curtSelectedProductName');
+      if (badge && nameEl) {
+        nameEl.textContent = name;
+        badge.classList.remove('hidden');
+      }
+      const quoteSec = document.getElementById('measurement');
+      if (quoteSec) quoteSec.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function clearSelectedCurtProduct() {
+      selectedCurtIdForForm = null;
+      const badge = document.getElementById('curtSelectedProductBadge');
+      if (badge) badge.classList.add('hidden');
+    }
+
+    function chatWhatsAppForThisCurt() {
+      if (!currentCurtModalProduct) return;
+      const text = encodeURIComponent(`مرحباً برايم سكوب للستائر، أود الاستفسار عن تفاصيل ومعاينة نوع: ${currentCurtModalProduct.nameAr} (${currentCurtModalProduct.nameEn || ''})`);
+      window.open(`https://wa.me/966534248861?text=${text}`, '_blank');
+    }
+
+    // Form
+    async function handleCurtQuoteSubmit(e) {
+      e.preventDefault();
+      const btn = document.getElementById('curtSubmitBtn');
+      btn.disabled = true;
+      btn.textContent = 'جاري إرسال الطلب...';
+
+      const payload = {
+        serviceType: 'measurement',
+        customerName: document.getElementById('curtName').value,
+        customerPhone: document.getElementById('curtPhone').value,
+        projectCity: document.getElementById('curtCity').value,
+        details: `عدد النوافذ: ${document.getElementById('curtWindows').value} | الطراز: ${document.getElementById('curtPref').value} | التحكم: ${document.getElementById('curtMotor').value} | ملاحظات: ${document.getElementById('curtNotes').value}`,
+        selectedProductId: selectedCurtIdForForm,
+        selectedProductName: selectedCurtIdForForm ? (currentCurtModalProduct?.nameAr || 'ستارة محددة') : null
+      };
+
+      try {
+        const res = await window.PrimeAPI.submitDivisionInquiry('curtains', payload);
+        const successBox = document.getElementById('curtFormSuccess');
+        const refText = document.getElementById('curtRefText');
+        if (successBox && refText) {
+          refText.textContent = res.inquiryRef;
+          successBox.classList.remove('hidden');
+        }
+        document.getElementById('curtQuoteForm').reset();
+        clearSelectedCurtProduct();
+      } catch(err) {
+        alert('حدث خطأ أثناء الإرسال. يرجى المحاولة أو التواصل عبر واتساب مباشرة.');
+      } finally {
+        btn.disabled = false;
+        btn.textContent = 'تأكيد طلب المعاينة والقياس';
+      }
+    }
+
+    function sendCurtWhatsAppDirect() {
+      const name = document.getElementById('curtName').value || 'عميل كريم';
+      const city = document.getElementById('curtCity').value;
+      const win = document.getElementById('curtWindows').value;
+      const pref = document.getElementById('curtPref').value;
+      const notes = document.getElementById('curtNotes').value;
+      const prodText = selectedCurtIdForForm ? ` (بخصوص: ${document.getElementById('curtSelectedProductName').textContent})` : '';
+
+      const msg = `مرحباً برايم سكوب للستائر\nالاسم: ${name}\nالمدينة: ${city}\nالنوافذ: ${win}\nالنوع المفضل: ${pref}${prodText}\nالملاحظات: ${notes}`;
+      window.open(`https://wa.me/966534248861?text=${encodeURIComponent(msg)}`, '_blank');
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      applyCurtLanguage();
+      loadCurtData();
+    });
+  </script>
+
+</body>
+</html>

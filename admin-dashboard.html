@@ -273,43 +273,119 @@
         </button>
       </div>
 
+      <!-- Multi-Division Selector (Marble / Furniture / Curtains) -->
+      <div class="p-3 border-b border-brand-border bg-slate-950/60">
+        <label class="text-[10px] font-bold text-brand-gold uppercase tracking-wider block mb-2">اختر نشاط الإدارة:</label>
+        <div class="grid grid-cols-3 gap-1 p-1 rounded-xl bg-slate-900 border border-slate-800 text-[11px] font-bold">
+          <button onclick="setAdminDivision('marble')" id="div-btn-marble" class="py-2 px-1 rounded-lg text-center transition bg-brand-gold text-slate-950 shadow">
+            🏛️ رخام
+          </button>
+          <button onclick="setAdminDivision('furniture')" id="div-btn-furniture" class="py-2 px-1 rounded-lg text-center transition text-slate-300 hover:text-white">
+            🛋️ أثاث
+          </button>
+          <button onclick="setAdminDivision('curtains')" id="div-btn-curtains" class="py-2 px-1 rounded-lg text-center transition text-slate-300 hover:text-white">
+            🪟 ستائر
+          </button>
+        </div>
+      </div>
+
       <!-- Navigation Links -->
       <nav class="flex-1 p-4 space-y-1.5 overflow-y-auto">
-        <div class="text-[11px] font-bold text-slate-400 px-3 py-2 uppercase tracking-wider">الأقسام الرئيسية</div>
         
-        <button onclick="switchTab('dashboard')" id="nav-dashboard" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-slate-200 hover:bg-slate-800 hover:text-brand-gold transition duration-200">
-          <i class="fa-solid fa-chart-pie w-5 text-center text-brand-gold"></i>
-          <span>لوحة الإحصائيات</span>
-        </button>
+        <!-- MARBLE NAVIGATION (Original intact) -->
+        <div id="marble-nav-group" class="space-y-1.5">
+          <div class="text-[11px] font-bold text-slate-400 px-3 py-2 uppercase tracking-wider">إدارة الرخام والأحجار</div>
+          
+          <button onclick="switchTab('dashboard')" id="nav-dashboard" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-slate-200 hover:bg-slate-800 hover:text-brand-gold transition duration-200">
+            <i class="fa-solid fa-chart-pie w-5 text-center text-brand-gold"></i>
+            <span>لوحة الإحصائيات</span>
+          </button>
 
-        <button onclick="switchTab('materials')" id="nav-materials" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-slate-200 hover:bg-slate-800 hover:text-brand-gold transition duration-200">
-          <i class="fa-solid fa-cubes w-5 text-center text-brand-gold"></i>
-          <span>إدارة المنتجات والخامات</span>
-        </button>
+          <button onclick="switchTab('materials')" id="nav-materials" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-slate-200 hover:bg-slate-800 hover:text-brand-gold transition duration-200">
+            <i class="fa-solid fa-cubes w-5 text-center text-brand-gold"></i>
+            <span>إدارة المنتجات والخامات</span>
+          </button>
 
-        <button onclick="switchTab('categories')" id="nav-categories" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-slate-200 hover:bg-slate-800 hover:text-brand-gold transition duration-200">
-          <i class="fa-solid fa-layer-group w-5 text-center text-brand-gold"></i>
-          <span>إدارة التصنيفات</span>
-        </button>
+          <button onclick="switchTab('categories')" id="nav-categories" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-slate-200 hover:bg-slate-800 hover:text-brand-gold transition duration-200">
+            <i class="fa-solid fa-layer-group w-5 text-center text-brand-gold"></i>
+            <span>إدارة التصنيفات</span>
+          </button>
 
-        <button onclick="switchTab('rfqs')" id="nav-rfqs" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-slate-200 hover:bg-slate-800 hover:text-brand-gold transition duration-200">
-          <i class="fa-solid fa-file-invoice-dollar w-5 text-center text-brand-gold"></i>
-          <span>طلبات عروض الأسعار (RFQ)</span>
-        </button>
+          <button onclick="switchTab('rfqs')" id="nav-rfqs" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-slate-200 hover:bg-slate-800 hover:text-brand-gold transition duration-200">
+            <i class="fa-solid fa-file-invoice-dollar w-5 text-center text-brand-gold"></i>
+            <span>طلبات عروض الأسعار (RFQ)</span>
+          </button>
 
-        <button onclick="switchTab('projects')" id="nav-projects" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-slate-200 hover:bg-slate-800 hover:text-brand-gold transition duration-200">
-          <i class="fa-solid fa-images w-5 text-center text-brand-gold"></i>
-          <span>إدارة المشاريع المنجزة</span>
-        </button>
+          <button onclick="switchTab('projects')" id="nav-projects" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-slate-200 hover:bg-slate-800 hover:text-brand-gold transition duration-200">
+            <i class="fa-solid fa-images w-5 text-center text-brand-gold"></i>
+            <span>إدارة المشاريع المنجزة</span>
+          </button>
+        </div>
+
+        <!-- DIVISION NAVIGATION (Furniture & Curtains) -->
+        <div id="division-nav-group" class="hidden space-y-1.5">
+          <div id="division-nav-title" class="text-[11px] font-bold text-brand-gold px-3 py-2 uppercase tracking-wider">إدارة الأثاث</div>
+          
+          <button onclick="switchDivTab('div-dashboard')" id="nav-div-dashboard" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-bold bg-brand-gold/10 text-brand-gold border border-brand-gold/30 shadow-sm transition">
+            <i class="fa-solid fa-chart-line w-5 text-center text-brand-gold"></i>
+            <span>لوحة المؤشرات</span>
+          </button>
+
+          <button onclick="switchDivTab('div-products')" id="nav-div-products" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-brand-gold transition duration-200">
+            <i class="fa-solid fa-boxes-stacked w-5 text-center text-brand-gold"></i>
+            <span id="nav-div-products-text">إدارة المنتجات</span>
+          </button>
+
+          <button onclick="switchDivTab('div-categories')" id="nav-div-categories" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-brand-gold transition duration-200">
+            <i class="fa-solid fa-tags w-5 text-center text-brand-gold"></i>
+            <span>إدارة التصنيفات</span>
+          </button>
+
+          <button onclick="switchDivTab('div-inquiries')" id="nav-div-inquiries" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-brand-gold transition duration-200">
+            <i class="fa-solid fa-envelope-open-text w-5 text-center text-brand-gold"></i>
+            <span id="nav-div-inquiries-text">طلبات التسعير والمعاينة</span>
+          </button>
+
+          <button onclick="switchDivTab('div-projects')" id="nav-div-projects" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-brand-gold transition duration-200">
+            <i class="fa-solid fa-camera-retro w-5 text-center text-brand-gold"></i>
+            <span>معرض المشاريع المنفذة</span>
+          </button>
+
+          <button onclick="switchDivTab('div-company')" id="nav-div-company" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-brand-gold transition duration-200">
+            <i class="fa-solid fa-building w-5 text-center text-brand-gold"></i>
+            <span>بيانات التواصل والشركة</span>
+          </button>
+        </div>
 
         <div class="pt-4 border-t border-brand-border mt-4">
-          <div class="text-[11px] font-bold text-slate-400 px-3 py-2 uppercase tracking-wider">روابط سريعة</div>
-          <a href="index.html" target="_blank" class="w-full flex items-center justify-between px-4 py-3 rounded-xl text-sm font-medium text-slate-400 hover:bg-slate-800/50 hover:text-slate-200 transition">
-            <span class="flex items-center gap-3">
-              <i class="fa-solid fa-globe w-5 text-center text-slate-400"></i>
-              <span>عرض الموقع العام</span>
+          <div class="text-[11px] font-bold text-slate-400 px-3 py-2 uppercase tracking-wider">روابط الواجهة العامة</div>
+          <a href="index.html" target="_blank" class="w-full flex items-center justify-between px-4 py-2 rounded-xl text-xs font-medium text-slate-300 hover:bg-slate-800/50 hover:text-brand-gold transition">
+            <span class="flex items-center gap-2">
+              <i class="fa-solid fa-globe text-brand-gold"></i>
+              <span>البوابة الرئيسية (Hub)</span>
             </span>
-            <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+            <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+          </a>
+          <a href="marble.html" target="_blank" class="w-full flex items-center justify-between px-4 py-2 rounded-xl text-xs font-medium text-slate-400 hover:bg-slate-800/50 hover:text-slate-200 transition">
+            <span class="flex items-center gap-2">
+              <i class="fa-solid fa-gem text-slate-400"></i>
+              <span>موقع الرخام</span>
+            </span>
+            <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+          </a>
+          <a href="furniture.html" target="_blank" class="w-full flex items-center justify-between px-4 py-2 rounded-xl text-xs font-medium text-slate-400 hover:bg-slate-800/50 hover:text-slate-200 transition">
+            <span class="flex items-center gap-2">
+              <i class="fa-solid fa-couch text-slate-400"></i>
+              <span>موقع الأثاث</span>
+            </span>
+            <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+          </a>
+          <a href="curtains.html" target="_blank" class="w-full flex items-center justify-between px-4 py-2 rounded-xl text-xs font-medium text-slate-400 hover:bg-slate-800/50 hover:text-slate-200 transition">
+            <span class="flex items-center gap-2">
+              <i class="fa-solid fa-person-shelter text-slate-400"></i>
+              <span>موقع الستائر</span>
+            </span>
+            <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
           </a>
         </div>
       </nav>
@@ -343,14 +419,19 @@
             <i class="fa-solid fa-bars"></i>
           </button>
           <div>
-            <h2 id="page-title" class="text-base md:text-lg font-bold text-white">لوحة الإحصائيات</h2>
+            <div class="flex items-center gap-2">
+              <span id="current-division-badge" class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-amber-500/10 text-brand-gold border border-brand-gold/30">
+                🏛️ الرخام والأحجار
+              </span>
+              <h2 id="page-title" class="text-base md:text-lg font-bold text-white">لوحة الإحصائيات</h2>
+            </div>
           </div>
         </div>
 
         <div class="flex items-center gap-3">
-          <button onclick="openMaterialModal()" class="hidden sm:flex items-center gap-2 px-3.5 py-1.5 rounded-lg gold-gradient-bg text-slate-950 font-bold text-xs hover:opacity-90 shadow transition">
+          <button id="top-quick-add-btn" onclick="handleQuickAdd()" class="hidden sm:flex items-center gap-2 px-3.5 py-1.5 rounded-lg gold-gradient-bg text-slate-950 font-bold text-xs hover:opacity-90 shadow transition">
             <i class="fa-solid fa-plus"></i>
-            <span>إضافة منتج سريع</span>
+            <span id="top-quick-add-text">إضافة منتج سريع</span>
           </button>
           <button onclick="refreshCurrentTab()" title="تحديث البيانات" class="p-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-brand-gold transition text-xs flex items-center gap-1.5">
             <i class="fa-solid fa-rotate"></i>
@@ -794,13 +875,538 @@
           </div>
         </section>
 
+        <!-- ================================================================= -->
+        <!-- MULTI-DIVISION TABS: FURNITURE & CURTAINS                         -->
+        <!-- ================================================================= -->
+
+        <!-- 1. DIVISION DASHBOARD TAB -->
+        <section id="tab-div-dashboard" class="tab-content hidden space-y-8">
+          <!-- Welcome Banner -->
+          <div class="luxury-card p-6 md:p-8 relative overflow-hidden flex flex-col md:flex-row items-start md:items-center justify-between gap-6 border-r-4 border-r-brand-gold">
+            <div class="space-y-2 relative z-10">
+              <span id="div-dash-badge" class="text-xs font-bold text-brand-gold uppercase tracking-wider">لوحة إدارة الأثاث الفاخر</span>
+              <h2 id="div-dash-title" class="text-2xl md:text-3xl font-bold font-serif text-white">إدارة منتجات ومشاريع الأثاث</h2>
+              <p id="div-dash-desc" class="text-slate-400 text-sm max-w-xl leading-relaxed">
+                مساحة إدارة مستقلة للكتالوج، التصنيفات، الأسعار، المواصفات الفنية، واستقبال طلبات عروض الأسعار والمعاينات.
+              </p>
+            </div>
+            <div class="flex flex-wrap gap-3">
+              <button onclick="openDivisionProductModal()" class="px-5 py-2.5 rounded-xl gold-gradient-bg text-slate-950 font-bold text-sm flex items-center gap-2 hover:opacity-95 shadow-lg shadow-amber-500/20 transition">
+                <i class="fa-solid fa-plus"></i>
+                <span id="div-btn-add-prod-text">إضافة قطعة أثاث</span>
+              </button>
+              <a id="div-public-link" href="furniture.html" target="_blank" class="px-5 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-semibold text-sm flex items-center gap-2 border border-slate-700 transition">
+                <i class="fa-solid fa-arrow-up-right-from-square text-xs text-brand-gold"></i>
+                <span>زيارة الموقع المباشر</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Metrics Row -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="luxury-card p-6 border-r-4 border-r-brand-gold">
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-xs text-slate-400 font-semibold">إجمالي المنتجات</span>
+                <i class="fa-solid fa-boxes-stacked text-brand-gold"></i>
+              </div>
+              <p id="div-stat-products" class="text-3xl font-bold text-white font-serif">0</p>
+            </div>
+            <div class="luxury-card p-6 border-r-4 border-r-amber-500">
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-xs text-slate-400 font-semibold">التصنيفات المعتمدة</span>
+                <i class="fa-solid fa-tags text-amber-500"></i>
+              </div>
+              <p id="div-stat-categories" class="text-3xl font-bold text-white font-serif">0</p>
+            </div>
+            <div class="luxury-card p-6 border-r-4 border-r-emerald-500">
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-xs text-slate-400 font-semibold">طلبات التسعير والمعاينة</span>
+                <i class="fa-solid fa-envelope-open-text text-emerald-500"></i>
+              </div>
+              <p id="div-stat-inquiries" class="text-3xl font-bold text-white font-serif">0</p>
+            </div>
+            <div class="luxury-card p-6 border-r-4 border-r-blue-500">
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-xs text-slate-400 font-semibold">المشاريع المنجزة</span>
+                <i class="fa-solid fa-camera-retro text-blue-500"></i>
+              </div>
+              <p id="div-stat-projects" class="text-3xl font-bold text-white font-serif">0</p>
+            </div>
+          </div>
+
+          <!-- Recent Inquiries Section -->
+          <div class="luxury-card p-6 space-y-4">
+            <div class="flex items-center justify-between">
+              <h3 class="text-base font-bold text-white flex items-center gap-2">
+                <i class="fa-solid fa-bell text-brand-gold"></i>
+                <span>أحدث طلبات التسعير والاستشارات الواردة</span>
+              </h3>
+              <button onclick="switchDivTab('div-inquiries')" class="text-xs text-brand-gold hover:underline font-semibold">
+                عرض كافة الطلبات &larr;
+              </button>
+            </div>
+            <div class="overflow-x-auto">
+              <table class="w-full text-right text-sm text-slate-300">
+                <thead class="bg-slate-900 text-slate-400 text-xs uppercase font-semibold">
+                  <tr>
+                    <th class="px-4 py-3">المرجع</th>
+                    <th class="px-4 py-3">اسم العميل</th>
+                    <th class="px-4 py-3">الجوال</th>
+                    <th class="px-4 py-3">المدينة</th>
+                    <th class="px-4 py-3">الطلب</th>
+                    <th class="px-4 py-3">الحالة</th>
+                    <th class="px-4 py-3 text-center">واتساب</th>
+                  </tr>
+                </thead>
+                <tbody id="div-recent-inquiries-body" class="divide-y divide-brand-border bg-slate-950/20">
+                  <tr><td colspan="7" class="px-4 py-6 text-center text-slate-500">جاري تحميل أحدث الطلبات...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- 2. DIVISION PRODUCTS TAB -->
+        <section id="tab-div-products" class="tab-content hidden space-y-6">
+          <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            <div>
+              <h2 id="div-prods-title" class="text-xl font-bold text-white">كتالوج منتجات الأثاث</h2>
+              <p class="text-xs text-slate-400">إضافة وتعديل وحذف المنتجات، الأسعار، المواصفات وحالة التوفر</p>
+            </div>
+            <button onclick="openDivisionProductModal()" class="px-5 py-2.5 rounded-xl gold-gradient-bg text-slate-950 font-bold text-sm flex items-center gap-2 hover:opacity-95 shadow transition">
+              <i class="fa-solid fa-plus"></i>
+              <span id="div-add-prod-btn-text">إضافة منتج جديد</span>
+            </button>
+          </div>
+
+          <!-- Filters Row -->
+          <div class="luxury-card p-4 flex flex-wrap items-center justify-between gap-4">
+            <div class="flex flex-wrap items-center gap-3 flex-1">
+              <div class="relative min-w-[240px]">
+                <input type="text" id="div-prod-search" oninput="filterDivProducts()" placeholder="ابحث باسم المنتج أو المواصفات..." class="w-full px-4 py-2 pr-9 rounded-xl bg-slate-900 border border-slate-700 text-xs text-white focus:outline-none focus:border-brand-gold">
+                <i class="fa-solid fa-magnifying-glass absolute top-2.5 right-3 text-slate-500 text-xs"></i>
+              </div>
+              <select id="div-prod-category-filter" onchange="filterDivProducts()" class="px-3 py-2 rounded-xl bg-slate-900 border border-slate-700 text-xs text-white focus:outline-none focus:border-brand-gold">
+                <option value="all">كافة التصنيفات</option>
+              </select>
+            </div>
+            <span id="div-prods-count" class="text-xs text-slate-400 font-semibold">0 منتج</span>
+          </div>
+
+          <!-- Products Table -->
+          <div class="luxury-card overflow-hidden">
+            <div class="overflow-x-auto">
+              <table class="w-full text-right text-sm text-slate-300">
+                <thead class="bg-slate-900 border-b border-brand-border text-slate-400 text-xs uppercase font-semibold">
+                  <tr>
+                    <th class="px-4 py-3">الصورة</th>
+                    <th class="px-4 py-3">اسم المنتج (عربي / English)</th>
+                    <th class="px-4 py-3">التصنيف</th>
+                    <th class="px-4 py-3">السعر التقديري</th>
+                    <th class="px-4 py-3">حالة التوفر</th>
+                    <th class="px-4 py-3">الكمية</th>
+                    <th class="px-4 py-3 text-center">الإجراءات</th>
+                  </tr>
+                </thead>
+                <tbody id="div-products-table-body" class="divide-y divide-brand-border bg-slate-950/20">
+                  <tr><td colspan="7" class="px-4 py-8 text-center text-slate-500">جاري تحميل المنتجات...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- 3. DIVISION CATEGORIES TAB -->
+        <section id="tab-div-categories" class="tab-content hidden space-y-6">
+          <div class="flex items-center justify-between">
+            <div>
+              <h2 id="div-cats-title" class="text-xl font-bold text-white">إدارة التصنيفات</h2>
+              <p class="text-xs text-slate-400">تصنيفات ومجموعات العرض في الموقع</p>
+            </div>
+            <button onclick="openDivisionCategoryModal()" class="px-4 py-2 rounded-xl gold-gradient-bg text-slate-950 font-bold text-xs flex items-center gap-2 hover:opacity-95 shadow transition">
+              <i class="fa-solid fa-plus"></i>
+              <span>إضافة تصنيف جديد</span>
+            </button>
+          </div>
+
+          <div class="luxury-card overflow-hidden">
+            <div class="overflow-x-auto">
+              <table class="w-full text-right text-sm text-slate-300">
+                <thead class="bg-slate-900 border-b border-brand-border text-slate-400 text-xs uppercase font-semibold">
+                  <tr>
+                    <th class="px-4 py-3">الأيقونة</th>
+                    <th class="px-4 py-3">الاسم بالعربية</th>
+                    <th class="px-4 py-3">English Name</th>
+                    <th class="px-4 py-3">الترتيب</th>
+                    <th class="px-4 py-3 text-center">الإجراءات</th>
+                  </tr>
+                </thead>
+                <tbody id="div-categories-table-body" class="divide-y divide-brand-border bg-slate-950/20">
+                  <tr><td colspan="5" class="px-4 py-8 text-center text-slate-500">جاري تحميل التصنيفات...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- 4. DIVISION INQUIRIES TAB -->
+        <section id="tab-div-inquiries" class="tab-content hidden space-y-6">
+          <div class="flex items-center justify-between">
+            <div>
+              <h2 id="div-inq-title" class="text-xl font-bold text-white">طلبات عروض الأسعار والمعاينة</h2>
+              <p class="text-xs text-slate-400">متابعة طلبات العملاء وتحديث حالتها والتواصل المباشر عبر واتساب</p>
+            </div>
+            <button onclick="loadDivisionInquiries()" class="px-3.5 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs text-slate-200 flex items-center gap-1.5 transition">
+              <i class="fa-solid fa-rotate"></i>
+              <span>تحديث الطلبات</span>
+            </button>
+          </div>
+
+          <div class="luxury-card overflow-hidden">
+            <div class="overflow-x-auto">
+              <table class="w-full text-right text-sm text-slate-300">
+                <thead class="bg-slate-900 border-b border-brand-border text-slate-400 text-xs uppercase font-semibold">
+                  <tr>
+                    <th class="px-4 py-3">المرجع والتاريخ</th>
+                    <th class="px-4 py-3">اسم العميل</th>
+                    <th class="px-4 py-3">الجوال</th>
+                    <th class="px-4 py-3">المدينة</th>
+                    <th class="px-4 py-3">نوع الطلب / المنتج</th>
+                    <th class="px-4 py-3">الملاحظات</th>
+                    <th class="px-4 py-3">الحالة</th>
+                    <th class="px-4 py-3 text-center">إجراءات</th>
+                  </tr>
+                </thead>
+                <tbody id="div-inquiries-table-body" class="divide-y divide-brand-border bg-slate-950/20">
+                  <tr><td colspan="8" class="px-4 py-8 text-center text-slate-500">جاري تحميل الطلبات...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- 5. DIVISION PROJECTS TAB -->
+        <section id="tab-div-projects" class="tab-content hidden space-y-6">
+          <div class="flex items-center justify-between">
+            <div>
+              <h2 id="div-proj-title" class="text-xl font-bold text-white">إدارة مشاريع المعرض المنفذة</h2>
+              <p class="text-xs text-slate-400">إضافة وتعديل صور ونطاق أعمال المشاريع المنجزة</p>
+            </div>
+            <button onclick="openDivisionProjectModal()" class="px-4 py-2 rounded-xl gold-gradient-bg text-slate-950 font-bold text-xs flex items-center gap-2 hover:opacity-95 shadow transition">
+              <i class="fa-solid fa-plus"></i>
+              <span>إضافة مشروع جديد</span>
+            </button>
+          </div>
+
+          <div class="luxury-card overflow-hidden">
+            <div class="overflow-x-auto">
+              <table class="w-full text-right text-sm text-slate-300">
+                <thead class="bg-slate-900 border-b border-brand-border text-slate-400 text-xs uppercase font-semibold">
+                  <tr>
+                    <th class="px-4 py-3">الصورة</th>
+                    <th class="px-4 py-3">اسم المشروع</th>
+                    <th class="px-4 py-3">الموقع / المدينة</th>
+                    <th class="px-4 py-3">نطاق الأعمال</th>
+                    <th class="px-4 py-3 text-center">الإجراءات</th>
+                  </tr>
+                </thead>
+                <tbody id="div-projects-table-body" class="divide-y divide-brand-border bg-slate-950/20">
+                  <tr><td colspan="5" class="px-4 py-8 text-center text-slate-500">جاري تحميل المشاريع...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- 6. DIVISION COMPANY INFO TAB -->
+        <section id="tab-div-company" class="tab-content hidden space-y-6">
+          <div>
+            <h2 id="div-comp-title" class="text-xl font-bold text-white">بيانات التواصل ومعلومات المعرض</h2>
+            <p class="text-xs text-slate-400">إدارة أرقام التواصل وساعات العمل وعنوان المعرض المعروض في الواجهة</p>
+          </div>
+
+          <div class="luxury-card p-6 max-w-3xl space-y-6">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <div>
+                <label class="block text-xs font-semibold text-slate-300 mb-1.5">رقم هاتف المبيعات والاستشارات</label>
+                <input type="text" id="div-comp-phone" value="+966534248861" class="w-full px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-xs text-white focus:outline-none focus:border-brand-gold">
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-slate-300 mb-1.5">رقم WhatsApp المعتمد</label>
+                <input type="text" id="div-comp-wa" value="966534248861" class="w-full px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-xs text-white focus:outline-none focus:border-brand-gold">
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 mb-1.5">عنوان المعرض والاستوديو</label>
+              <input type="text" id="div-comp-address" value="المملكة العربية السعودية — الرياض — توريد وتركيب لجميع مناطق المملكة" class="w-full px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-xs text-white focus:outline-none focus:border-brand-gold">
+            </div>
+
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 mb-1.5">أوقات العمل والمعاينات</label>
+              <input type="text" id="div-comp-hours" value="السبت إلى الخميس: 9:00 صباحاً – 10:00 مساءً" class="w-full px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-xs text-white focus:outline-none focus:border-brand-gold">
+            </div>
+
+            <div class="pt-2">
+              <button onclick="saveDivisionCompanySettings()" class="px-6 py-2.5 rounded-xl gold-gradient-bg text-slate-950 font-bold text-xs hover:opacity-95 shadow transition">
+                حفظ الإعدادات وبيانات التواصل
+              </button>
+            </div>
+          </div>
+        </section>
+
       </div>
     </main>
   </div>
 
   <!-- ========================================================================= -->
-  <!-- MODAL: ADD / EDIT MATERIAL                                                -->
+  <!-- MODAL: ADD / EDIT DIVISION PRODUCT (FURNITURE / CURTAINS)                  -->
   <!-- ========================================================================= -->
+  <div id="div-product-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 modal-backdrop overflow-y-auto">
+    <div class="luxury-card w-full max-w-4xl max-h-[92vh] flex flex-col overflow-hidden shadow-2xl border border-brand-gold/30 my-auto">
+      
+      <div class="p-5 border-b border-brand-border flex items-center justify-between bg-slate-900/90">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-brand-gold/10 text-brand-gold flex items-center justify-center text-lg">
+            <i id="div-modal-icon" class="fa-solid fa-boxes-stacked"></i>
+          </div>
+          <div>
+            <h3 id="div-modal-product-title" class="text-base font-bold text-white">إضافة منتج جديد</h3>
+            <p id="div-modal-product-subtitle" class="text-xs text-slate-400">إدخال المواصفات، الصور، الأسعار، وحالة التوفر</p>
+          </div>
+        </div>
+        <button onclick="closeDivisionProductModal()" class="w-8 h-8 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white flex items-center justify-center transition">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <div class="p-6 overflow-y-auto flex-1 space-y-6">
+        <form id="divProductForm" onsubmit="saveDivisionProductSubmit(event)" class="space-y-6">
+          <input type="hidden" id="div-prod-id">
+
+          <!-- Row 1: Names -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 mb-1">اسم المنتج بالعربية *</label>
+              <input type="text" id="div-prod-name-ar" required placeholder="مثال: كنبة فيرونا المنحنية" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-xs text-white focus:outline-none focus:border-brand-gold">
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 mb-1">Product Name (English) *</label>
+              <input type="text" id="div-prod-name-en" required placeholder="e.g. Verona Curved Sofa" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-xs text-white focus:outline-none focus:border-brand-gold">
+            </div>
+          </div>
+
+          <!-- Row 2: Category, Price & Tier -->
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 mb-1">التصنيف *</label>
+              <select id="div-prod-category" required class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-xs text-white focus:outline-none focus:border-brand-gold">
+              </select>
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 mb-1">السعر التقديري (ر.س)</label>
+              <input type="number" id="div-prod-price" placeholder="18500" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-xs text-white focus:outline-none focus:border-brand-gold">
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 mb-1">فئة الفخامة</label>
+              <select id="div-prod-tier" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-xs text-white focus:outline-none focus:border-brand-gold">
+                <option value="VIP Luxury">VIP Luxury</option>
+                <option value="Ultra Luxury">Ultra Luxury</option>
+                <option value="Premium">Premium</option>
+                <option value="Signature Edition">Signature Edition</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Row 3: Stock Status & Quantity -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 mb-1">حالة التوفر</label>
+              <select id="div-prod-stock-status" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-xs text-white focus:outline-none focus:border-brand-gold">
+                <option value="available">متوفر للتسليم (Available)</option>
+                <option value="custom_made">يصنع حسب الطلب (Custom Made)</option>
+                <option value="preorder">حجز مسبق (Pre-order)</option>
+                <option value="out_of_stock">نفذت الكمية (Out of Stock)</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 mb-1">الكمية التقديرية المتوفرة</label>
+              <input type="number" id="div-prod-stock-qty" value="5" min="0" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-xs text-white focus:outline-none focus:border-brand-gold">
+            </div>
+          </div>
+
+          <!-- Row 4: Multiple Images URLs & File Upload -->
+          <div class="space-y-2">
+            <label class="block text-xs font-semibold text-slate-300">
+              روابط الصور (رابط في كل سطر أو مفصولة بفاصلة)
+            </label>
+            <textarea id="div-prod-images" rows="3" placeholder="https://images.unsplash.com/photo-1555041469-a586c61ea9bc&#10;https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-xs text-white focus:outline-none focus:border-brand-gold font-mono"></textarea>
+            
+            <div class="flex items-center gap-3 pt-1">
+              <label class="px-3.5 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 border border-slate-600 text-xs text-slate-200 cursor-pointer flex items-center gap-2">
+                <i class="fa-solid fa-cloud-arrow-up text-brand-gold"></i>
+                <span>رفع صورة من الجهاز إلى السيرفر</span>
+                <input type="file" id="div-prod-file" accept="image/*" onchange="handleDivisionImageUpload(event)" class="hidden">
+              </label>
+              <span id="div-upload-status" class="text-xs text-slate-400"></span>
+            </div>
+          </div>
+
+          <!-- Row 5: Descriptions -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 mb-1">الوصف بالعربية</label>
+              <textarea id="div-prod-desc-ar" rows="3" placeholder="تفاصيل التصميم وهيكل النجارة وملمس القماش..." class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-xs text-white focus:outline-none focus:border-brand-gold"></textarea>
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 mb-1">Description (English)</label>
+              <textarea id="div-prod-desc-en" rows="3" placeholder="Curated architectural description..." class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-xs text-white focus:outline-none focus:border-brand-gold"></textarea>
+            </div>
+          </div>
+
+          <!-- Dynamic Specs Box -->
+          <div class="p-4 rounded-2xl bg-slate-900/60 border border-slate-800 space-y-3">
+            <h4 id="div-specs-heading" class="text-xs font-bold text-brand-gold uppercase tracking-wider">
+              المواصفات الفنية التفصيلية
+            </h4>
+            
+            <div id="div-specs-furniture" class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+              <div>
+                <label class="block text-slate-400 mb-1">الأبعاد (Dimensions)</label>
+                <input type="text" id="spec-furn-dimensions" placeholder="310W x 120D x 78H cm" class="w-full px-3 py-2 rounded-lg bg-slate-950 border border-slate-700 text-white">
+              </div>
+              <div>
+                <label class="block text-slate-400 mb-1">نوع الخشب (Wood)</label>
+                <input type="text" id="spec-furn-wood" placeholder="خشب زان أوروبي / جوز أمريكي" class="w-full px-3 py-2 rounded-lg bg-slate-950 border border-slate-700 text-white">
+              </div>
+              <div>
+                <label class="block text-slate-400 mb-1">القماش والجلد (Upholstery)</label>
+                <input type="text" id="spec-furn-fabric" placeholder="بوكليه إيطالي عاجي / جلد توسكاني" class="w-full px-3 py-2 rounded-lg bg-slate-950 border border-slate-700 text-white">
+              </div>
+              <div>
+                <label class="block text-slate-400 mb-1">التشطيب المعدني (Hardware/Finish)</label>
+                <input type="text" id="spec-furn-finish" placeholder="نحاس عتيق مصقول يدوياً" class="w-full px-3 py-2 rounded-lg bg-slate-950 border border-slate-700 text-white">
+              </div>
+            </div>
+
+            <div id="div-specs-curtains" class="hidden grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+              <div>
+                <label class="block text-slate-400 mb-1">منشأ النسيج (Origin)</label>
+                <input type="text" id="spec-curt-origin" placeholder="بلجيكا (100% كتان نقي)" class="w-full px-3 py-2 rounded-lg bg-slate-950 border border-slate-700 text-white">
+              </div>
+              <div>
+                <label class="block text-slate-400 mb-1">وزن القماش (Weight / GSM)</label>
+                <input type="text" id="spec-curt-weight" placeholder="380 GSM ثقيل السقوط" class="w-full px-3 py-2 rounded-lg bg-slate-950 border border-slate-700 text-white">
+              </div>
+              <div>
+                <label class="block text-slate-400 mb-1">حجب الضوء (Opacity / Blackout)</label>
+                <input type="text" id="spec-curt-opacity" placeholder="عتمة تامة 100% أو فلترة 60%" class="w-full px-3 py-2 rounded-lg bg-slate-950 border border-slate-700 text-white">
+              </div>
+              <div>
+                <label class="block text-slate-400 mb-1">المسارات والأتمتة (Track & Motors)</label>
+                <input type="text" id="spec-curt-motor" placeholder="مسار تموج صامت متوافق مع Somfy" class="w-full px-3 py-2 rounded-lg bg-slate-950 border border-slate-700 text-white">
+              </div>
+            </div>
+          </div>
+
+          <div class="flex items-center justify-end gap-3 pt-4 border-t border-brand-border">
+            <button type="button" onclick="closeDivisionProductModal()" class="px-5 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold transition">
+              إلغاء
+            </button>
+            <button type="submit" id="div-save-prod-btn" class="px-6 py-2.5 rounded-xl gold-gradient-bg text-slate-950 font-bold text-xs hover:opacity-95 shadow transition">
+              حفظ المنتج وتحديث الكتالوج
+            </button>
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- MODAL: ADD / EDIT DIVISION PROJECT -->
+  <div id="div-project-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 modal-backdrop overflow-y-auto">
+    <div class="luxury-card w-full max-w-2xl flex flex-col overflow-hidden shadow-2xl border border-brand-gold/30 my-auto">
+      <div class="p-5 border-b border-brand-border flex items-center justify-between bg-slate-900/90">
+        <h3 class="text-base font-bold text-white">إضافة / تعديل مشروع منفذ</h3>
+        <button onclick="closeDivisionProjectModal()" class="text-slate-400 hover:text-white">✕</button>
+      </div>
+      <form id="divProjectForm" onsubmit="saveDivisionProjectSubmit(event)" class="p-6 space-y-4">
+        <input type="hidden" id="div-proj-id">
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 mb-1">عنوان المشروع بالعربية *</label>
+          <input type="text" id="div-proj-title-ar" required placeholder="قصر خاص بحي حطين، الرياض" class="w-full px-3.5 py-2 rounded-xl bg-slate-900 border border-slate-700 text-xs text-white">
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 mb-1">Project Title (English)</label>
+          <input type="text" id="div-proj-title-en" placeholder="Private Royal Palace — Hittin" class="w-full px-3.5 py-2 rounded-xl bg-slate-900 border border-slate-700 text-xs text-white">
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1">الموقع / المدينة</label>
+            <input type="text" id="div-proj-location" placeholder="الرياض / حي حطين" class="w-full px-3.5 py-2 rounded-xl bg-slate-900 border border-slate-700 text-xs text-white">
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1">الفئة</label>
+            <select id="div-proj-category" class="w-full px-3.5 py-2 rounded-xl bg-slate-900 border border-slate-700 text-xs text-white">
+              <option value="palace">قصور ملكية وخاصة</option>
+              <option value="villa">فلل معمارية</option>
+              <option value="penthouse">أجنحة بنتهاوس</option>
+              <option value="hotel">فنادق وضيافة</option>
+              <option value="commercial">مكاتب وأبراج</option>
+            </select>
+          </div>
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 mb-1">رابط الصورة الرئيسية (Hero Image)</label>
+          <input type="text" id="div-proj-img" placeholder="https://images.unsplash.com/photo-..." class="w-full px-3.5 py-2 rounded-xl bg-slate-900 border border-slate-700 text-xs text-white font-mono">
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 mb-1">نطاق الأعمال المنفذة</label>
+          <textarea id="div-proj-scope" rows="2" placeholder="تصميم وتفصيل الصالونات وأجنحة النوم الرئيسية..." class="w-full px-3.5 py-2 rounded-xl bg-slate-900 border border-slate-700 text-xs text-white"></textarea>
+        </div>
+        <div class="flex justify-end gap-3 pt-3 border-t border-brand-border">
+          <button type="button" onclick="closeDivisionProjectModal()" class="px-4 py-2 rounded-xl bg-slate-800 text-xs text-slate-300">إلغاء</button>
+          <button type="submit" class="px-5 py-2 rounded-xl gold-gradient-bg text-slate-950 font-bold text-xs">حفظ المشروع</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: ADD / EDIT DIVISION CATEGORY -->
+  <div id="div-category-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 modal-backdrop">
+    <div class="luxury-card w-full max-w-md flex flex-col overflow-hidden shadow-2xl border border-brand-gold/30">
+      <div class="p-5 border-b border-brand-border flex items-center justify-between bg-slate-900/90">
+        <h3 class="text-base font-bold text-white">إضافة / تعديل تصنيف</h3>
+        <button onclick="closeDivisionCategoryModal()" class="text-slate-400 hover:text-white">✕</button>
+      </div>
+      <form id="divCategoryForm" onsubmit="saveDivisionCategorySubmit(event)" class="p-6 space-y-4">
+        <input type="hidden" id="div-cat-id">
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 mb-1">الاسم بالعربية *</label>
+          <input type="text" id="div-cat-name-ar" required placeholder="صالونات وغرف معيشة" class="w-full px-3.5 py-2 rounded-xl bg-slate-900 border border-slate-700 text-xs text-white">
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 mb-1">Category Name (English) *</label>
+          <input type="text" id="div-cat-name-en" required placeholder="Living Rooms & Lounges" class="w-full px-3.5 py-2 rounded-xl bg-slate-900 border border-slate-700 text-xs text-white">
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1">الأيقونة (Emoji)</label>
+            <input type="text" id="div-cat-icon" value="✨" class="w-full px-3.5 py-2 rounded-xl bg-slate-900 border border-slate-700 text-xs text-white text-center">
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1">ترتيب الظهور</label>
+            <input type="number" id="div-cat-sort" value="1" min="1" class="w-full px-3.5 py-2 rounded-xl bg-slate-900 border border-slate-700 text-xs text-white">
+          </div>
+        </div>
+        <div class="flex justify-end gap-3 pt-3 border-t border-brand-border">
+          <button type="button" onclick="closeDivisionCategoryModal()" class="px-4 py-2 rounded-xl bg-slate-800 text-xs text-slate-300">إلغاء</button>
+          <button type="submit" class="px-5 py-2 rounded-xl gold-gradient-bg text-slate-950 font-bold text-xs">حفظ التصنيف</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
   <div id="material-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 modal-backdrop overflow-y-auto">
     <div class="luxury-card w-full max-w-4xl max-h-[92vh] flex flex-col overflow-hidden shadow-2xl border border-brand-gold/30 my-auto">
       
@@ -1407,7 +2013,18 @@
       editingMaterialId: null,
       editingCategoryId: null,
       materialImages: [],       // Array of current existing image URLs
-      stagedImageFiles: []      // Array of File objects to upload upon saving
+      stagedImageFiles: [],     // Array of File objects to upload upon saving
+      // Multi-Division Ecosystem
+      activeDivision: 'marble', // 'marble' | 'furniture' | 'curtains'
+      divCurrentTab: 'div-dashboard',
+      divCategories: [],
+      divProducts: [],
+      divFilteredProducts: [],
+      divInquiries: [],
+      divProjects: [],
+      editingDivProductId: null,
+      editingDivCategoryId: null,
+      editingDivProjectId: null
     };
 
     // ==========================================================================
@@ -1726,9 +2343,720 @@
     }
 
     function refreshCurrentTab() {
-      loadAllData();
-      showToast("تم تحديث البيانات من السيرفر.", "info");
+      if (State.activeDivision === 'marble') {
+        loadAllData();
+        showToast("تم تحديث بيانات الرخام من السيرفر.", "info");
+      } else {
+        loadDivisionData(State.activeDivision);
+        showToast(`تم تحديث بيانات ${State.activeDivision === 'furniture' ? 'الأثاث' : 'الستائر'}.`, "info");
+      }
     }
+
+    function handleQuickAdd() {
+      if (State.activeDivision === 'marble') {
+        openMaterialModal();
+      } else {
+        openDivisionProductModal();
+      }
+    }
+
+    // ==========================================================================
+    // MULTI-DIVISION CONTROLLER (FURNITURE & CURTAINS ECOSYSTEM)
+    // ==========================================================================
+    
+    function setAdminDivision(division) {
+      State.activeDivision = division;
+
+      // Update Division Switcher Buttons
+      ['marble', 'furniture', 'curtains'].forEach(d => {
+        const btn = document.getElementById(`div-btn-${d}`);
+        if (btn) {
+          if (d === division) {
+            btn.className = "py-2 px-1 rounded-lg text-center transition bg-brand-gold text-slate-950 shadow font-bold";
+          } else {
+            btn.className = "py-2 px-1 rounded-lg text-center transition text-slate-300 hover:text-white font-bold";
+          }
+        }
+      });
+
+      const badgeEl = document.getElementById('current-division-badge');
+      const topAddText = document.getElementById('top-quick-add-text');
+
+      if (division === 'marble') {
+        // Show Marble Navigation & Hide Division Nav
+        document.getElementById('marble-nav-group')?.classList.remove('hidden');
+        document.getElementById('division-nav-group')?.classList.add('hidden');
+
+        // Hide Division Content Tabs
+        ['div-dashboard', 'div-products', 'div-categories', 'div-inquiries', 'div-projects', 'div-company'].forEach(id => {
+          document.getElementById(`tab-${id}`)?.classList.add('hidden');
+        });
+
+        // Restore Marble Tab
+        switchTab(State.currentTab || 'dashboard');
+
+        if (badgeEl) badgeEl.innerHTML = `<span>🏛️</span> <span>إدارة الرخام والأحجار</span>`;
+        if (topAddText) topAddText.textContent = "إضافة خامة سريعة";
+      } else {
+        // Hide Marble Navigation & Show Division Nav
+        document.getElementById('marble-nav-group')?.classList.add('hidden');
+        document.getElementById('division-nav-group')?.classList.remove('hidden');
+
+        // Hide all Marble Content Tabs
+        ['dashboard', 'materials', 'categories', 'rfqs', 'projects'].forEach(id => {
+          document.getElementById(`tab-${id}`)?.classList.add('hidden');
+        });
+
+        const isFurn = division === 'furniture';
+        const divName = isFurn ? 'الأثاث' : 'الستائر';
+        const divIcon = isFurn ? '🛋️' : '🪟';
+
+        // Update UI Labels
+        if (badgeEl) badgeEl.innerHTML = `<span>${divIcon}</span> <span>إدارة ${divName}</span>`;
+        if (topAddText) topAddText.textContent = isFurn ? "إضافة قطعة أثاث" : "إضافة موديل ستارة";
+
+        document.getElementById('division-nav-title').textContent = `إدارة ${divName}`;
+        document.getElementById('nav-div-products-text').textContent = isFurn ? "إدارة قطع الأثاث" : "إدارة موديلات الستائر";
+        document.getElementById('nav-div-inquiries-text').textContent = isFurn ? "طلبات التسعير (Quotes)" : "طلبات المعاينة والقياس";
+
+        document.getElementById('div-dash-badge').textContent = `لوحة إدارة ${divName} الفاخر`;
+        document.getElementById('div-dash-title').textContent = `إدارة منتجات ومشاريع ${divName}`;
+        document.getElementById('div-btn-add-prod-text').textContent = isFurn ? "إضافة قطعة أثاث" : "إضافة موديل ستارة";
+        document.getElementById('div-add-prod-btn-text').textContent = isFurn ? "إضافة قطعة أثاث" : "إضافة موديل ستارة";
+        document.getElementById('div-public-link').href = isFurn ? "furniture.html" : "curtains.html";
+        document.getElementById('div-prods-title').textContent = isFurn ? "كتالوج منتجات الأثاث" : "كتالوج الستائر والأنسجة";
+        document.getElementById('div-inq-title').textContent = isFurn ? "طلبات عروض أسعار الأثاث" : "طلبات المعاينة والقياس للستائر";
+
+        // Specs fields toggle in modal
+        if (isFurn) {
+          document.getElementById('div-specs-furniture')?.classList.remove('hidden');
+          document.getElementById('div-specs-curtains')?.classList.add('hidden');
+        } else {
+          document.getElementById('div-specs-furniture')?.classList.add('hidden');
+          document.getElementById('div-specs-curtains')?.classList.remove('hidden');
+        }
+
+        // Switch Tab and Load Data
+        switchDivTab(State.divCurrentTab || 'div-dashboard');
+        loadDivisionData(division);
+      }
+    }
+
+    function switchDivTab(tabId) {
+      State.divCurrentTab = tabId;
+
+      ['div-dashboard', 'div-products', 'div-categories', 'div-inquiries', 'div-projects', 'div-company'].forEach(id => {
+        const navBtn = document.getElementById(`nav-${id}`);
+        const contentSec = document.getElementById(`tab-${id}`);
+
+        if (navBtn) {
+          if (id === tabId) {
+            navBtn.className = "w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-bold bg-brand-gold/10 text-brand-gold border border-brand-gold/30 shadow-sm transition";
+          } else {
+            navBtn.className = "w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-brand-gold transition duration-200";
+          }
+        }
+
+        if (contentSec) {
+          if (id === tabId) {
+            contentSec.classList.remove('hidden');
+          } else {
+            contentSec.classList.add('hidden');
+          }
+        }
+      });
+
+      const isFurn = State.activeDivision === 'furniture';
+      const titles = {
+        'div-dashboard': `لوحة مؤشرات ${isFurn ? 'الأثاث' : 'الستائر'}`,
+        'div-products': isFurn ? "إدارة قطع الأثاث والمواصفات" : "إدارة الستائر والأنسجة",
+        'div-categories': "إدارة التصنيفات والمجموعات",
+        'div-inquiries': isFurn ? "طلبات التسعير وعروض الأسعار" : "طلبات المعاينة والقياس الميداني",
+        'div-projects': "معرض المشاريع المنفذة",
+        'div-company': "بيانات التواصل والمعرض"
+      };
+      document.getElementById('page-title').textContent = titles[tabId] || "لوحة الإدارة";
+      toggleSidebar(false);
+    }
+
+    async function loadDivisionData(division) {
+      if (!window.PrimeAPI) return;
+      try {
+        const [cats, prods, inqs, projs] = await Promise.all([
+          window.PrimeAPI.getDivisionCategories(division),
+          window.PrimeAPI.getDivisionProducts(division, 'all'),
+          window.PrimeAPI.getDivisionInquiries(division),
+          window.PrimeAPI.getDivisionProjects(division, 'all')
+        ]);
+
+        State.divCategories = cats || [];
+        State.divProducts = prods || [];
+        State.divFilteredProducts = [...State.divProducts];
+        State.divInquiries = inqs || [];
+        State.divProjects = projs || [];
+
+        renderDivisionDashboard();
+        renderDivisionProductsAdmin();
+        renderDivisionCategoriesAdmin();
+        renderDivisionInquiriesAdmin();
+        renderDivisionProjectsAdmin();
+      } catch(err) {
+        console.error("Error loading division data:", err);
+      }
+    }
+
+    function renderDivisionDashboard() {
+      document.getElementById('div-stat-products').textContent = State.divProducts.length;
+      document.getElementById('div-stat-categories').textContent = State.divCategories.length;
+      document.getElementById('div-stat-inquiries').textContent = State.divInquiries.length;
+      document.getElementById('div-stat-projects').textContent = State.divProjects.length;
+
+      // Recent inquiries table on dashboard
+      const body = document.getElementById('div-recent-inquiries-body');
+      if (!body) return;
+
+      const recent = State.divInquiries.slice(0, 5);
+      if (recent.length === 0) {
+        body.innerHTML = `<tr><td colspan="7" class="px-4 py-6 text-center text-slate-500">لا توجد طلبات واردة حتى الآن.</td></tr>`;
+        return;
+      }
+
+      body.innerHTML = recent.map(inq => {
+        const phone = inq.customer_phone || inq.customerPhone || '';
+        const name = inq.customer_name || inq.customerName || 'عميل';
+        const city = inq.project_city || inq.projectCity || '-';
+        const ref = inq.inquiry_ref || inq.inquiryRef || '-';
+        const prod = inq.selected_product_name || inq.selectedProductName || inq.service_type || 'طلب عام';
+        const status = inq.status || 'received';
+
+        const statusBadges = {
+          received: '<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-blue-500/20 text-blue-400">جديد</span>',
+          reviewing: '<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-amber-500/20 text-amber-400">قيد المراجعة</span>',
+          contacted: '<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-purple-500/20 text-purple-400">تم التواصل</span>',
+          completed: '<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500/20 text-emerald-400">مكتمل</span>'
+        };
+
+        const waText = encodeURIComponent(`مرحباً أستاذ ${name}، نتواصل معك بخصوص طلبك رقم (${ref}) لدى برايم سكوب.`);
+
+        return `
+          <tr>
+            <td class="px-4 py-3 font-mono text-xs text-brand-gold">${ref}</td>
+            <td class="px-4 py-3 font-semibold text-white">${name}</td>
+            <td class="px-4 py-3 font-mono text-xs">${phone}</td>
+            <td class="px-4 py-3 text-xs">${city}</td>
+            <td class="px-4 py-3 text-xs text-slate-300 max-w-xs truncate">${prod}</td>
+            <td class="px-4 py-3">${statusBadges[status] || status}</td>
+            <td class="px-4 py-3 text-center">
+              <a href="https://wa.me/${phone.replace(/[^0-9]/g, '')}?text=${waText}" target="_blank" class="w-8 h-8 rounded-lg bg-emerald-600/20 hover:bg-emerald-600 text-emerald-400 hover:text-white inline-flex items-center justify-center transition">
+                <i class="fa-brands fa-whatsapp"></i>
+              </a>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    function renderDivisionProductsAdmin() {
+      const body = document.getElementById('div-products-table-body');
+      const countEl = document.getElementById('div-prods-count');
+      const catFilter = document.getElementById('div-prod-category-filter');
+      if (!body) return;
+
+      // Populate filter dropdown
+      if (catFilter) {
+        const currentVal = catFilter.value;
+        catFilter.innerHTML = `<option value="all">كافة التصنيفات</option>` + State.divCategories.map(c => `
+          <option value="${c.id}" ${currentVal === c.id ? 'selected' : ''}>${c.nameAr}</option>
+        `).join('');
+      }
+
+      if (countEl) countEl.textContent = `${State.divFilteredProducts.length} منتج`;
+
+      if (State.divFilteredProducts.length === 0) {
+        body.innerHTML = `<tr><td colspan="7" class="px-4 py-8 text-center text-slate-500">لم يتم العثور على أية منتجات.</td></tr>`;
+        return;
+      }
+
+      body.innerHTML = State.divFilteredProducts.map(p => {
+        const img = (p.images && p.images[0]) || 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=300&q=80';
+        const cat = State.divCategories.find(c => c.id === (p.categoryId || p.category_id))?.nameAr || p.categoryId || '-';
+        const price = p.price ? `${Number(p.price).toLocaleString()} ر.س` : '<span class="text-slate-500">حسب الطلب</span>';
+
+        const stockLabels = {
+          available: '<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500/20 text-emerald-400">متوفر</span>',
+          custom_made: '<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-blue-500/20 text-blue-400">تفصيل خاص</span>',
+          preorder: '<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-amber-500/20 text-amber-400">حجز مسبق</span>',
+          out_of_stock: '<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-red-500/20 text-red-400">نفذ</span>'
+        };
+
+        return `
+          <tr class="hover:bg-slate-900/40 transition">
+            <td class="px-4 py-3">
+              <img src="${img}" alt="${p.nameAr}" class="w-12 h-12 rounded-xl object-cover border border-slate-700">
+            </td>
+            <td class="px-4 py-3">
+              <div class="font-bold text-white text-xs">${p.nameAr}</div>
+              <div class="text-[11px] text-slate-400 font-sans">${p.nameEn || ''}</div>
+            </td>
+            <td class="px-4 py-3 text-xs text-slate-300">${cat}</td>
+            <td class="px-4 py-3 text-xs font-mono font-bold text-brand-gold">${price}</td>
+            <td class="px-4 py-3">${stockLabels[p.stockStatus || p.stock_status] || p.stockStatus}</td>
+            <td class="px-4 py-3 text-xs font-mono">${p.stockQuantity ?? p.stock_quantity ?? 10}</td>
+            <td class="px-4 py-3 text-center">
+              <div class="flex items-center justify-center gap-1.5">
+                <button onclick="openDivisionProductModal('${p.id}')" title="تعديل المنتج" class="w-7 h-7 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-brand-gold flex items-center justify-center text-xs transition">
+                  <i class="fa-solid fa-pen-to-square"></i>
+                </button>
+                <button onclick="deleteDivisionProductAction('${p.id}')" title="حذف المنتج" class="w-7 h-7 rounded-lg bg-red-950/40 hover:bg-red-900 text-red-400 hover:text-white flex items-center justify-center text-xs transition">
+                  <i class="fa-solid fa-trash"></i>
+                </button>
+              </div>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    function filterDivProducts() {
+      const q = (document.getElementById('div-prod-search')?.value || '').toLowerCase().trim();
+      const cat = document.getElementById('div-prod-category-filter')?.value || 'all';
+
+      State.divFilteredProducts = State.divProducts.filter(p => {
+        const matchesCat = cat === 'all' || (p.categoryId || p.category_id) === cat;
+        const matchesSearch = !q || (p.nameAr && p.nameAr.toLowerCase().includes(q)) || 
+                                    (p.nameEn && p.nameEn.toLowerCase().includes(q)) ||
+                                    (p.descriptionAr && p.descriptionAr.toLowerCase().includes(q));
+        return matchesCat && matchesSearch;
+      });
+
+      renderDivisionProductsAdmin();
+    }
+
+    // Add / Edit Division Product Modal
+    function openDivisionProductModal(productId = null) {
+      State.editingDivProductId = productId;
+      const isFurn = State.activeDivision === 'furniture';
+      const modal = document.getElementById('div-product-modal');
+      const catSelect = document.getElementById('div-prod-category');
+
+      // Populate Category options
+      if (catSelect) {
+        catSelect.innerHTML = State.divCategories.map(c => `
+          <option value="${c.id}">${c.nameAr} (${c.nameEn})</option>
+        `).join('');
+      }
+
+      if (productId) {
+        const p = State.divProducts.find(item => item.id === productId);
+        if (p) {
+          document.getElementById('div-modal-product-title').textContent = "تعديل بيانات المنتج";
+          document.getElementById('div-prod-id').value = p.id;
+          document.getElementById('div-prod-name-ar').value = p.nameAr || '';
+          document.getElementById('div-prod-name-en').value = p.nameEn || '';
+          document.getElementById('div-prod-category').value = p.categoryId || p.category_id || '';
+          document.getElementById('div-prod-price').value = p.price || '';
+          document.getElementById('div-prod-tier').value = p.priceTier || p.price_tier || 'VIP Luxury';
+          document.getElementById('div-prod-stock-status').value = p.stockStatus || p.stock_status || 'available';
+          document.getElementById('div-prod-stock-qty').value = p.stockQuantity ?? p.stock_quantity ?? 10;
+          document.getElementById('div-prod-images').value = Array.isArray(p.images) ? p.images.join('\n') : (p.images || '');
+          document.getElementById('div-prod-desc-ar').value = p.descriptionAr || p.description_ar || '';
+          document.getElementById('div-prod-desc-en').value = p.descriptionEn || p.description_en || '';
+
+          const s = p.specs || {};
+          if (isFurn) {
+            document.getElementById('spec-furn-dimensions').value = s.dimensions || '';
+            document.getElementById('spec-furn-wood').value = s.wood || '';
+            document.getElementById('spec-furn-fabric').value = s.fabric || '';
+            document.getElementById('spec-furn-finish').value = s.finish || '';
+          } else {
+            document.getElementById('spec-curt-origin').value = s.fabricOrigin || '';
+            document.getElementById('spec-curt-weight').value = s.weight || '';
+            document.getElementById('spec-curt-opacity').value = s.opacity || '';
+            document.getElementById('spec-curt-motor').value = s.motorization || s.motor || '';
+          }
+        }
+      } else {
+        document.getElementById('div-modal-product-title').textContent = isFurn ? "إضافة قطعة أثاث جديدة" : "إضافة موديل ستارة جديد";
+        document.getElementById('divProductForm').reset();
+        document.getElementById('div-prod-id').value = '';
+      }
+
+      modal.classList.remove('hidden');
+    }
+
+    function closeDivisionProductModal() {
+      document.getElementById('div-product-modal')?.classList.add('hidden');
+      State.editingDivProductId = null;
+    }
+
+    async function saveDivisionProductSubmit(e) {
+      e.preventDefault();
+      const isFurn = State.activeDivision === 'furniture';
+      const btn = document.getElementById('div-save-prod-btn');
+      btn.disabled = true;
+      btn.textContent = 'جاري الحفظ...';
+
+      const imgsText = document.getElementById('div-prod-images').value;
+      const imagesArr = imgsText.split(/[\n,]+/).map(s => s.trim()).filter(Boolean);
+
+      let specsObj = {};
+      if (isFurn) {
+        specsObj = {
+          dimensions: document.getElementById('spec-furn-dimensions').value,
+          wood: document.getElementById('spec-furn-wood').value,
+          fabric: document.getElementById('spec-furn-fabric').value,
+          finish: document.getElementById('spec-furn-finish').value,
+          warranty: '10 سنوات هيكلية'
+        };
+      } else {
+        specsObj = {
+          fabricOrigin: document.getElementById('spec-curt-origin').value,
+          weight: document.getElementById('spec-curt-weight').value,
+          opacity: document.getElementById('spec-curt-opacity').value,
+          motorization: document.getElementById('spec-curt-motor').value,
+          trackSystem: 'مسار ألومنيوم صامت مدمج',
+          warranty: '7 سنوات ضمان على المسارات وثبات اللون'
+        };
+      }
+
+      const payload = {
+        id: document.getElementById('div-prod-id').value || null,
+        division: State.activeDivision,
+        categoryId: document.getElementById('div-prod-category').value,
+        nameAr: document.getElementById('div-prod-name-ar').value,
+        nameEn: document.getElementById('div-prod-name-en').value,
+        price: document.getElementById('div-prod-price').value || null,
+        priceTier: document.getElementById('div-prod-tier').value,
+        stockStatus: document.getElementById('div-prod-stock-status').value,
+        stockQuantity: document.getElementById('div-prod-stock-qty').value,
+        images: imagesArr,
+        descriptionAr: document.getElementById('div-prod-desc-ar').value,
+        descriptionEn: document.getElementById('div-prod-desc-en').value,
+        specs: specsObj,
+        isFeatured: true
+      };
+
+      try {
+        await window.PrimeAPI.saveDivisionProduct(State.activeDivision, payload);
+        showToast("تم حفظ المنتج بنجاح وتحديث الكتالوج.", "success");
+        closeDivisionProductModal();
+        await loadDivisionData(State.activeDivision);
+      } catch(err) {
+        showToast("حدث خطأ أثناء حفظ المنتج: " + err.message, "error");
+      } finally {
+        btn.disabled = false;
+        btn.textContent = 'حفظ المنتج وتحديث الكتالوج';
+      }
+    }
+
+    async function deleteDivisionProductAction(id) {
+      if (!confirm("هل أنت متأكد من حذف هذا المنتج؟")) return;
+      try {
+        await window.PrimeAPI.deleteDivisionProduct(State.activeDivision, id);
+        showToast("تم حذف المنتج بنجاح.", "success");
+        await loadDivisionData(State.activeDivision);
+      } catch(err) {
+        showToast("حدث خطأ أثناء الحذف.", "error");
+      }
+    }
+
+    // Upload image helper
+    async function handleDivisionImageUpload(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+
+      const statusEl = document.getElementById('div-upload-status');
+      statusEl.textContent = 'جاري رفع الصورة...';
+
+      try {
+        const res = await window.PrimeAPI.uploadImage(file, 'projects');
+        if (res.url) {
+          statusEl.textContent = '✓ تم الرفع بنجاح';
+          const area = document.getElementById('div-prod-images');
+          area.value = (area.value ? area.value + '\n' : '') + res.url;
+        } else {
+          statusEl.textContent = 'فشل الرفع: ' + (res.error?.message || 'خطأ غير معروف');
+        }
+      } catch(err) {
+        statusEl.textContent = 'خطأ أثناء الرفع';
+      }
+    }
+
+    // Categories
+    function renderDivisionCategoriesAdmin() {
+      const body = document.getElementById('div-categories-table-body');
+      if (!body) return;
+
+      if (State.divCategories.length === 0) {
+        body.innerHTML = `<tr><td colspan="5" class="px-4 py-8 text-center text-slate-500">لا توجد تصنيفات حالياً.</td></tr>`;
+        return;
+      }
+
+      body.innerHTML = State.divCategories.map(c => `
+        <tr class="hover:bg-slate-900/40 transition">
+          <td class="px-4 py-3 text-xl">${c.icon || '✨'}</td>
+          <td class="px-4 py-3 font-bold text-white text-xs">${c.nameAr}</td>
+          <td class="px-4 py-3 text-xs text-slate-400 font-sans">${c.nameEn}</td>
+          <td class="px-4 py-3 text-xs font-mono">${c.sortOrder || 1}</td>
+          <td class="px-4 py-3 text-center">
+            <button onclick="openDivisionCategoryModal('${c.id}')" class="w-7 h-7 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-brand-gold inline-flex items-center justify-center text-xs transition">
+              <i class="fa-solid fa-pen-to-square"></i>
+            </button>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    function openDivisionCategoryModal(catId = null) {
+      State.editingDivCategoryId = catId;
+      const modal = document.getElementById('div-category-modal');
+      if (catId) {
+        const c = State.divCategories.find(item => item.id === catId);
+        if (c) {
+          document.getElementById('div-cat-id').value = c.id;
+          document.getElementById('div-cat-name-ar').value = c.nameAr;
+          document.getElementById('div-cat-name-en').value = c.nameEn;
+          document.getElementById('div-cat-icon').value = c.icon || '✨';
+          document.getElementById('div-cat-sort').value = c.sortOrder || 1;
+        }
+      } else {
+        document.getElementById('divCategoryForm').reset();
+        document.getElementById('div-cat-id').value = '';
+      }
+      modal.classList.remove('hidden');
+    }
+
+    function closeDivisionCategoryModal() {
+      document.getElementById('div-category-modal')?.classList.add('hidden');
+      State.editingDivCategoryId = null;
+    }
+
+    async function saveDivisionCategorySubmit(e) {
+      e.preventDefault();
+      const id = document.getElementById('div-cat-id').value || `cat-${Date.now()}`;
+      const payload = {
+        id: id,
+        division: State.activeDivision,
+        nameAr: document.getElementById('div-cat-name-ar').value,
+        nameEn: document.getElementById('div-cat-name-en').value,
+        icon: document.getElementById('div-cat-icon').value || '✨',
+        sortOrder: parseInt(document.getElementById('div-cat-sort').value) || 1
+      };
+
+      try {
+        const client = window.PrimeSupabase?.getClient();
+        if (window.PrimeSupabase?.isReady()) {
+          await client.from('catalog_categories').upsert([{
+            id: payload.id,
+            division: payload.division,
+            name_ar: payload.nameAr,
+            name_en: payload.nameEn,
+            icon: payload.icon,
+            sort_order: payload.sortOrder
+          }]);
+        }
+
+        let cats = await window.PrimeAPI.getDivisionCategories(State.activeDivision);
+        const idx = cats.findIndex(c => c.id === id);
+        if (idx >= 0) cats[idx] = payload;
+        else cats.push(payload);
+        localStorage.setItem(`ps_${State.activeDivision}_categories`, JSON.stringify(cats));
+
+        showToast("تم حفظ التصنيف بنجاح.", "success");
+        closeDivisionCategoryModal();
+        await loadDivisionData(State.activeDivision);
+      } catch(err) {
+        showToast("حدث خطأ أثناء حفظ التصنيف.", "error");
+      }
+    }
+
+    // Inquiries Table
+    async function loadDivisionInquiries() {
+      const inqs = await window.PrimeAPI.getDivisionInquiries(State.activeDivision);
+      State.divInquiries = inqs || [];
+      renderDivisionInquiriesAdmin();
+      showToast("تم تحديث قائمة الطلبات.", "info");
+    }
+
+    function renderDivisionInquiriesAdmin() {
+      const body = document.getElementById('div-inquiries-table-body');
+      if (!body) return;
+
+      if (State.divInquiries.length === 0) {
+        body.innerHTML = `<tr><td colspan="8" class="px-4 py-8 text-center text-slate-500">لا توجد طلبات تسعير أو معاينة مسجلة حتى الآن.</td></tr>`;
+        return;
+      }
+
+      body.innerHTML = State.divInquiries.map((inq, idx) => {
+        const ref = inq.inquiry_ref || inq.inquiryRef || `INQ-${idx+1}`;
+        const name = inq.customer_name || inq.customerName || 'عميل';
+        const phone = inq.customer_phone || inq.customerPhone || '';
+        const city = inq.project_city || inq.projectCity || '-';
+        const date = inq.created_at ? new Date(inq.created_at).toLocaleDateString('ar-SA') : 'اليوم';
+        const prod = inq.selected_product_name || inq.selectedProductName || inq.service_type || 'طلب عام';
+        const details = inq.details || '-';
+        const status = inq.status || 'received';
+
+        const waText = encodeURIComponent(`مرحباً أستاذ ${name}، نتواصل معك من برايم سكوب بخصوص طلبك (${ref}).`);
+
+        return `
+          <tr class="hover:bg-slate-900/40 transition">
+            <td class="px-4 py-3">
+              <div class="font-mono text-xs text-brand-gold font-bold">${ref}</div>
+              <div class="text-[10px] text-slate-500">${date}</div>
+            </td>
+            <td class="px-4 py-3 font-semibold text-white text-xs">${name}</td>
+            <td class="px-4 py-3 font-mono text-xs">${phone}</td>
+            <td class="px-4 py-3 text-xs">${city}</td>
+            <td class="px-4 py-3 text-xs font-semibold text-slate-200">${prod}</td>
+            <td class="px-4 py-3 text-xs text-slate-400 max-w-xs truncate" title="${details}">${details}</td>
+            <td class="px-4 py-3">
+              <select onchange="updateDivisionInquiryStatus('${ref}', this.value)" class="px-2 py-1 rounded bg-slate-900 border border-slate-700 text-xs text-white">
+                <option value="received" ${status === 'received' ? 'selected' : ''}>جديد</option>
+                <option value="reviewing" ${status === 'reviewing' ? 'selected' : ''}>قيد المراجعة</option>
+                <option value="contacted" ${status === 'contacted' ? 'selected' : ''}>تم التواصل</option>
+                <option value="completed" ${status === 'completed' ? 'selected' : ''}>مكتمل</option>
+              </select>
+            </td>
+            <td class="px-4 py-3 text-center">
+              <a href="https://wa.me/${phone.replace(/[^0-9]/g, '')}?text=${waText}" target="_blank" class="w-8 h-8 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white inline-flex items-center justify-center transition shadow-sm">
+                <i class="fa-brands fa-whatsapp text-sm"></i>
+              </a>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    async function updateDivisionInquiryStatus(ref, newStatus) {
+      try {
+        const client = window.PrimeSupabase?.getClient();
+        if (window.PrimeSupabase?.isReady()) {
+          await client.from('division_inquiries').update({ status: newStatus }).eq('inquiry_ref', ref);
+        }
+
+        // Update local
+        const stored = JSON.parse(localStorage.getItem(`ps_${State.activeDivision}_inquiries`) || '[]');
+        const target = stored.find(i => (i.inquiry_ref || i.inquiryRef) === ref);
+        if (target) {
+          target.status = newStatus;
+          localStorage.setItem(`ps_${State.activeDivision}_inquiries`, JSON.stringify(stored));
+        }
+
+        showToast("تم تحديث حالة الطلب بنجاح.", "success");
+      } catch(err) {
+        showToast("حدث خطأ أثناء تحديث الحالة.", "error");
+      }
+    }
+
+    // Projects
+    function renderDivisionProjectsAdmin() {
+      const body = document.getElementById('div-projects-table-body');
+      if (!body) return;
+
+      if (State.divProjects.length === 0) {
+        body.innerHTML = `<tr><td colspan="5" class="px-4 py-8 text-center text-slate-500">لا توجد مشاريع مسجلة حالياً.</td></tr>`;
+        return;
+      }
+
+      body.innerHTML = State.divProjects.map(proj => {
+        const img = proj.heroImage || proj.hero_image || 'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=300&q=80';
+        return `
+          <tr class="hover:bg-slate-900/40 transition">
+            <td class="px-4 py-3">
+              <img src="${img}" alt="${proj.titleAr}" class="w-12 h-12 rounded-xl object-cover border border-slate-700">
+            </td>
+            <td class="px-4 py-3">
+              <div class="font-bold text-white text-xs">${proj.titleAr}</div>
+              <div class="text-[11px] text-slate-400 font-sans">${proj.titleEn || ''}</div>
+            </td>
+            <td class="px-4 py-3 text-xs text-slate-300">${proj.locationAr || proj.locationEn || '-'}</td>
+            <td class="px-4 py-3 text-xs text-slate-400 max-w-xs truncate">${proj.scopeAr || proj.scopeEn || '-'}</td>
+            <td class="px-4 py-3 text-center">
+              <div class="flex items-center justify-center gap-1.5">
+                <button onclick="openDivisionProjectModal('${proj.id}')" class="w-7 h-7 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-brand-gold flex items-center justify-center text-xs transition">
+                  <i class="fa-solid fa-pen-to-square"></i>
+                </button>
+                <button onclick="deleteDivisionProjectAction('${proj.id}')" class="w-7 h-7 rounded-lg bg-red-950/40 hover:bg-red-900 text-red-400 hover:text-white flex items-center justify-center text-xs transition">
+                  <i class="fa-solid fa-trash"></i>
+                </button>
+              </div>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    function openDivisionProjectModal(projId = null) {
+      State.editingDivProjectId = projId;
+      const modal = document.getElementById('div-project-modal');
+      if (projId) {
+        const p = State.divProjects.find(item => item.id === projId);
+        if (p) {
+          document.getElementById('div-proj-id').value = p.id;
+          document.getElementById('div-proj-title-ar').value = p.titleAr || p.title_ar || '';
+          document.getElementById('div-proj-title-en').value = p.titleEn || p.title_en || '';
+          document.getElementById('div-proj-location').value = p.locationAr || p.location_ar || '';
+          document.getElementById('div-proj-category').value = p.category || 'palace';
+          document.getElementById('div-proj-img').value = p.heroImage || p.hero_image || '';
+          document.getElementById('div-proj-scope').value = p.scopeAr || p.scope_ar || '';
+        }
+      } else {
+        document.getElementById('divProjectForm').reset();
+        document.getElementById('div-proj-id').value = '';
+      }
+      modal.classList.remove('hidden');
+    }
+
+    function closeDivisionProjectModal() {
+      document.getElementById('div-project-modal')?.classList.add('hidden');
+      State.editingDivProjectId = null;
+    }
+
+    async function saveDivisionProjectSubmit(e) {
+      e.preventDefault();
+      const payload = {
+        id: document.getElementById('div-proj-id').value || null,
+        titleAr: document.getElementById('div-proj-title-ar').value,
+        titleEn: document.getElementById('div-proj-title-en').value,
+        locationAr: document.getElementById('div-proj-location').value,
+        category: document.getElementById('div-proj-category').value,
+        heroImage: document.getElementById('div-proj-img').value,
+        scopeAr: document.getElementById('div-proj-scope').value
+      };
+
+      try {
+        await window.PrimeAPI.saveDivisionProject(State.activeDivision, payload);
+        showToast("تم حفظ المشروع بنجاح.", "success");
+        closeDivisionProjectModal();
+        await loadDivisionData(State.activeDivision);
+      } catch(err) {
+        showToast("حدث خطأ أثناء حفظ المشروع.", "error");
+      }
+    }
+
+    async function deleteDivisionProjectAction(id) {
+      if (!confirm("هل أنت متأكد من حذف هذا المشروع من المعرض؟")) return;
+      try {
+        await window.PrimeAPI.deleteDivisionProject(State.activeDivision, id);
+        showToast("تم حذف المشروع بنجاح.", "success");
+        await loadDivisionData(State.activeDivision);
+      } catch(err) {
+        showToast("حدث خطأ أثناء الحذف.", "error");
+      }
+    }
+
+    function saveDivisionCompanySettings() {
+      const data = {
+        phone: document.getElementById('div-comp-phone').value,
+        wa: document.getElementById('div-comp-wa').value,
+        address: document.getElementById('div-comp-address').value,
+        hours: document.getElementById('div-comp-hours').value
+      };
+      localStorage.setItem(`ps_${State.activeDivision}_company_settings`, JSON.stringify(data));
+      showToast("تم حفظ بيانات التواصل والمعرض بنجاح.", "success");
+    }
+
 
     // ==========================================================================
     // Data Loading Orchestrator

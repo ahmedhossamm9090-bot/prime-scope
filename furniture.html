@@ -1,0 +1,1201 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+
+  <title>Prime Scope Furniture | برايم سكوب للأثاث المعاصر الراقي</title>
+  <meta name="description" content="العلامة الرائدة في تصميم وتصنيع وتوريد الأثاث المعاصر الفاخر في المملكة: صالونات، أجنحة نوم ملكية، طاولات طعام، ومكاتب تنفيذية بأخشاب الجوز والبلوط الأوروبية والجلد التوسكاني.">
+  <meta name="keywords" content="برايم سكوب للأثاث, Prime Scope Furniture, أثاث فاخر الرياض, كنب مودرن, طاولات طعام رخام, أثاث قصور وفلل, أثاث معاصر">
+
+  <link rel="canonical" href="https://primescope.io/furniture.html">
+
+  <!-- Fonts: Tajawal & Playfair Display -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Tajawal:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            wood: {
+              50: '#FAF8F5',
+              100: '#F3EFEA',
+              200: '#E6DCCF',
+              300: '#D2C1AC',
+              400: '#B89F82',
+              500: '#9E8162',
+              600: '#80664B',
+              700: '#644E39',
+              800: '#4A392A',
+              900: '#2F2319',
+              950: '#1A130D'
+            },
+            sand: {
+              50: '#FDFCF9',
+              100: '#F9F6F0',
+              200: '#F2ECE0',
+              300: '#E8DEC9'
+            },
+            espresso: '#1A1614',
+            bronze: '#A68252'
+          },
+          fontFamily: {
+            tajawal: ['Tajawal', 'sans-serif'],
+            serif: ['Playfair Display', 'serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Supabase & API Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="config.js?v=4.0"></script>
+  <script src="supabaseClient.js?v=4.0"></script>
+  <script src="api.js?v=4.0"></script>
+
+  <style>
+    * {
+      font-family: 'Tajawal', sans-serif;
+      box-sizing: border-box;
+    }
+    
+    body {
+      background-color: #FAF8F5;
+      color: #2F2319;
+      overflow-x: hidden;
+    }
+
+    .font-editorial {
+      font-family: 'Playfair Display', 'Tajawal', serif;
+    }
+
+    .editorial-border {
+      border: 1px solid rgba(128, 102, 75, 0.18);
+    }
+
+    .editorial-border:hover {
+      border-color: rgba(128, 102, 75, 0.45);
+    }
+
+    .product-card {
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .product-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 40px -15px rgba(47, 35, 25, 0.08);
+    }
+
+    /* English LTR styling */
+    body.lang-en {
+      direction: ltr;
+      text-align: left;
+    }
+    body.lang-en * {
+      font-family: 'Tajawal', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+    body.lang-en .font-editorial {
+      font-family: 'Playfair Display', Georgia, serif;
+    }
+  </style>
+</head>
+<body class="lang-ar antialiased min-h-screen">
+
+  <!-- =========================================================================
+       1. Editorial Top Header
+       ========================================================================= -->
+  <header class="sticky top-0 z-40 bg-[#FAF8F5]/90 backdrop-blur-md border-b border-wood-200/60 transition-all">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      
+      <!-- Brand Logo -->
+      <a href="furniture.html" class="flex items-center gap-3 group">
+        <div class="w-10 h-10 rounded-lg bg-wood-900 text-wood-100 flex items-center justify-center font-editorial font-bold text-lg shadow-sm">
+          PS
+        </div>
+        <div>
+          <span class="text-xl font-bold tracking-wider text-wood-950 font-editorial flex items-center gap-1.5">
+            PRIME SCOPE <span class="text-xs px-2 py-0.5 rounded bg-wood-200 text-wood-800 font-sans tracking-normal">FURNITURE</span>
+          </span>
+          <p class="text-[11px] text-wood-600 tracking-wide" data-furn-i18n="brandSub">الأثاث المعاصر والتصاميم الراقية</p>
+        </div>
+      </a>
+
+      <!-- Navigation Links -->
+      <nav class="hidden lg:flex items-center gap-7 text-xs font-semibold tracking-wide text-wood-800">
+        <a href="index.html" class="text-wood-600 hover:text-wood-950 flex items-center gap-1 transition" data-furn-i18n="navPortal">🏛️ البوابة الرئيسية</a>
+        <a href="#about" class="hover:text-wood-950 transition" data-furn-i18n="navAbout">عن العلامة</a>
+        <a href="#leadership" class="hover:text-wood-950 transition" data-furn-i18n="navLeadership">كلمة الإدارة</a>
+        <a href="#approach" class="hover:text-wood-950 transition" data-furn-i18n="navApproach">منهجنا</a>
+        <a href="#catalog" class="hover:text-wood-950 transition" data-furn-i18n="navCatalog">المجموعات والأثاث</a>
+        <a href="#projects" class="hover:text-wood-950 transition" data-furn-i18n="navProjects">مشاريعنا المنجزة</a>
+        <a href="#features" class="hover:text-wood-950 transition" data-furn-i18n="navFeatures">المميزات</a>
+        <a href="#contact" class="hover:text-wood-950 transition" data-furn-i18n="navContact">تواصل معنا</a>
+      </nav>
+
+      <!-- Action Buttons -->
+      <div class="flex items-center gap-3">
+        <!-- Language Switcher -->
+        <button onclick="toggleFurnLanguage()" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-wood-100 hover:bg-wood-200 text-wood-800 border border-wood-200 transition">
+          <span id="furnLangLabel">English 🇬🇧</span>
+        </button>
+
+        <!-- Quote CTA -->
+        <a href="#quote" class="px-5 py-2.5 rounded-xl bg-wood-900 hover:bg-wood-800 text-wood-50 text-xs font-bold tracking-wider transition shadow-sm" data-furn-i18n="ctaQuote">
+          طلب عرض سعر
+        </a>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- =========================================================================
+       2. Hero Section (Contemporary Luxury Editorial)
+       ========================================================================= -->
+  <section class="relative pt-12 pb-24 md:pt-20 md:pb-32 overflow-hidden bg-sand-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        
+        <!-- Left Content -->
+        <div class="lg:col-span-6 space-y-6">
+          <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-wood-200/70 text-wood-800 text-xs font-semibold tracking-wide">
+            <span>🛋️</span>
+            <span data-furn-i18n="heroBadge">المجموعة المعاصرة للأثاث الراقي في المملكة</span>
+          </div>
+
+          <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold text-wood-950 leading-[1.2] font-editorial">
+            <span data-furn-i18n="heroTitle1">أثاث يُصاغ كـ</span>
+            <span class="italic text-wood-600 block sm:inline" data-furn-i18n="heroTitle2"> قطع فنية </span>
+            <span data-furn-i18n="heroTitle3">تتوارثها الأجيال</span>
+          </h1>
+
+          <p class="text-base sm:text-lg text-wood-700 leading-relaxed max-w-xl" data-furn-i18n="heroSub">
+            نصمم ونورد قطع أثاث معمارية بأسلوب Contemporary Luxury Editorial، تجمع بين دفء خشب الجوز والبلوط الأوروبي الطبيعي، وفخامة الجلد الإيطالي المدبوغ يدوياً، مع أبعاد وتفاصيل مخصصة لأرقى المساحات السكنية والقصور.
+          </p>
+
+          <div class="flex flex-wrap items-center gap-4 pt-4">
+            <a href="#catalog" class="px-7 py-3.5 rounded-xl bg-wood-900 hover:bg-wood-800 text-wood-50 font-bold text-sm tracking-wide transition shadow-lg shadow-wood-900/10 flex items-center gap-2" data-furn-i18n="btnCatalog">
+              <span>استكشف الكتالوج الحصري</span>
+              <svg class="w-4 h-4 rtl:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+            </a>
+
+            <a href="https://wa.me/966534248861?text=مرحباً%20برايم%20سكوب%20للأثاث%20-%20أود%20الاستفسار%20عن%20تفصيل%20أو%20شراء%20أثاث" target="_blank" rel="noopener noreferrer" class="px-6 py-3.5 rounded-xl bg-white hover:bg-wood-50 text-wood-900 border border-wood-300 font-bold text-sm flex items-center gap-2 transition" data-furn-i18n="btnWhatsapp">
+              <span>💬</span>
+              <span>استشارة عبر WhatsApp</span>
+            </a>
+          </div>
+
+          <!-- Quick Stats -->
+          <div class="grid grid-cols-3 gap-6 pt-8 border-t border-wood-200">
+            <div>
+              <p class="text-2xl sm:text-3xl font-bold text-wood-950 font-editorial">10</p>
+              <p class="text-xs text-wood-600 mt-0.5" data-furn-i18n="stat1">سنوات ضمان هيكلي</p>
+            </div>
+            <div>
+              <p class="text-2xl sm:text-3xl font-bold text-wood-950 font-editorial">100%</p>
+              <p class="text-xs text-wood-600 mt-0.5" data-furn-i18n="stat2">أخشاب أوروبية صلبة</p>
+            </div>
+            <div>
+              <p class="text-2xl sm:text-3xl font-bold text-wood-950 font-editorial">Custom</p>
+              <p class="text-xs text-wood-600 mt-0.5" data-furn-i18n="stat3">تفصيل حسب المخطط</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Large Visual -->
+        <div class="lg:col-span-6 relative">
+          <div class="relative rounded-3xl overflow-hidden shadow-2xl border border-wood-200/80 bg-white">
+            <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=1200&q=80" alt="Contemporary Luxury Furniture Suite" class="w-full h-[520px] object-cover">
+            
+            <!-- Floating Spec Card -->
+            <div class="absolute bottom-6 right-6 left-6 sm:left-auto bg-white/95 backdrop-blur-md p-5 rounded-2xl shadow-xl border border-wood-200 max-w-sm">
+              <span class="text-[10px] tracking-widest text-wood-500 font-bold uppercase">Featured Piece</span>
+              <h3 class="text-base font-bold text-wood-900 mt-0.5">كنبة فيرونا المنحنية بقماش البوكليه</h3>
+              <p class="text-xs text-wood-600 mt-1">هيكل من خشب الزان الأوروبي وقاعدة مدمجة بلمسات النحاس العتيق</p>
+              <div class="mt-3 pt-3 border-t border-wood-100 flex items-center justify-between text-xs">
+                <span class="font-bold text-wood-950">18,500 ر.س</span>
+                <button onclick="openProductModal('furn-sofa-verona')" class="text-wood-800 font-bold hover:underline">عرض التفاصيل &larr;</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       3. About the Brand (نبذة عن الشركة)
+       ========================================================================= -->
+  <section id="about" class="py-24 bg-white border-b border-wood-200/60">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        
+        <div class="lg:col-span-5 relative">
+          <div class="rounded-3xl overflow-hidden shadow-xl border border-wood-200">
+            <img src="https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?auto=format&fit=crop&w=1000&q=80" alt="Prime Scope Woodworking Atelier" class="w-full h-[460px] object-cover">
+          </div>
+          <div class="absolute -bottom-6 -left-6 bg-wood-900 text-wood-50 p-6 rounded-2xl shadow-2xl max-w-xs hidden sm:block">
+            <p class="font-editorial italic text-lg leading-snug">"الأثاث ليس مجرد استخدام، بل تجسيد لهدوء ووقار المكان."</p>
+          </div>
+        </div>
+
+        <div class="lg:col-span-7 space-y-6">
+          <div class="text-xs font-bold tracking-widest text-wood-600 uppercase" data-furn-i18n="aboutLabel">HERITAGE & ESSENCE</div>
+          <h2 class="text-3xl sm:text-4xl font-bold text-wood-950 font-editorial leading-tight" data-furn-i18n="aboutTitle">
+            نبذة عن Prime Scope للأثاث المعاصر
+          </h2>
+          <p class="text-base text-wood-700 leading-relaxed" data-furn-i18n="aboutP1">
+            تأسست علامة Prime Scope Furniture لترسيخ مفهوم جديد للأثاث الفاخر في المملكة؛ حيث يلتقي الطراز المعاصر الصافي مع أرقى معايير النجارة الأوروبية. لا نتبع الصيحات الاستهلاكية السريعة، بل نصوغ قطعاً ذات حضور بصري مهيب وشخصية مقتناة تناسب القصور والفلل الحديثة.
+          </p>
+          <p class="text-sm text-wood-600 leading-relaxed" data-furn-i18n="aboutP2">
+            نعمل بشراكة مباشرة مع أرقى ورش النجارة والدباغة في إيطاليا وإسبانيا، بالإضافة إلى خطوط تصنيع محلية متقدمة تتيح لنا تعديل المقاسات، واختيار تدرجات الخشب، وتطبيق تشطيبات النحاس المصقول حسب المخطط المعماري لكل عميل.
+          </p>
+          
+          <div class="grid grid-cols-2 gap-4 pt-4 text-xs font-semibold text-wood-800">
+            <div class="flex items-center gap-2 p-3 rounded-xl bg-wood-50 border border-wood-200">
+              <span class="text-wood-600 text-base">✓</span>
+              <span>خشب جوز وبلوط نخب أول</span>
+            </div>
+            <div class="flex items-center gap-2 p-3 rounded-xl bg-wood-50 border border-wood-200">
+              <span class="text-wood-600 text-base">✓</span>
+              <span>جلود توسكانية طبيعية 100%</span>
+            </div>
+            <div class="flex items-center gap-2 p-3 rounded-xl bg-wood-50 border border-wood-200">
+              <span class="text-wood-600 text-base">✓</span>
+              <span>أقمشة مقاومة للبقع وعالية الكثافة</span>
+            </div>
+            <div class="flex items-center gap-2 p-3 rounded-xl bg-wood-50 border border-wood-200">
+              <span class="text-wood-600 text-base">✓</span>
+              <span>فريق تركيب وتسليم White-Glove</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       4. Leadership Statement (كلمة إدارة الشركة)
+       ========================================================================= -->
+  <section id="leadership" class="py-20 bg-wood-900 text-wood-100 relative overflow-hidden">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+      
+      <div class="w-14 h-14 rounded-full bg-wood-800 border border-wood-700 flex items-center justify-center mx-auto mb-6 text-2xl font-editorial text-brand-gold">
+        ❝
+      </div>
+
+      <div class="text-xs font-bold tracking-widest text-wood-400 uppercase mb-3" data-furn-i18n="leaderLabel">LEADERSHIP STATEMENT</div>
+      <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold font-editorial text-white mb-8" data-furn-i18n="leaderTitle">
+        كلمة إدارة شركة برايم سكوب للأثاث
+      </h2>
+
+      <blockquote class="text-lg sm:text-xl text-wood-200 leading-relaxed font-light italic max-w-4xl mx-auto mb-8 font-editorial" data-furn-i18n="leaderQuote">
+        "إن تصميم المسكن الراقي هو تجربة روحية تبدأ من ملمس الخشب ودفء الجلوس. في برايم سكوب للأثاث، نلتزم بأن تكون كل قطعة دليلاً على براعة الصانع ودقة المعماري، لتبقى منازلكم واحة من السكينة والجمال الخالد الذي لا يبهت مع مرور السنين."
+      </blockquote>
+
+      <div>
+        <p class="font-bold text-white text-base font-sans" data-furn-i18n="leaderName">مجلس إدارة مجموعة برايم سكوب</p>
+        <p class="text-xs text-wood-400 mt-0.5" data-furn-i18n="leaderRole">الرياض، المملكة العربية السعودية</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       5. Vision, Mission & Values (رؤيتنا ورسالتنا وقيمنا)
+       ========================================================================= -->
+  <section class="py-24 bg-sand-50 border-b border-wood-200/60">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <div class="text-xs font-bold tracking-widest text-wood-600 uppercase mb-2" data-furn-i18n="vmvBadge">PURPOSE & PRINCIPLES</div>
+        <h2 class="text-3xl sm:text-4xl font-bold text-wood-950 font-editorial" data-furn-i18n="vmvTitle">رؤيتنا، رسالتنا، وقيمنا الراسخة</h2>
+        <p class="text-wood-600 text-sm mt-3" data-furn-i18n="vmvSub">المبادئ التوجيهية التي تصوغ معايير الجودة في كل قطعة نصنعها ونوردها.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        
+        <!-- Vision -->
+        <div class="bg-white p-8 rounded-3xl border border-wood-200 shadow-sm flex flex-col justify-between">
+          <div>
+            <div class="w-12 h-12 rounded-2xl bg-wood-100 flex items-center justify-center text-xl mb-6">👁️</div>
+            <h3 class="text-xl font-bold text-wood-950 mb-3" data-furn-i18n="visionTitle">رؤيتنا (Our Vision)</h3>
+            <p class="text-wood-600 text-sm leading-relaxed" data-furn-i18n="visionDesc">
+              أن نكون المرجع الأول في المملكة للعملاء والمكاتب الهندسية الباحثة عن أثاث معاصر يتمتع بهيبة القطع المقتناة وجدارة التصنيع الحرفي المستدام.
+            </p>
+          </div>
+        </div>
+
+        <!-- Mission -->
+        <div class="bg-white p-8 rounded-3xl border border-wood-200 shadow-sm flex flex-col justify-between">
+          <div>
+            <div class="w-12 h-12 rounded-2xl bg-wood-100 flex items-center justify-center text-xl mb-6">🎯</div>
+            <h3 class="text-xl font-bold text-wood-950 mb-3" data-furn-i18n="missionTitle">رسالتنا (Our Mission)</h3>
+            <p class="text-wood-600 text-sm leading-relaxed" data-furn-i18n="missionDesc">
+              تحويل المخططات والتخيلات المعمارية إلى فضاءات معيشية مريحة وساحرة عبر التوريد المباشر لأفخر الخامات وتفصيل الأثاث بما يلائم نمط الحياة العصري الرفيع.
+            </p>
+          </div>
+        </div>
+
+        <!-- Values -->
+        <div class="bg-white p-8 rounded-3xl border border-wood-200 shadow-sm flex flex-col justify-between">
+          <div>
+            <div class="w-12 h-12 rounded-2xl bg-wood-100 flex items-center justify-center text-xl mb-6">⚖️</div>
+            <h3 class="text-xl font-bold text-wood-950 mb-3" data-furn-i18n="valuesTitle">قيمنا (Core Values)</h3>
+            <p class="text-wood-600 text-sm leading-relaxed" data-furn-i18n="valuesDesc">
+              أصالة المادة الطبيعية، الشفافية المطلقة في المواصفات، الدقة الهندسية في التفصيل، والالتزام الصارم بمواعيد التسليم وفق أرقى المعايير.
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       6. Our Crafting & Sourcing Approach (منهجنا في التصميم والتصنيع)
+       ========================================================================= -->
+  <section id="approach" class="py-24 bg-white border-b border-wood-200/60">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <div class="text-xs font-bold tracking-widest text-wood-600 uppercase mb-2" data-furn-i18n="appBadge">THE 4-STAGE METHODOLOGY</div>
+        <h2 class="text-3xl sm:text-4xl font-bold text-wood-950 font-editorial" data-furn-i18n="appTitle">منهجنا في التصميم، التصنيع، والتوريد</h2>
+        <p class="text-wood-600 text-sm mt-3" data-furn-i18n="appSub">رحلة ولادة القطعة من اختيار جذوع الخشب وحتى تثبيتها في مكانها النهائي.</p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        
+        <!-- Step 1 -->
+        <div class="p-6 rounded-2xl bg-wood-50 border border-wood-200/80">
+          <span class="text-3xl font-editorial font-bold text-wood-400 block mb-3">01</span>
+          <h4 class="text-lg font-bold text-wood-950 mb-2" data-furn-i18n="step1Title">الدراسة المعمارية والمخطط</h4>
+          <p class="text-xs text-wood-600 leading-relaxed" data-furn-i18n="step1Desc">
+            تحليل مساحات الغرف ومسارات الحركة والارتفاعات لضمان التناسب البصري التام للأثاث داخل الفراغ.
+          </p>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="p-6 rounded-2xl bg-wood-50 border border-wood-200/80">
+          <span class="text-3xl font-editorial font-bold text-wood-400 block mb-3">02</span>
+          <h4 class="text-lg font-bold text-wood-950 mb-2" data-furn-i18n="step2Title">انتقاء الخامات النبيلة</h4>
+          <p class="text-xs text-wood-600 leading-relaxed" data-furn-i18n="step2Desc">
+            فرز ألواح الجوز والبلوط والتأكد من نسبة الرطوبة، مع اختيار عينات الجلود الإيطالية والأقمشة المضادة للبقع.
+          </p>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="p-6 rounded-2xl bg-wood-50 border border-wood-200/80">
+          <span class="text-3xl font-editorial font-bold text-wood-400 block mb-3">03</span>
+          <h4 class="text-lg font-bold text-wood-950 mb-2" data-furn-i18n="step3Title">النجارة الحرفية والتنجيد</h4>
+          <p class="text-xs text-wood-600 leading-relaxed" data-furn-i18n="step3Desc">
+            التشبيك الميكانيكي الصلب، النحت اليدوي للحواف، وتبطين المقاعد برغوة متعددة الكثافات لراحة فائقة.
+          </p>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="p-6 rounded-2xl bg-wood-50 border border-wood-200/80">
+          <span class="text-3xl font-editorial font-bold text-wood-400 block mb-3">04</span>
+          <h4 class="text-lg font-bold text-wood-950 mb-2" data-furn-i18n="step4Title">التسليم والتركيب الملكي</h4>
+          <p class="text-xs text-wood-600 leading-relaxed" data-furn-i18n="step4Desc">
+            نقل مخصص وتفريغ وتثبيت بأيدي فنيين متخصصين مع التلميع النهائي والفحص الشامل للقطع في الموقع.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       7. Categories & Product Catalog (أنواع الأثاث وتصنيف المنتجات)
+       ========================================================================= -->
+  <section id="catalog" class="py-24 bg-sand-100/60 border-b border-wood-200/60">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+        <div>
+          <div class="text-xs font-bold tracking-widest text-wood-600 uppercase mb-2" data-furn-i18n="catBadge">CURATED COLLECTIONS</div>
+          <h2 class="text-3xl sm:text-4xl font-bold text-wood-950 font-editorial" data-furn-i18n="catTitle">مجموعات الأثاث والتصاميم الحصرية</h2>
+          <p class="text-wood-600 text-sm mt-2" data-furn-i18n="catSub">تصفح تشكيلتنا من الصالونات، أجنحة النوم، غرف الطعام، والمكاتب التنفيذية.</p>
+        </div>
+
+        <!-- Categories Filter Tabs -->
+        <div id="categoryTabs" class="flex flex-wrap gap-2">
+          <button onclick="filterFurnCategory('all')" id="tab-furn-all" class="px-4 py-2 rounded-xl text-xs font-bold bg-wood-900 text-wood-50 transition">الكل</button>
+          <button onclick="filterFurnCategory('living-room')" id="tab-furn-living-room" class="px-4 py-2 rounded-xl text-xs font-bold bg-white text-wood-800 border border-wood-200 hover:bg-wood-100 transition">صالونات ومعيشة</button>
+          <button onclick="filterFurnCategory('bedroom')" id="tab-furn-bedroom" class="px-4 py-2 rounded-xl text-xs font-bold bg-white text-wood-800 border border-wood-200 hover:bg-wood-100 transition">أجنحة نوم</button>
+          <button onclick="filterFurnCategory('dining')" id="tab-furn-dining" class="px-4 py-2 rounded-xl text-xs font-bold bg-white text-wood-800 border border-wood-200 hover:bg-wood-100 transition">طاولات طعام</button>
+          <button onclick="filterFurnCategory('office')" id="tab-furn-office" class="px-4 py-2 rounded-xl text-xs font-bold bg-white text-wood-800 border border-wood-200 hover:bg-wood-100 transition">مكاتب تنفيذية</button>
+        </div>
+      </div>
+
+      <!-- Products Grid -->
+      <div id="furnProductsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Injected via JavaScript from PrimeAPI -->
+        <div class="col-span-full py-16 text-center text-wood-500">
+          <p>جاري تحميل كتالوج الأثاث الحصري...</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       8. Showcase Projects (معرض الأعمال والمشاريع المنجزة)
+       ========================================================================= -->
+  <section id="projects" class="py-24 bg-white border-b border-wood-200/60">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <div class="text-xs font-bold tracking-widest text-wood-600 uppercase mb-2" data-furn-i18n="projBadge">PORTFOLIO EXCELLENCE</div>
+        <h2 class="text-3xl sm:text-4xl font-bold text-wood-950 font-editorial" data-furn-i18n="projTitle">معرض المشاريع وأعمال التأثيث المنفذة</h2>
+        <p class="text-wood-600 text-sm mt-3" data-furn-i18n="projSub">نماذج من أعمالنا في تأثيث القصور الخاصة، أجنحة البنتهاوس، والفلل الراقية بالمملكة.</p>
+      </div>
+
+      <div id="furnProjectsGrid" class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- Injected via JavaScript from PrimeAPI -->
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       9. Achievements & Key Features (إنجازاتنا ومميزاتنا)
+       ========================================================================= -->
+  <section id="features" class="py-24 bg-sand-50 border-b border-wood-200/60">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <div class="text-xs font-bold tracking-widest text-wood-600 uppercase mb-2" data-furn-i18n="featBadge">DISTINCT ADVANTAGES</div>
+          <h2 class="text-3xl sm:text-4xl font-bold text-wood-950 font-editorial mb-6" data-furn-i18n="featTitle">
+            لماذا يختار كبار العملاء والمصممون أثاث Prime Scope؟
+          </h2>
+          <p class="text-wood-700 text-sm leading-relaxed mb-8" data-furn-i18n="featSub">
+            نجمع بين فخامة العلامات العالمية ومرونة الورش الخاصة؛ مما يمنحكم حرية كاملة في تخصيص أدق التفاصيل من الأبعاد إلى تدرج طلاء الأخشاب.
+          </p>
+
+          <div class="space-y-4">
+            <div class="p-4 rounded-2xl bg-white border border-wood-200 flex items-start gap-4">
+              <span class="w-9 h-9 rounded-xl bg-wood-100 flex items-center justify-center text-wood-800 font-bold shrink-0">01</span>
+              <div>
+                <h4 class="font-bold text-wood-950 text-sm mb-1">تعديل المقاسات والتفصيل حسب الطلب</h4>
+                <p class="text-xs text-wood-600 leading-relaxed">إمكانية زيادة أو تقليص أبعاد الكنب والطاولات والأسرة لتلائم مساقط غرفكم بدقة مليمترية.</p>
+              </div>
+            </div>
+
+            <div class="p-4 rounded-2xl bg-white border border-wood-200 flex items-start gap-4">
+              <span class="w-9 h-9 rounded-xl bg-wood-100 flex items-center justify-center text-wood-800 font-bold shrink-0">02</span>
+              <div>
+                <h4 class="font-bold text-wood-950 text-sm mb-1">أخشاب مصمتة معالجة ومجففة حرارياً</h4>
+                <p class="text-xs text-wood-600 leading-relaxed">استخدام أخشاب الزان والبلوط المجففة في أفران متطورة لتقاوم رطوبة وحرارة مناخ الخليج دون أي التواء.</p>
+              </div>
+            </div>
+
+            <div class="p-4 rounded-2xl bg-white border border-wood-200 flex items-start gap-4">
+              <span class="w-9 h-9 rounded-xl bg-wood-100 flex items-center justify-center text-wood-800 font-bold shrink-0">03</span>
+              <div>
+                <h4 class="font-bold text-wood-950 text-sm mb-1">ضمان ممتد 10 سنوات على الهيكل الداخلي</h4>
+                <p class="text-xs text-wood-600 leading-relaxed">ثقتنا المطلقة في جودة وصلات النجارة والمواد الإنشائية تجعلنا نقدم ضماناً حقيقياً مع خدمة صيانة معتمدة.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="relative">
+          <div class="rounded-3xl overflow-hidden shadow-2xl border border-wood-200">
+            <img src="https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?auto=format&fit=crop&w=1200&q=80" alt="Master Craftsmanship Detail" class="w-full h-[520px] object-cover">
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       10. Quote Request & WhatsApp (طلب عرض سعر والتواصل)
+       ========================================================================= -->
+  <section id="quote" class="py-24 bg-white border-b border-wood-200/60">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center mb-12">
+        <div class="text-xs font-bold tracking-widest text-wood-600 uppercase mb-2" data-furn-i18n="rfqBadge">BESPOKE INQUIRY</div>
+        <h2 class="text-3xl sm:text-4xl font-bold text-wood-950 font-editorial" data-furn-i18n="rfqTitle">طلب تسعير أثاث أو استشارة خاصة</h2>
+        <p class="text-wood-600 text-sm mt-3" data-furn-i18n="rfqSub">أدخل بيانات مشروعك وسيقوم مستشار الأثاث بالتواصل معك وتقديم عرض السعر والمواصفات.</p>
+      </div>
+
+      <!-- Form Box -->
+      <div class="bg-sand-50 p-8 sm:p-10 rounded-3xl border border-wood-200 shadow-sm">
+        <form id="furnQuoteForm" onsubmit="handleFurnQuoteSubmit(event)" class="space-y-6">
+          
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div>
+              <label class="block text-xs font-bold text-wood-800 uppercase tracking-wider mb-2" data-furn-i18n="formName">الاسم الكريم *</label>
+              <input type="text" id="furnName" required placeholder="مثال: المهندس عبدالعزيز" class="w-full px-4 py-3 rounded-xl bg-white border border-wood-300 text-wood-950 focus:outline-none focus:border-wood-600 text-sm">
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-wood-800 uppercase tracking-wider mb-2" data-furn-i18n="formPhone">رقم الجوال (WhatsApp) *</label>
+              <input type="tel" id="furnPhone" required placeholder="05xxxxxxxx" class="w-full px-4 py-3 rounded-xl bg-white border border-wood-300 text-wood-950 focus:outline-none focus:border-wood-600 text-sm">
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div>
+              <label class="block text-xs font-bold text-wood-800 uppercase tracking-wider mb-2" data-furn-i18n="formCity">المدينة / موقع المشروع *</label>
+              <select id="furnCity" class="w-full px-4 py-3 rounded-xl bg-white border border-wood-300 text-wood-950 focus:outline-none focus:border-wood-600 text-sm">
+                <option value="الرياض">الرياض</option>
+                <option value="جدة">جدة</option>
+                <option value="الدمام والخبر">الدمام والخبر</option>
+                <option value="مكة المكرمة">مكة المكرمة</option>
+                <option value="المدينة المنورة">المدينة المنورة</option>
+                <option value="أخرى">مدينة أخرى بالمملكة</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-wood-800 uppercase tracking-wider mb-2" data-furn-i18n="formType">نوع المشروع أو الغرفة المطلوبة</label>
+              <select id="furnType" class="w-full px-4 py-3 rounded-xl bg-white border border-wood-300 text-wood-950 focus:outline-none focus:border-wood-600 text-sm">
+                <option value="صالون معيشة كامل">صالون معيشة أو مجلس كامل</option>
+                <option value="جناح نوم رئيسي">جناح نوم رئيسي</option>
+                <option value="غرفة طعام وضيافة">طاولة طعام وكراسي ضيافة</option>
+                <option value="مكتب تنفيذي خاص">مكتب تنفيذي خاص</option>
+                <option value="تأثيث فيلا بالكامل">تأثيث فيلا أو قصر بالكامل</option>
+                <option value="قطعة مفردة محددة">قطعة أثاث محددة من الكتالوج</option>
+              </select>
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-wood-800 uppercase tracking-wider mb-2" data-furn-i18n="formNotes">ملاحظات أو مواصفات خاصة (أبعاد، لون الخشب، نوع القماش)</label>
+            <textarea id="furnNotes" rows="4" placeholder="اذكر أية أبعاد أو تفضيلات خاصة بالخامات..." class="w-full px-4 py-3 rounded-xl bg-white border border-wood-300 text-wood-950 focus:outline-none focus:border-wood-600 text-sm"></textarea>
+          </div>
+
+          <!-- Selected Product Indicator (Hidden unless prefilled) -->
+          <div id="furnSelectedProductBadge" class="hidden p-3 rounded-xl bg-wood-200/60 border border-wood-300 text-xs text-wood-900 font-semibold flex items-center justify-between">
+            <span>المنتج المحدد: <strong id="furnSelectedProductName"></strong></span>
+            <button type="button" onclick="clearSelectedFurnProduct()" class="text-wood-600 hover:text-wood-950 font-bold">إلغاء ✕</button>
+          </div>
+
+          <div class="flex flex-col sm:flex-row items-center gap-4 pt-2">
+            <button type="submit" id="furnSubmitBtn" class="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-wood-900 hover:bg-wood-800 text-wood-50 font-bold text-sm tracking-wide transition shadow-lg shadow-wood-900/10">
+              إرسال طلب التسعير المباشر
+            </button>
+
+            <button type="button" onclick="sendFurnWhatsAppDirect()" class="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-emerald-700 hover:bg-emerald-600 text-white font-bold text-sm flex items-center justify-center gap-2 transition">
+              <span>💬</span>
+              <span>إرسال فوراً عبر WhatsApp</span>
+            </button>
+          </div>
+
+          <div id="furnFormSuccess" class="hidden p-4 rounded-xl bg-emerald-50 border border-emerald-300 text-emerald-800 text-xs font-semibold text-center">
+            تم استلام طلبكم بنجاح! رقم المرجع: <span id="furnRefText"></span>. سيتواصل معكم مستشار الأثاث خلال وقت وجيز.
+          </div>
+
+        </form>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       11. Contact & Company Info (تواصل معنا وبيانات الشركة)
+       ========================================================================= -->
+  <section id="contact" class="py-20 bg-sand-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        
+        <!-- Showroom Location -->
+        <div class="p-8 rounded-3xl bg-white border border-wood-200 shadow-sm">
+          <div class="w-10 h-10 rounded-xl bg-wood-100 flex items-center justify-center text-lg mb-4">📍</div>
+          <h4 class="font-bold text-wood-950 text-base mb-1" data-furn-i18n="coord1Title">معرض واستوديو الأثاث</h4>
+          <p class="text-xs text-wood-600 leading-relaxed" data-furn-i18n="coord1Desc">المملكة العربية السعودية — الرياض — توريد وتركيب لجميع مناطق المملكة والخليج.</p>
+        </div>
+
+        <!-- Working Hours -->
+        <div class="p-8 rounded-3xl bg-white border border-wood-200 shadow-sm">
+          <div class="w-10 h-10 rounded-xl bg-wood-100 flex items-center justify-center text-lg mb-4">⏰</div>
+          <h4 class="font-bold text-wood-950 text-base mb-1" data-furn-i18n="coord2Title">ساعات العمل والاستشارات</h4>
+          <p class="text-xs text-wood-600 leading-relaxed" data-furn-i18n="coord2Desc">السبت إلى الخميس: 9:00 صباحاً – 10:00 مساءً<br>جلسات المعاينة الخاصة متاحة بحجز مسبق.</p>
+        </div>
+
+        <!-- Direct Direct Phone & WA -->
+        <div class="p-8 rounded-3xl bg-white border border-wood-200 shadow-sm">
+          <div class="w-10 h-10 rounded-xl bg-wood-100 flex items-center justify-center text-lg mb-4">📞</div>
+          <h4 class="font-bold text-wood-950 text-base mb-1" data-furn-i18n="coord3Title">الاتصال والمبيعات المباشرة</h4>
+          <p class="text-xs text-wood-600 leading-relaxed mb-3">هاتف واستشارات الأثاث المباشرة:</p>
+          <a href="tel:+966534248861" class="text-wood-950 font-bold hover:underline block text-sm">+966 53 424 8861</a>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       12. Independent Product Details Modal
+       ========================================================================= -->
+  <div id="productModal" class="fixed inset-0 z-50 hidden bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-4xl w-full max-h-[92vh] overflow-y-auto shadow-2xl border border-wood-200 relative p-6 sm:p-10">
+      
+      <!-- Close Button -->
+      <button onclick="closeProductModal()" class="absolute top-6 left-6 rtl:left-auto rtl:right-6 w-10 h-10 rounded-full bg-wood-100 hover:bg-wood-200 text-wood-800 font-bold flex items-center justify-center transition">
+        ✕
+      </button>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start mt-4">
+        
+        <!-- Image & Thumbnails -->
+        <div>
+          <div class="rounded-2xl overflow-hidden border border-wood-200 bg-wood-50 mb-4 h-72 sm:h-96">
+            <img id="modalMainImg" src="" alt="Product Detail" class="w-full h-full object-cover">
+          </div>
+          <div id="modalThumbnails" class="flex gap-3 overflow-x-auto pb-2">
+            <!-- Injected thumbnails -->
+          </div>
+        </div>
+
+        <!-- Info & Specifications -->
+        <div class="space-y-5">
+          <div>
+            <div class="flex items-center gap-2 mb-1">
+              <span id="modalStockStatus" class="px-2.5 py-0.5 rounded text-[11px] font-bold bg-emerald-100 text-emerald-800">متوفر</span>
+              <span id="modalTier" class="px-2.5 py-0.5 rounded text-[11px] font-bold bg-wood-100 text-wood-800">VIP Luxury</span>
+            </div>
+            <h2 id="modalTitle" class="text-2xl sm:text-3xl font-bold text-wood-950 font-editorial"></h2>
+            <p id="modalSubTitle" class="text-xs text-wood-500 mt-1"></p>
+          </div>
+
+          <p id="modalDesc" class="text-sm text-wood-700 leading-relaxed"></p>
+
+          <!-- Specs Box -->
+          <div class="p-4 rounded-2xl bg-wood-50 border border-wood-200/80 space-y-2 text-xs">
+            <div class="flex justify-between py-1 border-b border-wood-200/60">
+              <span class="text-wood-600">الأبعاد (Dimensions):</span>
+              <span id="modalDimensions" class="font-bold text-wood-950"></span>
+            </div>
+            <div class="flex justify-between py-1 border-b border-wood-200/60">
+              <span class="text-wood-600">نوع الخشب (Wood):</span>
+              <span id="modalWood" class="font-bold text-wood-950"></span>
+            </div>
+            <div class="flex justify-between py-1 border-b border-wood-200/60">
+              <span class="text-wood-600">القماش والجلد (Upholstery):</span>
+              <span id="modalFabric" class="font-bold text-wood-950"></span>
+            </div>
+            <div class="flex justify-between py-1 border-b border-wood-200/60">
+              <span class="text-wood-600">التشطيب المعدني (Hardware):</span>
+              <span id="modalFinish" class="font-bold text-wood-950"></span>
+            </div>
+            <div class="flex justify-between py-1">
+              <span class="text-wood-600">الضمان (Warranty):</span>
+              <span id="modalWarranty" class="font-bold text-wood-950"></span>
+            </div>
+          </div>
+
+          <!-- Price & Actions -->
+          <div class="pt-4 border-t border-wood-200 flex flex-col gap-3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs text-wood-600 font-semibold">السعر التقديري:</span>
+              <span id="modalPrice" class="text-xl font-bold text-wood-950 font-editorial"></span>
+            </div>
+
+            <div class="grid grid-cols-2 gap-3 pt-2">
+              <button onclick="requestThisProductQuote()" class="py-3 rounded-xl bg-wood-900 hover:bg-wood-800 text-wood-50 text-xs font-bold transition">
+                طلب تسعير لهذا الموديل
+              </button>
+              <button onclick="chatWhatsAppForThisProduct()" class="py-3 rounded-xl bg-emerald-700 hover:bg-emerald-600 text-white text-xs font-bold flex items-center justify-center gap-1.5 transition">
+                <span>💬</span>
+                <span>استفسار واتساب</span>
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       13. Footer
+       ========================================================================= -->
+  <footer class="bg-wood-950 text-wood-300 py-12 border-t border-wood-900 text-xs">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-6">
+      <div class="flex items-center gap-3">
+        <span class="font-editorial text-lg text-white font-bold">PRIME SCOPE FURNITURE</span>
+        <span class="text-wood-600">|</span>
+        <span class="text-wood-400">إحدى قطاعات مجموعة برايم سكوب التجارية</span>
+      </div>
+      <div class="flex items-center gap-6">
+        <a href="index.html" class="hover:text-white transition">🏛️ البوابة الرئيسية</a>
+        <a href="marble.html" class="hover:text-white transition">الرخام والأحجار</a>
+        <a href="curtains.html" class="hover:text-white transition">الستائر والأنسجة</a>
+        <a href="admin.html" class="hover:text-white transition">لوحة الإدارة</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- =========================================================================
+       14. Interactive Application Script
+       ========================================================================= -->
+  <script>
+    let activeFurnProducts = [];
+    let currentModalProduct = null;
+    let selectedProductIdForForm = null;
+
+    // Bilingual dictionary for Furniture
+    const FURN_I18N = {
+      ar: {
+        brandSub: 'الأثاث المعاصر والتصاميم الراقية',
+        navPortal: '🏛️ البوابة الرئيسية',
+        navAbout: 'عن العلامة',
+        navLeadership: 'كلمة الإدارة',
+        navApproach: 'منهجنا',
+        navCatalog: 'المجموعات والأثاث',
+        navProjects: 'مشاريعنا المنجزة',
+        navFeatures: 'المميزات',
+        navContact: 'تواصل معنا',
+        ctaQuote: 'طلب عرض سعر',
+        heroBadge: 'المجموعة المعاصرة للأثاث الراقي في المملكة',
+        heroTitle1: 'أثاث يُصاغ كـ',
+        heroTitle2: ' قطع فنية ',
+        heroTitle3: 'تتوارثها الأجيال',
+        heroSub: 'نصمم ونورد قطع أثاث معمارية بأسلوب Contemporary Luxury Editorial، تجمع بين دفء خشب الجوز والبلوط الأوروبي الطبيعي، وفخامة الجلد الإيطالي المدبوغ يدوياً، مع أبعاد وتفاصيل مخصصة لأرقى المساحات السكنية والقصور.',
+        btnCatalog: 'استكشف الكتالوج الحصري',
+        btnWhatsapp: 'استشارة عبر WhatsApp',
+        stat1: 'سنوات ضمان هيكلي',
+        stat2: 'أخشاب أوروبية صلبة',
+        stat3: 'تفصيل حسب المخطط',
+        aboutLabel: 'HERITAGE & ESSENCE',
+        aboutTitle: 'نبذة عن Prime Scope للأثاث المعاصر',
+        aboutP1: 'تأسست علامة Prime Scope Furniture لترسيخ مفهوم جديد للأثاث الفاخر في المملكة؛ حيث يلتقي الطراز المعاصر الصافي مع أرقى معايير النجارة الأوروبية. لا نتبع الصيحات الاستهلاكية السريعة، بل نصوغ قطعاً ذات حضور بصري مهيب وشخصية مقتناة تناسب القصور والفلل الحديثة.',
+        aboutP2: 'نعمل بشراكة مباشرة مع أرقى ورش النجارة والدباغة في إيطاليا وإسبانيا، بالإضافة إلى خطوط تصنيع محلية متقدمة تتيح لنا تعديل المقاسات، واختيار تدرجات الخشب، وتطبيق تشطيبات النحاس المصقول حسب المخطط المعماري لكل عميل.',
+        leaderLabel: 'LEADERSHIP STATEMENT',
+        leaderTitle: 'كلمة إدارة شركة برايم سكوب للأثاث',
+        leaderQuote: '\"إن تصميم المسكن الراقي هو تجربة روحية تبدأ من ملمس الخشب ودفء الجلوس. في برايم سكوب للأثاث، نلتزم بأن تكون كل قطعة دليلاً على براعة الصانع ودقة المعماري، لتبقى منازلكم واحة من السكينة والجمال الخالد الذي لا يبهت مع مرور السنين.\"',
+        leaderName: 'مجلس إدارة مجموعة برايم سكوب',
+        leaderRole: 'الرياض، المملكة العربية السعودية',
+        vmvBadge: 'PURPOSE & PRINCIPLES',
+        vmvTitle: 'رؤيتنا، رسالتنا، وقيمنا الراسخة',
+        vmvSub: 'المبادئ التوجيهية التي تصوغ معايير الجودة في كل قطعة نصنعها ونوردها.',
+        visionTitle: 'رؤيتنا (Our Vision)',
+        visionDesc: 'أن نكون المرجع الأول في المملكة للعملاء والمكاتب الهندسية الباحثة عن أثاث معاصر يتمتع بهيبة القطع المقتناة وجدارة التصنيع الحرفي المستدام.',
+        missionTitle: 'رسالتنا (Our Mission)',
+        missionDesc: 'تحويل المخططات والتخيلات المعمارية إلى فضاءات معيشية مريحة وساحرة عبر التوريد المباشر لأفخر الخامات وتفصيل الأثاث بما يلائم نمط الحياة العصري الرفيع.',
+        valuesTitle: 'قيمنا (Core Values)',
+        valuesDesc: 'أصالة المادة الطبيعية، الشفافية المطلقة في المواصفات، الدقة الهندسية في التفصيل، والالتزام الصارم بمواعيد التسليم وفق أرقى المعايير.',
+        appBadge: 'THE 4-STAGE METHODOLOGY',
+        appTitle: 'منهجنا في التصميم، التصنيع، والتوريد',
+        appSub: 'رحلة ولادة القطعة من اختيار جذوع الخشب وحتى تثبيتها في مكانها النهائي.',
+        step1Title: 'الدراسة المعمارية والمخطط',
+        step1Desc: 'تحليل مساحات الغرف ومسارات الحركة والارتفاعات لضمان التناسب البصري التام للأثاث داخل الفراغ.',
+        step2Title: 'انتقاء الخامات النبيلة',
+        step2Desc: 'فرز ألواح الجوز والبلوط والتأكد من نسبة الرطوبة، مع اختيار عينات الجلود الإيطالية والأقمشة المضادة للبقع.',
+        step3Title: 'النجارة الحرفية والتنجيد',
+        step3Desc: 'التشبيك الميكانيكي الصلب، النحت اليدوي للحواف، وتبطين المقاعد برغوة متعددة الكثافات لراحة فائقة.',
+        step4Title: 'التسليم والتركيب الملكي',
+        step4Desc: 'نقل مخصص وتفريغ وتثبيت بأيدي فنيين متخصصين مع التلميع النهائي والفحص الشامل للقطع في الموقع.',
+        catBadge: 'CURATED COLLECTIONS',
+        catTitle: 'مجموعات الأثاث والتصاميم الحصرية',
+        catSub: 'تصفح تشكيلتنا من الصالونات، أجنحة النوم، غرف الطعام، والمكاتب التنفيذية.',
+        projBadge: 'PORTFOLIO EXCELLENCE',
+        projTitle: 'معرض المشاريع وأعمال التأثيث المنفذة',
+        projSub: 'نماذج من أعمالنا في تأثيث القصور الخاصة، أجنحة البنتهاوس، والفلل الراقية بالمملكة.',
+        featBadge: 'DISTINCT ADVANTAGES',
+        featTitle: 'لماذا يختار كبار العملاء والمصممون أثاث Prime Scope؟',
+        featSub: 'نجمع بين فخامة العلامات العالمية ومرونة الورش الخاصة؛ مما يمنحكم حرية كاملة في تخصيص أدق التفاصيل من الأبعاد إلى تدرج طلاء الأخشاب.',
+        rfqBadge: 'BESPOKE INQUIRY',
+        rfqTitle: 'طلب تسعير أثاث أو استشارة خاصة',
+        rfqSub: 'أدخل بيانات مشروعك وسيقوم مستشار الأثاث بالتواصل معك وتقديم عرض السعر والمواصفات.',
+        formName: 'الاسم الكريم *',
+        formPhone: 'رقم الجوال (WhatsApp) *',
+        formCity: 'المدينة / موقع المشروع *',
+        formType: 'نوع المشروع أو الغرفة المطلوبة',
+        formNotes: 'ملاحظات أو مواصفات خاصة (أبعاد، لون الخشب، نوع القماش)',
+        coord1Title: 'معرض واستوديو الأثاث',
+        coord1Desc: 'المملكة العربية السعودية — الرياض — توريد وتركيب لجميع مناطق المملكة والخليج.',
+        coord2Title: 'ساعات العمل والاستشارات',
+        coord2Desc: 'السبت إلى الخميس: 9:00 صباحاً – 10:00 مساءً<br>جلسات المعاينة الخاصة متاحة بحجز مسبق.',
+        coord3Title: 'الاتصال والمبيعات المباشرة'
+      },
+      en: {
+        brandSub: 'Contemporary Luxury Bespoke Furniture',
+        navPortal: '🏛️ Main Portal',
+        navAbout: 'About',
+        navLeadership: 'Leadership',
+        navApproach: 'Approach',
+        navCatalog: 'Collections',
+        navProjects: 'Portfolio',
+        navFeatures: 'Advantages',
+        navContact: 'Contact',
+        ctaQuote: 'Request Quote',
+        heroBadge: 'Contemporary Luxury Furniture House in Saudi Arabia',
+        heroTitle1: 'Furniture Crafted as',
+        heroTitle2: ' Timeless Art ',
+        heroTitle3: 'Across Generations',
+        heroSub: 'We engineer bespoke architectural furniture defined by contemporary luxury editorial aesthetics, pairing European walnut, quartersawn oak, and hand-patinated Tuscan saddle leather tailored for luxury residences and palaces.',
+        btnCatalog: 'Explore Catalog',
+        btnWhatsapp: 'Consult via WhatsApp',
+        stat1: 'Years Structural Warranty',
+        stat2: 'Solid European Hardwoods',
+        stat3: 'Bespoke Blueprint Sizing',
+        aboutLabel: 'HERITAGE & ESSENCE',
+        aboutTitle: 'About Prime Scope Contemporary Furniture',
+        aboutP1: 'Prime Scope Furniture was conceived to redefine luxury living in Saudi Arabia. We reject transient consumer fads in favor of sculptural gravitas, architectural integrity, and enduring European joinery standards suited for private palaces and modern estates.',
+        aboutP2: 'Collaborating directly with artisan ateliers and leather tanneries in Italy and Spain, along with advanced local facilities, we offer bespoke sizing, wood tone selection, and hand-finished bronze hardware matching each architectural blueprint.',
+        leaderLabel: 'LEADERSHIP STATEMENT',
+        leaderTitle: 'Word from the Leadership',
+        leaderQuote: '\"Luxury living is a tactile journey rooted in the warmth of noble woods and the comfort of seating. At Prime Scope Furniture, we ensure every piece embodies master craftsmanship and architectural precision, creating an enduring sanctuary of peace.\"',
+        leaderName: 'Prime Scope Group Executive Board',
+        leaderRole: 'Riyadh, Kingdom of Saudi Arabia',
+        vmvBadge: 'PURPOSE & PRINCIPLES',
+        vmvTitle: 'Our Vision, Mission & Values',
+        vmvSub: 'Guiding standards that govern every curve and joint we produce.',
+        visionTitle: 'Our Vision',
+        visionDesc: 'To be the Kingdom\'s premier destination for discerning homeowners and architectural firms seeking contemporary furniture with collector-grade prestige.',
+        missionTitle: 'Our Mission',
+        missionDesc: 'Transform architectural blueprints into harmonious sanctuaries through direct noble material procurement and meticulous bespoke tailoring.',
+        valuesTitle: 'Core Values',
+        valuesDesc: 'Authenticity of raw materials, absolute specification transparency, joinery precision, and unwavering delivery integrity.',
+        appBadge: 'THE 4-STAGE METHODOLOGY',
+        appTitle: 'Our Design & Crafting Approach',
+        appSub: 'The journey from selecting timber flitches to white-glove site delivery.',
+        step1Title: 'Architectural Blueprint Study',
+        step1Desc: 'Analyzing sightlines, circulation paths, and ceiling heights to ensure flawless spatial proportion.',
+        step2Title: 'Noble Material Selection',
+        step2Desc: 'Grading kilned walnut and oak logs for moisture equilibrium, and pairing with top-grain Tuscan leathers.',
+        step3Title: 'Artisan Joinery & Upholstery',
+        step3Desc: 'Reinforced mortise-and-tenon framing, hand-sculpted edges, and ergonomic multi-density seating cores.',
+        step4Title: 'White-Glove Installation',
+        step4Desc: 'Specialized climate-controlled transit, on-site assembly, and micro-buffing by specialized technicians.',
+        catBadge: 'CURATED COLLECTIONS',
+        catTitle: 'Bespoke Furniture Collections',
+        catSub: 'Browse our curated living suites, royal master beds, dining credenzas, and executive desks.',
+        projBadge: 'PORTFOLIO EXCELLENCE',
+        projTitle: 'Realized Residential & Palace Portfolio',
+        projSub: 'A showcase of realized private palace interiors, penthouses, and architectural villas in KSA.',
+        featBadge: 'DISTINCT ADVANTAGES',
+        featTitle: 'Why Discerning Clients Choose Prime Scope Furniture',
+        featSub: 'We bridge the prestige of global design icons with the flexibility of custom ateliers, offering total customization freedom.',
+        rfqBadge: 'BESPOKE INQUIRY',
+        rfqTitle: 'Request a Furniture Quotation or Consultation',
+        rfqSub: 'Submit your project details and our furniture consultant will prepare your tailored specification and proposal.',
+        formName: 'Full Name *',
+        formPhone: 'Mobile (WhatsApp) *',
+        formCity: 'City / Location *',
+        formType: 'Requested Category / Suite',
+        formNotes: 'Notes or Custom Specs (Dimensions, Wood Finish, Fabrics)',
+        coord1Title: 'Furniture Atelier & Showroom',
+        coord1Desc: 'Kingdom of Saudi Arabia — Riyadh — Supply & Installation kingdom-wide.',
+        coord2Title: 'Studio Hours & Consultations',
+        coord2Desc: 'Saturday to Thursday: 9:00 AM – 10:00 PM<br>Private blueprint review available by appointment.',
+        coord3Title: 'Direct Inquiries & Sales'
+      }
+    };
+
+    let currentFurnLang = localStorage.getItem('primeLang') || 'ar';
+
+    function applyFurnLanguage() {
+      const isAr = currentFurnLang === 'ar';
+      document.body.className = `lang-${currentFurnLang} antialiased min-h-screen`;
+      document.documentElement.lang = currentFurnLang;
+      document.documentElement.dir = isAr ? 'rtl' : 'ltr';
+
+      const label = document.getElementById('furnLangLabel');
+      if (label) label.textContent = isAr ? 'English 🇬🇧' : 'عربي 🇸🇦';
+
+      document.querySelectorAll('[data-furn-i18n]').forEach(el => {
+        const key = el.getAttribute('data-furn-i18n');
+        if (FURN_I18N[currentFurnLang][key]) {
+          el.innerHTML = FURN_I18N[currentFurnLang][key];
+        }
+      });
+
+      renderFurnProducts();
+      renderFurnProjects();
+    }
+
+    function toggleFurnLanguage() {
+      currentFurnLang = currentFurnLang === 'ar' ? 'en' : 'ar';
+      localStorage.setItem('primeLang', currentFurnLang);
+      applyFurnLanguage();
+    }
+
+    // Load Products
+    async function loadFurnData() {
+      try {
+        activeFurnProducts = await window.PrimeAPI.getDivisionProducts('furniture', 'all');
+        renderFurnProducts();
+        
+        const projects = await window.PrimeAPI.getDivisionProjects('furniture', 'all');
+        renderFurnProjects(projects);
+      } catch(e) {
+        console.error("Error loading furniture data:", e);
+      }
+    }
+
+    function filterFurnCategory(catId) {
+      document.querySelectorAll('#categoryTabs button').forEach(btn => {
+        btn.className = "px-4 py-2 rounded-xl text-xs font-bold bg-white text-wood-800 border border-wood-200 hover:bg-wood-100 transition";
+      });
+      const activeBtn = document.getElementById(`tab-furn-${catId}`);
+      if (activeBtn) {
+        activeBtn.className = "px-4 py-2 rounded-xl text-xs font-bold bg-wood-900 text-wood-50 transition";
+      }
+
+      renderFurnProducts(catId);
+    }
+
+    function renderFurnProducts(catFilter = 'all') {
+      const grid = document.getElementById('furnProductsGrid');
+      if (!grid) return;
+
+      const items = catFilter === 'all' 
+        ? activeFurnProducts 
+        : activeFurnProducts.filter(p => p.categoryId === catFilter);
+
+      const isAr = currentFurnLang === 'ar';
+
+      if (items.length === 0) {
+        grid.innerHTML = `<div class="col-span-full py-12 text-center text-wood-500">لا توجد قطع حالياً في هذا القسم.</div>`;
+        return;
+      }
+
+      grid.innerHTML = items.map(p => {
+        const title = isAr ? p.nameAr : p.nameEn;
+        const desc = isAr ? p.descriptionAr : p.descriptionEn;
+        const img = (p.images && p.images[0]) || 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=800&q=80';
+        const priceFormatted = p.price ? `${Number(p.price).toLocaleString()} ر.س` : 'حسب المواصفات';
+        const stockBadge = p.stockStatus === 'available' ? 'متوفر' : (p.stockStatus === 'custom_made' ? 'تفصيل خاص' : 'حجز مسبق');
+
+        return `
+          <div class="product-card bg-white rounded-3xl overflow-hidden border border-wood-200/80 flex flex-col justify-between group">
+            <div>
+              <div class="relative h-64 overflow-hidden bg-wood-50">
+                <img src="${img}" alt="${title}" class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
+                <div class="absolute top-4 right-4 rtl:right-auto rtl:left-4">
+                  <span class="px-2.5 py-1 rounded-md text-[11px] font-bold bg-white/90 text-wood-900 shadow-sm backdrop-blur-sm">${stockBadge}</span>
+                </div>
+              </div>
+              <div class="p-6">
+                <span class="text-[10px] tracking-widest text-wood-500 font-bold uppercase">${p.priceTier || 'VIP Luxury'}</span>
+                <h3 class="text-lg font-bold text-wood-950 font-editorial mt-1 line-clamp-1">${title}</h3>
+                <p class="text-xs text-wood-600 mt-2 line-clamp-2 leading-relaxed">${desc}</p>
+                
+                <div class="mt-4 pt-3 border-t border-wood-100 flex items-center justify-between text-xs">
+                  <span class="font-bold text-wood-950">${priceFormatted}</span>
+                  <span class="text-wood-500 text-[11px]">${p.specs?.wood || 'خشب صلب'}</span>
+                </div>
+              </div>
+            </div>
+            
+            <div class="p-6 pt-0 grid grid-cols-2 gap-2">
+              <button onclick="openProductModal('${p.id}')" class="py-2.5 rounded-xl bg-wood-100 hover:bg-wood-200 text-wood-900 text-xs font-bold transition text-center">
+                المواصفات والصور
+              </button>
+              <button onclick="selectProductForQuote('${p.id}', '${title}')" class="py-2.5 rounded-xl bg-wood-900 hover:bg-wood-800 text-wood-50 text-xs font-bold transition text-center">
+                طلب تسعير
+              </button>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function renderFurnProjects(projects) {
+      const grid = document.getElementById('furnProjectsGrid');
+      if (!grid) return;
+
+      const pList = projects || [
+        {
+          titleAr: 'تأثيث قصر خاص بحي حطين، الرياض',
+          titleEn: 'Private Royal Palace Residence — Hittin, Riyadh',
+          scopeAr: 'تصميم وتصنيع كامل الصالونات الرسمية وأجنحة النوم الكبرى بأخشاب الجوز.',
+          heroImage: 'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=800&q=80',
+          locationAr: 'حي حطين، شمال الرياض'
+        },
+        {
+          titleAr: 'بنتهاوس برج المجدول التنفيذي',
+          titleEn: 'Executive Penthouse — Majdoul Tower, Riyadh',
+          scopeAr: 'أثاث معاصر بنمط Contemporary Editorial يجمع الجلد الإيطالي والبلوط المدخن.',
+          heroImage: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=800&q=80',
+          locationAr: 'طريق الملك فهد، الرياض'
+        },
+        {
+          titleAr: 'فيلا مودرن ساحلية — أبحر، جدة',
+          titleEn: 'Coastal Architectural Villa — Obhur, Jeddah',
+          scopeAr: 'أثاث متكامل بأقمشة البوكليه العاجية وأخشاب السنديان الفاتحة.',
+          heroImage: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=800&q=80',
+          locationAr: 'أبحر الشمالية، جدة'
+        }
+      ];
+
+      const isAr = currentFurnLang === 'ar';
+      grid.innerHTML = pList.map(proj => `
+        <div class="rounded-3xl overflow-hidden border border-wood-200/80 bg-white group shadow-sm">
+          <div class="relative h-64 overflow-hidden">
+            <img src="${proj.heroImage}" alt="${isAr ? proj.titleAr : proj.titleEn}" class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
+            <div class="absolute bottom-4 right-4 rtl:right-auto rtl:left-4 text-white text-xs font-semibold">
+              📍 ${isAr ? (proj.locationAr || 'الرياض') : (proj.locationEn || 'Riyadh')}
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-base font-bold text-wood-950 font-editorial mb-2">${isAr ? proj.titleAr : proj.titleEn}</h3>
+            <p class="text-xs text-wood-600 leading-relaxed">${isAr ? proj.scopeAr : proj.scopeEn}</p>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // Modal Details Logic
+    function openProductModal(id) {
+      const p = activeFurnProducts.find(item => item.id === id);
+      if (!p) return;
+      currentModalProduct = p;
+
+      const isAr = currentFurnLang === 'ar';
+      document.getElementById('modalTitle').textContent = isAr ? p.nameAr : p.nameEn;
+      document.getElementById('modalSubTitle').textContent = isAr ? (p.nameEn || '') : (p.nameAr || '');
+      document.getElementById('modalDesc').textContent = isAr ? p.descriptionAr : p.descriptionEn;
+      
+      const priceText = p.price ? `${Number(p.price).toLocaleString()} ر.س` : 'حسب المواصفات الخاصة';
+      document.getElementById('modalPrice').textContent = priceText;
+      document.getElementById('modalTier').textContent = p.priceTier || 'VIP Luxury';
+
+      // Specs
+      const s = p.specs || {};
+      document.getElementById('modalDimensions').textContent = s.dimensions || 'تحدد حسب المخطط';
+      document.getElementById('modalWood').textContent = s.wood || 'خشب صلب نخب أول';
+      document.getElementById('modalFabric').textContent = s.fabric || 'أقمشة إيطالية / جلد طبيعي';
+      document.getElementById('modalFinish').textContent = s.finish || 'تشطيب يدوي عالي المقاومة';
+      document.getElementById('modalWarranty').textContent = s.warranty || '10 سنوات هيكلية';
+
+      // Stock status
+      const stockEl = document.getElementById('modalStockStatus');
+      stockEl.textContent = p.stockStatus === 'available' ? 'متوفر للتسليم' : (p.stockStatus === 'custom_made' ? 'يصنع حسب الطلب' : 'حجز مسبق');
+
+      // Images & Thumbnails
+      const imgs = p.images && p.images.length > 0 ? p.images : ['https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=1000&q=80'];
+      document.getElementById('modalMainImg').src = imgs[0];
+
+      const thumbBox = document.getElementById('modalThumbnails');
+      thumbBox.innerHTML = imgs.map((imgSrc, idx) => `
+        <button type="button" onclick="setModalMainImg('${imgSrc}')" class="w-16 h-16 rounded-xl overflow-hidden border-2 ${idx === 0 ? 'border-wood-900' : 'border-transparent'} shrink-0">
+          <img src="${imgSrc}" class="w-full h-full object-cover">
+        </button>
+      `).join('');
+
+      document.getElementById('productModal').classList.remove('hidden');
+    }
+
+    function setModalMainImg(src) {
+      document.getElementById('modalMainImg').src = src;
+    }
+
+    function closeProductModal() {
+      document.getElementById('productModal').classList.add('hidden');
+      currentModalProduct = null;
+    }
+
+    function requestThisProductQuote() {
+      if (!currentModalProduct) return;
+      selectProductForQuote(currentModalProduct.id, currentModalProduct.nameAr);
+      closeProductModal();
+    }
+
+    function selectProductForQuote(id, name) {
+      selectedProductIdForForm = id;
+      const badge = document.getElementById('furnSelectedProductBadge');
+      const nameEl = document.getElementById('furnSelectedProductName');
+      if (badge && nameEl) {
+        nameEl.textContent = name;
+        badge.classList.remove('hidden');
+      }
+      const quoteSec = document.getElementById('quote');
+      if (quoteSec) quoteSec.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function clearSelectedFurnProduct() {
+      selectedProductIdForForm = null;
+      const badge = document.getElementById('furnSelectedProductBadge');
+      if (badge) badge.classList.add('hidden');
+    }
+
+    function chatWhatsAppForThisProduct() {
+      if (!currentModalProduct) return;
+      const text = encodeURIComponent(`مرحباً برايم سكوب للأثاث، أود الاستفسار عن تفاصيل وسعر: ${currentModalProduct.nameAr} (${currentModalProduct.nameEn || ''})`);
+      window.open(`https://wa.me/966534248861?text=${text}`, '_blank');
+    }
+
+    // Form Handling
+    async function handleFurnQuoteSubmit(e) {
+      e.preventDefault();
+      const btn = document.getElementById('furnSubmitBtn');
+      btn.disabled = true;
+      btn.textContent = 'جاري إرسال الطلب...';
+
+      const payload = {
+        serviceType: 'quote',
+        customerName: document.getElementById('furnName').value,
+        customerPhone: document.getElementById('furnPhone').value,
+        projectCity: document.getElementById('furnCity').value,
+        details: `${document.getElementById('furnType').value} - ${document.getElementById('furnNotes').value}`,
+        selectedProductId: selectedProductIdForForm,
+        selectedProductName: selectedProductIdForForm ? (currentModalProduct?.nameAr || 'منتج محدد') : null
+      };
+
+      try {
+        const res = await window.PrimeAPI.submitDivisionInquiry('furniture', payload);
+        const successBox = document.getElementById('furnFormSuccess');
+        const refText = document.getElementById('furnRefText');
+        if (successBox && refText) {
+          refText.textContent = res.inquiryRef;
+          successBox.classList.remove('hidden');
+        }
+        document.getElementById('furnQuoteForm').reset();
+        clearSelectedFurnProduct();
+      } catch(err) {
+        alert('حدث خطأ أثناء الإرسال. يرجى المحاولة أو التواصل عبر واتساب مباشرة.');
+      } finally {
+        btn.disabled = false;
+        btn.textContent = 'إرسال طلب التسعير المباشر';
+      }
+    }
+
+    function sendFurnWhatsAppDirect() {
+      const name = document.getElementById('furnName').value || 'عميل كريم';
+      const city = document.getElementById('furnCity').value;
+      const type = document.getElementById('furnType').value;
+      const notes = document.getElementById('furnNotes').value;
+      const prodText = selectedProductIdForForm ? ` (بخصوص: ${document.getElementById('furnSelectedProductName').textContent})` : '';
+
+      const msg = `مرحباً برايم سكوب للأثاث\nالاسم: ${name}\nالمدينة: ${city}\nنوع الطلب: ${type}${prodText}\nالملاحظات: ${notes}`;
+      window.open(`https://wa.me/966534248861?text=${encodeURIComponent(msg)}`, '_blank');
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      applyFurnLanguage();
+      loadFurnData();
+    });
+  </script>
+
+</body>
+</html>

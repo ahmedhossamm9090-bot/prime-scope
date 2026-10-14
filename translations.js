@@ -12,6 +12,7 @@ const TRANSLATIONS = {
     // Brand & Navigation
     brandName: 'برايم سكوب',
     brandTagline: 'منصة برايم سكوب للرخام والحجر الطبيعي المعمارية الفاخرة',
+    navPortal: 'البوابة الرئيسية',
     navHome: 'الرئيسية',
     navCatalog: 'كتالوج الخامات',
     navProjects: 'معرض المشاريع',
@@ -209,6 +210,7 @@ const TRANSLATIONS = {
     // Brand & Navigation
     brandName: 'PRIME SCOPE',
     brandTagline: 'Luxury Architectural Natural Stone & Marble Platform',
+    navPortal: 'Main Portal',
     navHome: 'Home',
     navCatalog: 'Materials Catalog',
     navProjects: 'Projects Showcase',
