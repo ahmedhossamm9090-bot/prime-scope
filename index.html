@@ -156,14 +156,14 @@
           <span id="langLabel" class="hidden xs:inline">English</span>
         </button>
 
-        <!-- Admin Access Button -->
-        <a href="admin.html" class="hidden sm:flex px-3.5 sm:px-4 py-2 rounded-xl text-xs font-bold bg-slate-900 text-slate-300 hover:text-brand-gold border border-slate-800 hover:border-brand-gold/40 transition items-center gap-1.5 shadow-sm">
+        <!-- Admin Access Button (Visible on all devices) -->
+        <a href="admin.html" class="flex px-2.5 sm:px-4 py-1.5 sm:py-2 rounded-xl text-xs font-bold bg-slate-900 text-brand-gold border border-brand-gold/40 hover:bg-slate-800 transition items-center gap-1.5 shadow-sm" title="لوحة الإدارة CMS">
           <svg class="w-3.5 h-3.5 text-brand-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
-          <span data-portal-i18n="navAdmin">لوحة الإدارة</span>
+          <span class="inline" data-portal-i18n="navAdmin">لوحة الإدارة</span>
         </a>
 
         <!-- Mobile Hamburger Menu Button -->
-        <button onclick="togglePortalMobileMenu(true)" class="md:hidden p-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-200 hover:text-brand-gold transition flex items-center justify-center">
+        <button onclick="togglePortalMobileMenu(true)" class="md:hidden p-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-200 hover:text-brand-gold transition flex items-center justify-center" aria-label="قائمة الموبايل">
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/></svg>
         </button>
       </div>
@@ -171,7 +171,7 @@
     </div>
 
     <!-- Mobile Drawer Overlay -->
-    <div id="portalMobileMenu" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden transition-opacity duration-300 flex flex-col justify-between p-6">
+    <div id="portalMobileMenu" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md hidden transition-opacity duration-300 flex flex-col justify-between p-6">
       <div class="space-y-6">
         <div class="flex items-center justify-between pb-4 border-b border-slate-800">
           <div class="flex items-center gap-3">
@@ -207,13 +207,16 @@
             <span class="text-xs text-brand-gold">دخول &larr;</span>
           </a>
 
-          <div class="pt-4 space-y-2 border-t border-slate-800/80 text-sm">
-            <a href="#about-group" onclick="togglePortalMobileMenu(false)" class="block p-2.5 text-slate-300 hover:text-brand-gold transition">رؤية وفلسفة المجموعة</a>
-            <a href="#contact" onclick="togglePortalMobileMenu(false)" class="block p-2.5 text-slate-300 hover:text-brand-gold transition">التواصل مع الإدارة العامة</a>
-            <a href="admin.html" class="block p-2.5 text-brand-gold font-bold flex items-center gap-2">
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
-              <span>لوحة الإدارة (Admin CMS)</span>
+          <div class="pt-4 space-y-2.5 border-t border-slate-800/80 text-sm">
+            <a href="admin.html" class="flex items-center justify-between p-3.5 rounded-2xl bg-amber-500/15 border border-brand-gold/60 text-brand-gold font-bold hover:bg-amber-500/25 transition">
+              <span class="flex items-center gap-2">
+                <svg class="w-4 h-4 text-brand-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+                <span>لوحة تحكم الإدارة (Admin CMS)</span>
+              </span>
+              <span class="text-xs">&larr;</span>
             </a>
+            <a href="#about-group" onclick="togglePortalMobileMenu(false)" class="block p-2 text-slate-300 hover:text-brand-gold transition">رؤية وفلسفة المجموعة</a>
+            <a href="#contact" onclick="togglePortalMobileMenu(false)" class="block p-2 text-slate-300 hover:text-brand-gold transition">التواصل مع الإدارة العامة</a>
           </div>
         </nav>
       </div>
@@ -683,7 +686,7 @@
     }
 
     function togglePortalMobileMenu(open) {
-      const menu = document.getElementById('portal-mobile-menu');
+      const menu = document.getElementById('portalMobileMenu');
       if (!menu) return;
       if (open) {
         menu.classList.remove('hidden');

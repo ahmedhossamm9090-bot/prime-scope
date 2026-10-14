@@ -149,6 +149,12 @@
           <span id="furnLangLabel">English 🇬🇧</span>
         </button>
 
+        <!-- Admin Access Button (Visible on mobile & desktop) -->
+        <a href="admin.html" class="px-2.5 sm:px-3 py-1.5 rounded-lg text-xs font-bold bg-wood-200 hover:bg-wood-300 text-wood-950 border border-wood-300 transition flex items-center gap-1 shadow-sm" title="لوحة الإدارة CMS">
+          <span>⚙️</span>
+          <span class="inline">الإدارة</span>
+        </a>
+
         <!-- Quote CTA (Desktop) -->
         <a href="#quote" class="hidden sm:inline-flex px-4 sm:px-5 py-2.5 rounded-xl bg-wood-900 hover:bg-wood-800 text-wood-50 text-xs font-bold tracking-wider transition shadow-sm" data-furn-i18n="ctaQuote">
           طلب عرض سعر
@@ -188,6 +194,16 @@
         <!-- Links List -->
         <nav class="flex flex-col gap-2.5 py-5 text-sm font-semibold text-wood-800">
           <a href="index.html" class="p-2.5 rounded-xl bg-wood-200/60 hover:bg-wood-200 text-wood-950 flex items-center gap-2">🏛️ البوابة الرئيسية (المجموعة)</a>
+          
+          <!-- Direct Admin Link inside Mobile Menu -->
+          <a href="admin.html" class="p-2.5 rounded-xl bg-wood-900 text-wood-100 hover:bg-wood-800 flex items-center justify-between font-bold text-xs shadow-sm">
+            <span class="flex items-center gap-2">
+              <span>⚙️</span>
+              <span>لوحة تحكم الإدارة (Admin CMS)</span>
+            </span>
+            <span>&larr;</span>
+          </a>
+
           <a href="#about" onclick="toggleFurnMobileMenu(false)" class="p-2.5 hover:bg-wood-100 rounded-xl">عن العلامة وفلسفتنا</a>
           <a href="#leadership" onclick="toggleFurnMobileMenu(false)" class="p-2.5 hover:bg-wood-100 rounded-xl">كلمة الإدارة</a>
           <a href="#approach" onclick="toggleFurnMobileMenu(false)" class="p-2.5 hover:bg-wood-100 rounded-xl">منهجنا في التصنيع والتوريد</a>
