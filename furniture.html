@@ -114,24 +114,24 @@
   <!-- =========================================================================
        1. Editorial Top Header
        ========================================================================= -->
-  <header class="sticky top-0 z-40 bg-[#FAF8F5]/90 backdrop-blur-md border-b border-wood-200/60 transition-all">
+  <header class="sticky top-0 z-40 bg-[#FAF8F5]/95 backdrop-blur-md border-b border-wood-200/60 transition-all">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
       
       <!-- Brand Logo -->
-      <a href="furniture.html" class="flex items-center gap-3 group">
-        <div class="w-10 h-10 rounded-lg bg-wood-900 text-wood-100 flex items-center justify-center font-editorial font-bold text-lg shadow-sm">
+      <a href="furniture.html" class="flex items-center gap-2.5 sm:gap-3 group">
+        <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-wood-900 text-wood-100 flex items-center justify-center font-editorial font-bold text-base sm:text-lg shadow-sm">
           PS
         </div>
         <div>
-          <span class="text-xl font-bold tracking-wider text-wood-950 font-editorial flex items-center gap-1.5">
-            PRIME SCOPE <span class="text-xs px-2 py-0.5 rounded bg-wood-200 text-wood-800 font-sans tracking-normal">FURNITURE</span>
+          <span class="text-lg sm:text-xl font-bold tracking-wider text-wood-950 font-editorial flex items-center gap-1.5">
+            PRIME SCOPE <span class="text-[10px] sm:text-xs px-1.5 sm:px-2 py-0.5 rounded bg-wood-200 text-wood-800 font-sans tracking-normal">FURNITURE</span>
           </span>
-          <p class="text-[11px] text-wood-600 tracking-wide" data-furn-i18n="brandSub">الأثاث المعاصر والتصاميم الراقية</p>
+          <p class="text-[10px] sm:text-[11px] text-wood-600 tracking-wide" data-furn-i18n="brandSub">الأثاث المعاصر والتصاميم الراقية</p>
         </div>
       </a>
 
-      <!-- Navigation Links -->
-      <nav class="hidden lg:flex items-center gap-7 text-xs font-semibold tracking-wide text-wood-800">
+      <!-- Navigation Links (Desktop) -->
+      <nav class="hidden lg:flex items-center gap-6 xl:gap-7 text-xs font-semibold tracking-wide text-wood-800">
         <a href="index.html" class="text-wood-600 hover:text-wood-950 flex items-center gap-1 transition" data-furn-i18n="navPortal">🏛️ البوابة الرئيسية</a>
         <a href="#about" class="hover:text-wood-950 transition" data-furn-i18n="navAbout">عن العلامة</a>
         <a href="#leadership" class="hover:text-wood-950 transition" data-furn-i18n="navLeadership">كلمة الإدارة</a>
@@ -143,20 +143,79 @@
       </nav>
 
       <!-- Action Buttons -->
-      <div class="flex items-center gap-3">
+      <div class="flex items-center gap-2 sm:gap-3">
         <!-- Language Switcher -->
-        <button onclick="toggleFurnLanguage()" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-wood-100 hover:bg-wood-200 text-wood-800 border border-wood-200 transition">
+        <button onclick="toggleFurnLanguage()" class="px-2.5 sm:px-3 py-1.5 rounded-lg text-xs font-bold bg-wood-100 hover:bg-wood-200 text-wood-800 border border-wood-200 transition">
           <span id="furnLangLabel">English 🇬🇧</span>
         </button>
 
-        <!-- Quote CTA -->
-        <a href="#quote" class="px-5 py-2.5 rounded-xl bg-wood-900 hover:bg-wood-800 text-wood-50 text-xs font-bold tracking-wider transition shadow-sm" data-furn-i18n="ctaQuote">
+        <!-- Quote CTA (Desktop) -->
+        <a href="#quote" class="hidden sm:inline-flex px-4 sm:px-5 py-2.5 rounded-xl bg-wood-900 hover:bg-wood-800 text-wood-50 text-xs font-bold tracking-wider transition shadow-sm" data-furn-i18n="ctaQuote">
           طلب عرض سعر
         </a>
+
+        <!-- Mobile Hamburger Button -->
+        <button onclick="toggleFurnMobileMenu(true)" class="lg:hidden p-2 rounded-xl bg-wood-100 hover:bg-wood-200 text-wood-900 transition" aria-label="قائمة الأثاث">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
       </div>
 
     </div>
   </header>
+
+  <!-- =========================================================================
+       Mobile Navigation Drawer for Furniture
+       ========================================================================= -->
+  <div id="furnMobileDrawer" class="fixed inset-0 z-50 hidden bg-black/60 backdrop-blur-sm transition-opacity">
+    <div class="fixed inset-y-0 start-0 max-w-xs w-full bg-[#FAF8F5] shadow-2xl p-6 flex flex-col justify-between overflow-y-auto">
+      <div>
+        <!-- Drawer Header -->
+        <div class="flex items-center justify-between pb-5 border-b border-wood-200">
+          <div class="flex items-center gap-2.5">
+            <div class="w-9 h-9 rounded-lg bg-wood-900 text-wood-100 flex items-center justify-center font-editorial font-bold text-sm">
+              PS
+            </div>
+            <div>
+              <span class="font-bold text-wood-950 font-editorial tracking-wider text-sm block">PRIME FURNITURE</span>
+              <span class="text-[10px] text-wood-600 block">الأثاث المعاصر الراقي</span>
+            </div>
+          </div>
+          <button onclick="toggleFurnMobileMenu(false)" class="p-2 rounded-xl bg-wood-100 hover:bg-wood-200 text-wood-700">
+            ✕
+          </button>
+        </div>
+
+        <!-- Links List -->
+        <nav class="flex flex-col gap-2.5 py-5 text-sm font-semibold text-wood-800">
+          <a href="index.html" class="p-2.5 rounded-xl bg-wood-200/60 hover:bg-wood-200 text-wood-950 flex items-center gap-2">🏛️ البوابة الرئيسية (المجموعة)</a>
+          <a href="#about" onclick="toggleFurnMobileMenu(false)" class="p-2.5 hover:bg-wood-100 rounded-xl">عن العلامة وفلسفتنا</a>
+          <a href="#leadership" onclick="toggleFurnMobileMenu(false)" class="p-2.5 hover:bg-wood-100 rounded-xl">كلمة الإدارة</a>
+          <a href="#approach" onclick="toggleFurnMobileMenu(false)" class="p-2.5 hover:bg-wood-100 rounded-xl">منهجنا في التصنيع والتوريد</a>
+          <a href="#catalog" onclick="toggleFurnMobileMenu(false)" class="p-2.5 hover:bg-wood-100 rounded-xl font-bold text-wood-950">المجموعات والكتالوج</a>
+          <a href="#projects" onclick="toggleFurnMobileMenu(false)" class="p-2.5 hover:bg-wood-100 rounded-xl">المشاريع المنجزة</a>
+          <a href="#features" onclick="toggleFurnMobileMenu(false)" class="p-2.5 hover:bg-wood-100 rounded-xl">المميزات والضمان 10 سنوات</a>
+          <a href="#contact" onclick="toggleFurnMobileMenu(false)" class="p-2.5 hover:bg-wood-100 rounded-xl">بيانات التواصل</a>
+          
+          <div class="pt-4 mt-2 border-t border-wood-200 flex flex-col gap-2 text-xs text-wood-600">
+            <span class="font-bold uppercase tracking-wider text-[11px] text-wood-500">المواقع الشقيقة للمجموعة:</span>
+            <a href="marble.html" class="p-2 rounded-lg hover:bg-wood-100 flex items-center gap-2">🏛️ الرخام والأحجار الطبيعية</a>
+            <a href="curtains.html" class="p-2 rounded-lg hover:bg-wood-100 flex items-center gap-2">🪟 الستائر وهندسة الأنسجة</a>
+          </div>
+        </nav>
+      </div>
+
+      <!-- Drawer Bottom CTAs -->
+      <div class="pt-5 border-t border-wood-200 space-y-2.5">
+        <a href="#quote" onclick="toggleFurnMobileMenu(false)" class="w-full py-3 rounded-xl bg-wood-900 text-wood-50 font-bold text-center text-xs block shadow">
+          طلب عرض سعر وتفصيل
+        </a>
+        <a href="https://wa.me/966534248861?text=مرحباً%20برايم%20سكوب%20للأثاث" target="_blank" class="w-full py-3 rounded-xl bg-emerald-700 hover:bg-emerald-600 text-white font-bold text-center text-xs flex items-center justify-center gap-2 shadow">
+          <span>💬</span>
+          <span>محادثة واتساب مباشرة</span>
+        </a>
+      </div>
+    </div>
+  </div>
 
   <!-- =========================================================================
        2. Hero Section (Contemporary Luxury Editorial)
@@ -215,14 +274,14 @@
         <!-- Right Large Visual -->
         <div class="lg:col-span-6 relative">
           <div class="relative rounded-3xl overflow-hidden shadow-2xl border border-wood-200/80 bg-white">
-            <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=1200&q=80" alt="Contemporary Luxury Furniture Suite" class="w-full h-[520px] object-cover">
+            <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=1200&q=80" alt="Contemporary Luxury Furniture Suite" class="w-full h-[360px] sm:h-[520px] object-cover">
             
             <!-- Floating Spec Card -->
-            <div class="absolute bottom-6 right-6 left-6 sm:left-auto bg-white/95 backdrop-blur-md p-5 rounded-2xl shadow-xl border border-wood-200 max-w-sm">
-              <span class="text-[10px] tracking-widest text-wood-500 font-bold uppercase">Featured Piece</span>
-              <h3 class="text-base font-bold text-wood-900 mt-0.5">كنبة فيرونا المنحنية بقماش البوكليه</h3>
-              <p class="text-xs text-wood-600 mt-1">هيكل من خشب الزان الأوروبي وقاعدة مدمجة بلمسات النحاس العتيق</p>
-              <div class="mt-3 pt-3 border-t border-wood-100 flex items-center justify-between text-xs">
+            <div class="absolute bottom-3 right-3 left-3 sm:bottom-6 sm:right-6 sm:left-auto bg-white/95 backdrop-blur-md p-3.5 sm:p-5 rounded-2xl shadow-xl border border-wood-200 sm:max-w-sm">
+              <span class="text-[9px] sm:text-[10px] tracking-widest text-wood-500 font-bold uppercase">Featured Piece</span>
+              <h3 class="text-sm sm:text-base font-bold text-wood-900 mt-0.5">كنبة فيرونا المنحنية بقماش البوكليه</h3>
+              <p class="text-[11px] sm:text-xs text-wood-600 mt-1 line-clamp-2">هيكل من خشب الزان الأوروبي وقاعدة مدمجة بلمسات النحاس العتيق</p>
+              <div class="mt-2.5 pt-2.5 border-t border-wood-100 flex items-center justify-between text-xs">
                 <span class="font-bold text-wood-950">18,500 ر.س</span>
                 <button onclick="openProductModal('furn-sofa-verona')" class="text-wood-800 font-bold hover:underline">عرض التفاصيل &larr;</button>
               </div>
@@ -437,12 +496,12 @@
         </div>
 
         <!-- Categories Filter Tabs -->
-        <div id="categoryTabs" class="flex flex-wrap gap-2">
-          <button onclick="filterFurnCategory('all')" id="tab-furn-all" class="px-4 py-2 rounded-xl text-xs font-bold bg-wood-900 text-wood-50 transition">الكل</button>
-          <button onclick="filterFurnCategory('living-room')" id="tab-furn-living-room" class="px-4 py-2 rounded-xl text-xs font-bold bg-white text-wood-800 border border-wood-200 hover:bg-wood-100 transition">صالونات ومعيشة</button>
-          <button onclick="filterFurnCategory('bedroom')" id="tab-furn-bedroom" class="px-4 py-2 rounded-xl text-xs font-bold bg-white text-wood-800 border border-wood-200 hover:bg-wood-100 transition">أجنحة نوم</button>
-          <button onclick="filterFurnCategory('dining')" id="tab-furn-dining" class="px-4 py-2 rounded-xl text-xs font-bold bg-white text-wood-800 border border-wood-200 hover:bg-wood-100 transition">طاولات طعام</button>
-          <button onclick="filterFurnCategory('office')" id="tab-furn-office" class="px-4 py-2 rounded-xl text-xs font-bold bg-white text-wood-800 border border-wood-200 hover:bg-wood-100 transition">مكاتب تنفيذية</button>
+        <div id="categoryTabs" class="flex items-center gap-2 overflow-x-auto pb-2 sm:pb-0 sm:flex-wrap max-w-full no-scrollbar">
+          <button onclick="filterFurnCategory('all')" id="tab-furn-all" class="px-4 py-2 rounded-xl text-xs font-bold bg-wood-900 text-wood-50 whitespace-nowrap transition">الكل</button>
+          <button onclick="filterFurnCategory('living-room')" id="tab-furn-living-room" class="px-4 py-2 rounded-xl text-xs font-bold bg-white text-wood-800 border border-wood-200 hover:bg-wood-100 whitespace-nowrap transition">صالونات ومعيشة</button>
+          <button onclick="filterFurnCategory('bedroom')" id="tab-furn-bedroom" class="px-4 py-2 rounded-xl text-xs font-bold bg-white text-wood-800 border border-wood-200 hover:bg-wood-100 whitespace-nowrap transition">أجنحة نوم</button>
+          <button onclick="filterFurnCategory('dining')" id="tab-furn-dining" class="px-4 py-2 rounded-xl text-xs font-bold bg-white text-wood-800 border border-wood-200 hover:bg-wood-100 whitespace-nowrap transition">طاولات طعام</button>
+          <button onclick="filterFurnCategory('office')" id="tab-furn-office" class="px-4 py-2 rounded-xl text-xs font-bold bg-white text-wood-800 border border-wood-200 hover:bg-wood-100 whitespace-nowrap transition">مكاتب تنفيذية</button>
         </div>
       </div>
 
@@ -715,7 +774,7 @@
               <span id="modalPrice" class="text-xl font-bold text-wood-950 font-editorial"></span>
             </div>
 
-            <div class="grid grid-cols-2 gap-3 pt-2">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
               <button onclick="requestThisProductQuote()" class="py-3 rounded-xl bg-wood-900 hover:bg-wood-800 text-wood-50 text-xs font-bold transition">
                 طلب تسعير لهذا الموديل
               </button>
@@ -1191,11 +1250,38 @@
       window.open(`https://wa.me/966534248861?text=${encodeURIComponent(msg)}`, '_blank');
     }
 
+    function toggleFurnMobileMenu(open) {
+      const drawer = document.getElementById('furnMobileDrawer');
+      if (!drawer) return;
+      if (open) {
+        drawer.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+      } else {
+        drawer.classList.add('hidden');
+        document.body.style.overflow = '';
+      }
+    }
+
     document.addEventListener('DOMContentLoaded', () => {
       applyFurnLanguage();
       loadFurnData();
     });
   </script>
+
+  <!-- =========================================================================
+       Mobile Floating Quick Contact Bar (Phone Only)
+       ========================================================================= -->
+  <div class="lg:hidden fixed bottom-4 inset-x-4 z-30 pointer-events-none">
+    <div class="pointer-events-auto bg-wood-950/95 backdrop-blur-md p-2 rounded-2xl shadow-2xl border border-wood-800 flex items-center justify-between gap-2 max-w-md mx-auto">
+      <a href="#quote" class="flex-1 py-2.5 px-3 rounded-xl bg-wood-900 text-wood-100 hover:text-white font-bold text-xs text-center transition">
+        📝 طلب تسعير وتفصيل
+      </a>
+      <a href="https://wa.me/966534248861?text=مرحباً%20برايم%20سكوب%20للأثاث" target="_blank" class="flex-1 py-2.5 px-3 rounded-xl bg-emerald-700 hover:bg-emerald-600 text-white font-bold text-xs text-center flex items-center justify-center gap-1.5 transition">
+        <span>💬</span>
+        <span>استشارة واتساب</span>
+      </a>
+    </div>
+  </div>
 
 </body>
 </html>

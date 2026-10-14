@@ -107,24 +107,27 @@
   <!-- =========================================================================
        1. Top Header
        ========================================================================= -->
-  <header class="sticky top-0 z-40 bg-[#FDFCF9]/90 backdrop-blur-md border-b border-textile-200/60 transition-all">
+  <!-- =========================================================================
+       1. Editorial Curtains Header
+       ========================================================================= -->
+  <header class="sticky top-0 z-40 bg-[#FDFCF9]/95 backdrop-blur-md border-b border-textile-200/60 transition-all">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
       
       <!-- Brand Logo -->
-      <a href="curtains.html" class="flex items-center gap-3 group">
-        <div class="w-10 h-10 rounded-lg bg-textile-900 text-textile-100 flex items-center justify-center font-editorial font-bold text-lg shadow-sm border border-champagne/40">
+      <a href="curtains.html" class="flex items-center gap-2.5 sm:gap-3 group">
+        <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-textile-900 text-textile-100 flex items-center justify-center font-editorial font-bold text-base sm:text-lg shadow-sm border border-champagne/40">
           PC
         </div>
         <div>
-          <span class="text-xl font-bold tracking-wider text-textile-900 font-editorial flex items-center gap-1.5">
-            PRIME SCOPE <span class="text-xs px-2 py-0.5 rounded bg-champagne/15 text-champagneDark font-sans tracking-normal border border-champagne/30">CURTAINS</span>
+          <span class="text-lg sm:text-xl font-bold tracking-wider text-textile-900 font-editorial flex items-center gap-1.5">
+            PRIME SCOPE <span class="text-[10px] sm:text-xs px-1.5 sm:px-2 py-0.5 rounded bg-champagne/15 text-champagneDark font-sans tracking-normal border border-champagne/30">CURTAINS</span>
           </span>
-          <p class="text-[11px] text-stoneWarm tracking-wide" data-curt-i18n="brandSub">هندسة الأنسجة الديكورية والستائر الفاخرة</p>
+          <p class="text-[10px] sm:text-[11px] text-stoneWarm tracking-wide" data-curt-i18n="brandSub">هندسة الأنسجة الديكورية والستائر الفاخرة</p>
         </div>
       </a>
 
-      <!-- Navigation Links -->
-      <nav class="hidden lg:flex items-center gap-7 text-xs font-semibold tracking-wide text-textile-800">
+      <!-- Navigation Links (Desktop) -->
+      <nav class="hidden lg:flex items-center gap-6 xl:gap-7 text-xs font-semibold tracking-wide text-textile-800">
         <a href="index.html" class="text-stoneWarm hover:text-textile-900 flex items-center gap-1 transition" data-curt-i18n="navPortal">🏛️ البوابة الرئيسية</a>
         <a href="#about" class="hover:text-textile-900 transition" data-curt-i18n="navAbout">عن الاستوديو</a>
         <a href="#leadership" class="hover:text-textile-900 transition" data-curt-i18n="navLeadership">كلمة الإدارة</a>
@@ -136,20 +139,79 @@
       </nav>
 
       <!-- Action Buttons -->
-      <div class="flex items-center gap-3">
+      <div class="flex items-center gap-2 sm:gap-3">
         <!-- Language Switcher -->
-        <button onclick="toggleCurtLanguage()" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-textile-100 hover:bg-textile-200 text-textile-800 border border-textile-200 transition">
+        <button onclick="toggleCurtLanguage()" class="px-2.5 sm:px-3 py-1.5 rounded-lg text-xs font-bold bg-textile-100 hover:bg-textile-200 text-textile-800 border border-textile-200 transition">
           <span id="curtLangLabel">English 🇬🇧</span>
         </button>
 
-        <!-- Measurement CTA -->
-        <a href="#measurement" class="px-5 py-2.5 rounded-xl bg-textile-900 hover:bg-textile-800 text-white text-xs font-bold tracking-wider transition shadow-sm border border-champagne/40" data-curt-i18n="ctaMeasurement">
+        <!-- Measurement CTA (Desktop) -->
+        <a href="#measurement" class="hidden sm:inline-flex px-4 sm:px-5 py-2.5 rounded-xl bg-textile-900 hover:bg-textile-800 text-white text-xs font-bold tracking-wider transition shadow-sm border border-champagne/40" data-curt-i18n="ctaMeasurement">
           طلب معاينة وقياس
         </a>
+
+        <!-- Mobile Hamburger Button -->
+        <button onclick="toggleCurtMobileMenu(true)" class="lg:hidden p-2 rounded-xl bg-textile-100 hover:bg-textile-200 text-textile-900 transition" aria-label="قائمة الستائر">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
       </div>
 
     </div>
   </header>
+
+  <!-- =========================================================================
+       Mobile Navigation Drawer for Curtains
+       ========================================================================= -->
+  <div id="curtMobileDrawer" class="fixed inset-0 z-50 hidden bg-black/60 backdrop-blur-sm transition-opacity">
+    <div class="fixed inset-y-0 start-0 max-w-xs w-full bg-[#FDFCF9] shadow-2xl p-6 flex flex-col justify-between overflow-y-auto">
+      <div>
+        <!-- Drawer Header -->
+        <div class="flex items-center justify-between pb-5 border-b border-textile-200">
+          <div class="flex items-center gap-2.5">
+            <div class="w-9 h-9 rounded-lg bg-textile-900 text-textile-100 flex items-center justify-center font-editorial font-bold text-sm border border-champagne/40">
+              PC
+            </div>
+            <div>
+              <span class="font-bold text-textile-950 font-editorial tracking-wider text-sm block">PRIME CURTAINS</span>
+              <span class="text-[10px] text-stoneWarm block">هندسة الأنسجة والستائر</span>
+            </div>
+          </div>
+          <button onclick="toggleCurtMobileMenu(false)" class="p-2 rounded-xl bg-textile-100 hover:bg-textile-200 text-textile-700">
+            ✕
+          </button>
+        </div>
+
+        <!-- Links List -->
+        <nav class="flex flex-col gap-2.5 py-5 text-sm font-semibold text-textile-800">
+          <a href="index.html" class="p-2.5 rounded-xl bg-champagne/10 hover:bg-champagne/20 text-textile-950 flex items-center gap-2">🏛️ البوابة الرئيسية (المجموعة)</a>
+          <a href="#about" onclick="toggleCurtMobileMenu(false)" class="p-2.5 hover:bg-textile-100 rounded-xl">عن الاستوديو وفلسفتنا</a>
+          <a href="#leadership" onclick="toggleCurtMobileMenu(false)" class="p-2.5 hover:bg-textile-100 rounded-xl">كلمة الإدارة</a>
+          <a href="#methodology" onclick="toggleCurtMobileMenu(false)" class="p-2.5 hover:bg-textile-100 rounded-xl">المنهج وهندسة القياس</a>
+          <a href="#types" onclick="toggleCurtMobileMenu(false)" class="p-2.5 hover:bg-textile-100 rounded-xl font-bold text-textile-950">أنواع وتصنيفات الستائر</a>
+          <a href="#fabrics" onclick="toggleCurtMobileMenu(false)" class="p-2.5 hover:bg-textile-100 rounded-xl">الخامات والأقمشة الأوروبية</a>
+          <a href="#projects" onclick="toggleCurtMobileMenu(false)" class="p-2.5 hover:bg-textile-100 rounded-xl">معرض المشاريع المنجزة</a>
+          <a href="#contact" onclick="toggleCurtMobileMenu(false)" class="p-2.5 hover:bg-textile-100 rounded-xl">تواصل معنا وبيانات الشركة</a>
+          
+          <div class="pt-4 mt-2 border-t border-textile-200 flex flex-col gap-2 text-xs text-stoneWarm">
+            <span class="font-bold uppercase tracking-wider text-[11px] text-champagneDark">المواقع الشقيقة للمجموعة:</span>
+            <a href="marble.html" class="p-2 rounded-lg hover:bg-textile-100 flex items-center gap-2">🏛️ الرخام والأحجار الطبيعية</a>
+            <a href="furniture.html" class="p-2 rounded-lg hover:bg-textile-100 flex items-center gap-2">🛋️ الأثاث المعاصر الراقي</a>
+          </div>
+        </nav>
+      </div>
+
+      <!-- Drawer Bottom CTAs -->
+      <div class="pt-5 border-t border-textile-200 space-y-2.5">
+        <a href="#measurement" onclick="toggleCurtMobileMenu(false)" class="w-full py-3 rounded-xl bg-textile-900 text-white font-bold text-center text-xs block shadow border border-champagne/40">
+          طلب معاينة وقياس مجاني
+        </a>
+        <a href="https://wa.me/966534248861?text=مرحباً%20برايم%20سكوب%20للستائر" target="_blank" class="w-full py-3 rounded-xl bg-emerald-700 hover:bg-emerald-600 text-white font-bold text-center text-xs flex items-center justify-center gap-2 shadow">
+          <span>💬</span>
+          <span>محادثة استشارية واتساب</span>
+        </a>
+      </div>
+    </div>
+  </div>
 
   <!-- =========================================================================
        2. Hero Section (Panoramic Architectural Textiles)
@@ -208,14 +270,14 @@
         <!-- Right Visual (Full Height Flowing Drape) -->
         <div class="lg:col-span-6 relative">
           <div class="relative rounded-3xl overflow-hidden shadow-2xl border border-textile-200/80 bg-white">
-            <img src="https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1200&q=80" alt="Architectural Flowing Wave Curtains" class="w-full h-[520px] object-cover">
+            <img src="https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1200&q=80" alt="Architectural Flowing Wave Curtains" class="w-full h-[360px] sm:h-[520px] object-cover">
             
             <!-- Floating Feature Banner -->
-            <div class="absolute bottom-6 right-6 left-6 sm:left-auto bg-white/95 backdrop-blur-md p-5 rounded-2xl shadow-xl border border-textile-200 max-w-sm">
-              <span class="text-[10px] tracking-widest text-champagneDark font-bold uppercase">Signature Textile</span>
-              <h3 class="text-base font-bold text-textile-900 mt-0.5">ستائر الكتان الطبيعي بنظام التموج السويسري</h3>
-              <p class="text-xs text-stoneWarm mt-1">سقوط قماش ناعم بوزن 380 جم/م² مع مسارات ألومنيوم مخفية صامتة</p>
-              <div class="mt-3 pt-3 border-t border-textile-100 flex items-center justify-between text-xs">
+            <div class="absolute bottom-3 right-3 left-3 sm:bottom-6 sm:right-6 sm:left-auto bg-white/95 backdrop-blur-md p-3.5 sm:p-5 rounded-2xl shadow-xl border border-textile-200 sm:max-w-sm">
+              <span class="text-[9px] sm:text-[10px] tracking-widest text-champagneDark font-bold uppercase">Signature Textile</span>
+              <h3 class="text-sm sm:text-base font-bold text-textile-900 mt-0.5">ستائر الكتان الطبيعي بنظام التموج السويسري</h3>
+              <p class="text-[11px] sm:text-xs text-stoneWarm mt-1 line-clamp-2">سقوط قماش ناعم بوزن 380 جم/م² مع مسارات ألومنيوم مخفية صامتة</p>
+              <div class="mt-2.5 pt-2.5 border-t border-textile-100 flex items-center justify-between text-xs">
                 <span class="font-bold text-textile-950">480 ر.س / م.ط</span>
                 <button onclick="openCurtModal('curt-wave-linen')" class="text-champagneDark font-bold hover:underline">عرض الخصائص &larr;</button>
               </div>
@@ -374,12 +436,12 @@
         </div>
 
         <!-- Filter tabs -->
-        <div id="curtCategoryTabs" class="flex flex-wrap gap-2">
-          <button onclick="filterCurtCategory('all')" id="tab-curt-all" class="px-4 py-2 rounded-xl text-xs font-bold bg-textile-900 text-white transition">الكل</button>
-          <button onclick="filterCurtCategory('wave')" id="tab-curt-wave" class="px-4 py-2 rounded-xl text-xs font-bold bg-textile-100 text-textile-900 border border-textile-200 hover:bg-textile-200 transition">تموج Wave</button>
-          <button onclick="filterCurtCategory('motorized')" id="tab-curt-motorized" class="px-4 py-2 rounded-xl text-xs font-bold bg-textile-100 text-textile-900 border border-textile-200 hover:bg-textile-200 transition">رول ذكية (Somfy)</button>
-          <button onclick="filterCurtCategory('blackout')" id="tab-curt-blackout" class="px-4 py-2 rounded-xl text-xs font-bold bg-textile-100 text-textile-900 border border-textile-200 hover:bg-textile-200 transition">بلاك آوت فندقي</button>
-          <button onclick="filterCurtCategory('sheer')" id="tab-curt-sheer" class="px-4 py-2 rounded-xl text-xs font-bold bg-textile-100 text-textile-900 border border-textile-200 hover:bg-textile-200 transition">شير وكتان ناعم</button>
+        <div id="curtCategoryTabs" class="flex items-center gap-2 overflow-x-auto pb-2 sm:pb-0 sm:flex-wrap max-w-full no-scrollbar">
+          <button onclick="filterCurtCategory('all')" id="tab-curt-all" class="px-4 py-2 rounded-xl text-xs font-bold bg-textile-900 text-white whitespace-nowrap transition">الكل</button>
+          <button onclick="filterCurtCategory('wave')" id="tab-curt-wave" class="px-4 py-2 rounded-xl text-xs font-bold bg-textile-100 text-textile-900 border border-textile-200 hover:bg-textile-200 whitespace-nowrap transition">تموج Wave</button>
+          <button onclick="filterCurtCategory('motorized')" id="tab-curt-motorized" class="px-4 py-2 rounded-xl text-xs font-bold bg-textile-100 text-textile-900 border border-textile-200 hover:bg-textile-200 whitespace-nowrap transition">رول ذكية (Somfy)</button>
+          <button onclick="filterCurtCategory('blackout')" id="tab-curt-blackout" class="px-4 py-2 rounded-xl text-xs font-bold bg-textile-100 text-textile-900 border border-textile-200 hover:bg-textile-200 whitespace-nowrap transition">بلاك آوت فندقي</button>
+          <button onclick="filterCurtCategory('sheer')" id="tab-curt-sheer" class="px-4 py-2 rounded-xl text-xs font-bold bg-textile-100 text-textile-900 border border-textile-200 hover:bg-textile-200 whitespace-nowrap transition">شير وكتان ناعم</button>
         </div>
       </div>
 
@@ -685,7 +747,7 @@
               <span id="curtModalPrice" class="text-xl font-bold text-textile-950 font-editorial"></span>
             </div>
 
-            <div class="grid grid-cols-2 gap-3 pt-2">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
               <button onclick="requestThisCurtQuote()" class="py-3 rounded-xl bg-textile-900 hover:bg-textile-800 text-white text-xs font-bold transition">
                 طلب معاينة لهذه الستارة
               </button>
@@ -1142,11 +1204,38 @@
       window.open(`https://wa.me/966534248861?text=${encodeURIComponent(msg)}`, '_blank');
     }
 
+    function toggleCurtMobileMenu(open) {
+      const drawer = document.getElementById('curtMobileDrawer');
+      if (!drawer) return;
+      if (open) {
+        drawer.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+      } else {
+        drawer.classList.add('hidden');
+        document.body.style.overflow = '';
+      }
+    }
+
     document.addEventListener('DOMContentLoaded', () => {
       applyCurtLanguage();
       loadCurtData();
     });
   </script>
+
+  <!-- =========================================================================
+       Mobile Floating Quick Contact Bar (Phone Only)
+       ========================================================================= -->
+  <div class="lg:hidden fixed bottom-4 inset-x-4 z-30 pointer-events-none">
+    <div class="pointer-events-auto bg-textile-900/95 backdrop-blur-md p-2 rounded-2xl shadow-2xl border border-textile-800 flex items-center justify-between gap-2 max-w-md mx-auto">
+      <a href="#measurement" class="flex-1 py-2.5 px-3 rounded-xl bg-textile-800 text-champagne hover:text-white font-bold text-xs text-center border border-champagne/30 transition">
+        📏 طلب معاينة وقياس
+      </a>
+      <a href="https://wa.me/966534248861?text=مرحباً%20برايم%20سكوب%20للستائر" target="_blank" class="flex-1 py-2.5 px-3 rounded-xl bg-emerald-700 hover:bg-emerald-600 text-white font-bold text-xs text-center flex items-center justify-center gap-1.5 transition">
+        <span>💬</span>
+        <span>محادثة واتساب</span>
+      </a>
+    </div>
+  </div>
 
 </body>
 </html>

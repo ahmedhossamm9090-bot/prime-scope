@@ -145,24 +145,85 @@
       </a>
 
       <!-- Navigation & Action -->
-      <div class="flex items-center gap-4 sm:gap-6">
+      <div class="flex items-center gap-2 sm:gap-4 md:gap-6">
         <a href="#sectors" class="hidden md:inline-block text-sm text-slate-300 hover:text-brand-gold transition" data-portal-i18n="navSectors">قطاعاتنا الثلاثة</a>
         <a href="#about-group" class="hidden md:inline-block text-sm text-slate-300 hover:text-brand-gold transition" data-portal-i18n="navPhilosophy">رؤية المجموعة</a>
         <a href="#contact" class="hidden sm:inline-block text-sm text-slate-300 hover:text-brand-gold transition" data-portal-i18n="navContact">تواصل معنا</a>
 
         <!-- Language Switcher -->
-        <button id="langToggleBtn" onclick="togglePortalLanguage()" class="px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-800/80 hover:bg-slate-700 text-slate-200 border border-slate-700 transition flex items-center gap-1.5">
+        <button id="langToggleBtn" onclick="togglePortalLanguage()" class="px-2.5 sm:px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-800/80 hover:bg-slate-700 text-slate-200 border border-slate-700 transition flex items-center gap-1">
           <span>🇬🇧</span>
-          <span id="langLabel">English</span>
+          <span id="langLabel" class="hidden xs:inline">English</span>
         </button>
 
         <!-- Admin Access Button -->
-        <a href="admin.html" class="px-4 py-2 rounded-xl text-xs font-bold bg-slate-900 text-slate-300 hover:text-brand-gold border border-slate-800 hover:border-brand-gold/40 transition flex items-center gap-2 shadow-sm">
+        <a href="admin.html" class="hidden sm:flex px-3.5 sm:px-4 py-2 rounded-xl text-xs font-bold bg-slate-900 text-slate-300 hover:text-brand-gold border border-slate-800 hover:border-brand-gold/40 transition items-center gap-1.5 shadow-sm">
           <svg class="w-3.5 h-3.5 text-brand-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
           <span data-portal-i18n="navAdmin">لوحة الإدارة</span>
         </a>
+
+        <!-- Mobile Hamburger Menu Button -->
+        <button onclick="togglePortalMobileMenu(true)" class="md:hidden p-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-200 hover:text-brand-gold transition flex items-center justify-center">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/></svg>
+        </button>
       </div>
 
+    </div>
+
+    <!-- Mobile Drawer Overlay -->
+    <div id="portalMobileMenu" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden transition-opacity duration-300 flex flex-col justify-between p-6">
+      <div class="space-y-6">
+        <div class="flex items-center justify-between pb-4 border-b border-slate-800">
+          <div class="flex items-center gap-3">
+            <img src="logo.png" alt="Prime Scope Logo" class="w-8 h-8 object-contain">
+            <span class="text-base font-bold text-white font-editorial tracking-wide">PRIME SCOPE GROUP</span>
+          </div>
+          <button onclick="togglePortalMobileMenu(false)" class="w-10 h-10 rounded-full bg-slate-900 border border-slate-800 text-slate-300 hover:text-white flex items-center justify-center text-lg">
+            ✕
+          </button>
+        </div>
+
+        <nav class="space-y-2 text-base font-semibold">
+          <p class="text-xs text-brand-gold uppercase tracking-wider font-bold mb-2">المواقع والقطاعات التجارية:</p>
+          <a href="marble.html" onclick="togglePortalMobileMenu(false)" class="flex items-center justify-between p-3.5 rounded-2xl bg-slate-900/80 border border-brand-gold/30 text-white hover:border-brand-gold transition">
+            <span class="flex items-center gap-3">
+              <span class="text-xl">🏛️</span>
+              <span>Prime Scope الرخام والأحجار</span>
+            </span>
+            <span class="text-xs text-brand-gold">دخول &larr;</span>
+          </a>
+          <a href="furniture.html" onclick="togglePortalMobileMenu(false)" class="flex items-center justify-between p-3.5 rounded-2xl bg-slate-900/80 border border-brand-gold/30 text-white hover:border-brand-gold transition">
+            <span class="flex items-center gap-3">
+              <span class="text-xl">🛋️</span>
+              <span>Prime Scope الأثاث المعاصر</span>
+            </span>
+            <span class="text-xs text-brand-gold">دخول &larr;</span>
+          </a>
+          <a href="curtains.html" onclick="togglePortalMobileMenu(false)" class="flex items-center justify-between p-3.5 rounded-2xl bg-slate-900/80 border border-brand-gold/30 text-white hover:border-brand-gold transition">
+            <span class="flex items-center gap-3">
+              <span class="text-xl">🪟</span>
+              <span>Prime Scope الستائر والأنسجة</span>
+            </span>
+            <span class="text-xs text-brand-gold">دخول &larr;</span>
+          </a>
+
+          <div class="pt-4 space-y-2 border-t border-slate-800/80 text-sm">
+            <a href="#about-group" onclick="togglePortalMobileMenu(false)" class="block p-2.5 text-slate-300 hover:text-brand-gold transition">رؤية وفلسفة المجموعة</a>
+            <a href="#contact" onclick="togglePortalMobileMenu(false)" class="block p-2.5 text-slate-300 hover:text-brand-gold transition">التواصل مع الإدارة العامة</a>
+            <a href="admin.html" class="block p-2.5 text-brand-gold font-bold flex items-center gap-2">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+              <span>لوحة الإدارة (Admin CMS)</span>
+            </a>
+          </div>
+        </nav>
+      </div>
+
+      <div class="pt-6 border-t border-slate-800 flex items-center justify-between">
+        <a href="https://wa.me/966534248861" target="_blank" class="w-full py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm flex items-center justify-center gap-2 transition">
+          <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86.174.086.275.073.376-.044.101-.116.433-.506.549-.68.116-.173.231-.145.39-.086s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.1.824zm-3.423-14.416c-6.627 0-12 5.373-12 12 0 2.153.57 4.175 1.564 5.922l-1.636 5.978 6.134-1.609c1.705.932 3.659 1.469 5.738 1.469 6.627 0 12-5.373 12-12s-5.373-12-12-12z"/></svg>
+          <span>واتساب الإدارة العامة</span>
+        </a>
+      </div>
     </div>
   </header>
 
@@ -619,6 +680,18 @@
       currentPortalLang = currentPortalLang === 'ar' ? 'en' : 'ar';
       localStorage.setItem('primeLang', currentPortalLang);
       applyPortalLanguage();
+    }
+
+    function togglePortalMobileMenu(open) {
+      const menu = document.getElementById('portal-mobile-menu');
+      if (!menu) return;
+      if (open) {
+        menu.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+      } else {
+        menu.classList.add('hidden');
+        document.body.style.overflow = '';
+      }
     }
 
     document.addEventListener('DOMContentLoaded', applyPortalLanguage);
